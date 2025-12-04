@@ -217,7 +217,7 @@ header p {
 
 .restaurant-thumbnail {
     width: 100%;
-    height: 150px;
+    aspect-ratio: 9 / 16;
     object-fit: cover;
     background-color: #f0f0f0;
 }
@@ -247,8 +247,8 @@ header p {
 }
 
 .rating-icon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
@@ -285,7 +285,8 @@ header p {
 
 .popup-thumbnail {
     width: 100%;
-    height: 120px;
+    max-width: 150px;
+    aspect-ratio: 9 / 16;
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 0.75rem;
@@ -317,8 +318,8 @@ header p {
 }
 
 .popup-rating .rating-icon {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
 }
 
