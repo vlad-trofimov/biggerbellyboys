@@ -1,7 +1,7 @@
 // Configuration
 const CONFIG = {
     // Replace this URL with your actual Google Sheets CSV URL
-    csvUrl: 'PASTE_YOUR_GOOGLE_SHEETS_CSV_URL_HERE',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
     // Default map center (will be updated based on restaurant locations)
     defaultCenter: [40.7128, -74.0060], // New York City
