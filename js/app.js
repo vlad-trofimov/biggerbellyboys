@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.9.4',
+    version: '1.9.5',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -99,7 +99,7 @@ async function loadRestaurantData() {
         createMapMarkers();
         sortAndDisplayRestaurants();
         setupFilters();
-        centerMapOnFirstVisibleRestaurant();
+        centerMapOnCenterOfMass();
         
         loadingElement.classList.add('hidden');
         console.log(`✅ Loaded ${restaurants.length} restaurants successfully`);
@@ -646,25 +646,38 @@ function clearAllFilters() {
     });
 }
 
-// Center map on first visible restaurant card
-function centerMapOnFirstVisibleRestaurant() {
+// Center map on geographic center of mass of all restaurants
+function centerMapOnCenterOfMass() {
     if (restaurants.length === 0) return;
     
-    // Get the first visible restaurant card
-    const firstVisibleCard = document.querySelector('.restaurant-card:not(.hidden)');
-    if (firstVisibleCard) {
-        const cardIndex = parseInt(firstVisibleCard.dataset.index);
-        const restaurant = restaurants[cardIndex];
-        if (restaurant) {
-            map.setView([restaurant.latitude, restaurant.longitude], 13);
-            return;
-        }
-    }
+    // Calculate center of mass (average of all coordinates)
+    let totalLat = 0;
+    let totalLng = 0;
+    let count = 0;
     
-    // Fallback: use first restaurant in the list
-    const firstRestaurant = restaurants[0];
-    if (firstRestaurant) {
-        map.setView([firstRestaurant.latitude, firstRestaurant.longitude], 13);
+    restaurants.forEach(restaurant => {
+        if (restaurant.latitude && restaurant.longitude) {
+            totalLat += restaurant.latitude;
+            totalLng += restaurant.longitude;
+            count++;
+        }
+    });
+    
+    if (count > 0) {
+        const centerLat = totalLat / count;
+        const centerLng = totalLng / count;
+        
+        // Adjust zoom based on number of restaurants
+        let zoom = 13; // Default zoom
+        if (count > 20) zoom = 11;
+        else if (count > 10) zoom = 12;
+        else if (count < 5) zoom = 14;
+        
+        map.setView([centerLat, centerLng], zoom);
+        console.log(`📍 Map centered on geographic center of ${count} restaurants`);
+    } else {
+        // Fallback to NYC if no valid coordinates
+        map.setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
     }
 }
 
