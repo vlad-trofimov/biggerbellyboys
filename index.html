@@ -32,28 +32,30 @@
                 </div>
                 
                 <div class="filter-content">
-                    <div class="filter-group">
-                        <label for="tag-search">Search Tags:</label>
-                        <div class="tag-input-container">
-                            <input type="text" id="tag-search" placeholder="Type to search tags..." class="tag-search-input">
-                            <div id="tag-suggestions" class="tag-suggestions hidden"></div>
-                            <div id="selected-tags" class="selected-tags"></div>
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label for="tag-search">Search Tags:</label>
+                            <div class="tag-input-container">
+                                <input type="text" id="tag-search" placeholder="Type to search tags..." class="tag-search-input">
+                                <div id="tag-suggestions" class="tag-suggestions hidden"></div>
+                                <div id="selected-tags" class="selected-tags"></div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="rating-filter">Bigger Belly Score:</label>
-                        <div class="slider-container">
-                            <input type="range" id="rating-filter" min="0" max="10" step="0.1" value="0" class="rating-slider">
-                            <div class="slider-labels">
-                                <span>0</span>
-                                <span id="rating-value">0+</span>
-                                <span>10</span>
+                        
+                        <div class="filter-group">
+                            <label for="rating-filter">Bigger Belly Score:</label>
+                            <div class="slider-container">
+                                <input type="range" id="rating-filter" min="0" max="10" step="0.1" value="0" class="rating-slider">
+                                <div class="slider-labels">
+                                    <span>0</span>
+                                    <span id="rating-value">0+</span>
+                                    <span>10</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <button id="clear-filters">Clear All Filters</button>
+                    <button id="clear-filters" class="modern-clear-btn">Clear All Filters</button>
                 </div>
             </div>
 

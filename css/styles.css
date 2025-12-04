@@ -107,8 +107,14 @@ header h1 {
 }
 
 .filter-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-row {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     align-items: start;
 }
@@ -292,20 +298,31 @@ header h1 {
     color: var(--primary-color);
 }
 
-#clear-filters {
+.modern-clear-btn {
     width: 100%;
-    padding: 0.75rem;
-    background: var(--accent-color);
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #6c757d, #495057);
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-#clear-filters:hover {
-    background: #e55a2b;
+.modern-clear-btn:hover {
+    background: linear-gradient(135deg, #495057, #343a40);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modern-clear-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Right Panel: Map */
@@ -436,6 +453,16 @@ header h1 {
 
 .tag:hover {
     transform: scale(1.05);
+}
+
+.clickable-tag {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clickable-tag:hover {
+    background: var(--secondary-color);
+    transform: scale(1.08);
 }
 
 .restaurant-reviewer {
@@ -591,10 +618,15 @@ header h1 {
     }
     
     .filter-content.active {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 1rem;
         margin-top: 1rem;
+    }
+    
+    .filter-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
     .map-container {
