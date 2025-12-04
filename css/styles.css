@@ -315,7 +315,7 @@ header h1 {
 }
 
 .modern-clear-btn:hover {
-    background: linear-gradient(135deg, #495057, #343a40);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -323,6 +323,40 @@ header h1 {
 .modern-clear-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Clickable Reviewer */
+.clickable-reviewer {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.clickable-reviewer:hover {
+    color: var(--accent-color);
+}
+
+/* Selected Reviewer Display */
+.selected-reviewer {
+    margin-top: 0.5rem;
+}
+
+/* Sort Dropdown */
+.sort-dropdown {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-dropdown:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 101, 26, 0.1);
 }
 
 /* Right Panel: Map */

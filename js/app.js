@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.6.3',
+    version: '1.7.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -16,6 +16,8 @@ let markers = [];
 let allTags = new Set();
 let allReviewers = new Set();
 let selectedTags = new Set();
+let selectedReviewer = null;
+let currentSort = 'newest';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -62,6 +64,12 @@ function setupEventListeners() {
         ratingValueDisplay.textContent = value === 0 ? '0+' : `${value}+`;
         applyFilters();
     });
+    
+    // Sort filter
+    document.getElementById('sort-filter').addEventListener('change', function() {
+        currentSort = this.value;
+        sortAndDisplayRestaurants();
+    });
 }
 
 // Load restaurant data from CSV
@@ -87,7 +95,7 @@ async function loadRestaurantData() {
         }
         
         createMapMarkers();
-        createRestaurantCards();
+        sortAndDisplayRestaurants();
         setupFilters();
         centerMapOnRestaurants();
         
@@ -289,17 +297,44 @@ function createPopupContent(restaurant) {
                     ''
                 }
             </div>
-            <div class="popup-reviewer">Reviewed by: ${restaurant.reviewer}</div>
+            <div class="popup-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${restaurant.reviewer}</span></div>
         </div>
     `;
 }
 
+// Sort and display restaurants
+function sortAndDisplayRestaurants() {
+    // Sort restaurants based on current sort option
+    let sortedRestaurants = [...restaurants];
+    
+    switch (currentSort) {
+        case 'rating-asc':
+            sortedRestaurants.sort((a, b) => a.rating - b.rating);
+            break;
+        case 'rating-desc':
+            sortedRestaurants.sort((a, b) => b.rating - a.rating);
+            break;
+        case 'newest':
+        default:
+            // Sort by date posted (newest first)
+            sortedRestaurants.sort((a, b) => {
+                const dateA = a.datePosted ? new Date(a.datePosted) : new Date(0);
+                const dateB = b.datePosted ? new Date(b.datePosted) : new Date(0);
+                return dateB - dateA;
+            });
+            break;
+    }
+    
+    createRestaurantCards(sortedRestaurants);
+}
+
 // Create restaurant cards
-function createRestaurantCards() {
+function createRestaurantCards(sortedRestaurants = restaurants) {
     const restaurantList = document.getElementById('restaurant-list');
     restaurantList.innerHTML = '';
     
-    restaurants.forEach((restaurant, index) => {
+    sortedRestaurants.forEach((restaurant, index) => {
+        const originalIndex = restaurants.indexOf(restaurant);
         const card = document.createElement('div');
         card.className = 'restaurant-card';
         card.dataset.index = index;
@@ -319,13 +354,13 @@ function createRestaurantCards() {
                     <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
                 </div>
                 <div class="restaurant-tags">${tagsHtml}</div>
-                <div class="restaurant-reviewer">Reviewed by: ${restaurant.reviewer}</div>
+                <div class="restaurant-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${restaurant.reviewer}</span></div>
             </div>
         `;
         
         // Add click event to zoom to marker
         card.addEventListener('click', () => {
-            const marker = markers[index];
+            const marker = markers[originalIndex];
             map.setView([restaurant.latitude, restaurant.longitude], 15);
             marker.openPopup();
         });
@@ -480,6 +515,33 @@ function removeTag(tag) {
     applyFilters();
 }
 
+function selectReviewer(reviewer) {
+    selectedReviewer = reviewer;
+    updateSelectedReviewerDisplay();
+    applyFilters();
+}
+
+function removeReviewer() {
+    selectedReviewer = null;
+    updateSelectedReviewerDisplay();
+    applyFilters();
+}
+
+function updateSelectedReviewerDisplay() {
+    const container = document.getElementById('selected-reviewer');
+    container.innerHTML = '';
+    
+    if (selectedReviewer) {
+        const reviewerElement = document.createElement('div');
+        reviewerElement.className = 'selected-tag';
+        reviewerElement.innerHTML = `
+            <span>${selectedReviewer}</span>
+            <button class="remove-tag" onclick="removeReviewer()">&times;</button>
+        `;
+        container.appendChild(reviewerElement);
+    }
+}
+
 function updateSelectedTagsDisplay() {
     const container = document.getElementById('selected-tags');
     container.innerHTML = '';
@@ -517,6 +579,11 @@ function applyFilters() {
             if (!hasAllSelectedTags) show = false;
         }
         
+        // Filter by selected reviewer
+        if (selectedReviewer && restaurant.reviewer.toLowerCase() !== selectedReviewer.toLowerCase()) {
+            show = false;
+        }
+        
         // Filter by rating
         if (restaurant.rating < minRating) show = false;
         
@@ -537,6 +604,10 @@ function clearAllFilters() {
     selectedTags.clear();
     updateSelectedTagsDisplay();
     
+    // Clear selected reviewer
+    selectedReviewer = null;
+    updateSelectedReviewerDisplay();
+    
     // Clear tag search input
     document.getElementById('tag-search').value = '';
     document.getElementById('tag-suggestions').classList.add('hidden');
@@ -547,12 +618,19 @@ function clearAllFilters() {
     ratingSlider.value = ratingSlider.min;
     ratingValueDisplay.textContent = `${ratingSlider.min}+`;
     
+    // Reset sort to default
+    currentSort = 'newest';
+    document.getElementById('sort-filter').value = 'newest';
+    sortAndDisplayRestaurants();
+    
     // Show all restaurants
     restaurants.forEach((restaurant, index) => {
         const card = document.querySelector(`[data-index="${index}"]`);
         const marker = markers[index];
         
-        card.classList.remove('hidden');
+        if (card) {
+            card.classList.remove('hidden');
+        }
         if (!map.hasLayer(marker)) {
             map.addLayer(marker);
         }
