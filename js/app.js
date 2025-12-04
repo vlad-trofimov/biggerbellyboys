@@ -269,11 +269,15 @@ function processRestaurantData(rawData) {
         }
         
         // Parse and validate rating (out of 10)
-        const rating = parseFloat(row['Bigger Belly Rating']);
+        const ratingStr = row['Bigger Belly Rating'];
+        console.log(`   Rating string: "${ratingStr}" for ${row.Restaurant}`);
+        const rating = parseFloat(ratingStr);
+        console.log(`   Parsed rating: ${rating}, isNaN: ${isNaN(rating)}`);
         const validRating = !isNaN(rating) && rating >= 0 && rating <= 10 ? rating : 0;
+        console.log(`   Final rating: ${validRating}`);
         
         if (isNaN(rating) || rating < 0 || rating > 10) {
-            console.warn(`⚠️ Invalid rating for ${row.Restaurant}: ${row['Bigger Belly Rating']}, defaulting to 0`);
+            console.warn(`⚠️ Invalid rating for ${row.Restaurant}: "${ratingStr}" (parsed as ${rating}), defaulting to 0`);
         }
         
         const processedRow = {
