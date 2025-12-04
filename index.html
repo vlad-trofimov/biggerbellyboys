@@ -21,48 +21,45 @@
     </header>
 
     <div class="container">
-        <!-- Filter Panel -->
-        <aside class="filter-panel">
-            <div class="filter-toggle">
-                <button id="filter-toggle-btn">☰ Filters</button>
-            </div>
-            
-            <div class="filter-content">
-                <div class="filter-group">
-                    <label>Filter by Tags:</label>
-                    <div id="tag-filters" class="checkbox-group">
-                        <!-- Dynamically populated -->
+        <!-- Left Side: Restaurant Cards with Filters -->
+        <aside class="left-panel">
+            <!-- Filters at top -->
+            <div class="filter-section">
+                <div class="filter-toggle">
+                    <button id="filter-toggle-btn">☰ Filters</button>
+                </div>
+                
+                <div class="filter-content">
+                    <div class="filter-group">
+                        <label>Filter by Tags:</label>
+                        <div id="tag-filters" class="checkbox-group">
+                            <!-- Dynamically populated -->
+                        </div>
                     </div>
-                </div>
-                
-                <div class="filter-group">
-                    <label>Filter by Reviewer:</label>
-                    <div id="reviewer-filters" class="checkbox-group">
-                        <!-- Dynamically populated -->
+                    
+                    <div class="filter-group">
+                        <label>Filter by Reviewer:</label>
+                        <div id="reviewer-filters" class="checkbox-group">
+                            <!-- Dynamically populated -->
+                        </div>
                     </div>
+                    
+                    <div class="filter-group">
+                        <label>Minimum Rating:</label>
+                        <select id="rating-filter">
+                            <option value="0">All Ratings</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                    
+                    <button id="clear-filters">Clear All Filters</button>
                 </div>
-                
-                <div class="filter-group">
-                    <label>Minimum Rating:</label>
-                    <select id="rating-filter">
-                        <option value="0">All Ratings</option>
-                        <option value="1">1+ Stars</option>
-                        <option value="2">2+ Stars</option>
-                        <option value="3">3+ Stars</option>
-                        <option value="4">4+ Stars</option>
-                        <option value="5">5 Stars</option>
-                    </select>
-                </div>
-                
-                <button id="clear-filters">Clear All Filters</button>
             </div>
-        </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Map Container -->
-            <div id="map" class="map-container"></div>
-            
             <!-- Restaurant List -->
             <div class="restaurant-list-container">
                 <h2>Restaurants</h2>
@@ -70,6 +67,11 @@
                     <!-- Dynamically populated -->
                 </div>
             </div>
+        </aside>
+
+        <!-- Right Side: Map -->
+        <main class="right-panel">
+            <div id="map" class="map-container"></div>
         </main>
     </div>
 
