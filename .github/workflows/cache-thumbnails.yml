@@ -1,0 +1,171 @@
+name: Cache TikTok Thumbnails
+
+on:
+  schedule:
+    # Runs daily at 6am UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  cache-thumbnails:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create thumbnails directory
+        run: mkdir -p thumbnails
+
+      - name: Fetch CSV and cache thumbnails
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
+          const https = require('https');
+          const http = require('http');
+
+          // === CONFIGURATION ===
+          const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv';
+          const TIKTOK_VIDEO_COLUMN = 9; // Column J (0-indexed = 9) - adjust if needed
+          const THUMBNAILS_DIR = './thumbnails';
+
+          // Helper: fetch URL and return buffer
+          function fetch(url) {
+            return new Promise((resolve, reject) => {
+              const client = url.startsWith('https') ? https : http;
+              client.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
+                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                  // Follow redirect
+                  return fetch(res.headers.location).then(resolve).catch(reject);
+                }
+                const chunks = [];
+                res.on('data', (chunk) => chunks.push(chunk));
+                res.on('end', () => resolve(Buffer.concat(chunks)));
+                res.on('error', reject);
+              }).on('error', reject);
+            });
+          }
+
+          // Extract video ID from TikTok URL
+          function extractVideoId(url) {
+            const match = url.match(/\/video\/(\d+)/);
+            return match ? match[1] : null;
+          }
+
+          // Get thumbnail URL via oEmbed
+          async function getThumbnailUrl(videoUrl) {
+            const oembedUrl = `https://www.tiktok.com/oembed?url=${encodeURIComponent(videoUrl)}`;
+            const data = await fetch(oembedUrl);
+            const json = JSON.parse(data.toString());
+            return json.thumbnail_url;
+          }
+
+          // Parse CSV (simple parser for Google Sheets output)
+          function parseCSV(text) {
+            const lines = text.split('\n');
+            const rows = [];
+            for (let i = 1; i < lines.length; i++) { // Skip header
+              if (lines[i].trim()) {
+                // Handle quoted fields with commas
+                const row = [];
+                let field = '';
+                let inQuotes = false;
+                for (const char of lines[i]) {
+                  if (char === '"') {
+                    inQuotes = !inQuotes;
+                  } else if (char === ',' && !inQuotes) {
+                    row.push(field.trim());
+                    field = '';
+                  } else {
+                    field += char;
+                  }
+                }
+                row.push(field.trim());
+                rows.push(row);
+              }
+            }
+            return rows;
+          }
+
+          async function main() {
+            console.log('Fetching CSV...');
+            const csvBuffer = await fetch(CSV_URL);
+            const csvText = csvBuffer.toString();
+            const rows = parseCSV(csvText);
+            
+            console.log(`Found ${rows.length} rows`);
+
+            let downloaded = 0;
+            let skipped = 0;
+            let errors = 0;
+
+            for (const row of rows) {
+              const videoUrl = row[TIKTOK_VIDEO_COLUMN];
+              if (!videoUrl || !videoUrl.includes('tiktok.com')) {
+                continue;
+              }
+
+              const videoId = extractVideoId(videoUrl);
+              if (!videoId) {
+                console.log(`Could not extract video ID from: ${videoUrl}`);
+                errors++;
+                continue;
+              }
+
+              const imagePath = `${THUMBNAILS_DIR}/${videoId}.jpeg`;
+
+              // Check if already exists
+              if (fs.existsSync(imagePath)) {
+                console.log(`Skipping ${videoId} - already cached`);
+                skipped++;
+                continue;
+              }
+
+              try {
+                console.log(`Fetching thumbnail for ${videoId}...`);
+                const thumbnailUrl = await getThumbnailUrl(videoUrl);
+                
+                if (!thumbnailUrl) {
+                  console.log(`No thumbnail URL returned for ${videoId}`);
+                  errors++;
+                  continue;
+                }
+
+                const imageBuffer = await fetch(thumbnailUrl);
+                fs.writeFileSync(imagePath, imageBuffer);
+                console.log(`Saved ${videoId}.jpeg`);
+                downloaded++;
+
+                // Small delay to avoid rate limiting
+                await new Promise(r => setTimeout(r, 500));
+              } catch (err) {
+                console.log(`Error processing ${videoId}: ${err.message}`);
+                errors++;
+              }
+            }
+
+            console.log('\n=== Summary ===');
+            console.log(`Downloaded: ${downloaded}`);
+            console.log(`Skipped (already cached): ${skipped}`);
+            console.log(`Errors: ${errors}`);
+          }
+
+          main().catch(console.error);
+          EOF
+
+      - name: Commit and push if changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add thumbnails/
+          if git diff --staged --quiet; then
+            echo "No new thumbnails to commit"
+          else
+            git commit -m "Cache new TikTok thumbnails"
+            git push
+          fi
