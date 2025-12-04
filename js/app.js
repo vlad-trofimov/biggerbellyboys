@@ -224,12 +224,17 @@ function processRestaurantData(rawData) {
             }
         });
         
-        // Validate coordinates
-        const lat = parseFloat(row.Latitude);
-        const lng = parseFloat(row.Longitude);
+        // Validate coordinates (handle @ symbol prefix in latitude)
+        const cleanLat = row.Latitude ? row.Latitude.toString().replace('@', '') : '';
+        const cleanLng = row.Longitude ? row.Longitude.toString() : '';
+        
+        const lat = parseFloat(cleanLat);
+        const lng = parseFloat(cleanLng);
         const validCoordinates = !isNaN(lat) && !isNaN(lng) && 
                                 lat >= -90 && lat <= 90 && 
                                 lng >= -180 && lng <= 180;
+        
+        console.log(`   Cleaned coordinates: lat="${cleanLat}" (${lat}), lng="${cleanLng}" (${lng}), valid: ${validCoordinates}`);
         
         if (missingFields.length > 0) {
             console.warn(`⚠️ Row ${index + 1} missing required fields:`, missingFields);
@@ -278,7 +283,7 @@ function processRestaurantData(rawData) {
             location: row.Location ? row.Location.trim() : '',
             address: row.Address.trim(),
             googleMapsLink: row['Google Maps Link'] ? row['Google Maps Link'].trim() : '',
-            latitude: parseFloat(row.Latitude),
+            latitude: parseFloat(row.Latitude.toString().replace('@', '')),
             longitude: parseFloat(row.Longitude),
             rating: validRating,
             tikTokVideo: row['TikTok Video'] ? row['TikTok Video'].trim() : '',
