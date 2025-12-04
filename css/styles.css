@@ -239,15 +239,17 @@ header p {
     margin-bottom: 0.5rem;
 }
 
-.stars {
-    color: #ffa500;
+.rating-value {
+    font-weight: bold;
+    color: var(--primary-color);
     margin-right: 0.5rem;
     font-size: 1.1rem;
 }
 
-.rating-value {
-    font-weight: bold;
-    color: var(--primary-color);
+.rating-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 .restaurant-tags {
@@ -303,7 +305,21 @@ header p {
 }
 
 .popup-rating {
+    display: flex;
+    align-items: center;
     margin-bottom: 0.5rem;
+}
+
+.popup-rating .rating-value {
+    margin-right: 0.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.popup-rating .rating-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
 }
 
 .popup-links {

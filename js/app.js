@@ -268,11 +268,11 @@ function processRestaurantData(rawData) {
             allReviewers.add(row.Reviewer.trim());
         }
         
-        // Parse and validate rating
+        // Parse and validate rating (out of 10)
         const rating = parseFloat(row['Bigger Belly Rating']);
-        const validRating = !isNaN(rating) && rating >= 0 && rating <= 5 ? rating : 0;
+        const validRating = !isNaN(rating) && rating >= 0 && rating <= 10 ? rating : 0;
         
-        if (isNaN(rating) || rating < 0 || rating > 5) {
+        if (isNaN(rating) || rating < 0 || rating > 10) {
             console.warn(`⚠️ Invalid rating for ${row.Restaurant}: ${row['Bigger Belly Rating']}, defaulting to 0`);
         }
         
@@ -321,8 +321,6 @@ function createMapMarkers() {
 
 // Create popup content for map markers
 function createPopupContent(restaurant) {
-    const stars = '★'.repeat(Math.floor(restaurant.rating)) + '☆'.repeat(5 - Math.floor(restaurant.rating));
-    
     return `
         <div class="popup-content">
             ${restaurant.tikTokThumbnail ? 
@@ -332,8 +330,8 @@ function createPopupContent(restaurant) {
             <div class="popup-name">${restaurant.restaurant}</div>
             <div class="popup-address">${restaurant.address}</div>
             <div class="popup-rating">
-                <span class="stars">${stars}</span>
-                <span class="rating-value">${restaurant.rating}/5</span>
+                <span class="rating-value">${restaurant.rating}/10</span>
+                <img src="src/vlad-bbb.png" alt="Bigger Belly Rating" class="rating-icon">
             </div>
             <div class="popup-links">
                 ${restaurant.tikTokVideo ? 
@@ -360,7 +358,6 @@ function createRestaurantCards() {
         card.className = 'restaurant-card';
         card.dataset.index = index;
         
-        const stars = '★'.repeat(Math.floor(restaurant.rating)) + '☆'.repeat(5 - Math.floor(restaurant.rating));
         const tagsHtml = restaurant.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
         
         card.innerHTML = `
@@ -371,8 +368,8 @@ function createRestaurantCards() {
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
                 <div class="restaurant-rating">
-                    <span class="stars">${stars}</span>
-                    <span class="rating-value">${restaurant.rating}/5</span>
+                    <span class="rating-value">${restaurant.rating}/10</span>
+                    <img src="src/vlad-bbb.png" alt="Bigger Belly Rating" class="rating-icon">
                 </div>
                 <div class="restaurant-tags">${tagsHtml}</div>
                 <div class="restaurant-reviewer">Reviewed by: ${restaurant.reviewer}</div>
