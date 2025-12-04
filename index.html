@@ -55,29 +55,23 @@
                         </div>
                     </div>
                     
-                    <div class="filter-row">
-                        <div class="filter-group">
-                            <label for="reviewer-filter">Reviewer:</label>
-                            <div id="selected-reviewer" class="selected-reviewer"></div>
-                        </div>
-                        
-                        <div class="filter-group">
-                            <label for="sort-filter">Sort by:</label>
-                            <select id="sort-filter" class="sort-dropdown">
-                                <option value="newest">Newest</option>
-                                <option value="rating-desc">Rating (High to Low)</option>
-                                <option value="rating-asc">Rating (Low to High)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
                     <button id="clear-filters" class="modern-clear-btn">Clear All Filters</button>
                 </div>
             </div>
 
             <!-- Restaurant List -->
             <div class="restaurant-list-container">
-                <h2>Restaurants</h2>
+                <div class="restaurant-list-header">
+                    <h2>Restaurants</h2>
+                    <div class="sort-container">
+                        <label for="sort-filter">Sort by:</label>
+                        <select id="sort-filter" class="sort-dropdown">
+                            <option value="newest">Newest</option>
+                            <option value="rating-desc">Rating (High to Low)</option>
+                            <option value="rating-asc">Rating (Low to High)</option>
+                        </select>
+                    </div>
+                </div>
                 <div id="restaurant-list" class="restaurant-list">
                     <!-- Dynamically populated -->
                 </div>

@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.7.0',
+    version: '1.7.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -16,7 +16,7 @@ let markers = [];
 let allTags = new Set();
 let allReviewers = new Set();
 let selectedTags = new Set();
-let selectedReviewer = null;
+// selectedReviewer removed - now using tags
 let currentSort = 'newest';
 
 // Initialize the application
@@ -227,9 +227,11 @@ function processRestaurantData(rawData) {
         // Add tags to global set
         tags.forEach(tag => allTags.add(tag));
         
-        // Add reviewer to global set
+        // Add reviewer to global sets (both as reviewer and as a selectable tag)
         if (row.Reviewer && row.Reviewer.trim()) {
-            allReviewers.add(row.Reviewer.trim());
+            const reviewerName = row.Reviewer.trim();
+            allReviewers.add(reviewerName);
+            allTags.add(reviewerName); // Add reviewer as a selectable tag
         }
         
         // Parse and validate rating (out of 10)
@@ -437,17 +439,25 @@ function setupTagSearch() {
             // Check if restaurant matches current selected tags and rating
             let matchesSelectedTags = true;
             if (selectedTags.size > 0) {
-                matchesSelectedTags = Array.from(selectedTags).every(selectedTag =>
-                    restaurant.tags.some(restaurantTag => 
+                matchesSelectedTags = Array.from(selectedTags).every(selectedTag => {
+                    // Check if it matches a regular tag
+                    const matchesTag = restaurant.tags.some(restaurantTag => 
                         restaurantTag.toLowerCase() === selectedTag.toLowerCase()
-                    )
-                );
+                    );
+                    // Or check if it matches the reviewer
+                    const matchesReviewer = restaurant.reviewer.toLowerCase() === selectedTag.toLowerCase();
+                    
+                    return matchesTag || matchesReviewer;
+                });
             }
             
             const matchesRating = restaurant.rating >= currentRating;
             
             if (matchesSelectedTags && matchesRating) {
+                // Add regular tags
                 restaurant.tags.forEach(tag => availableTagsFromFilteredRestaurants.add(tag));
+                // Add reviewer as available tag
+                availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
             }
         });
         
@@ -516,30 +526,8 @@ function removeTag(tag) {
 }
 
 function selectReviewer(reviewer) {
-    selectedReviewer = reviewer;
-    updateSelectedReviewerDisplay();
-    applyFilters();
-}
-
-function removeReviewer() {
-    selectedReviewer = null;
-    updateSelectedReviewerDisplay();
-    applyFilters();
-}
-
-function updateSelectedReviewerDisplay() {
-    const container = document.getElementById('selected-reviewer');
-    container.innerHTML = '';
-    
-    if (selectedReviewer) {
-        const reviewerElement = document.createElement('div');
-        reviewerElement.className = 'selected-tag';
-        reviewerElement.innerHTML = `
-            <span>${selectedReviewer}</span>
-            <button class="remove-tag" onclick="removeReviewer()">&times;</button>
-        `;
-        container.appendChild(reviewerElement);
-    }
+    // Now just use the existing tag selection system
+    selectTag(reviewer);
 }
 
 function updateSelectedTagsDisplay() {
@@ -569,19 +557,19 @@ function applyFilters() {
         
         let show = true;
         
-        // Filter by selected tags (must have ALL selected tags)
+        // Filter by selected tags (must have ALL selected tags - includes reviewers)
         if (selectedTags.size > 0) {
-            const hasAllSelectedTags = Array.from(selectedTags).every(selectedTag =>
-                restaurant.tags.some(restaurantTag => 
+            const hasAllSelectedTags = Array.from(selectedTags).every(selectedTag => {
+                // Check if it matches a regular tag
+                const matchesTag = restaurant.tags.some(restaurantTag => 
                     restaurantTag.toLowerCase() === selectedTag.toLowerCase()
-                )
-            );
+                );
+                // Or check if it matches the reviewer
+                const matchesReviewer = restaurant.reviewer.toLowerCase() === selectedTag.toLowerCase();
+                
+                return matchesTag || matchesReviewer;
+            });
             if (!hasAllSelectedTags) show = false;
-        }
-        
-        // Filter by selected reviewer
-        if (selectedReviewer && restaurant.reviewer.toLowerCase() !== selectedReviewer.toLowerCase()) {
-            show = false;
         }
         
         // Filter by rating
@@ -604,9 +592,7 @@ function clearAllFilters() {
     selectedTags.clear();
     updateSelectedTagsDisplay();
     
-    // Clear selected reviewer
-    selectedReviewer = null;
-    updateSelectedReviewerDisplay();
+    // Reviewer filtering now handled through tags
     
     // Clear tag search input
     document.getElementById('tag-search').value = '';

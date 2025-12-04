@@ -337,9 +337,28 @@ header h1 {
     color: var(--accent-color);
 }
 
-/* Selected Reviewer Display */
-.selected-reviewer {
-    margin-top: 0.5rem;
+/* Restaurant List Header */
+.restaurant-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.restaurant-list-header h2 {
+    margin: 0;
+}
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sort-container label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 /* Sort Dropdown */
