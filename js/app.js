@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.7.1',
+    version: '1.7.3',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -227,11 +227,11 @@ function processRestaurantData(rawData) {
         // Add tags to global set
         tags.forEach(tag => allTags.add(tag));
         
-        // Add reviewer to global sets (both as reviewer and as a selectable tag)
+        // Add reviewer to global sets
         if (row.Reviewer && row.Reviewer.trim()) {
             const reviewerName = row.Reviewer.trim();
             allReviewers.add(reviewerName);
-            allTags.add(reviewerName); // Add reviewer as a selectable tag
+            // Don't add reviewer to allTags here - we'll handle it in the search logic
         }
         
         // Parse and validate rating (out of 10)
@@ -315,6 +315,14 @@ function sortAndDisplayRestaurants() {
             break;
         case 'rating-desc':
             sortedRestaurants.sort((a, b) => b.rating - a.rating);
+            break;
+        case 'oldest':
+            // Sort by date posted (oldest first)
+            sortedRestaurants.sort((a, b) => {
+                const dateA = a.datePosted ? new Date(a.datePosted) : new Date(0);
+                const dateB = b.datePosted ? new Date(b.datePosted) : new Date(0);
+                return dateA - dateB;
+            });
             break;
         case 'newest':
         default:
@@ -456,8 +464,10 @@ function setupTagSearch() {
             if (matchesSelectedTags && matchesRating) {
                 // Add regular tags
                 restaurant.tags.forEach(tag => availableTagsFromFilteredRestaurants.add(tag));
-                // Add reviewer as available tag
-                availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
+                // Add this restaurant's reviewer as available tag
+                if (restaurant.reviewer) {
+                    availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
+                }
             }
         });
         
