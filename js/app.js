@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.4.0',
+    version: '1.4.2',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -15,6 +15,7 @@ let restaurants = [];
 let markers = [];
 let allTags = new Set();
 let allReviewers = new Set();
+let selectedTags = new Set();
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -48,7 +49,7 @@ function setupEventListeners() {
     document.getElementById('clear-filters').addEventListener('click', clearAllFilters);
     
     // Tag search filter
-    document.getElementById('tag-search').addEventListener('input', applyFilters);
+    setupTagSearch();
     
     // Rating slider filter
     const ratingSlider = document.getElementById('rating-filter');
@@ -300,15 +301,134 @@ function createRestaurantCards() {
 
 // Setup filter controls
 function setupFilters() {
-    // No need to setup individual tag checkboxes anymore - using search input
+    setupDynamicRatingSlider();
     console.log(`🔧 Filters ready - ${Array.from(allTags).length} tags available for search`);
+}
+
+// Setup dynamic rating slider based on actual data
+function setupDynamicRatingSlider() {
+    const ratings = restaurants.map(r => r.rating).filter(rating => rating > 0);
+    
+    if (ratings.length === 0) return;
+    
+    const minRating = Math.min(...ratings);
+    const maxRating = Math.max(...ratings);
+    
+    const ratingSlider = document.getElementById('rating-filter');
+    const ratingValueDisplay = document.getElementById('rating-value');
+    
+    // Update slider attributes
+    ratingSlider.min = minRating;
+    ratingSlider.max = maxRating;
+    ratingSlider.value = minRating;
+    ratingSlider.step = '0.1';
+    
+    // Update display
+    ratingValueDisplay.textContent = `${minRating}+`;
+    
+    // Update slider labels
+    const sliderLabels = document.querySelector('.slider-labels');
+    sliderLabels.innerHTML = `
+        <span>${minRating}</span>
+        <span id="rating-value">${minRating}+</span>
+        <span>${maxRating}</span>
+    `;
+    
+    console.log(`🎚️ Rating slider: ${minRating} - ${maxRating}`);
+}
+
+// Setup tag search with autocomplete and multi-select
+function setupTagSearch() {
+    const tagInput = document.getElementById('tag-search');
+    const suggestionsContainer = document.getElementById('tag-suggestions');
+    const selectedTagsContainer = document.getElementById('selected-tags');
+    
+    tagInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+        
+        if (query.length === 0) {
+            suggestionsContainer.classList.add('hidden');
+            return;
+        }
+        
+        // Filter available tags based on input
+        const availableTags = Array.from(allTags).filter(tag => {
+            return tag.toLowerCase().includes(query) && !selectedTags.has(tag);
+        });
+        
+        if (availableTags.length === 0) {
+            suggestionsContainer.classList.add('hidden');
+            return;
+        }
+        
+        // Show suggestions
+        suggestionsContainer.innerHTML = '';
+        availableTags.slice(0, 8).forEach(tag => { // Limit to 8 suggestions
+            const suggestionItem = document.createElement('div');
+            suggestionItem.className = 'tag-suggestion-item';
+            suggestionItem.textContent = tag;
+            suggestionItem.addEventListener('click', () => selectTag(tag));
+            suggestionsContainer.appendChild(suggestionItem);
+        });
+        
+        suggestionsContainer.classList.remove('hidden');
+    });
+    
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!tagInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+            suggestionsContainer.classList.add('hidden');
+        }
+    });
+    
+    // Handle Enter key to select first suggestion
+    tagInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const firstSuggestion = suggestionsContainer.querySelector('.tag-suggestion-item');
+            if (firstSuggestion) {
+                selectTag(firstSuggestion.textContent);
+            }
+        }
+    });
+}
+
+function selectTag(tag) {
+    selectedTags.add(tag);
+    updateSelectedTagsDisplay();
+    
+    // Clear input and hide suggestions
+    document.getElementById('tag-search').value = '';
+    document.getElementById('tag-suggestions').classList.add('hidden');
+    
+    applyFilters();
+}
+
+function removeTag(tag) {
+    selectedTags.delete(tag);
+    updateSelectedTagsDisplay();
+    applyFilters();
+}
+
+function updateSelectedTagsDisplay() {
+    const container = document.getElementById('selected-tags');
+    container.innerHTML = '';
+    
+    selectedTags.forEach(tag => {
+        const tagElement = document.createElement('div');
+        tagElement.className = 'selected-tag';
+        tagElement.innerHTML = `
+            <span>${tag}</span>
+            <button class="remove-tag" onclick="removeTag('${tag}')">&times;</button>
+        `;
+        container.appendChild(tagElement);
+    });
 }
 
 // These functions are no longer needed with the new filter design
 
 // Apply filters
 function applyFilters() {
-    const tagSearchTerm = document.getElementById('tag-search').value.toLowerCase().trim();
     const minRating = parseFloat(document.getElementById('rating-filter').value) || 0;
     
     restaurants.forEach((restaurant, index) => {
@@ -317,12 +437,14 @@ function applyFilters() {
         
         let show = true;
         
-        // Filter by tag search
-        if (tagSearchTerm) {
-            const hasMatchingTag = restaurant.tags.some(tag => 
-                tag.toLowerCase().includes(tagSearchTerm)
+        // Filter by selected tags (must have ALL selected tags)
+        if (selectedTags.size > 0) {
+            const hasAllSelectedTags = Array.from(selectedTags).every(selectedTag =>
+                restaurant.tags.some(restaurantTag => 
+                    restaurantTag.toLowerCase() === selectedTag.toLowerCase()
+                )
             );
-            if (!hasMatchingTag) show = false;
+            if (!hasAllSelectedTags) show = false;
         }
         
         // Filter by rating
@@ -341,14 +463,19 @@ function applyFilters() {
 
 // Clear all filters
 function clearAllFilters() {
-    // Clear tag search
-    document.getElementById('tag-search').value = '';
+    // Clear selected tags
+    selectedTags.clear();
+    updateSelectedTagsDisplay();
     
-    // Reset rating slider
+    // Clear tag search input
+    document.getElementById('tag-search').value = '';
+    document.getElementById('tag-suggestions').classList.add('hidden');
+    
+    // Reset rating slider to minimum value
     const ratingSlider = document.getElementById('rating-filter');
     const ratingValueDisplay = document.getElementById('rating-value');
-    ratingSlider.value = '0';
-    ratingValueDisplay.textContent = '0+';
+    ratingSlider.value = ratingSlider.min;
+    ratingValueDisplay.textContent = `${ratingSlider.min}+`;
     
     // Show all restaurants
     restaurants.forEach((restaurant, index) => {
