@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.6.1',
+    version: '1.6.2',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -274,7 +274,7 @@ function createPopupContent(restaurant) {
             <div class="popup-name">${restaurant.restaurant}</div>
             <div class="popup-address">${restaurant.address}</div>
             <div class="popup-rating">
-                <span class="rating-value">${restaurant.rating}</span>
+                <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
                 <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
             </div>
             <div class="popup-links">
@@ -313,7 +313,7 @@ function createRestaurantCards() {
                 <div class="restaurant-name">${restaurant.restaurant}</div>
                 <div class="restaurant-address">${restaurant.address}</div>
                 <div class="restaurant-rating">
-                    <span class="rating-value">${restaurant.rating}</span>
+                    <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
                     <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
                 </div>
                 <div class="restaurant-tags">${tagsHtml}</div>
