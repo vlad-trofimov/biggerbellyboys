@@ -378,58 +378,7 @@ header h1 {
     box-shadow: 0 0 0 3px rgba(212, 101, 26, 0.1);
 }
 
-/* Lazy Loading States */
-.lazy-image, .lazy-popup-image {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    transition: opacity 0.3s ease;
-    display: block;
-    width: 100%;
-    object-fit: cover;
-}
-
-/* Specific lazy loading for restaurant thumbnails */
-.restaurant-thumbnail.lazy-image {
-    aspect-ratio: 1177 / 1570; /* Maintain TikTok aspect ratio */
-}
-
-/* Specific lazy loading for popup thumbnails */  
-.popup-thumbnail.lazy-popup-image {
-    min-height: 150px;
-    max-height: 200px;
-}
-
-.lazy-image.loading, .lazy-popup-image.loading {
-    animation: shimmer 1.5s infinite;
-}
-
-.lazy-image.loaded, .lazy-popup-image.loaded {
-    opacity: 1;
-    background: none; /* Remove placeholder background once loaded */
-}
-
-.lazy-image.error, .lazy-popup-image.error {
-    background: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 14px;
-}
-
-.lazy-image.error::after {
-    content: "Image not available";
-}
-
-/* Shimmer loading animation */
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
-}
+/* Lazy loading removed - images load normally now */
 
 /* Right Panel: Map */
 .right-panel {
