@@ -81,7 +81,12 @@ async function loadRestaurantData() {
         console.log('✅ Sample restaurant:', restaurants[0]);
         
         if (restaurants.length === 0) {
-            throw new Error('No valid restaurant data found');
+            console.error('❌ No valid restaurants found after processing!');
+            console.error('📊 Debug info:');
+            console.error('   - Raw CSV rows:', parsedData.length);
+            console.error('   - Headers detected:', Object.keys(parsedData[0] || {}));
+            console.error('   - Sample raw row:', parsedData[0]);
+            throw new Error('No valid restaurant data found - check console for details');
         }
         
         console.log('🗺️ Creating map markers...');
@@ -181,8 +186,27 @@ function processRestaurantData(rawData) {
     let validCount = 0;
     let invalidCount = 0;
     
-    // Define required fields
+    // Define required fields based on the CSV column structure
+    // Note: These field names must match your CSV headers exactly (case-sensitive)
     const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
+    
+    console.log('🔍 Looking for required fields:', requiredFields);
+    
+    // Check if we have the required columns in our headers
+    if (rawData.length > 0) {
+        const availableFields = Object.keys(rawData[0]);
+        console.log('📋 Available fields in CSV:', availableFields);
+        
+        const missingRequiredFields = requiredFields.filter(field => !availableFields.includes(field));
+        if (missingRequiredFields.length > 0) {
+            console.error('❌ Missing required columns in CSV:', missingRequiredFields);
+            console.error('💡 Your CSV headers might be different. Common alternatives:');
+            console.error('   - Restaurant → Name, Restaurant Name, Business Name');
+            console.error('   - Address → Full Address, Street Address');
+            console.error('   - Latitude → Lat, Y');
+            console.error('   - Longitude → Lng, Long, X');
+        }
+    }
     
     const validData = rawData.filter((row, index) => {
         console.log(`🔍 Validating row ${index + 1}:`, {
