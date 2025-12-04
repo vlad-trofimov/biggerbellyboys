@@ -54,33 +54,54 @@ async function loadRestaurantData() {
     const loadingElement = document.getElementById('loading');
     
     try {
+        console.log('🔄 Loading restaurant data from:', CONFIG.csvUrl);
+        
         if (CONFIG.csvUrl === 'PASTE_YOUR_GOOGLE_SHEETS_CSV_URL_HERE') {
             throw new Error('Please update the CSV URL in the CONFIG object');
         }
         
+        console.log('📡 Fetching CSV data...');
         const response = await fetch(CONFIG.csvUrl);
+        console.log('📡 Response status:', response.status, response.statusText);
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const csvText = await response.text();
+        console.log('📄 CSV text length:', csvText.length);
+        console.log('📄 First 200 characters of CSV:', csvText.substring(0, 200));
+        
         const parsedData = parseCSV(csvText);
+        console.log('📊 Parsed data rows:', parsedData.length);
+        console.log('📊 Sample parsed row:', parsedData[0]);
         
         restaurants = processRestaurantData(parsedData);
+        console.log('✅ Valid restaurants found:', restaurants.length);
+        console.log('✅ Sample restaurant:', restaurants[0]);
         
         if (restaurants.length === 0) {
             throw new Error('No valid restaurant data found');
         }
         
+        console.log('🗺️ Creating map markers...');
         createMapMarkers();
+        
+        console.log('📋 Creating restaurant cards...');
         createRestaurantCards();
+        
+        console.log('🔧 Setting up filters...');
         setupFilters();
+        
+        console.log('📍 Centering map...');
         centerMapOnRestaurants();
         
         loadingElement.classList.add('hidden');
+        console.log('🎉 Restaurant data loaded successfully!');
         
     } catch (error) {
-        console.error('Error loading restaurant data:', error);
+        console.error('❌ Error loading restaurant data:', error);
+        console.error('❌ Stack trace:', error.stack);
         loadingElement.innerHTML = `
             <div class="spinner" style="display: none;"></div>
             <p>Error loading restaurant data: ${error.message}</p>
@@ -95,8 +116,18 @@ async function loadRestaurantData() {
 
 // Parse CSV data
 function parseCSV(csvText) {
+    console.log('🔍 Starting CSV parsing...');
     const lines = csvText.trim().split('\n');
+    console.log('📄 Total lines in CSV:', lines.length);
+    
+    if (lines.length < 2) {
+        console.error('❌ CSV has no data rows (only headers or empty)');
+        return [];
+    }
+    
     const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+    console.log('📋 Headers found:', headers);
+    
     const data = [];
     
     for (let i = 1; i < lines.length; i++) {
@@ -108,8 +139,14 @@ function parseCSV(csvText) {
         });
         
         data.push(row);
+        
+        // Log first few rows for debugging
+        if (i <= 3) {
+            console.log(`📊 Row ${i}:`, row);
+        }
     }
     
+    console.log('✅ CSV parsing complete. Data rows:', data.length);
     return data;
 }
 
@@ -138,15 +175,57 @@ function parseCSVLine(line) {
 
 // Process and validate restaurant data
 function processRestaurantData(rawData) {
-    return rawData.filter(row => {
-        // Check required fields
-        return row.Restaurant && 
-               row.Address && 
-               row.Latitude && 
-               row.Longitude &&
-               !isNaN(parseFloat(row.Latitude)) && 
-               !isNaN(parseFloat(row.Longitude));
-    }).map(row => {
+    console.log('🔍 Starting data validation and processing...');
+    console.log('📊 Raw data rows to process:', rawData.length);
+    
+    let validCount = 0;
+    let invalidCount = 0;
+    
+    // Define required fields
+    const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
+    
+    const validData = rawData.filter((row, index) => {
+        console.log(`🔍 Validating row ${index + 1}:`, {
+            Restaurant: row.Restaurant,
+            Address: row.Address,
+            Latitude: row.Latitude,
+            Longitude: row.Longitude
+        });
+        
+        // Check each required field
+        const missingFields = [];
+        requiredFields.forEach(field => {
+            if (!row[field] || row[field].trim() === '') {
+                missingFields.push(field);
+            }
+        });
+        
+        // Validate coordinates
+        const lat = parseFloat(row.Latitude);
+        const lng = parseFloat(row.Longitude);
+        const validCoordinates = !isNaN(lat) && !isNaN(lng) && 
+                                lat >= -90 && lat <= 90 && 
+                                lng >= -180 && lng <= 180;
+        
+        if (missingFields.length > 0) {
+            console.warn(`⚠️ Row ${index + 1} missing required fields:`, missingFields);
+            invalidCount++;
+            return false;
+        }
+        
+        if (!validCoordinates) {
+            console.warn(`⚠️ Row ${index + 1} has invalid coordinates: lat=${row.Latitude}, lng=${row.Longitude}`);
+            invalidCount++;
+            return false;
+        }
+        
+        validCount++;
+        return true;
+    });
+    
+    console.log(`✅ Validation complete: ${validCount} valid, ${invalidCount} invalid rows`);
+    
+    const processedData = validData.map((row, index) => {
         // Process tags
         const tags = row.Tags ? 
             row.Tags.split(',').map(tag => tag.trim()).filter(tag => tag) : 
@@ -156,25 +235,46 @@ function processRestaurantData(rawData) {
         tags.forEach(tag => allTags.add(tag));
         
         // Add reviewer to global set
-        if (row.Reviewer) {
+        if (row.Reviewer && row.Reviewer.trim()) {
             allReviewers.add(row.Reviewer.trim());
         }
         
-        return {
-            reviewer: row.Reviewer || 'Unknown',
-            restaurant: row.Restaurant,
+        // Parse and validate rating
+        const rating = parseFloat(row['Bigger Belly Rating']);
+        const validRating = !isNaN(rating) && rating >= 0 && rating <= 5 ? rating : 0;
+        
+        if (isNaN(rating) || rating < 0 || rating > 5) {
+            console.warn(`⚠️ Invalid rating for ${row.Restaurant}: ${row['Bigger Belly Rating']}, defaulting to 0`);
+        }
+        
+        const processedRow = {
+            reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
+            restaurant: row.Restaurant.trim(),
             tags: tags,
-            location: row.Location || '',
-            address: row.Address,
-            googleMapsLink: row['Google Maps Link'] || '',
+            location: row.Location ? row.Location.trim() : '',
+            address: row.Address.trim(),
+            googleMapsLink: row['Google Maps Link'] ? row['Google Maps Link'].trim() : '',
             latitude: parseFloat(row.Latitude),
             longitude: parseFloat(row.Longitude),
-            rating: parseFloat(row['Bigger Belly Rating']) || 0,
-            tikTokVideo: row['TikTok Video'] || '',
-            tikTokThumbnail: row['TikTok Thumbnail'] || '',
-            datePosted: row['Date of Posted Video'] || ''
+            rating: validRating,
+            tikTokVideo: row['TikTok Video'] ? row['TikTok Video'].trim() : '',
+            tikTokThumbnail: row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '',
+            datePosted: row['Date of Posted Video'] ? row['Date of Posted Video'].trim() : ''
         };
+        
+        // Log first few processed rows
+        if (index < 3) {
+            console.log(`✅ Processed row ${index + 1}:`, processedRow);
+        }
+        
+        return processedRow;
     });
+    
+    console.log(`🎯 Final processed restaurants: ${processedData.length}`);
+    console.log(`🏷️ Unique tags found: ${Array.from(allTags).length}`);
+    console.log(`👤 Unique reviewers found: ${Array.from(allReviewers).length}`);
+    
+    return processedData;
 }
 
 // Create map markers
