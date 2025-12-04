@@ -73,7 +73,7 @@ async function loadRestaurantData() {
             throw new Error('Please update the CSV URL in the CONFIG object');
         }
         
-        const response = await fetch(CONFIG.csvUrl);
+        const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
