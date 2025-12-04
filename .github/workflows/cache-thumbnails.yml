@@ -21,12 +21,16 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install sharp for image compression
+        run: npm install sharp
+
       - name: Fetch CSV and cache thumbnails
         run: |
           node << 'EOF'
           const fs = require('fs');
           const https = require('https');
           const http = require('http');
+          const sharp = require('sharp');
 
           // === CONFIGURATION ===
           const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv';
@@ -136,8 +140,18 @@ jobs:
                 }
 
                 const imageBuffer = await fetch(thumbnailUrl);
-                fs.writeFileSync(imagePath, imageBuffer);
-                console.log(`Saved ${videoId}.jpeg`);
+                
+                // Compress image using sharp
+                const compressedBuffer = await sharp(imageBuffer)
+                  .jpeg({ 
+                    quality: 80, 
+                    progressive: true 
+                  })
+                  .resize({ width: 300, withoutEnlargement: true })
+                  .toBuffer();
+                
+                fs.writeFileSync(imagePath, compressedBuffer);
+                console.log(`Saved and compressed ${videoId}.jpeg`);
                 downloaded++;
 
                 // Small delay to avoid rate limiting
