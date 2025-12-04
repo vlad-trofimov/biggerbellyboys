@@ -243,7 +243,7 @@ function processRestaurantData(rawData) {
         }
         
         if (!validCoordinates) {
-            console.warn(`⚠️ Row ${index + 1} has invalid coordinates: lat=${row.Latitude}, lng=${row.Longitude}`);
+            console.warn(`⚠️ Row ${index + 1} has invalid coordinates: lat="${cleanLat}" (${lat}), lng="${cleanLng}" (${lng})`);
             invalidCount++;
             return false;
         }
