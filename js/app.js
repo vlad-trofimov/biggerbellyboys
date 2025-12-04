@@ -1,5 +1,6 @@
 // Configuration
 const CONFIG = {
+    version: '1.2.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -17,6 +18,7 @@ let allReviewers = new Set();
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    console.log(`🍔 Bigger Belly Boys v${CONFIG.version} - Loading...`);
     initializeMap();
     setupEventListeners();
     loadRestaurantData();
@@ -54,59 +56,33 @@ async function loadRestaurantData() {
     const loadingElement = document.getElementById('loading');
     
     try {
-        console.log('🔄 Loading restaurant data from:', CONFIG.csvUrl);
-        
         if (CONFIG.csvUrl === 'PASTE_YOUR_GOOGLE_SHEETS_CSV_URL_HERE') {
             throw new Error('Please update the CSV URL in the CONFIG object');
         }
         
-        console.log('📡 Fetching CSV data...');
         const response = await fetch(CONFIG.csvUrl);
-        console.log('📡 Response status:', response.status, response.statusText);
-        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const csvText = await response.text();
-        console.log('📄 CSV text length:', csvText.length);
-        console.log('📄 First 200 characters of CSV:', csvText.substring(0, 200));
-        
         const parsedData = parseCSV(csvText);
-        console.log('📊 Parsed data rows:', parsedData.length);
-        console.log('📊 Sample parsed row:', parsedData[0]);
-        
         restaurants = processRestaurantData(parsedData);
-        console.log('✅ Valid restaurants found:', restaurants.length);
-        console.log('✅ Sample restaurant:', restaurants[0]);
         
         if (restaurants.length === 0) {
-            console.error('❌ No valid restaurants found after processing!');
-            console.error('📊 Debug info:');
-            console.error('   - Raw CSV rows:', parsedData.length);
-            console.error('   - Headers detected:', Object.keys(parsedData[0] || {}));
-            console.error('   - Sample raw row:', parsedData[0]);
-            throw new Error('No valid restaurant data found - check console for details');
+            throw new Error('No valid restaurant data found');
         }
         
-        console.log('🗺️ Creating map markers...');
         createMapMarkers();
-        
-        console.log('📋 Creating restaurant cards...');
         createRestaurantCards();
-        
-        console.log('🔧 Setting up filters...');
         setupFilters();
-        
-        console.log('📍 Centering map...');
         centerMapOnRestaurants();
         
         loadingElement.classList.add('hidden');
-        console.log('🎉 Restaurant data loaded successfully!');
+        console.log(`✅ Loaded ${restaurants.length} restaurants successfully`);
         
     } catch (error) {
         console.error('❌ Error loading restaurant data:', error);
-        console.error('❌ Stack trace:', error.stack);
         loadingElement.innerHTML = `
             <div class="spinner" style="display: none;"></div>
             <p>Error loading restaurant data: ${error.message}</p>
@@ -121,18 +97,13 @@ async function loadRestaurantData() {
 
 // Parse CSV data
 function parseCSV(csvText) {
-    console.log('🔍 Starting CSV parsing...');
     const lines = csvText.trim().split('\n');
-    console.log('📄 Total lines in CSV:', lines.length);
     
     if (lines.length < 2) {
-        console.error('❌ CSV has no data rows (only headers or empty)');
         return [];
     }
     
     const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-    console.log('📋 Headers found:', headers);
-    
     const data = [];
     
     for (let i = 1; i < lines.length; i++) {
@@ -144,14 +115,8 @@ function parseCSV(csvText) {
         });
         
         data.push(row);
-        
-        // Log first few rows for debugging
-        if (i <= 3) {
-            console.log(`📊 Row ${i}:`, row);
-        }
     }
     
-    console.log('✅ CSV parsing complete. Data rows:', data.length);
     return data;
 }
 
@@ -180,42 +145,9 @@ function parseCSVLine(line) {
 
 // Process and validate restaurant data
 function processRestaurantData(rawData) {
-    console.log('🔍 Starting data validation and processing...');
-    console.log('📊 Raw data rows to process:', rawData.length);
-    
-    let validCount = 0;
-    let invalidCount = 0;
-    
-    // Define required fields based on the CSV column structure
-    // Note: These field names must match your CSV headers exactly (case-sensitive)
     const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
     
-    console.log('🔍 Looking for required fields:', requiredFields);
-    
-    // Check if we have the required columns in our headers
-    if (rawData.length > 0) {
-        const availableFields = Object.keys(rawData[0]);
-        console.log('📋 Available fields in CSV:', availableFields);
-        
-        const missingRequiredFields = requiredFields.filter(field => !availableFields.includes(field));
-        if (missingRequiredFields.length > 0) {
-            console.error('❌ Missing required columns in CSV:', missingRequiredFields);
-            console.error('💡 Your CSV headers might be different. Common alternatives:');
-            console.error('   - Restaurant → Name, Restaurant Name, Business Name');
-            console.error('   - Address → Full Address, Street Address');
-            console.error('   - Latitude → Lat, Y');
-            console.error('   - Longitude → Lng, Long, X');
-        }
-    }
-    
     const validData = rawData.filter((row, index) => {
-        console.log(`🔍 Validating row ${index + 1}:`, {
-            Restaurant: row.Restaurant,
-            Address: row.Address,
-            Latitude: row.Latitude,
-            Longitude: row.Longitude
-        });
-        
         // Check each required field
         const missingFields = [];
         requiredFields.forEach(field => {
@@ -234,25 +166,8 @@ function processRestaurantData(rawData) {
                                 lat >= -90 && lat <= 90 && 
                                 lng >= -180 && lng <= 180;
         
-        console.log(`   Cleaned coordinates: lat="${cleanLat}" (${lat}), lng="${cleanLng}" (${lng}), valid: ${validCoordinates}`);
-        
-        if (missingFields.length > 0) {
-            console.warn(`⚠️ Row ${index + 1} missing required fields:`, missingFields);
-            invalidCount++;
-            return false;
-        }
-        
-        if (!validCoordinates) {
-            console.warn(`⚠️ Row ${index + 1} has invalid coordinates: lat="${cleanLat}" (${lat}), lng="${cleanLng}" (${lng})`);
-            invalidCount++;
-            return false;
-        }
-        
-        validCount++;
-        return true;
+        return missingFields.length === 0 && validCoordinates;
     });
-    
-    console.log(`✅ Validation complete: ${validCount} valid, ${invalidCount} invalid rows`);
     
     const processedData = validData.map((row, index) => {
         // Process tags
@@ -269,18 +184,10 @@ function processRestaurantData(rawData) {
         }
         
         // Parse and validate rating (out of 10)
-        const ratingStr = row['Bigger Belly Rating'];
-        console.log(`   Rating string: "${ratingStr}" for ${row.Restaurant}`);
-        const rating = parseFloat(ratingStr);
-        console.log(`   Parsed rating: ${rating}, isNaN: ${isNaN(rating)}`);
+        const rating = parseFloat(row['Bigger Belly Rating']);
         const validRating = !isNaN(rating) && rating >= 0 && rating <= 10 ? rating : 0;
-        console.log(`   Final rating: ${validRating}`);
         
-        if (isNaN(rating) || rating < 0 || rating > 10) {
-            console.warn(`⚠️ Invalid rating for ${row.Restaurant}: "${ratingStr}" (parsed as ${rating}), defaulting to 0`);
-        }
-        
-        const processedRow = {
+        return {
             reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
             restaurant: row.Restaurant.trim(),
             tags: tags,
@@ -294,18 +201,7 @@ function processRestaurantData(rawData) {
             tikTokThumbnail: row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '',
             datePosted: row['Date of Posted Video'] ? row['Date of Posted Video'].trim() : ''
         };
-        
-        // Log first few processed rows
-        if (index < 3) {
-            console.log(`✅ Processed row ${index + 1}:`, processedRow);
-        }
-        
-        return processedRow;
     });
-    
-    console.log(`🎯 Final processed restaurants: ${processedData.length}`);
-    console.log(`🏷️ Unique tags found: ${Array.from(allTags).length}`);
-    console.log(`👤 Unique reviewers found: ${Array.from(allReviewers).length}`);
     
     return processedData;
 }
