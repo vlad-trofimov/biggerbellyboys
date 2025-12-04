@@ -169,6 +169,21 @@ function getCachedThumbnailPath(tikTokVideoUrl) {
     return videoId ? `thumbnails/${videoId}.jpeg` : null;
 }
 
+// Get reviewer-specific rating icon with fallback
+function getReviewerIcon(reviewer) {
+    if (!reviewer) return 'src/vlad-bbb.png';
+    
+    const reviewerName = reviewer.toLowerCase().trim();
+    switch (reviewerName) {
+        case 'andrew':
+            return 'src/andrew-bbb.png';
+        case 'jason':
+            return 'src/jason-bbb.png';
+        default:
+            return 'src/vlad-bbb.png';
+    }
+}
+
 // Process and validate restaurant data
 function processRestaurantData(rawData) {
     const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
@@ -260,7 +275,7 @@ function createPopupContent(restaurant) {
             <div class="popup-address">${restaurant.address}</div>
             <div class="popup-rating">
                 <span class="rating-value">${restaurant.rating}</span>
-                <img src="src/vlad-bbb.png" alt="Bigger Belly Rating" class="rating-icon">
+                <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
             </div>
             <div class="popup-links">
                 ${restaurant.tikTokVideo ? 
@@ -299,7 +314,7 @@ function createRestaurantCards() {
                 <div class="restaurant-address">${restaurant.address}</div>
                 <div class="restaurant-rating">
                     <span class="rating-value">${restaurant.rating}</span>
-                    <img src="src/vlad-bbb.png" alt="Bigger Belly Rating" class="rating-icon">
+                    <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
                 </div>
                 <div class="restaurant-tags">${tagsHtml}</div>
                 <div class="restaurant-reviewer">Reviewed by: ${restaurant.reviewer}</div>
