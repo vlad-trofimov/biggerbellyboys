@@ -76,14 +76,40 @@ header h1 {
     overflow: hidden;
 }
 
-/* Filter Section */
+/* Filter Section with Food-Inspired Border */
 .filter-section {
     background: var(--background-light);
-    border-bottom: 1px solid var(--border-color);
+    border: 3px solid var(--primary-color);
+    border-radius: 20px;
     padding: 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
+    margin: 1rem;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(212, 101, 26, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+/* Add gradient border to filter section */
+.filter-section::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, 
+        var(--primary-color) 0%, 
+        var(--accent-color) 25%, 
+        var(--primary-color) 50%, 
+        var(--accent-color) 75%, 
+        var(--primary-color) 100%);
+    border-radius: 23px;
+    z-index: -1;
+    opacity: 0.8;
 }
 
 .filter-toggle {
@@ -391,12 +417,14 @@ header h1 {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 /* Map Container with Food-Inspired Design */
 .map-container {
-    height: 100%;
-    min-height: 400px;
+    width: 100%;
+    aspect-ratio: 4/3; /* More square-like ratio */
+    max-height: 75vh; /* Prevent it from being too tall */
     border: 3px solid var(--primary-color);
     border-radius: 20px;
     overflow: hidden;
@@ -427,20 +455,7 @@ header h1 {
     opacity: 0.8;
 }
 
-/* Map title/header */
-.map-header {
-    text-align: center;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-}
-
-.map-header h3 {
-    color: var(--text-dark);
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
+/* Map header removed */
 
 /* Mobile Responsiveness for Map */
 @media (max-width: 768px) {
@@ -473,7 +488,7 @@ header h1 {
 /* Restaurant List */
 .restaurant-list-container {
     flex: 1;
-    padding: 1.5rem;
+    padding: 0.5rem;
     background: var(--background-white);
     overflow: hidden;
     display: flex;
@@ -489,27 +504,56 @@ header h1 {
 .restaurant-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 0.5rem;
     overflow-y: auto;
     padding-right: 0.5rem;
     flex: 1;
 }
 
-/* Restaurant Card */
+/* Restaurant Card with Food-Inspired Border */
 .restaurant-card {
     background: white;
-    border: 2px solid var(--border-color);
-    border-radius: 15px;
+    border: 3px solid var(--primary-color);
+    border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 12px var(--shadow);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(212, 101, 26, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    margin: 1rem;
+}
+
+/* Add gradient border to restaurant cards */
+.restaurant-card::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(45deg, 
+        var(--primary-color) 0%, 
+        var(--accent-color) 25%, 
+        var(--primary-color) 50%, 
+        var(--accent-color) 75%, 
+        var(--primary-color) 100%);
+    border-radius: 23px;
+    z-index: -1;
+    opacity: 0.8;
 }
 
 .restaurant-card:hover {
     transform: translateY(-5px) rotate(1deg);
-    box-shadow: 0 6px 20px var(--shadow);
-    border-color: var(--primary-color);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(212, 101, 26, 0.2);
+}
+
+.restaurant-card:hover::before {
+    opacity: 1;
 }
 
 .restaurant-card.hidden {

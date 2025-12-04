@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.9.0',
+    version: '1.9.2',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -99,7 +99,7 @@ async function loadRestaurantData() {
         createMapMarkers();
         sortAndDisplayRestaurants();
         setupFilters();
-        centerMapOnRestaurants();
+        centerMapOnFirstVisibleRestaurant();
         
         loadingElement.classList.add('hidden');
         console.log(`✅ Loaded ${restaurants.length} restaurants successfully`);
@@ -646,7 +646,29 @@ function clearAllFilters() {
     });
 }
 
-// Center map on all restaurants
+// Center map on first visible restaurant card
+function centerMapOnFirstVisibleRestaurant() {
+    if (restaurants.length === 0) return;
+    
+    // Get the first visible restaurant card
+    const firstVisibleCard = document.querySelector('.restaurant-card:not(.hidden)');
+    if (firstVisibleCard) {
+        const cardIndex = parseInt(firstVisibleCard.dataset.index);
+        const restaurant = restaurants[cardIndex];
+        if (restaurant) {
+            map.setView([restaurant.latitude, restaurant.longitude], 13);
+            return;
+        }
+    }
+    
+    // Fallback: use first restaurant in the list
+    const firstRestaurant = restaurants[0];
+    if (firstRestaurant) {
+        map.setView([firstRestaurant.latitude, firstRestaurant.longitude], 13);
+    }
+}
+
+// Center map on all restaurants (fallback function)
 function centerMapOnRestaurants() {
     if (restaurants.length === 0) return;
     
