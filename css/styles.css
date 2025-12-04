@@ -383,6 +383,20 @@ header h1 {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     transition: opacity 0.3s ease;
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Specific lazy loading for restaurant thumbnails */
+.restaurant-thumbnail.lazy-image {
+    aspect-ratio: 1177 / 1570; /* Maintain TikTok aspect ratio */
+}
+
+/* Specific lazy loading for popup thumbnails */  
+.popup-thumbnail.lazy-popup-image {
+    min-height: 150px;
+    max-height: 200px;
 }
 
 .lazy-image.loading, .lazy-popup-image.loading {
@@ -391,6 +405,7 @@ header h1 {
 
 .lazy-image.loaded, .lazy-popup-image.loaded {
     opacity: 1;
+    background: none; /* Remove placeholder background once loaded */
 }
 
 .lazy-image.error, .lazy-popup-image.error {
