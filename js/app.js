@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.2.3',
+    version: '1.2.4',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -263,7 +263,7 @@ function createRestaurantCards() {
         card.innerHTML = `
             ${restaurant.tikTokThumbnail ? 
                 `<img src="${restaurant.tikTokThumbnail}" alt="${restaurant.restaurant}" class="restaurant-thumbnail" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDMwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjBGMEYwIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iNzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K'">` : 
-                `<div class="restaurant-thumbnail" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; aspect-ratio: 1177 / 1570; max-height: 200px;">No Image</div>`
+                `<div class="restaurant-thumbnail" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; aspect-ratio: 1177 / 1570;">No Image</div>`
             }
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
