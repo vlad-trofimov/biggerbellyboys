@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.8.1',
+    version: '1.8.2',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -290,6 +290,11 @@ function processRestaurantData(rawData) {
         const tags = row.Tags ? 
             row.Tags.split(',').map(tag => tag.trim()).filter(tag => tag) : 
             [];
+        
+        // Debug: log tags for troubleshooting
+        if (row.Restaurant && row.Restaurant.includes('cheesesteak')) {
+            console.log(`Tags for ${row.Restaurant}:`, tags);
+        }
         
         // Add tags to global set
         tags.forEach(tag => allTags.add(tag));
@@ -663,12 +668,22 @@ function applyFilters() {
         // Filter by selected tags (must have ALL selected tags - includes reviewers)
         if (selectedTags.size > 0) {
             const hasAllSelectedTags = Array.from(selectedTags).every(selectedTag => {
+                // Clean and normalize the selected tag
+                const cleanSelectedTag = selectedTag.toLowerCase().trim();
+                
                 // Check if it matches a regular tag
                 const matchesTag = restaurant.tags.some(restaurantTag => 
-                    restaurantTag.toLowerCase() === selectedTag.toLowerCase()
+                    restaurantTag.toLowerCase().trim() === cleanSelectedTag
                 );
                 // Or check if it matches the reviewer
-                const matchesReviewer = restaurant.reviewer.toLowerCase() === selectedTag.toLowerCase();
+                const matchesReviewer = restaurant.reviewer.toLowerCase().trim() === cleanSelectedTag;
+                
+                // Debug log for troubleshooting
+                if (!matchesTag && !matchesReviewer) {
+                    console.log(`No match for "${selectedTag}" in restaurant "${restaurant.restaurant}"`);
+                    console.log('Restaurant tags:', restaurant.tags);
+                    console.log('Restaurant reviewer:', restaurant.reviewer);
+                }
                 
                 return matchesTag || matchesReviewer;
             });
