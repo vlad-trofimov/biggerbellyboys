@@ -156,6 +156,19 @@ function parseCSVLine(line) {
     return result;
 }
 
+// Extract TikTok video ID from URL
+function extractTikTokVideoId(url) {
+    if (!url) return null;
+    const match = url.match(/\/video\/(\d+)/);
+    return match ? match[1] : null;
+}
+
+// Get cached thumbnail path for a TikTok video
+function getCachedThumbnailPath(tikTokVideoUrl) {
+    const videoId = extractTikTokVideoId(tikTokVideoUrl);
+    return videoId ? `thumbnails/${videoId}.jpeg` : null;
+}
+
 // Process and validate restaurant data
 function processRestaurantData(rawData) {
     const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
@@ -200,6 +213,9 @@ function processRestaurantData(rawData) {
         const rating = parseFloat(row['Bigger Belly Rating']);
         const validRating = !isNaN(rating) && rating >= 0 && rating <= 10 ? rating : 0;
         
+        const tikTokVideoUrl = row['TikTok Video'] ? row['TikTok Video'].trim() : '';
+        const cachedThumbnailPath = getCachedThumbnailPath(tikTokVideoUrl);
+        
         return {
             reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
             restaurant: row.Restaurant.trim(),
@@ -210,8 +226,8 @@ function processRestaurantData(rawData) {
             latitude: parseFloat(row.Latitude.toString().replace('@', '')),
             longitude: parseFloat(row.Longitude),
             rating: validRating,
-            tikTokVideo: row['TikTok Video'] ? row['TikTok Video'].trim() : '',
-            tikTokThumbnail: row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '',
+            tikTokVideo: tikTokVideoUrl,
+            tikTokThumbnail: cachedThumbnailPath || (row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : ''),
             datePosted: row['Date of Posted Video'] ? row['Date of Posted Video'].trim() : ''
         };
     });
