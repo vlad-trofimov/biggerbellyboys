@@ -231,7 +231,14 @@ header p {
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.restaurant-address {
+    font-size: 0.9rem;
+    color: var(--text-light);
     margin-bottom: 0.5rem;
+    line-height: 1.3;
 }
 
 .restaurant-rating {

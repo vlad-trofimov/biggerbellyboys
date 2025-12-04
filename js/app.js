@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.2.2',
+    version: '1.2.3',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -267,6 +267,7 @@ function createRestaurantCards() {
             }
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
+                <div class="restaurant-address">${restaurant.address}</div>
                 <div class="restaurant-rating">
                     <span class="rating-value">${restaurant.rating}</span>
                     <img src="src/vlad-bbb.png" alt="Bigger Belly Rating" class="rating-icon">
