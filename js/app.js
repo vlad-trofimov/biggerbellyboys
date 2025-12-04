@@ -1,0 +1,379 @@
+// Configuration
+const CONFIG = {
+    // Replace this URL with your actual Google Sheets CSV URL
+    csvUrl: 'PASTE_YOUR_GOOGLE_SHEETS_CSV_URL_HERE',
+    
+    // Default map center (will be updated based on restaurant locations)
+    defaultCenter: [40.7128, -74.0060], // New York City
+    defaultZoom: 10
+};
+
+// Global variables
+let map;
+let restaurants = [];
+let markers = [];
+let allTags = new Set();
+let allReviewers = new Set();
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    initializeMap();
+    setupEventListeners();
+    loadRestaurantData();
+});
+
+// Initialize Leaflet map
+function initializeMap() {
+    map = L.map('map').setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
+    
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Filter toggle for mobile
+    const filterToggle = document.getElementById('filter-toggle-btn');
+    const filterContent = document.querySelector('.filter-content');
+    
+    filterToggle.addEventListener('click', function() {
+        filterContent.classList.toggle('active');
+    });
+    
+    // Clear filters button
+    document.getElementById('clear-filters').addEventListener('click', clearAllFilters);
+    
+    // Rating filter
+    document.getElementById('rating-filter').addEventListener('change', applyFilters);
+}
+
+// Load restaurant data from CSV
+async function loadRestaurantData() {
+    const loadingElement = document.getElementById('loading');
+    
+    try {
+        if (CONFIG.csvUrl === 'PASTE_YOUR_GOOGLE_SHEETS_CSV_URL_HERE') {
+            throw new Error('Please update the CSV URL in the CONFIG object');
+        }
+        
+        const response = await fetch(CONFIG.csvUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const csvText = await response.text();
+        const parsedData = parseCSV(csvText);
+        
+        restaurants = processRestaurantData(parsedData);
+        
+        if (restaurants.length === 0) {
+            throw new Error('No valid restaurant data found');
+        }
+        
+        createMapMarkers();
+        createRestaurantCards();
+        setupFilters();
+        centerMapOnRestaurants();
+        
+        loadingElement.classList.add('hidden');
+        
+    } catch (error) {
+        console.error('Error loading restaurant data:', error);
+        loadingElement.innerHTML = `
+            <div class="spinner" style="display: none;"></div>
+            <p>Error loading restaurant data: ${error.message}</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                ${CONFIG.csvUrl === 'PASTE_YOUR_GOOGLE_SHEETS_CSV_URL_HERE' ? 
+                  'Please update the CSV URL in js/app.js' : 
+                  'Please check your internet connection and try again.'}
+            </p>
+        `;
+    }
+}
+
+// Parse CSV data
+function parseCSV(csvText) {
+    const lines = csvText.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+    const data = [];
+    
+    for (let i = 1; i < lines.length; i++) {
+        const values = parseCSVLine(lines[i]);
+        const row = {};
+        
+        headers.forEach((header, index) => {
+            row[header] = values[index] ? values[index].trim().replace(/"/g, '') : '';
+        });
+        
+        data.push(row);
+    }
+    
+    return data;
+}
+
+// Parse a single CSV line (handles commas within quotes)
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            result.push(current);
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    
+    result.push(current);
+    return result;
+}
+
+// Process and validate restaurant data
+function processRestaurantData(rawData) {
+    return rawData.filter(row => {
+        // Check required fields
+        return row.Restaurant && 
+               row.Address && 
+               row.Latitude && 
+               row.Longitude &&
+               !isNaN(parseFloat(row.Latitude)) && 
+               !isNaN(parseFloat(row.Longitude));
+    }).map(row => {
+        // Process tags
+        const tags = row.Tags ? 
+            row.Tags.split(',').map(tag => tag.trim()).filter(tag => tag) : 
+            [];
+        
+        // Add tags to global set
+        tags.forEach(tag => allTags.add(tag));
+        
+        // Add reviewer to global set
+        if (row.Reviewer) {
+            allReviewers.add(row.Reviewer.trim());
+        }
+        
+        return {
+            reviewer: row.Reviewer || 'Unknown',
+            restaurant: row.Restaurant,
+            tags: tags,
+            location: row.Location || '',
+            address: row.Address,
+            googleMapsLink: row['Google Maps Link'] || '',
+            latitude: parseFloat(row.Latitude),
+            longitude: parseFloat(row.Longitude),
+            rating: parseFloat(row['Bigger Belly Rating']) || 0,
+            tikTokVideo: row['TikTok Video'] || '',
+            tikTokThumbnail: row['TikTok Thumbnail'] || '',
+            datePosted: row['Date of Posted Video'] || ''
+        };
+    });
+}
+
+// Create map markers
+function createMapMarkers() {
+    restaurants.forEach((restaurant, index) => {
+        const marker = L.marker([restaurant.latitude, restaurant.longitude])
+            .addTo(map)
+            .bindPopup(createPopupContent(restaurant));
+        
+        // Store reference to restaurant data
+        marker.restaurantIndex = index;
+        markers.push(marker);
+    });
+}
+
+// Create popup content for map markers
+function createPopupContent(restaurant) {
+    const stars = '★'.repeat(Math.floor(restaurant.rating)) + '☆'.repeat(5 - Math.floor(restaurant.rating));
+    
+    return `
+        <div class="popup-content">
+            ${restaurant.tikTokThumbnail ? 
+                `<img src="${restaurant.tikTokThumbnail}" alt="${restaurant.restaurant}" class="popup-thumbnail" onerror="this.style.display='none'">` : 
+                ''
+            }
+            <div class="popup-name">${restaurant.restaurant}</div>
+            <div class="popup-address">${restaurant.address}</div>
+            <div class="popup-rating">
+                <span class="stars">${stars}</span>
+                <span class="rating-value">${restaurant.rating}/5</span>
+            </div>
+            <div class="popup-links">
+                ${restaurant.tikTokVideo ? 
+                    `<a href="${restaurant.tikTokVideo}" target="_blank">Watch Review</a>` : 
+                    ''
+                }
+                ${restaurant.googleMapsLink ? 
+                    `<a href="${restaurant.googleMapsLink}" target="_blank">View on Maps</a>` : 
+                    ''
+                }
+            </div>
+            <div class="popup-reviewer">Reviewed by: ${restaurant.reviewer}</div>
+        </div>
+    `;
+}
+
+// Create restaurant cards
+function createRestaurantCards() {
+    const restaurantList = document.getElementById('restaurant-list');
+    restaurantList.innerHTML = '';
+    
+    restaurants.forEach((restaurant, index) => {
+        const card = document.createElement('div');
+        card.className = 'restaurant-card';
+        card.dataset.index = index;
+        
+        const stars = '★'.repeat(Math.floor(restaurant.rating)) + '☆'.repeat(5 - Math.floor(restaurant.rating));
+        const tagsHtml = restaurant.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        
+        card.innerHTML = `
+            ${restaurant.tikTokThumbnail ? 
+                `<img src="${restaurant.tikTokThumbnail}" alt="${restaurant.restaurant}" class="restaurant-thumbnail" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDMwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjBGMEYwIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iNzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K'">` : 
+                `<div class="restaurant-thumbnail" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px;">No Image</div>`
+            }
+            <div class="restaurant-info">
+                <div class="restaurant-name">${restaurant.restaurant}</div>
+                <div class="restaurant-rating">
+                    <span class="stars">${stars}</span>
+                    <span class="rating-value">${restaurant.rating}/5</span>
+                </div>
+                <div class="restaurant-tags">${tagsHtml}</div>
+                <div class="restaurant-reviewer">Reviewed by: ${restaurant.reviewer}</div>
+            </div>
+        `;
+        
+        // Add click event to zoom to marker
+        card.addEventListener('click', () => {
+            const marker = markers[index];
+            map.setView([restaurant.latitude, restaurant.longitude], 15);
+            marker.openPopup();
+        });
+        
+        restaurantList.appendChild(card);
+    });
+}
+
+// Setup filter controls
+function setupFilters() {
+    setupTagFilters();
+    setupReviewerFilters();
+}
+
+// Setup tag filters
+function setupTagFilters() {
+    const tagFilters = document.getElementById('tag-filters');
+    const sortedTags = Array.from(allTags).sort();
+    
+    tagFilters.innerHTML = '';
+    
+    sortedTags.forEach(tag => {
+        const checkboxItem = document.createElement('div');
+        checkboxItem.className = 'checkbox-item';
+        
+        checkboxItem.innerHTML = `
+            <input type="checkbox" id="tag-${tag}" value="${tag}">
+            <label for="tag-${tag}">${tag}</label>
+        `;
+        
+        checkboxItem.querySelector('input').addEventListener('change', applyFilters);
+        tagFilters.appendChild(checkboxItem);
+    });
+}
+
+// Setup reviewer filters
+function setupReviewerFilters() {
+    const reviewerFilters = document.getElementById('reviewer-filters');
+    const sortedReviewers = Array.from(allReviewers).sort();
+    
+    reviewerFilters.innerHTML = '';
+    
+    sortedReviewers.forEach(reviewer => {
+        const checkboxItem = document.createElement('div');
+        checkboxItem.className = 'checkbox-item';
+        
+        const safeName = reviewer.replace(/[^a-zA-Z0-9]/g, '-');
+        
+        checkboxItem.innerHTML = `
+            <input type="checkbox" id="reviewer-${safeName}" value="${reviewer}">
+            <label for="reviewer-${safeName}">${reviewer}</label>
+        `;
+        
+        checkboxItem.querySelector('input').addEventListener('change', applyFilters);
+        reviewerFilters.appendChild(checkboxItem);
+    });
+}
+
+// Apply filters
+function applyFilters() {
+    const selectedTags = Array.from(document.querySelectorAll('#tag-filters input:checked')).map(cb => cb.value);
+    const selectedReviewers = Array.from(document.querySelectorAll('#reviewer-filters input:checked')).map(cb => cb.value);
+    const minRating = parseFloat(document.getElementById('rating-filter').value) || 0;
+    
+    restaurants.forEach((restaurant, index) => {
+        const card = document.querySelector(`[data-index="${index}"]`);
+        const marker = markers[index];
+        
+        let show = true;
+        
+        // Filter by tags
+        if (selectedTags.length > 0) {
+            const hasSelectedTag = selectedTags.some(tag => restaurant.tags.includes(tag));
+            if (!hasSelectedTag) show = false;
+        }
+        
+        // Filter by reviewers
+        if (selectedReviewers.length > 0) {
+            if (!selectedReviewers.includes(restaurant.reviewer)) show = false;
+        }
+        
+        // Filter by rating
+        if (restaurant.rating < minRating) show = false;
+        
+        // Show/hide card and marker
+        if (show) {
+            card.classList.remove('hidden');
+            map.addLayer(marker);
+        } else {
+            card.classList.add('hidden');
+            map.removeLayer(marker);
+        }
+    });
+}
+
+// Clear all filters
+function clearAllFilters() {
+    // Clear checkboxes
+    document.querySelectorAll('#tag-filters input, #reviewer-filters input').forEach(cb => {
+        cb.checked = false;
+    });
+    
+    // Reset rating filter
+    document.getElementById('rating-filter').value = '0';
+    
+    // Show all restaurants
+    restaurants.forEach((restaurant, index) => {
+        const card = document.querySelector(`[data-index="${index}"]`);
+        const marker = markers[index];
+        
+        card.classList.remove('hidden');
+        if (!map.hasLayer(marker)) {
+            map.addLayer(marker);
+        }
+    });
+}
+
+// Center map on all restaurants
+function centerMapOnRestaurants() {
+    if (restaurants.length === 0) return;
+    
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+}
