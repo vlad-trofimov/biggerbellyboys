@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.8.4',
+    version: '1.8.5',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -226,10 +226,7 @@ function processRestaurantData(rawData) {
             row.Tags.split(',').map(tag => tag.trim()).filter(tag => tag) : 
             [];
         
-        // Debug: log tags for troubleshooting
-        if (row.Restaurant && row.Restaurant.includes('cheesesteak')) {
-            console.log(`Tags for ${row.Restaurant}:`, tags);
-        }
+        // Tags processed and ready
         
         // Add tags to global set
         tags.forEach(tag => allTags.add(tag));
@@ -591,12 +588,7 @@ function applyFilters() {
                 // Or check if it matches the reviewer
                 const matchesReviewer = restaurant.reviewer.toLowerCase().trim() === cleanSelectedTag;
                 
-                // Debug log for troubleshooting
-                if (!matchesTag && !matchesReviewer) {
-                    console.log(`No match for "${selectedTag}" in restaurant "${restaurant.restaurant}"`);
-                    console.log('Restaurant tags:', restaurant.tags);
-                    console.log('Restaurant reviewer:', restaurant.reviewer);
-                }
+                // Clean filtering without debug logs
                 
                 return matchesTag || matchesReviewer;
             });
