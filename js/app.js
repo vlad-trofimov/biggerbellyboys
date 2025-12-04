@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.7.3',
+    version: '1.8.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -18,12 +18,14 @@ let allReviewers = new Set();
 let selectedTags = new Set();
 // selectedReviewer removed - now using tags
 let currentSort = 'newest';
+let imageObserver;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     console.log(`🍔 Bigger Belly Boys v${CONFIG.version} - Loading...`);
     initializeMap();
     setupEventListeners();
+    setupLazyLoading();
     loadRestaurantData();
 });
 
@@ -70,6 +72,71 @@ function setupEventListeners() {
         currentSort = this.value;
         sortAndDisplayRestaurants();
     });
+}
+
+// Setup lazy loading for images
+function setupLazyLoading() {
+    // Check if Intersection Observer is supported
+    if ('IntersectionObserver' in window) {
+        imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    loadImage(img);
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            // Load images when they're 50px from entering the viewport
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+    } else {
+        // Fallback: load all images immediately for older browsers
+        console.log('Intersection Observer not supported, loading all images immediately');
+    }
+}
+
+// Load an individual image
+function loadImage(img) {
+    const src = img.getAttribute('data-src');
+    const fallback = img.getAttribute('data-fallback');
+    
+    if (!src) return;
+    
+    // Show loading state
+    img.classList.add('loading');
+    
+    // Create a new image to preload
+    const imageLoader = new Image();
+    
+    imageLoader.onload = () => {
+        img.src = src;
+        img.classList.remove('loading');
+        img.classList.add('loaded');
+    };
+    
+    imageLoader.onerror = () => {
+        if (fallback) {
+            // Try fallback image
+            const fallbackLoader = new Image();
+            fallbackLoader.onload = () => {
+                img.src = fallback;
+                img.classList.remove('loading');
+                img.classList.add('loaded');
+            };
+            fallbackLoader.onerror = () => {
+                img.classList.remove('loading');
+                img.classList.add('error');
+            };
+            fallbackLoader.src = fallback;
+        } else {
+            img.classList.remove('loading');
+            img.classList.add('error');
+        }
+    };
+    
+    imageLoader.src = src;
 }
 
 // Load restaurant data from CSV
@@ -269,6 +336,15 @@ function createMapMarkers() {
             .addTo(map)
             .bindPopup(createPopupContent(restaurant));
         
+        // Load popup image when popup opens
+        marker.on('popupopen', function() {
+            const popup = this.getPopup();
+            const lazyImage = popup.getElement().querySelector('.lazy-popup-image');
+            if (lazyImage) {
+                loadImage(lazyImage);
+            }
+        });
+        
         // Store reference to restaurant data
         marker.restaurantIndex = index;
         markers.push(marker);
@@ -280,7 +356,10 @@ function createPopupContent(restaurant) {
     return `
         <div class="popup-content">
             ${restaurant.tikTokThumbnail ? 
-                `<img src="${restaurant.tikTokThumbnail}" alt="${restaurant.restaurant}" class="popup-thumbnail" onerror="this.src='${restaurant.tikTokThumbnailFallback}'; this.onerror=function(){this.style.display='none'}">` : 
+                `<img class="popup-thumbnail lazy-popup-image" 
+                      data-src="${restaurant.tikTokThumbnail}" 
+                      data-fallback="${restaurant.tikTokThumbnailFallback}" 
+                      alt="${restaurant.restaurant}">` : 
                 ''
             }
             <div class="popup-name">${restaurant.restaurant}</div>
@@ -353,8 +432,11 @@ function createRestaurantCards(sortedRestaurants = restaurants) {
         
         card.innerHTML = `
             ${restaurant.tikTokThumbnail ? 
-                `<img src="${restaurant.tikTokThumbnail}" alt="${restaurant.restaurant}" class="restaurant-thumbnail" onerror="this.src='${restaurant.tikTokThumbnailFallback}'; this.onerror=function(){this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDMwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjBGMEYwIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iNzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K'}">` : 
-                `<div class="restaurant-thumbnail" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; aspect-ratio: 1177 / 1570;">No Image</div>`
+                `<img class="restaurant-thumbnail lazy-image" 
+                      data-src="${restaurant.tikTokThumbnail}" 
+                      data-fallback="${restaurant.tikTokThumbnailFallback}" 
+                      alt="${restaurant.restaurant}">` : 
+                `<div class="restaurant-thumbnail no-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; aspect-ratio: 1177 / 1570;">No Image</div>`
             }
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
@@ -376,6 +458,17 @@ function createRestaurantCards(sortedRestaurants = restaurants) {
         });
         
         restaurantList.appendChild(card);
+        
+        // Observe lazy images for intersection
+        const lazyImage = card.querySelector('.lazy-image');
+        if (lazyImage) {
+            if (imageObserver) {
+                imageObserver.observe(lazyImage);
+            } else {
+                // Fallback: load immediately if no Intersection Observer
+                loadImage(lazyImage);
+            }
+        }
     });
 }
 
