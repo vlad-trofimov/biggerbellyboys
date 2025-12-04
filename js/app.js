@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.4.5',
+    version: '1.4.6',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeMap() {
     map = L.map('map').setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
     
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+    // Add CartoDB Positron tiles (clean, minimal style)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors © CARTO',
+        subdomains: 'abcd',
+        maxZoom: 20
     }).addTo(map);
 }
 
