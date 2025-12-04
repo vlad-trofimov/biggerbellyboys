@@ -93,24 +93,7 @@ header h1 {
     position: relative;
 }
 
-/* Add gradient border to filter section */
-.filter-section::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(45deg, 
-        var(--primary-color) 0%, 
-        var(--accent-color) 25%, 
-        var(--primary-color) 50%, 
-        var(--accent-color) 75%, 
-        var(--primary-color) 100%);
-    border-radius: 23px;
-    z-index: -1;
-    opacity: 0.8;
-}
+/* Gradient border removed for cleaner transparent look */
 
 .filter-toggle {
     display: none;
