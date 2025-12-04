@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.4.2',
+    version: '1.4.3',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -334,6 +334,14 @@ function setupDynamicRatingSlider() {
         <span>${maxRating}</span>
     `;
     
+    // Re-attach the event listener for the updated slider
+    ratingSlider.addEventListener('input', function() {
+        const value = parseFloat(this.value);
+        const newRatingValueDisplay = document.getElementById('rating-value');
+        newRatingValueDisplay.textContent = `${value}+`;
+        applyFilters();
+    });
+    
     console.log(`🎚️ Rating slider: ${minRating} - ${maxRating}`);
 }
 
@@ -351,8 +359,30 @@ function setupTagSearch() {
             return;
         }
         
-        // Filter available tags based on input
-        const availableTags = Array.from(allTags).filter(tag => {
+        // Get tags from restaurants that match current filters
+        const currentRating = parseFloat(document.getElementById('rating-filter').value) || 0;
+        
+        const availableTagsFromFilteredRestaurants = new Set();
+        restaurants.forEach(restaurant => {
+            // Check if restaurant matches current selected tags and rating
+            let matchesSelectedTags = true;
+            if (selectedTags.size > 0) {
+                matchesSelectedTags = Array.from(selectedTags).every(selectedTag =>
+                    restaurant.tags.some(restaurantTag => 
+                        restaurantTag.toLowerCase() === selectedTag.toLowerCase()
+                    )
+                );
+            }
+            
+            const matchesRating = restaurant.rating >= currentRating;
+            
+            if (matchesSelectedTags && matchesRating) {
+                restaurant.tags.forEach(tag => availableTagsFromFilteredRestaurants.add(tag));
+            }
+        });
+        
+        // Filter available tags based on input and current filters
+        const availableTags = Array.from(availableTagsFromFilteredRestaurants).filter(tag => {
             return tag.toLowerCase().includes(query) && !selectedTags.has(tag);
         });
         
