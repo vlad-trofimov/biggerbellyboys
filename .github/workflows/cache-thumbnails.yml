@@ -9,6 +9,8 @@ on:
 jobs:
   cache-thumbnails:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -18,9 +20,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Create thumbnails directory
-        run: mkdir -p thumbnails
 
       - name: Fetch CSV and cache thumbnails
         run: |
@@ -159,6 +158,8 @@ jobs:
           EOF
 
       - name: Commit and push if changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -167,5 +168,5 @@ jobs:
             echo "No new thumbnails to commit"
           else
             git commit -m "Cache new TikTok thumbnails"
-            git push
+            git push origin HEAD:${{ github.ref_name }}
           fi
