@@ -98,7 +98,7 @@ header p {
 
 .filter-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr auto;
     gap: 1rem;
     align-items: start;
 }
@@ -148,13 +148,63 @@ header p {
     flex: 1;
 }
 
-#rating-filter {
+.tag-search-input {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
     background: white;
+}
+
+.tag-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.slider-container {
+    width: 100%;
+}
+
+.rating-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    background: #ddd;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.rating-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+}
+
+.rating-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.slider-labels #rating-value {
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 #clear-filters {

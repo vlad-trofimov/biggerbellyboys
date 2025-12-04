@@ -31,29 +31,20 @@
                 
                 <div class="filter-content">
                     <div class="filter-group">
-                        <label>Filter by Tags:</label>
-                        <div id="tag-filters" class="checkbox-group">
-                            <!-- Dynamically populated -->
-                        </div>
+                        <label for="tag-search">Search Tags:</label>
+                        <input type="text" id="tag-search" placeholder="Type to filter tags..." class="tag-search-input">
                     </div>
                     
                     <div class="filter-group">
-                        <label>Filter by Reviewer:</label>
-                        <div id="reviewer-filters" class="checkbox-group">
-                            <!-- Dynamically populated -->
+                        <label for="rating-filter">Bigger Belly Score:</label>
+                        <div class="slider-container">
+                            <input type="range" id="rating-filter" min="0" max="10" step="0.1" value="0" class="rating-slider">
+                            <div class="slider-labels">
+                                <span>0</span>
+                                <span id="rating-value">0+</span>
+                                <span>10</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label>Minimum Rating:</label>
-                        <select id="rating-filter">
-                            <option value="0">All Ratings</option>
-                            <option value="1">1+</option>
-                            <option value="2">2+</option>
-                            <option value="3">3+</option>
-                            <option value="4">4+</option>
-                            <option value="5">5+</option>
-                        </select>
                     </div>
                     
                     <button id="clear-filters">Clear All Filters</button>

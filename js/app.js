@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.3.1',
+    version: '1.4.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -47,8 +47,18 @@ function setupEventListeners() {
     // Clear filters button
     document.getElementById('clear-filters').addEventListener('click', clearAllFilters);
     
-    // Rating filter
-    document.getElementById('rating-filter').addEventListener('change', applyFilters);
+    // Tag search filter
+    document.getElementById('tag-search').addEventListener('input', applyFilters);
+    
+    // Rating slider filter
+    const ratingSlider = document.getElementById('rating-filter');
+    const ratingValueDisplay = document.getElementById('rating-value');
+    
+    ratingSlider.addEventListener('input', function() {
+        const value = parseFloat(this.value);
+        ratingValueDisplay.textContent = value === 0 ? '0+' : `${value}+`;
+        applyFilters();
+    });
 }
 
 // Load restaurant data from CSV
@@ -290,58 +300,15 @@ function createRestaurantCards() {
 
 // Setup filter controls
 function setupFilters() {
-    setupTagFilters();
-    setupReviewerFilters();
+    // No need to setup individual tag checkboxes anymore - using search input
+    console.log(`🔧 Filters ready - ${Array.from(allTags).length} tags available for search`);
 }
 
-// Setup tag filters
-function setupTagFilters() {
-    const tagFilters = document.getElementById('tag-filters');
-    const sortedTags = Array.from(allTags).sort();
-    
-    tagFilters.innerHTML = '';
-    
-    sortedTags.forEach(tag => {
-        const checkboxItem = document.createElement('div');
-        checkboxItem.className = 'checkbox-item';
-        
-        checkboxItem.innerHTML = `
-            <input type="checkbox" id="tag-${tag}" value="${tag}">
-            <label for="tag-${tag}">${tag}</label>
-        `;
-        
-        checkboxItem.querySelector('input').addEventListener('change', applyFilters);
-        tagFilters.appendChild(checkboxItem);
-    });
-}
-
-// Setup reviewer filters
-function setupReviewerFilters() {
-    const reviewerFilters = document.getElementById('reviewer-filters');
-    const sortedReviewers = Array.from(allReviewers).sort();
-    
-    reviewerFilters.innerHTML = '';
-    
-    sortedReviewers.forEach(reviewer => {
-        const checkboxItem = document.createElement('div');
-        checkboxItem.className = 'checkbox-item';
-        
-        const safeName = reviewer.replace(/[^a-zA-Z0-9]/g, '-');
-        
-        checkboxItem.innerHTML = `
-            <input type="checkbox" id="reviewer-${safeName}" value="${reviewer}">
-            <label for="reviewer-${safeName}">${reviewer}</label>
-        `;
-        
-        checkboxItem.querySelector('input').addEventListener('change', applyFilters);
-        reviewerFilters.appendChild(checkboxItem);
-    });
-}
+// These functions are no longer needed with the new filter design
 
 // Apply filters
 function applyFilters() {
-    const selectedTags = Array.from(document.querySelectorAll('#tag-filters input:checked')).map(cb => cb.value);
-    const selectedReviewers = Array.from(document.querySelectorAll('#reviewer-filters input:checked')).map(cb => cb.value);
+    const tagSearchTerm = document.getElementById('tag-search').value.toLowerCase().trim();
     const minRating = parseFloat(document.getElementById('rating-filter').value) || 0;
     
     restaurants.forEach((restaurant, index) => {
@@ -350,15 +317,12 @@ function applyFilters() {
         
         let show = true;
         
-        // Filter by tags
-        if (selectedTags.length > 0) {
-            const hasSelectedTag = selectedTags.some(tag => restaurant.tags.includes(tag));
-            if (!hasSelectedTag) show = false;
-        }
-        
-        // Filter by reviewers
-        if (selectedReviewers.length > 0) {
-            if (!selectedReviewers.includes(restaurant.reviewer)) show = false;
+        // Filter by tag search
+        if (tagSearchTerm) {
+            const hasMatchingTag = restaurant.tags.some(tag => 
+                tag.toLowerCase().includes(tagSearchTerm)
+            );
+            if (!hasMatchingTag) show = false;
         }
         
         // Filter by rating
@@ -377,13 +341,14 @@ function applyFilters() {
 
 // Clear all filters
 function clearAllFilters() {
-    // Clear checkboxes
-    document.querySelectorAll('#tag-filters input, #reviewer-filters input').forEach(cb => {
-        cb.checked = false;
-    });
+    // Clear tag search
+    document.getElementById('tag-search').value = '';
     
-    // Reset rating filter
-    document.getElementById('rating-filter').value = '0';
+    // Reset rating slider
+    const ratingSlider = document.getElementById('rating-filter');
+    const ratingValueDisplay = document.getElementById('rating-value');
+    ratingSlider.value = '0';
+    ratingValueDisplay.textContent = '0+';
     
     // Show all restaurants
     restaurants.forEach((restaurant, index) => {
