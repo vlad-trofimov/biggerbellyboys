@@ -281,12 +281,12 @@ header p {
 }
 
 .popup-content {
-    min-width: 200px;
+    width: 160px;
+    max-width: 160px;
 }
 
 .popup-thumbnail {
     width: 100%;
-    max-width: 150px;
     aspect-ratio: 9 / 16;
     object-fit: cover;
     border-radius: 5px;
@@ -329,15 +329,16 @@ header p {
 }
 
 .popup-links a {
-    display: inline-block;
-    padding: 0.5rem 1rem;
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
     background: var(--primary-color);
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    margin-right: 0.5rem;
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    text-align: center;
     transition: background-color 0.3s;
 }
 
