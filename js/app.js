@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.9.5',
+    version: '1.9.6',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -646,35 +646,41 @@ function clearAllFilters() {
     });
 }
 
-// Center map on geographic center of mass of all restaurants
+// Center map to show all restaurants with appropriate bounding box
 function centerMapOnCenterOfMass() {
     if (restaurants.length === 0) return;
     
-    // Calculate center of mass (average of all coordinates)
-    let totalLat = 0;
-    let totalLng = 0;
+    // Find bounding box of all restaurant locations
+    let minLat = Infinity;
+    let maxLat = -Infinity;
+    let minLng = Infinity;
+    let maxLng = -Infinity;
     let count = 0;
     
     restaurants.forEach(restaurant => {
         if (restaurant.latitude && restaurant.longitude) {
-            totalLat += restaurant.latitude;
-            totalLng += restaurant.longitude;
+            minLat = Math.min(minLat, restaurant.latitude);
+            maxLat = Math.max(maxLat, restaurant.latitude);
+            minLng = Math.min(minLng, restaurant.longitude);
+            maxLng = Math.max(maxLng, restaurant.longitude);
             count++;
         }
     });
     
     if (count > 0) {
-        const centerLat = totalLat / count;
-        const centerLng = totalLng / count;
+        // Create bounding box with some padding
+        const bounds = [
+            [minLat, minLng],
+            [maxLat, maxLng]
+        ];
         
-        // Adjust zoom based on number of restaurants
-        let zoom = 13; // Default zoom
-        if (count > 20) zoom = 11;
-        else if (count > 10) zoom = 12;
-        else if (count < 5) zoom = 14;
+        // Fit map to show all restaurants with padding
+        map.fitBounds(bounds, {
+            padding: [20, 20], // Add 20px padding on all sides
+            maxZoom: 12 // Don't zoom in too close even if restaurants are clustered
+        });
         
-        map.setView([centerLat, centerLng], zoom);
-        console.log(`📍 Map centered on geographic center of ${count} restaurants`);
+        console.log(`🗺️ Map fitted to show all ${count} restaurants across both coasts`);
     } else {
         // Fallback to NYC if no valid coordinates
         map.setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
