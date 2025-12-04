@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.8.3',
+    version: '1.8.4',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -345,6 +345,8 @@ function sortAndDisplayRestaurants() {
     }
     
     createRestaurantCards(sortedRestaurants);
+    // Apply filters after creating new cards
+    applyFilters();
 }
 
 // Create restaurant cards
@@ -356,7 +358,7 @@ function createRestaurantCards(sortedRestaurants = restaurants) {
         const originalIndex = restaurants.indexOf(restaurant);
         const card = document.createElement('div');
         card.className = 'restaurant-card';
-        card.dataset.index = index;
+        card.dataset.index = originalIndex; // Use original index for filtering
         
         const tagsHtml = restaurant.tags.map(tag => `<span class="tag clickable-tag" onclick="selectTag('${tag}')">${tag}</span>`).join('');
         
