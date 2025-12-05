@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.9.7',
+    version: '1.9.8',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -534,7 +534,22 @@ function selectTag(tag) {
     document.getElementById('tag-search').value = '';
     document.getElementById('tag-suggestions').classList.add('hidden');
     
+    // Auto-expand filters on mobile when tag is selected
+    expandFiltersOnMobile();
+    
     applyFilters();
+}
+
+// Auto-expand filters on mobile when interaction happens
+function expandFiltersOnMobile() {
+    // Check if we're on mobile (filter toggle is visible)
+    const filterToggle = document.getElementById('filter-toggle-btn');
+    if (filterToggle && window.getComputedStyle(filterToggle).display !== 'none') {
+        const filterContent = document.querySelector('.filter-content');
+        if (filterContent && !filterContent.classList.contains('active')) {
+            filterContent.classList.add('active');
+        }
+    }
 }
 
 function removeTag(tag) {
@@ -544,6 +559,8 @@ function removeTag(tag) {
 }
 
 function selectReviewer(reviewer) {
+    // Auto-expand filters on mobile when reviewer is selected
+    expandFiltersOnMobile();
     // Now just use the existing tag selection system
     selectTag(reviewer);
 }
