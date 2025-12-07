@@ -90,7 +90,7 @@ async function loadRestaurantData() {
         
         const csvText = await response.text();
         const parsedData = parseCSV(csvText);
-        restaurants = processRestaurantData(parsedData);
+        restaurants = await processRestaurantData(parsedData);
         
         if (restaurants.length === 0) {
             throw new Error('No valid restaurant data found');
@@ -179,6 +179,18 @@ function getCachedThumbnailPath(tikTokVideoUrl) {
     return videoId ? `thumbnails/${videoId}.jpeg` : null;
 }
 
+// Check if cached thumbnail actually exists
+async function cachedThumbnailExists(thumbnailPath) {
+    if (!thumbnailPath) return false;
+    
+    try {
+        const response = await fetch(thumbnailPath, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+
 // Get reviewer-specific rating icon with fallback
 function getReviewerIcon(reviewer) {
     if (!reviewer) return 'src/vlad-bbb.png';
@@ -195,10 +207,10 @@ function getReviewerIcon(reviewer) {
 }
 
 // Process and validate restaurant data
-function processRestaurantData(rawData) {
+async function processRestaurantData(rawData) {
     const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
     
-    const validData = rawData.filter((row, index) => {
+    const validationResults = await Promise.all(rawData.map(async (row, index) => {
         // Check each required field
         const missingFields = [];
         requiredFields.forEach(field => {
@@ -225,9 +237,12 @@ function processRestaurantData(rawData) {
         // URL regex to validate proper URL format
         const urlRegex = /^https?:\/\/.+\..+/;
         
-        // If we have a cached thumbnail, we don't need to validate the external URL
+        // Check if cached thumbnail actually exists
+        const hasCachedThumbnail = await cachedThumbnailExists(cachedThumbnailPath);
+        
+        // If we have a valid cached thumbnail, we don't need to validate the external URL
         // If no cached thumbnail, require a valid external URL (https AND proper URL format)
-        const validThumbnailUrl = cachedThumbnailPath || (tikTokThumbnail && tikTokThumbnail.startsWith('https://') && urlRegex.test(tikTokThumbnail));
+        const validThumbnailUrl = hasCachedThumbnail || (tikTokThumbnail && tikTokThumbnail.startsWith('https://') && urlRegex.test(tikTokThumbnail));
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
@@ -235,13 +250,16 @@ function processRestaurantData(rawData) {
         if (!isValid && tikTokThumbnail && (tikTokThumbnail.includes('#NAME?') || tikTokThumbnail.includes('Error:'))) {
             console.log(`🔍 Row ${index + 1} has formula/function error in TikTok thumbnail:`, {
                 restaurant: row.Restaurant || 'N/A',
-                cached: cachedThumbnailPath || 'none',
+                cached: hasCachedThumbnail ? 'exists' : (cachedThumbnailPath || 'none'),
                 external: tikTokThumbnail
             });
         }
         
-        return isValid;
-    });
+        return { row, isValid };
+    }));
+    
+    // Filter valid rows
+    const validData = validationResults.filter(result => result.isValid).map(result => result.row);
     
     // Debug logging summary
     console.log(`📊 Validation summary: ${validData.length}/${rawData.length} rows valid`);
