@@ -217,7 +217,11 @@ function processRestaurantData(rawData) {
                                 lat >= -90 && lat <= 90 && 
                                 lng >= -180 && lng <= 180;
         
-        return missingFields.length === 0 && validCoordinates;
+        // Validate TikTok Thumbnail URL
+        const tikTokThumbnail = row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '';
+        const validThumbnailUrl = tikTokThumbnail && tikTokThumbnail.startsWith('https://');
+        
+        return missingFields.length === 0 && validCoordinates && validThumbnailUrl;
     });
     
     const processedData = validData.map((row, index) => {
