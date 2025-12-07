@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '1.9.8',
+    version: '1.9.8.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -221,8 +221,27 @@ function processRestaurantData(rawData) {
         const tikTokThumbnail = row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '';
         const validThumbnailUrl = tikTokThumbnail && tikTokThumbnail.startsWith('https://');
         
-        return missingFields.length === 0 && validCoordinates && validThumbnailUrl;
+        const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
+        
+        // Debug logging for invalid rows
+        if (!isValid) {
+            console.log(`🔍 Row ${index + 1} validation failed:`, {
+                restaurant: row.Restaurant || 'N/A',
+                missingFields: missingFields.length > 0 ? missingFields : 'none',
+                coordinates: validCoordinates ? 'valid' : `invalid (lat: ${cleanLat}, lng: ${cleanLng})`,
+                thumbnailUrl: validThumbnailUrl ? 'valid' : `invalid (${tikTokThumbnail || 'empty'})`,
+                availableColumns: Object.keys(row)
+            });
+        }
+        
+        return isValid;
     });
+    
+    // Debug logging summary
+    console.log(`📊 Validation summary: ${validData.length}/${rawData.length} rows valid`);
+    if (validData.length === 0) {
+        console.error('❌ No valid rows found! Check the debug logs above for validation failures.');
+    }
     
     const processedData = validData.map((row, index) => {
         // Process tags
