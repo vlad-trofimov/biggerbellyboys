@@ -222,15 +222,18 @@ function processRestaurantData(rawData) {
         const cachedThumbnailPath = getCachedThumbnailPath(tikTokVideoUrl);
         const tikTokThumbnail = row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '';
         
+        // URL regex to validate proper URL format
+        const urlRegex = /^https?:\/\/.+\..+/;
+        
         // If we have a cached thumbnail, we don't need to validate the external URL
-        // If no cached thumbnail, require a valid external URL
-        const validThumbnailUrl = cachedThumbnailPath || (tikTokThumbnail && tikTokThumbnail.startsWith('https://'));
+        // If no cached thumbnail, require a valid external URL (https AND proper URL format)
+        const validThumbnailUrl = cachedThumbnailPath || (tikTokThumbnail && tikTokThumbnail.startsWith('https://') && urlRegex.test(tikTokThumbnail));
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
-        // Debug logging only for #NAME? errors in TikTok thumbnail
-        if (!isValid && tikTokThumbnail.includes('#NAME?')) {
-            console.log(`🔍 Row ${index + 1} has #NAME? error in TikTok thumbnail:`, {
+        // Debug logging only for formula/function errors in TikTok thumbnail
+        if (!isValid && tikTokThumbnail && (tikTokThumbnail.includes('#NAME?') || tikTokThumbnail.includes('Error:'))) {
+            console.log(`🔍 Row ${index + 1} has formula/function error in TikTok thumbnail:`, {
                 restaurant: row.Restaurant || 'N/A',
                 cached: cachedThumbnailPath || 'none',
                 external: tikTokThumbnail
