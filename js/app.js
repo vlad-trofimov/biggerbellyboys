@@ -83,36 +83,17 @@ async function loadRestaurantData() {
             throw new Error('Please update the CSV URL in the CONFIG object');
         }
         
-        let attempts = 0;
-        const maxAttempts = 3;
+        const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         
-        while (attempts < maxAttempts) {
-            attempts++;
-            console.log(`📡 Fetching CSV data (attempt ${attempts}/${maxAttempts})`);
-            
-            const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const csvText = await response.text();
-            const parsedData = parseCSV(csvText);
-            restaurants = processRestaurantData(parsedData);
-            
-            // Check if we got formula errors and need to retry
-            const hasFormulaErrors = csvText.includes('#NAME?') || csvText.includes('#REF!') || csvText.includes('#VALUE!');
-            
-            if (restaurants.length === 0 && hasFormulaErrors && attempts < maxAttempts) {
-                console.warn(`⚠️ Google Sheets formula errors detected, retrying in 1 second... (attempt ${attempts})`);
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                continue;
-            }
-            
-            if (restaurants.length === 0) {
-                throw new Error('No valid restaurant data found');
-            }
-            
-            break; // Success, exit retry loop
+        const csvText = await response.text();
+        const parsedData = parseCSV(csvText);
+        restaurants = processRestaurantData(parsedData);
+        
+        if (restaurants.length === 0) {
+            throw new Error('No valid restaurant data found');
         }
         
         createMapMarkers();
@@ -247,14 +228,12 @@ function processRestaurantData(rawData) {
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
-        // Debug logging for invalid rows
-        if (!isValid) {
-            console.log(`🔍 Row ${index + 1} validation failed:`, {
+        // Debug logging only for #NAME? errors in TikTok thumbnail
+        if (!isValid && tikTokThumbnail.includes('#NAME?')) {
+            console.log(`🔍 Row ${index + 1} has #NAME? error in TikTok thumbnail:`, {
                 restaurant: row.Restaurant || 'N/A',
-                missingFields: missingFields.length > 0 ? missingFields : 'none',
-                coordinates: validCoordinates ? 'valid' : `invalid (lat: ${cleanLat}, lng: ${cleanLng})`,
-                thumbnailUrl: validThumbnailUrl ? 'valid' : `invalid - cached: ${cachedThumbnailPath || 'none'}, external: ${tikTokThumbnail || 'empty'}`,
-                availableColumns: Object.keys(row)
+                cached: cachedThumbnailPath || 'none',
+                external: tikTokThumbnail
             });
         }
         
