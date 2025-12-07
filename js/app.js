@@ -236,9 +236,14 @@ function processRestaurantData(rawData) {
                                 lat >= -90 && lat <= 90 && 
                                 lng >= -180 && lng <= 180;
         
-        // Validate TikTok Thumbnail URL
+        // Validate TikTok Thumbnail URL (only required if no cached thumbnail exists)
+        const tikTokVideoUrl = row['TikTok Video'] ? row['TikTok Video'].trim() : '';
+        const cachedThumbnailPath = getCachedThumbnailPath(tikTokVideoUrl);
         const tikTokThumbnail = row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '';
-        const validThumbnailUrl = tikTokThumbnail && tikTokThumbnail.startsWith('https://');
+        
+        // If we have a cached thumbnail, we don't need to validate the external URL
+        // If no cached thumbnail, require a valid external URL
+        const validThumbnailUrl = cachedThumbnailPath || (tikTokThumbnail && tikTokThumbnail.startsWith('https://'));
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
@@ -248,7 +253,7 @@ function processRestaurantData(rawData) {
                 restaurant: row.Restaurant || 'N/A',
                 missingFields: missingFields.length > 0 ? missingFields : 'none',
                 coordinates: validCoordinates ? 'valid' : `invalid (lat: ${cleanLat}, lng: ${cleanLng})`,
-                thumbnailUrl: validThumbnailUrl ? 'valid' : `invalid (${tikTokThumbnail || 'empty'})`,
+                thumbnailUrl: validThumbnailUrl ? 'valid' : `invalid - cached: ${cachedThumbnailPath || 'none'}, external: ${tikTokThumbnail || 'empty'}`,
                 availableColumns: Object.keys(row)
             });
         }
