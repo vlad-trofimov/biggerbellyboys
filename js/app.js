@@ -83,17 +83,36 @@ async function loadRestaurantData() {
             throw new Error('Please update the CSV URL in the CONFIG object');
         }
         
-        const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        let attempts = 0;
+        const maxAttempts = 3;
         
-        const csvText = await response.text();
-        const parsedData = parseCSV(csvText);
-        restaurants = processRestaurantData(parsedData);
-        
-        if (restaurants.length === 0) {
-            throw new Error('No valid restaurant data found');
+        while (attempts < maxAttempts) {
+            attempts++;
+            console.log(`📡 Fetching CSV data (attempt ${attempts}/${maxAttempts})`);
+            
+            const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const csvText = await response.text();
+            const parsedData = parseCSV(csvText);
+            restaurants = processRestaurantData(parsedData);
+            
+            // Check if we got formula errors and need to retry
+            const hasFormulaErrors = csvText.includes('#NAME?') || csvText.includes('#REF!') || csvText.includes('#VALUE!');
+            
+            if (restaurants.length === 0 && hasFormulaErrors && attempts < maxAttempts) {
+                console.warn(`⚠️ Google Sheets formula errors detected, retrying in 1 second... (attempt ${attempts})`);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                continue;
+            }
+            
+            if (restaurants.length === 0) {
+                throw new Error('No valid restaurant data found');
+            }
+            
+            break; // Success, exit retry loop
         }
         
         createMapMarkers();
