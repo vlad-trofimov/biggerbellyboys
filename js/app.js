@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0',
+    version: '2.0.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(`🍔 Bigger Belly Boys v${CONFIG.version} - Loading...`);
     initializeMap();
     setupEventListeners();
+    setupBrowserNavigation();
     initializeFromUrl();
     loadRestaurantData();
 });
@@ -119,8 +120,21 @@ function updateUrl() {
         url.searchParams.delete('sort');
     }
     
-    // Update URL without page reload
-    window.history.replaceState({}, '', url);
+    // Update URL with proper history entry
+    window.history.pushState({}, '', url);
+}
+
+// Setup browser navigation (back/forward buttons)
+function setupBrowserNavigation() {
+    window.addEventListener('popstate', function(event) {
+        // Re-initialize from URL parameters when user navigates
+        initializeFromUrl();
+        
+        // If restaurants are already loaded, apply the URL state immediately
+        if (restaurants.length > 0) {
+            sortAndDisplayRestaurants();
+        }
+    });
 }
 
 // Lazy loading removed for better user experience
