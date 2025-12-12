@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.1.2',
+    version: '2.1.3',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -570,7 +570,7 @@ async function processRestaurantData(rawData) {
         const longitude = parseFloat(lngString);
         
         // Debug coordinate precision for first few restaurants
-        if (processedData.length < 3) {
+        if (index < 3) {
             console.log(`🗺️ Coordinate precision check for "${row.Restaurant}":`, {
                 originalLat: latString,
                 originalLng: lngString,
