@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0.6',
+    version: '2.0.7',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -104,6 +104,32 @@ function initializeFromUrl() {
         }
     }
     
+    // Get tags from URL
+    const tagsParam = urlParams.get('tags');
+    if (tagsParam) {
+        selectedTags.clear();
+        const tags = tagsParam.split(',').map(tag => tag.trim()).filter(tag => tag);
+        tags.forEach(tag => selectedTags.add(tag));
+        // Update display after DOM is ready
+        setTimeout(() => updateSelectedTagsDisplay(), 0);
+    }
+    
+    // Get rating from URL
+    const ratingParam = urlParams.get('rating');
+    if (ratingParam) {
+        const rating = parseFloat(ratingParam);
+        if (!isNaN(rating)) {
+            const ratingSlider = document.getElementById('rating-filter');
+            if (ratingSlider) {
+                ratingSlider.value = rating.toString();
+                const ratingValueDisplay = document.getElementById('rating-value');
+                if (ratingValueDisplay) {
+                    ratingValueDisplay.textContent = `${rating}+`;
+                }
+            }
+        }
+    }
+    
     // Create initial history entry with current state
     const url = new URL(window.location);
     if (currentPage > 1) {
@@ -111,6 +137,12 @@ function initializeFromUrl() {
     }
     if (currentSort !== 'newest') {
         url.searchParams.set('sort', currentSort);
+    }
+    if (selectedTags.size > 0) {
+        url.searchParams.set('tags', Array.from(selectedTags).join(','));
+    }
+    if (ratingParam && !isNaN(parseFloat(ratingParam))) {
+        url.searchParams.set('rating', ratingParam);
     }
     window.history.replaceState({}, '', url);
 }
@@ -147,7 +179,37 @@ function initializeFromUrlForNavigation() {
         }
     }
     
-    console.log('🔄 State from URL - Page:', currentPage, 'Sort:', currentSort);
+    // Get tags from URL
+    const tagsParam = urlParams.get('tags');
+    selectedTags.clear();
+    if (tagsParam) {
+        const tags = tagsParam.split(',').map(tag => tag.trim()).filter(tag => tag);
+        tags.forEach(tag => selectedTags.add(tag));
+    }
+    updateSelectedTagsDisplay();
+    
+    // Get rating from URL
+    const ratingParam = urlParams.get('rating');
+    const ratingSlider = document.getElementById('rating-filter');
+    const ratingValueDisplay = document.getElementById('rating-value');
+    
+    if (ratingParam && ratingSlider) {
+        const rating = parseFloat(ratingParam);
+        if (!isNaN(rating)) {
+            ratingSlider.value = rating.toString();
+            if (ratingValueDisplay) {
+                ratingValueDisplay.textContent = `${rating}+`;
+            }
+        }
+    } else if (ratingSlider) {
+        // Reset to minimum if no rating param
+        ratingSlider.value = ratingSlider.min;
+        if (ratingValueDisplay) {
+            ratingValueDisplay.textContent = `${ratingSlider.min}+`;
+        }
+    }
+    
+    console.log('🔄 State from URL - Page:', currentPage, 'Sort:', currentSort, 'Tags:', Array.from(selectedTags), 'Rating:', ratingParam);
 }
 
 // Update URL with current state
@@ -167,6 +229,25 @@ function updateUrl() {
         url.searchParams.set('sort', currentSort);
     } else {
         url.searchParams.delete('sort');
+    }
+    
+    // Set tags parameter
+    if (selectedTags.size > 0) {
+        url.searchParams.set('tags', Array.from(selectedTags).join(','));
+    } else {
+        url.searchParams.delete('tags');
+    }
+    
+    // Set rating parameter
+    const ratingSlider = document.getElementById('rating-filter');
+    if (ratingSlider) {
+        const currentRating = parseFloat(ratingSlider.value);
+        const minRating = parseFloat(ratingSlider.min);
+        if (currentRating > minRating) {
+            url.searchParams.set('rating', currentRating.toString());
+        } else {
+            url.searchParams.delete('rating');
+        }
     }
     
     const newUrl = url.href;
@@ -704,6 +785,8 @@ function setupDynamicRatingSlider() {
         const value = parseFloat(this.value);
         const newRatingValueDisplay = document.getElementById('rating-value');
         newRatingValueDisplay.textContent = `${value}+`;
+        currentPage = 1; // Reset to first page when rating changes
+        updateUrl();
         applyFilters();
     });
     
@@ -816,6 +899,7 @@ function selectTag(tag) {
     
     // Reset to first page when tag is selected
     currentPage = 1;
+    updateUrl();
     
     applyFilters();
 }
@@ -838,6 +922,7 @@ function removeTag(tag) {
     
     // Reset to first page when tag is removed
     currentPage = 1;
+    updateUrl();
     
     applyFilters();
 }
