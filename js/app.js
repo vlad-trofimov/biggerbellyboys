@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.1.1',
+    version: '2.1.2',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -42,6 +42,31 @@ function initializeMap() {
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
+    
+    // Debug: Test coordinate precision with a known location
+    console.log('🔬 Testing coordinate precision with test marker...');
+    const testLat = 32.7780686;
+    const testLng = -117.2870695;
+    console.log('Input coordinates:', { lat: testLat, lng: testLng });
+    
+    // Create a test marker to verify precision
+    const testMarker = L.marker([testLat, testLng])
+        .addTo(map)
+        .bindPopup(`Test marker<br>Lat: ${testLat}<br>Lng: ${testLng}`);
+    
+    // Get the marker's actual position
+    const actualPos = testMarker.getLatLng();
+    console.log('Marker actual position:', { lat: actualPos.lat, lng: actualPos.lng });
+    console.log('Position difference:', { 
+        lat: Math.abs(testLat - actualPos.lat), 
+        lng: Math.abs(testLng - actualPos.lng) 
+    });
+    
+    // Remove test marker after 5 seconds
+    setTimeout(() => {
+        map.removeLayer(testMarker);
+        console.log('Test marker removed');
+    }, 5000);
 }
 
 // Setup event listeners
@@ -431,7 +456,7 @@ function formatAddressWithClickableCity(address, city) {
     const cityRegex = new RegExp(`(,\\s*)(${city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(\\s*,|\\s+[A-Z]{2}|\\s*$)`, 'i');
     
     return address.replace(cityRegex, (match, beforeCity, cityMatch, afterCity) => {
-        return `${beforeCity}<span class="clickable-city" onclick="selectTag('${city}')">${cityMatch}</span>${afterCity}`;
+        return `${beforeCity}<span class="clickable-city" onclick="selectCityTag(event, '${city}')">${cityMatch}</span>${afterCity}`;
     });
 }
 
@@ -538,6 +563,24 @@ async function processRestaurantData(rawData) {
         const address = row.Address.trim();
         const city = extractCityFromAddress(address);
         
+        // Process coordinates with full precision
+        const latString = row.Latitude.toString().replace('@', '');
+        const lngString = row.Longitude.toString();
+        const latitude = parseFloat(latString);
+        const longitude = parseFloat(lngString);
+        
+        // Debug coordinate precision for first few restaurants
+        if (processedData.length < 3) {
+            console.log(`🗺️ Coordinate precision check for "${row.Restaurant}":`, {
+                originalLat: latString,
+                originalLng: lngString,
+                parsedLat: latitude,
+                parsedLng: longitude,
+                latPrecision: latString.split('.')[1]?.length || 0,
+                lngPrecision: lngString.split('.')[1]?.length || 0
+            });
+        }
+        
         return {
             reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
             restaurant: row.Restaurant.trim(),
@@ -546,8 +589,8 @@ async function processRestaurantData(rawData) {
             address: address,
             city: city,
             googleMapsLink: row['Google Maps Link'] ? row['Google Maps Link'].trim() : '',
-            latitude: parseFloat(row.Latitude.toString().replace('@', '')),
-            longitude: parseFloat(row.Longitude),
+            latitude: latitude,
+            longitude: longitude,
             rating: validRating,
             tikTokVideo: tikTokVideoUrl,
             tikTokThumbnail: cachedThumbnailPath || csvThumbnailUrl,
@@ -562,6 +605,14 @@ async function processRestaurantData(rawData) {
 // Create map markers
 function createMapMarkers() {
     restaurants.forEach((restaurant, index) => {
+        // Debug marker placement for first few restaurants
+        if (index < 3) {
+            console.log(`🎯 Creating marker for "${restaurant.restaurant}":`, {
+                coords: [restaurant.latitude, restaurant.longitude],
+                precision: `${restaurant.latitude.toString().split('.')[1]?.length || 0} / ${restaurant.longitude.toString().split('.')[1]?.length || 0} digits`
+            });
+        }
+        
         const marker = L.marker([restaurant.latitude, restaurant.longitude])
             .addTo(map)
             .bindPopup(createPopupContent(restaurant));
@@ -958,6 +1009,15 @@ function selectTag(tag) {
     updateUrl();
     
     applyFilters();
+}
+
+// Select city tag with event handling (prevents card click zooming)
+function selectCityTag(event, city) {
+    // Prevent event from bubbling up to the restaurant card click handler
+    event.stopPropagation();
+    
+    // Use the regular selectTag function for the filtering logic
+    selectTag(city);
 }
 
 // Auto-expand filters on mobile when interaction happens
