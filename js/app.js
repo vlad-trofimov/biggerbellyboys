@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.1.0',
+    version: '2.1.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -872,8 +872,10 @@ function setupTagSearch() {
                     );
                     // Or check if it matches the reviewer
                     const matchesReviewer = restaurant.reviewer.toLowerCase() === selectedTag.toLowerCase();
+                    // Or check if it matches the city
+                    const matchesCity = restaurant.city && restaurant.city.toLowerCase() === selectedTag.toLowerCase();
                     
-                    return matchesTag || matchesReviewer;
+                    return matchesTag || matchesReviewer || matchesCity;
                 });
             }
             
@@ -885,6 +887,10 @@ function setupTagSearch() {
                 // Add this restaurant's reviewer as available tag
                 if (restaurant.reviewer) {
                     availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
+                }
+                // Add this restaurant's city as available tag
+                if (restaurant.city) {
+                    availableTagsFromFilteredRestaurants.add(restaurant.city);
                 }
             }
         });
@@ -1021,8 +1027,10 @@ function getFilteredRestaurants() {
                 );
                 // Or check if it matches the reviewer
                 const matchesReviewer = restaurant.reviewer.toLowerCase().trim() === cleanSelectedTag;
+                // Or check if it matches the city
+                const matchesCity = restaurant.city && restaurant.city.toLowerCase().trim() === cleanSelectedTag;
                 
-                return matchesTag || matchesReviewer;
+                return matchesTag || matchesReviewer || matchesCity;
             });
             if (!hasAllSelectedTags) show = false;
         }

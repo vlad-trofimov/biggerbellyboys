@@ -347,6 +347,17 @@ header h1 {
     color: var(--accent-color);
 }
 
+.clickable-city {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.clickable-city:hover {
+    color: var(--accent-color);
+}
+
 /* Restaurant List Header */
 .restaurant-list-header {
     display: flex;
