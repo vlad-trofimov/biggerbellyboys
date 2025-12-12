@@ -18,12 +18,16 @@ let allReviewers = new Set();
 let selectedTags = new Set();
 // selectedReviewer removed - now using tags
 let currentSort = 'newest';
+let currentPage = 1;
+let itemsPerPage = 24;
+let totalFilteredRestaurants = 0;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     console.log(`🍔 Bigger Belly Boys v${CONFIG.version} - Loading...`);
     initializeMap();
     setupEventListeners();
+    initializeFromUrl();
     loadRestaurantData();
 });
 
@@ -62,14 +66,61 @@ function setupEventListeners() {
     ratingSlider.addEventListener('input', function() {
         const value = parseFloat(this.value);
         ratingValueDisplay.textContent = value === 0 ? '0+' : `${value}+`;
+        currentPage = 1; // Reset to first page when rating changes
         applyFilters();
     });
     
     // Sort filter
     document.getElementById('sort-filter').addEventListener('change', function() {
         currentSort = this.value;
+        currentPage = 1; // Reset to first page when sorting changes
+        updateUrl();
         sortAndDisplayRestaurants();
     });
+}
+
+// Initialize state from URL parameters
+function initializeFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Get page from URL
+    const pageParam = urlParams.get('page');
+    if (pageParam) {
+        const page = parseInt(pageParam);
+        if (page > 0) {
+            currentPage = page;
+        }
+    }
+    
+    // Get sort from URL
+    const sortParam = urlParams.get('sort');
+    if (sortParam && ['newest', 'oldest', 'rating-desc', 'rating-asc'].includes(sortParam)) {
+        currentSort = sortParam;
+        // Update the dropdown to match
+        document.getElementById('sort-filter').value = sortParam;
+    }
+}
+
+// Update URL with current state
+function updateUrl() {
+    const url = new URL(window.location);
+    
+    // Set page parameter
+    if (currentPage > 1) {
+        url.searchParams.set('page', currentPage.toString());
+    } else {
+        url.searchParams.delete('page');
+    }
+    
+    // Set sort parameter
+    if (currentSort !== 'newest') {
+        url.searchParams.set('sort', currentSort);
+    } else {
+        url.searchParams.delete('sort');
+    }
+    
+    // Update URL without page reload
+    window.history.replaceState({}, '', url);
 }
 
 // Lazy loading removed for better user experience
@@ -393,12 +444,35 @@ function sortAndDisplayRestaurants() {
     applyFilters();
 }
 
-// Create restaurant cards
+// Create restaurant cards with pagination
 function createRestaurantCards(sortedRestaurants = restaurants) {
     const restaurantList = document.getElementById('restaurant-list');
     restaurantList.innerHTML = '';
     
-    sortedRestaurants.forEach((restaurant, index) => {
+    // Store all sorted restaurants for filtering/pagination
+    window.currentSortedRestaurants = sortedRestaurants;
+    
+    // Apply pagination - this will be updated by applyFilters
+    displayPaginatedRestaurants(sortedRestaurants);
+}
+
+// Display paginated restaurants
+function displayPaginatedRestaurants(filteredRestaurants) {
+    const restaurantList = document.getElementById('restaurant-list');
+    restaurantList.innerHTML = '';
+    
+    // Update total for pagination
+    totalFilteredRestaurants = filteredRestaurants.length;
+    
+    // Calculate pagination
+    const totalPages = Math.ceil(totalFilteredRestaurants / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, totalFilteredRestaurants);
+    
+    // Get restaurants for current page
+    const restaurantsToShow = filteredRestaurants.slice(startIndex, endIndex);
+    
+    restaurantsToShow.forEach((restaurant, index) => {
         const originalIndex = restaurants.indexOf(restaurant);
         const card = document.createElement('div');
         card.className = 'restaurant-card';
@@ -432,6 +506,90 @@ function createRestaurantCards(sortedRestaurants = restaurants) {
         
         restaurantList.appendChild(card);
     });
+    
+    // Update pagination controls
+    updatePaginationControls();
+}
+
+// Update pagination controls
+function updatePaginationControls() {
+    const paginationContainer = document.getElementById('pagination');
+    const totalPages = Math.ceil(totalFilteredRestaurants / itemsPerPage);
+    
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+    
+    let paginationHtml = '<div class="pagination">';
+    
+    // Previous button
+    if (currentPage > 1) {
+        paginationHtml += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})">← Previous</button>`;
+    }
+    
+    // Page numbers - show up to 5 page numbers
+    const maxPagesToShow = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+    
+    // Adjust start page if we're near the end
+    if (endPage - startPage + 1 < maxPagesToShow) {
+        startPage = Math.max(1, endPage - maxPagesToShow + 1);
+    }
+    
+    // Add first page and ellipsis if needed
+    if (startPage > 1) {
+        paginationHtml += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
+        if (startPage > 2) {
+            paginationHtml += '<span class="pagination-ellipsis">...</span>';
+        }
+    }
+    
+    // Add page numbers
+    for (let i = startPage; i <= endPage; i++) {
+        const activeClass = i === currentPage ? ' active' : '';
+        paginationHtml += `<button class="pagination-btn${activeClass}" onclick="goToPage(${i})">${i}</button>`;
+    }
+    
+    // Add last page and ellipsis if needed
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            paginationHtml += '<span class="pagination-ellipsis">...</span>';
+        }
+        paginationHtml += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+    }
+    
+    // Next button
+    if (currentPage < totalPages) {
+        paginationHtml += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})">Next →</button>`;
+    }
+    
+    paginationHtml += '</div>';
+    
+    // Add results info
+    const startResult = totalFilteredRestaurants === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+    const endResult = Math.min(currentPage * itemsPerPage, totalFilteredRestaurants);
+    paginationHtml += `<div class="pagination-info">Showing ${startResult}-${endResult} of ${totalFilteredRestaurants} restaurants</div>`;
+    
+    paginationContainer.innerHTML = paginationHtml;
+}
+
+// Navigate to a specific page
+function goToPage(page) {
+    const totalPages = Math.ceil(totalFilteredRestaurants / itemsPerPage);
+    
+    if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        updateUrl();
+        
+        // Get current filtered restaurants and display the correct page
+        const filteredRestaurants = getFilteredRestaurants();
+        displayPaginatedRestaurants(filteredRestaurants);
+        
+        // Scroll to top of restaurant list
+        document.getElementById('restaurant-list').scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Setup filter controls
@@ -584,6 +742,9 @@ function selectTag(tag) {
     // Auto-expand filters on mobile when tag is selected
     expandFiltersOnMobile();
     
+    // Reset to first page when tag is selected
+    currentPage = 1;
+    
     applyFilters();
 }
 
@@ -602,6 +763,10 @@ function expandFiltersOnMobile() {
 function removeTag(tag) {
     selectedTags.delete(tag);
     updateSelectedTagsDisplay();
+    
+    // Reset to first page when tag is removed
+    currentPage = 1;
+    
     applyFilters();
 }
 
@@ -629,14 +794,12 @@ function updateSelectedTagsDisplay() {
 
 // These functions are no longer needed with the new filter design
 
-// Apply filters
-function applyFilters() {
+// Get filtered restaurants based on current filters
+function getFilteredRestaurants() {
     const minRating = parseFloat(document.getElementById('rating-filter').value) || 0;
+    const sortedRestaurants = window.currentSortedRestaurants || restaurants;
     
-    restaurants.forEach((restaurant, index) => {
-        const card = document.querySelector(`[data-index="${index}"]`);
-        const marker = markers[index];
-        
+    return sortedRestaurants.filter(restaurant => {
         let show = true;
         
         // Filter by selected tags (must have ALL selected tags - includes reviewers)
@@ -652,8 +815,6 @@ function applyFilters() {
                 // Or check if it matches the reviewer
                 const matchesReviewer = restaurant.reviewer.toLowerCase().trim() === cleanSelectedTag;
                 
-                // Clean filtering without debug logs
-                
                 return matchesTag || matchesReviewer;
             });
             if (!hasAllSelectedTags) show = false;
@@ -662,15 +823,37 @@ function applyFilters() {
         // Filter by rating
         if (restaurant.rating < minRating) show = false;
         
-        // Show/hide card and marker
-        if (show) {
-            card.classList.remove('hidden');
-            map.addLayer(marker);
+        return show;
+    });
+}
+
+// Apply filters with pagination
+function applyFilters() {
+    // Reset to first page when filters change
+    currentPage = 1;
+    updateUrl();
+    
+    // Get filtered restaurants
+    const filteredRestaurants = getFilteredRestaurants();
+    
+    // Update map markers visibility
+    restaurants.forEach((restaurant, index) => {
+        const marker = markers[index];
+        const isFiltered = filteredRestaurants.includes(restaurant);
+        
+        if (isFiltered) {
+            if (!map.hasLayer(marker)) {
+                map.addLayer(marker);
+            }
         } else {
-            card.classList.add('hidden');
-            map.removeLayer(marker);
+            if (map.hasLayer(marker)) {
+                map.removeLayer(marker);
+            }
         }
     });
+    
+    // Display paginated filtered restaurants
+    displayPaginatedRestaurants(filteredRestaurants);
 }
 
 // Clear all filters
@@ -678,8 +861,6 @@ function clearAllFilters() {
     // Clear selected tags
     selectedTags.clear();
     updateSelectedTagsDisplay();
-    
-    // Reviewer filtering now handled through tags
     
     // Clear tag search input
     document.getElementById('tag-search').value = '';
@@ -694,20 +875,13 @@ function clearAllFilters() {
     // Reset sort to default
     currentSort = 'newest';
     document.getElementById('sort-filter').value = 'newest';
-    sortAndDisplayRestaurants();
     
-    // Show all restaurants
-    restaurants.forEach((restaurant, index) => {
-        const card = document.querySelector(`[data-index="${index}"]`);
-        const marker = markers[index];
-        
-        if (card) {
-            card.classList.remove('hidden');
-        }
-        if (!map.hasLayer(marker)) {
-            map.addLayer(marker);
-        }
-    });
+    // Reset pagination
+    currentPage = 1;
+    updateUrl();
+    
+    // Re-sort and display all restaurants
+    sortAndDisplayRestaurants();
 }
 
 // Center map to show all restaurants with appropriate bounding box
