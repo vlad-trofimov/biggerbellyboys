@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0.9',
+    version: '2.1.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -391,6 +391,50 @@ async function cachedThumbnailExists(thumbnailPath) {
     }
 }
 
+// Extract city from address string
+function extractCityFromAddress(address) {
+    if (!address) return '';
+    
+    // Common address formats:
+    // "123 Main St, New York, NY 10001"
+    // "456 Oak Ave, Los Angeles, CA"
+    // "789 Pine Rd, Chicago IL 60601"
+    
+    const parts = address.split(',').map(part => part.trim());
+    
+    if (parts.length >= 2) {
+        // Second part is usually the city
+        let city = parts[1].trim();
+        
+        // Remove state abbreviations and zip codes from city name
+        city = city.replace(/\s+[A-Z]{2}(\s+\d{5})?$/i, '').trim();
+        
+        return city;
+    }
+    
+    // Fallback: try to extract from single comma-separated format
+    if (parts.length === 1) {
+        const match = address.match(/,\s*([^,\d]+?)(?:\s+[A-Z]{2})?\s*\d*$/i);
+        if (match) {
+            return match[1].trim();
+        }
+    }
+    
+    return '';
+}
+
+// Format address with clickable city
+function formatAddressWithClickableCity(address, city) {
+    if (!city) return address;
+    
+    // Replace the city part in the address with a clickable span
+    const cityRegex = new RegExp(`(,\\s*)(${city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(\\s*,|\\s+[A-Z]{2}|\\s*$)`, 'i');
+    
+    return address.replace(cityRegex, (match, beforeCity, cityMatch, afterCity) => {
+        return `${beforeCity}<span class="clickable-city" onclick="selectTag('${city}')">${cityMatch}</span>${afterCity}`;
+    });
+}
+
 // Get reviewer-specific rating icon with fallback
 function getReviewerIcon(reviewer) {
     if (!reviewer) return 'src/vlad-bbb.png';
@@ -491,12 +535,16 @@ async function processRestaurantData(rawData) {
         const cachedThumbnailPath = getCachedThumbnailPath(tikTokVideoUrl);
         const csvThumbnailUrl = row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '';
         
+        const address = row.Address.trim();
+        const city = extractCityFromAddress(address);
+        
         return {
             reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
             restaurant: row.Restaurant.trim(),
             tags: tags,
             location: row.Location ? row.Location.trim() : '',
-            address: row.Address.trim(),
+            address: address,
+            city: city,
             googleMapsLink: row['Google Maps Link'] ? row['Google Maps Link'].trim() : '',
             latitude: parseFloat(row.Latitude.toString().replace('@', '')),
             longitude: parseFloat(row.Longitude),
@@ -528,6 +576,8 @@ function createMapMarkers() {
 
 // Create popup content for map markers
 function createPopupContent(restaurant) {
+    const formattedAddress = formatAddressWithClickableCity(restaurant.address, restaurant.city);
+    
     return `
         <div class="popup-content">
             ${restaurant.tikTokThumbnail ? 
@@ -535,7 +585,7 @@ function createPopupContent(restaurant) {
                 ''
             }
             <div class="popup-name">${restaurant.restaurant}</div>
-            <div class="popup-address">${restaurant.address}</div>
+            <div class="popup-address">${formattedAddress}</div>
             <div class="popup-rating">
                 <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
                 <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
@@ -626,6 +676,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
         card.dataset.index = originalIndex; // Use original index for filtering
         
         const tagsHtml = restaurant.tags.map(tag => `<span class="tag clickable-tag" onclick="selectTag('${tag}')">${tag}</span>`).join('');
+        const formattedAddress = formatAddressWithClickableCity(restaurant.address, restaurant.city);
         
         card.innerHTML = `
             ${restaurant.tikTokThumbnail ? 
@@ -634,7 +685,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
             }
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
-                <div class="restaurant-address">${restaurant.address}</div>
+                <div class="restaurant-address">${formattedAddress}</div>
                 <div class="restaurant-rating">
                     <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
                     <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
