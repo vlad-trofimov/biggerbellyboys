@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0.2',
+    version: '2.0.3',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -322,7 +322,14 @@ async function processRestaurantData(rawData) {
         
         // If we have a valid cached thumbnail, we don't need to validate the external URL
         // If no cached thumbnail, require a valid external URL (https AND proper URL format)
-        const validThumbnailUrl = hasCachedThumbnail || (tikTokThumbnail && tikTokThumbnail.startsWith('https://') && urlRegex.test(tikTokThumbnail));
+        // Skip external URL validation if it contains formula errors but we have a cached thumbnail
+        const hasValidExternalUrl = tikTokThumbnail && 
+                                   !tikTokThumbnail.includes('#NAME?') && 
+                                   !tikTokThumbnail.includes('Error:') && 
+                                   tikTokThumbnail.startsWith('https://') && 
+                                   urlRegex.test(tikTokThumbnail);
+        
+        const validThumbnailUrl = hasCachedThumbnail || hasValidExternalUrl;
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
