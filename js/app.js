@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0.3',
+    version: '2.0.4',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -115,6 +115,41 @@ function initializeFromUrl() {
     window.history.replaceState({}, '', url);
 }
 
+// Initialize state from URL parameters (for navigation only - no history modification)
+function initializeFromUrlForNavigation() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Get page from URL
+    const pageParam = urlParams.get('page');
+    if (pageParam) {
+        const page = parseInt(pageParam);
+        if (page > 0) {
+            currentPage = page;
+        }
+    } else {
+        currentPage = 1;
+    }
+    
+    // Get sort from URL
+    const sortParam = urlParams.get('sort');
+    if (sortParam && ['newest', 'oldest', 'rating-desc', 'rating-asc'].includes(sortParam)) {
+        currentSort = sortParam;
+        // Update the dropdown to match
+        const sortDropdown = document.getElementById('sort-filter');
+        if (sortDropdown) {
+            sortDropdown.value = sortParam;
+        }
+    } else {
+        currentSort = 'newest';
+        const sortDropdown = document.getElementById('sort-filter');
+        if (sortDropdown) {
+            sortDropdown.value = 'newest';
+        }
+    }
+    
+    console.log('🔄 State from URL - Page:', currentPage, 'Sort:', currentSort);
+}
+
 // Update URL with current state
 function updateUrl() {
     const url = new URL(window.location);
@@ -140,8 +175,10 @@ function updateUrl() {
 // Setup browser navigation (back/forward buttons)
 function setupBrowserNavigation() {
     window.addEventListener('popstate', function(event) {
+        console.log('🔙 Browser navigation detected, URL:', window.location.href);
+        
         // Re-initialize from URL parameters when user navigates
-        initializeFromUrl();
+        initializeFromUrlForNavigation();
         
         // If restaurants are already loaded, apply the URL state immediately
         if (restaurants.length > 0) {
