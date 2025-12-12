@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0.7',
+    version: '2.0.9',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -209,7 +209,6 @@ function initializeFromUrlForNavigation() {
         }
     }
     
-    console.log('🔄 State from URL - Page:', currentPage, 'Sort:', currentSort, 'Tags:', Array.from(selectedTags), 'Rating:', ratingParam);
 }
 
 // Update URL with current state
@@ -254,18 +253,13 @@ function updateUrl() {
     
     // Only push to history if the URL actually changed
     if (oldUrl !== newUrl) {
-        console.log('📝 URL changing from:', oldUrl, 'to:', newUrl);
         window.history.pushState({}, '', url);
-    } else {
-        console.log('⏭️ URL unchanged, skipping history push:', newUrl);
     }
 }
 
 // Setup browser navigation (back/forward buttons)
 function setupBrowserNavigation() {
     window.addEventListener('popstate', function(event) {
-        console.log('🔙 Browser navigation detected, URL:', window.location.href);
-        
         // Re-initialize from URL parameters when user navigates
         initializeFromUrlForNavigation();
         
@@ -305,7 +299,7 @@ async function loadRestaurantData() {
         createMapMarkers();
         sortAndDisplayRestaurants();
         setupFilters();
-        centerMapOnCenterOfMass();
+        // Map will be centered by displayPaginatedRestaurants when restaurants are displayed
         
         loadingElement.classList.add('hidden');
         console.log(`✅ Loaded ${restaurants.length} restaurants successfully`);
@@ -662,6 +656,11 @@ function displayPaginatedRestaurants(filteredRestaurants) {
     
     // Update pagination controls
     updatePaginationControls();
+    
+    // Center map on first result when results change
+    if (currentPage === 1) {
+        centerMapOnFirstResult();
+    }
 }
 
 // Update pagination controls
@@ -1078,6 +1077,26 @@ function centerMapOnCenterOfMass() {
         });
         
         console.log(`🗺️ Map fitted to show all ${count} restaurants across both coasts`);
+    } else {
+        // Fallback to NYC if no valid coordinates
+        map.setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
+    }
+}
+
+// Center map on first filtered result with city-level zoom
+function centerMapOnFirstResult() {
+    const filteredRestaurants = getFilteredRestaurants();
+    
+    if (filteredRestaurants.length === 0) {
+        // Fallback to showing all restaurants if no filtered results
+        centerMapOnCenterOfMass();
+        return;
+    }
+    
+    const firstRestaurant = filteredRestaurants[0];
+    if (firstRestaurant.latitude && firstRestaurant.longitude) {
+        // Center on first result with city-level zoom (zoom 10-11 shows city + surrounding areas)
+        map.setView([firstRestaurant.latitude, firstRestaurant.longitude], 11);
     } else {
         // Fallback to NYC if no valid coordinates
         map.setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
