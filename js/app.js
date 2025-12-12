@@ -98,8 +98,21 @@ function initializeFromUrl() {
     if (sortParam && ['newest', 'oldest', 'rating-desc', 'rating-asc'].includes(sortParam)) {
         currentSort = sortParam;
         // Update the dropdown to match
-        document.getElementById('sort-filter').value = sortParam;
+        const sortDropdown = document.getElementById('sort-filter');
+        if (sortDropdown) {
+            sortDropdown.value = sortParam;
+        }
     }
+    
+    // Create initial history entry with current state
+    const url = new URL(window.location);
+    if (currentPage > 1) {
+        url.searchParams.set('page', currentPage.toString());
+    }
+    if (currentSort !== 'newest') {
+        url.searchParams.set('sort', currentSort);
+    }
+    window.history.replaceState({}, '', url);
 }
 
 // Update URL with current state
@@ -133,6 +146,8 @@ function setupBrowserNavigation() {
         // If restaurants are already loaded, apply the URL state immediately
         if (restaurants.length > 0) {
             sortAndDisplayRestaurants();
+            // Also apply filters to ensure everything is in sync
+            applyFilters();
         }
     });
 }
