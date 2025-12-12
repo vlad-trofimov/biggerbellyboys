@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.0.4',
+    version: '2.0.6',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -152,6 +152,7 @@ function initializeFromUrlForNavigation() {
 
 // Update URL with current state
 function updateUrl() {
+    const oldUrl = window.location.href;
     const url = new URL(window.location);
     
     // Set page parameter
@@ -168,8 +169,15 @@ function updateUrl() {
         url.searchParams.delete('sort');
     }
     
-    // Update URL with proper history entry
-    window.history.pushState({}, '', url);
+    const newUrl = url.href;
+    
+    // Only push to history if the URL actually changed
+    if (oldUrl !== newUrl) {
+        console.log('📝 URL changing from:', oldUrl, 'to:', newUrl);
+        window.history.pushState({}, '', url);
+    } else {
+        console.log('⏭️ URL unchanged, skipping history push:', newUrl);
+    }
 }
 
 // Setup browser navigation (back/forward buttons)
@@ -183,8 +191,8 @@ function setupBrowserNavigation() {
         // If restaurants are already loaded, apply the URL state immediately
         if (restaurants.length > 0) {
             sortAndDisplayRestaurants();
-            // Also apply filters to ensure everything is in sync
-            applyFilters();
+            // Also apply filters to ensure everything is in sync (skip URL update to avoid creating new history)
+            applyFilters(true);
         }
     });
 }
@@ -369,15 +377,6 @@ async function processRestaurantData(rawData) {
         const validThumbnailUrl = hasCachedThumbnail || hasValidExternalUrl;
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
-        
-        // Debug logging only for formula/function errors in TikTok thumbnail
-        if (!isValid && tikTokThumbnail && (tikTokThumbnail.includes('#NAME?') || tikTokThumbnail.includes('Error:'))) {
-            console.log(`🔍 Row ${index + 1} has formula/function error in TikTok thumbnail:`, {
-                restaurant: row.Restaurant || 'N/A',
-                cached: hasCachedThumbnail ? 'exists' : (cachedThumbnailPath || 'none'),
-                external: tikTokThumbnail
-            });
-        }
         
         return { row, isValid };
     }));
@@ -901,10 +900,12 @@ function getFilteredRestaurants() {
 }
 
 // Apply filters with pagination
-function applyFilters() {
-    // Reset to first page when filters change
-    currentPage = 1;
-    updateUrl();
+function applyFilters(skipUrlUpdate = false) {
+    // Reset to first page when filters change (but not during navigation)
+    if (!skipUrlUpdate) {
+        currentPage = 1;
+        updateUrl();
+    }
     
     // Get filtered restaurants
     const filteredRestaurants = getFilteredRestaurants();
