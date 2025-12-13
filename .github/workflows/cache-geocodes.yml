@@ -221,11 +221,45 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f data/geocode-cache.json
+          
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No geocode cache changes to commit"
-          else
-            # Pull latest changes first to avoid conflicts
-            git pull origin ${{ github.ref_name }} --rebase || true
-            git commit -m "Update geocode cache from CSV GeoCode Script column" || true
-            git push origin HEAD:${{ github.ref_name }}
+            exit 0
           fi
+          
+          # Fetch latest changes from remote
+          git fetch origin ${{ github.ref_name }}
+          
+          # Attempt to rebase and push with retry logic
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            echo "Attempt $((RETRY_COUNT + 1)) of $MAX_RETRIES"
+            
+            # Reset to latest remote state and re-apply our changes
+            git reset --soft origin/${{ github.ref_name }}
+            git add -f data/geocode-cache.json
+            
+            # Try to commit and push
+            if git commit -m "Update geocode cache from CSV GeoCode Script column"; then
+              if git push origin HEAD:${{ github.ref_name }}; then
+                echo "Successfully pushed changes"
+                exit 0
+              else
+                echo "Push failed, retrying..."
+                git reset --hard HEAD~1
+                git fetch origin ${{ github.ref_name }}
+              fi
+            else
+              echo "Commit failed, checking if already applied..."
+              break
+            fi
+            
+            RETRY_COUNT=$((RETRY_COUNT + 1))
+            sleep 2
+          done
+          
+          echo "Failed to push after $MAX_RETRIES attempts"
+          exit 1
