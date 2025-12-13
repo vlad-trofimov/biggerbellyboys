@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2025-12-13T21:26:57.686Z",
+  "lastUpdated": "2025-12-13T21:27:29.826Z",
   "source": "Sample cache structure - add your geocoded restaurant data here",
   "restaurants": {
     "plern_thai_22_55_31st_st_astoria_ny_11105": {
@@ -13,6 +13,1876 @@
       },
       "source": "geocode_api",
       "lastGeocoded": "2025-12-13T18:00:00Z"
+    },
+    "rosario_s_22_55_31st_st_astoria_ny_11105": {
+      "name": "Rosario's",
+      "address": "22-55 31st St, Astoria, NY 11105",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7749284,
+        "lng": -73.9120251
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.819Z"
+    },
+    "tavola_nostra_1040_university_ave_b101_san_diego_c": {
+      "name": "Tavola Nostra",
+      "address": "1040 University Ave B101, San Diego, CA 92103",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7486939,
+        "lng": -117.1540716
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.820Z"
+    },
+    "piroshki_1219_madison_st_seattle_wa_98104": {
+      "name": "Piroshki",
+      "address": "1219 Madison St, Seattle, WA 98104",
+      "location": "Seattle, WA",
+      "coordinates": {
+        "lat": 47.6099342,
+        "lng": -122.3231709
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.820Z"
+    },
+    "chicha_san_chen_72_74_bayard_st_new_york_ny_10013": {
+      "name": "Chicha San Chen",
+      "address": "72-74 Bayard St, New York, NY 10013",
+      "location": "bubble tea, tea ,nyc",
+      "coordinates": {
+        "lat": 40.71572820000001,
+        "lng": -73.9982357
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.820Z"
+    },
+    "the_friendly_tavern_2632_university_ave_san_diego_": {
+      "name": "The Friendly Tavern",
+      "address": "2632 University Ave, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.748647,
+        "lng": -117.1354747
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.820Z"
+    },
+    "foodland_poke_90_kane_st_kahului_hi_96732": {
+      "name": "Foodland Poke",
+      "address": "90 Kane St, Kahului, HI 96732",
+      "location": "Maui, HI",
+      "coordinates": {
+        "lat": 20.8865328,
+        "lng": -156.472629
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.820Z"
+    },
+    "deavedura_200_sol_st_san_juan_00901": {
+      "name": "DeAvedura",
+      "address": "200 Sol St, San Juan, 00901",
+      "location": "San Juan, PR",
+      "coordinates": {
+        "lat": 18.466782,
+        "lng": -66.11640059999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.820Z"
+    },
+    "fortunate_son_2943_adams_ave_san_diego_ca_92116": {
+      "name": "Fortunate Son",
+      "address": "2943 Adams Ave, San Diego, CA 92116",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7627468,
+        "lng": -117.1304879
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "miss_arepa_3600_lower_honoapiilani_rd_suite_a_laha": {
+      "name": "Miss Arepa",
+      "address": "3600 Lower Honoapiilani Rd suite a, Lahaina, HI 96761",
+      "location": "Maui, HI",
+      "coordinates": {
+        "lat": 20.9527733,
+        "lng": -156.686325
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "la_bagel_delight_284_7th_ave_brooklyn_ny_11215": {
+      "name": "La Bagel Delight",
+      "address": "284 7th Ave, Brooklyn, NY 11215",
+      "location": "Brooklyn, NY",
+      "coordinates": {
+        "lat": 40.6686377,
+        "lng": -73.9803859
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "pho_dunyen_mai_5375_kearny_villa_rd_111_san_diego_": {
+      "name": "Pho Dunyen Mai",
+      "address": "5375 Kearny Villa Rd #111, San Diego, CA 92123",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8306521,
+        "lng": -117.1388964
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "pomegranate_2312_el_cajon_blvd_san_diego_ca_92104": {
+      "name": "Pomegranate",
+      "address": "2312 El Cajon Blvd, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7555759,
+        "lng": -117.1396878
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "white_bear_135_02_roosevelt_ave_flushing_ny_11354": {
+      "name": "White Bear",
+      "address": "135-02 Roosevelt Ave, Flushing, NY 11354",
+      "location": "Flushing, NY",
+      "coordinates": {
+        "lat": 40.7588674,
+        "lng": -73.83167759999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "shanghai_you_garden_135_33_40th_rd_flushing_ny_113": {
+      "name": "Shanghai You Garden",
+      "address": "135-33 40th Rd, Flushing, NY 11354",
+      "location": "Flushing, NY",
+      "coordinates": {
+        "lat": 40.7589365,
+        "lng": -73.8305462
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "he_nan_hui_mian_136_31_41st_ave_flushing_ny_11354": {
+      "name": "He Nan Hui Mian",
+      "address": "136-31 41st Ave, Flushing, NY 11354",
+      "location": "Flushing, NY",
+      "coordinates": {
+        "lat": 40.759021,
+        "lng": -73.8284962
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "spot_dessert_bar_39_16_prince_st_flushing_ny_11354": {
+      "name": "Spot Dessert Bar",
+      "address": "39-16 Prince St, Flushing, NY 11354",
+      "location": "Flushing, NY",
+      "coordinates": {
+        "lat": 40.759141,
+        "lng": -73.83181139999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "golden_city_5375_kearny_villa_rd_san_diego_ca_9212": {
+      "name": "Golden City",
+      "address": "5375 Kearny Villa Rd, San Diego, CA 92123",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8305181,
+        "lng": -117.1389872
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "an_s_dry_cleaning_3017_adams_ave_san_diego_ca_9211": {
+      "name": "An's Dry Cleaning",
+      "address": "3017 Adams Ave, San Diego, CA 92116",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7627034,
+        "lng": -117.1297498
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "raku_48_macdougal_st_new_york_ny_10012": {
+      "name": "Raku",
+      "address": "48 MacDougal St, New York, NY 10012",
+      "location": "SoHo, NY",
+      "coordinates": {
+        "lat": 40.727289,
+        "lng": -74.0026139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "flavors_of_east_africa_4900_newport_ave_san_diego_": {
+      "name": "Flavors of East Africa",
+      "address": "4900 Newport Ave, San Diego, CA 92107",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7460533,
+        "lng": -117.2492724
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "pinoyshki_715_e_pine_st_seattle_wa_98122": {
+      "name": "Pinoyshki",
+      "address": "715 E Pine St, Seattle, WA 98122",
+      "location": "Seattle, WA",
+      "coordinates": {
+        "lat": 47.6150702,
+        "lng": -122.3226252
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.821Z"
+    },
+    "haile_182_avenue_b_1_new_york_ny_10009": {
+      "name": "Haile",
+      "address": "182 Avenue B #1, New York, NY 10009",
+      "location": "East Village, NY",
+      "coordinates": {
+        "lat": 40.7278052,
+        "lng": -73.97946449999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "juanbachi_600_w_date_st_san_diego_ca_92101": {
+      "name": "Juanbachi",
+      "address": "600 W Date St, San Diego, CA 92101",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7231728,
+        "lng": -117.1684698
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "un_bien_6226_seaview_ave_nw_seattle_wa_98107": {
+      "name": "Un Bien",
+      "address": "6226 Seaview Ave NW, Seattle, WA 98107",
+      "location": "Seattle, WA",
+      "coordinates": {
+        "lat": 47.67480399999999,
+        "lng": -122.4061144
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "salt_lick_bbq_3350_e_palm_valley_blvd_round_rock_t": {
+      "name": "Salt Lick BBQ",
+      "address": "3350 E Palm Valley Blvd, Round Rock, Texas 78665",
+      "location": "Austin, TX",
+      "coordinates": {
+        "lat": 30.5254364,
+        "lng": -97.6326351
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "cubano_kings_3960_normal_st_3960_san_diego_ca_9210": {
+      "name": "Cubano Kings",
+      "address": "3960 Normal St #3960, San Diego, CA 92103",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7505094,
+        "lng": -117.149235
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "taqueria_revolucion_3001_bonita_rd_chula_vista_ca_": {
+      "name": "Taqueria Revolucion",
+      "address": "3001 Bonita Rd, Chula Vista, CA 91910",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.6483147,
+        "lng": -117.0595026
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "waffle_house_2651_s_a_w_crimes_blvd_round_rock_tx_": {
+      "name": "Waffle House",
+      "address": "2651 S A.W. Crimes Blvd, Round Rock, TX 78664",
+      "location": "Austin, TX",
+      "coordinates": {
+        "lat": 30.483738,
+        "lng": -97.6481208
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "argentinian_street_food_4900_newport_ave_san_diego": {
+      "name": "Argentinian Street Food",
+      "address": "4900 Newport Ave, San Diego, CA 92107",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7460533,
+        "lng": -117.2492724
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "yesenia_s_2505_el_cajon_blvd_san_diego_ca_92104": {
+      "name": "Yesenia's",
+      "address": "2505 El Cajon Blvd, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7550548,
+        "lng": -117.1372845
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "colima_s_2302_university_ave_san_diego_ca_92104": {
+      "name": "Colima's",
+      "address": "2302 University Ave, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7486598,
+        "lng": -117.1398718
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "between_the_bagel_31_13_30th_ave_astoria_ny_11102": {
+      "name": "Between the Bagel",
+      "address": "31-13 30th Ave, Astoria, NY 11102",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7668438,
+        "lng": -73.9207377
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "k_sandwiches_7604_linda_vista_rd_san_diego_ca_9211": {
+      "name": "K Sandwiches",
+      "address": "7604 Linda Vista Rd, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8012133,
+        "lng": -117.1583222
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "the_taco_stand_3000_upas_st_105_san_diego_ca_92104": {
+      "name": "The Taco Stand",
+      "address": "3000 Upas St #105, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.74125720000001,
+        "lng": -117.1296924
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "levant_25_64_steinway_st_astoria_ny_11103": {
+      "name": "Levant",
+      "address": "25-64 Steinway St, Astoria, NY 11103",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7665026,
+        "lng": -73.9131681
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "goi_cuon_420_robinson_ave_san_diego_ca_92103": {
+      "name": "Goi Cuon",
+      "address": "420 Robinson Ave, San Diego, CA 92103",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7472221,
+        "lng": -117.1613752
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "it_s_raw_poke_4991_newport_ave_ste_a_san_diego_ca_": {
+      "name": "It's Raw Poke",
+      "address": "4991 Newport Ave STE A, San Diego, CA 92107",
+      "location": "Ocean Beach, SD",
+      "coordinates": {
+        "lat": 32.7465572,
+        "lng": -117.2511462
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "oxomoco_128_greenpoint_ave_brooklyn_ny_11222": {
+      "name": "Oxomoco",
+      "address": "128 Greenpoint Ave, Brooklyn, NY 11222",
+      "location": "Brooklyn, NY",
+      "coordinates": {
+        "lat": 40.7298151,
+        "lng": -73.9554763
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "the_shed_sidecar_1312_morena_blvd_san_diego_ca_921": {
+      "name": "The Shed & Sidecar",
+      "address": "1312 Morena Blvd, San Diego, CA 92110",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7719716,
+        "lng": -117.2023499
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "perla_3_1224_rosecrans_st_san_diego_ca_92106": {
+      "name": "Perla #3",
+      "address": "1224 Rosecrans St, San Diego, CA 92106",
+      "location": "Point Loma, SD",
+      "coordinates": {
+        "lat": 32.7231616,
+        "lng": -117.2309616
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "szechuan_mountain_house_39_16_prince_st_g03_flushi": {
+      "name": "Szechuan Mountain House",
+      "address": "39-16 Prince St g03, Flushing, NY 11354",
+      "location": "Flushing, NY",
+      "coordinates": {
+        "lat": 40.7591659,
+        "lng": -73.8321855
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.822Z"
+    },
+    "island_life_foods_3960_normal_st_3960_san_diego_ca": {
+      "name": "Island Life Foods",
+      "address": "3960 Normal St #3960, San Diego, CA 92103",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7505094,
+        "lng": -117.149235
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "the_crack_shack_4525_mission_blvd_san_diego_ca_921": {
+      "name": "The Crack Shack",
+      "address": "4525 Mission Blvd, San Diego, CA 92109",
+      "location": "Pacific Beach, SD",
+      "coordinates": {
+        "lat": 32.7971765,
+        "lng": -117.2554021
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "karczma_136_greenpoint_ave_brooklyn_ny_11222": {
+      "name": "Karczma",
+      "address": "136 Greenpoint Ave, Brooklyn, NY 11222",
+      "location": "Brooklyn, NY",
+      "coordinates": {
+        "lat": 40.7298911,
+        "lng": -73.95511549999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "summers_deli_catering_16885_via_del_campo_ct_115_s": {
+      "name": "Summers Deli & Catering",
+      "address": "16885 Via Del Campo Ct #115, San Diego, CA 92127",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 33.0198207,
+        "lng": -117.0947767
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "mike_s_taco_club_5060_newport_ave_san_diego_ca_921": {
+      "name": "Mike's Taco Club",
+      "address": "5060 Newport Ave, San Diego, CA 92107",
+      "location": "Ocean Beach, SD",
+      "coordinates": {
+        "lat": 32.747649,
+        "lng": -117.2520091
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "el_lado_taco_34_14_30th_ave_astoria_ny_11103": {
+      "name": "El Lado Taco",
+      "address": "34-14 30th Ave, Astoria, NY 11103",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7654061,
+        "lng": -73.91866259999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "mike_s_red_tacos_4310_genesee_ave_105_106_san_dieg": {
+      "name": "Mike's Red Tacos",
+      "address": "4310 Genesee Ave #105-106, San Diego, CA 92117",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8215556,
+        "lng": -117.1834192
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "bronx_pizza_111_washington_st_san_diego_ca_92103": {
+      "name": "Bronx Pizza",
+      "address": "111 Washington St, San Diego, CA 92103",
+      "location": "Hillcrest, SD",
+      "coordinates": {
+        "lat": 32.7496911,
+        "lng": -117.1634473
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "el_punto_cubano_445_albee_square_w_brooklyn_ny_112": {
+      "name": "El Punto Cubano",
+      "address": "445 Albee Square W, Brooklyn, NY 11201",
+      "location": "Brooklyn, NY",
+      "coordinates": {
+        "lat": 40.6907135,
+        "lng": -73.983204
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "pollos_asados_2436_ulric_st_san_diego_ca_92111": {
+      "name": "Pollos Asados",
+      "address": "2436 Ulric St, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7871805,
+        "lng": -117.1716064
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "humberto_s_taco_shop_1136_s_43rd_st_san_diego_ca_9": {
+      "name": "Humberto's Taco Shop",
+      "address": "1136 S 43rd St, San Diego, CA 92113",
+      "location": "National City",
+      "coordinates": {
+        "lat": 32.6942961,
+        "lng": -117.1026124
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "halftime_king_of_pizza_115_causeway_st_boston_ma_0": {
+      "name": "Halftime King of Pizza",
+      "address": "115 Causeway St, Boston, MA 02114",
+      "location": "Boston, MA",
+      "coordinates": {
+        "lat": 42.3650551,
+        "lng": -71.0614617
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "the_tri_tiperia_3574_mt_acadia_blvd_san_diego_ca_9": {
+      "name": "The Tri Tiperia",
+      "address": "3574 Mt Acadia Blvd, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8072292,
+        "lng": -117.1834815
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "coco_ichibanya_4428_convoy_st_san_diego_ca_92111": {
+      "name": "CoCo Ichibanya",
+      "address": "4428 Convoy St, San Diego, CA 92111",
+      "location": "Kearny Mesa, SD",
+      "coordinates": {
+        "lat": 32.8203022,
+        "lng": -117.1557029
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "cafe_polonia_611_dorchester_ave_boston_ma_02127": {
+      "name": "Cafe Polonia",
+      "address": "611 Dorchester Ave, Boston, MA 02127",
+      "location": "Boston, MA",
+      "coordinates": {
+        "lat": 42.32881769999999,
+        "lng": -71.0571338
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "angry_petes_pizza_5335_overland_ave_san_diego_ca_9": {
+      "name": "Angry Petes Pizza",
+      "address": "5335 Overland Ave, San Diego, CA 92123",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8319391,
+        "lng": -117.1307247
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "izakaya_sakura_3904_convoy_st_121_san_diego_ca_921": {
+      "name": "Izakaya Sakura",
+      "address": "3904 Convoy St #121, San Diego, CA 92111",
+      "location": "Kearny Mesa, SD",
+      "coordinates": {
+        "lat": 32.8148375,
+        "lng": -117.1549191
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.823Z"
+    },
+    "tsukiji_fish_market_japan_104_0045_tokyo_chuo_city": {
+      "name": "Tsukiji Fish Market",
+      "address": "Japan, 〒104-0045 Tokyo, Chuo City, Tsukiji, 4 Chome および６丁目一部",
+      "location": "Tokyo, Japan",
+      "coordinates": {
+        "lat": 35.666348,
+        "lng": 139.7693612
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "sanuki_mengyo_japan_100_0005_tokyo_chiyoda_city_ma": {
+      "name": "Sanuki Mengyo",
+      "address": "Japan, 〒100-0005 Tokyo, Chiyoda City, Marunouchi, 1 Chome−9−1 東京駅一番街 B1F",
+      "location": "Tokyo, Japan",
+      "coordinates": {
+        "lat": 35.6822889,
+        "lng": 139.7684903
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "gyukatsu_motomura_japan_150_0001_tokyo_shibuya_jin": {
+      "name": "Gyukatsu Motomura",
+      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 3 Chome−23−2 青山ＮＳビル B1F",
+      "location": "Tokyo, Japan",
+      "coordinates": {
+        "lat": 35.6706585,
+        "lng": 139.7072227
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "ramen_afro_beats_103_1_chome_16_10_shinjuku_shinju": {
+      "name": "Ramen Afro Beats",
+      "address": "103 1 Chome-16-10 Shinjuku, Shinjuku City, Tokyo 160-0022, Japan",
+      "location": "Tokyo, Japan",
+      "coordinates": {
+        "lat": 35.6899748,
+        "lng": 139.7110171
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "yoriniku_japan_107_0062_tokyo_minato_city_minamiao": {
+      "name": "Yoriniku",
+      "address": "Japan, 〒107-0062 Tokyo, Minato City, Minamiaoyama, 6 Chome−6−22 LunaRossa南青山 B1",
+      "location": "Tokyo, Japan",
+      "coordinates": {
+        "lat": 35.6602079,
+        "lng": 139.7175935
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "pelicana_kitchen_7767_balboa_ave_san_diego_ca_9211": {
+      "name": "Pelicana Kitchen",
+      "address": "7767 Balboa Ave, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8212681,
+        "lng": -117.1559327
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "curry_club_7309_clairemont_mesa_blvd_san_diego_ca_": {
+      "name": "Curry Club",
+      "address": "7309 Clairemont Mesa Blvd, San Diego, CA 92111",
+      "location": "Kearny Mesa, SD",
+      "coordinates": {
+        "lat": 32.8321436,
+        "lng": -117.1604598
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "ramen_miyako_1f_gionmachi_kitagawa_higashiyama_war": {
+      "name": "Ramen Miyako",
+      "address": "３０３番地, 1F, Gionmachi Kitagawa, Higashiyama Ward, Kyoto, 605-0073, Japan",
+      "location": "Kyoto, Japan",
+      "coordinates": {
+        "lat": 35.0045602,
+        "lng": 135.7777317
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "katsakura_tonkatsu_sanjo_japan_604_8036_kyoto_naka": {
+      "name": "Katsakura Tonkatsu Sanjo",
+      "address": "Japan, 〒604-8036 Kyoto, Nakagyo Ward, Ishibashicho, 16 三条通寺町東入ル",
+      "location": "Kyoto, Japan",
+      "coordinates": {
+        "lat": 35.0088234,
+        "lng": 135.7678434
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "pizzeria_lugara_18_25_sagatenryuji_setogawacho_uky": {
+      "name": "Pizzeria Lugara",
+      "address": "18‐25 Sagatenryuji Setogawacho, Ukyo Ward, Kyoto, 616-8376, Japan",
+      "location": "Kyoto, Japan",
+      "coordinates": {
+        "lat": 35.0190027,
+        "lng": 135.6762
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "the_balboa_1863_fifth_ave_san_diego_ca_92101": {
+      "name": "The Balboa",
+      "address": "1863 Fifth Ave, San Diego, CA 92101",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7249283,
+        "lng": -117.1599764
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "ee_nami_tonkatsu_izakaya_4706_clairemont_mesa_blvd": {
+      "name": "EE Nami Tonkatsu Izakaya",
+      "address": "4706 Clairemont Mesa Blvd, San Diego, CA 92117",
+      "location": "Clairemont, SD",
+      "coordinates": {
+        "lat": 32.8354842,
+        "lng": -117.1892022
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "fukutaro_2_chome_3_17_sennichimae_chuo_ward_osaka_": {
+      "name": "Fukutaro",
+      "address": "2 Chome-3-17 Sennichimae, Chuo Ward, Osaka, 542-0074, Japan",
+      "location": "Osaka, Japan",
+      "coordinates": {
+        "lat": 34.665589,
+        "lng": 135.5045345
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "sulk_green_cafe_3_65_banbacho_chuo_ward_osaka_540_": {
+      "name": "Sulk Green Cafe",
+      "address": "3-65 Banbacho, Chuo Ward, Osaka, 540-0007, Japan",
+      "location": "Osaka, Japan",
+      "coordinates": {
+        "lat": 34.6823654,
+        "lng": 135.5220066
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "gyukatsu_tomita_japan_556_0011_osaka_naniwa_ward_n": {
+      "name": "Gyukatsu Tomita",
+      "address": "Japan, 〒556-0011 Osaka, Naniwa Ward, Nanbanaka, 2 Chome−3−1 ２階",
+      "location": "Osaka, Japan",
+      "coordinates": {
+        "lat": 34.6627501,
+        "lng": 135.5039434
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "honke_ootako_dotonbori_honten_1_chome_4_16_dotonbo": {
+      "name": "Honke Ootako Dotonbori Honten",
+      "address": "1 Chome-4-16 Dotonbori, Chuo Ward, Osaka, 542-0071, Japan",
+      "location": "Osaka, Japan",
+      "coordinates": {
+        "lat": 34.6684423,
+        "lng": 135.5032494
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "wagyu_shawarma_grill_10467_san_diego_mission_rd_sa": {
+      "name": "Wagyu Shawarma Grill",
+      "address": "10467 San Diego Mission Rd, San Diego, CA 92108",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.784454,
+        "lng": -117.1113313
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "handroll_project_598_guerrero_st_san_francisco_ca_": {
+      "name": "Handroll Project",
+      "address": "598 Guerrero St, San Francisco, CA 94110",
+      "location": "San Francisco, CA",
+      "coordinates": {
+        "lat": 37.7616968,
+        "lng": -122.424146
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "bhc_chicken_11983_bernardo_plaza_dr_san_diego_ca_9": {
+      "name": "BHC Chicken",
+      "address": "11983 Bernardo Plaza Dr, San Diego, CA 92128",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 33.0199589,
+        "lng": -117.0725127
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "izakaya_masa_928_fort_stockton_dr_san_diego_ca_921": {
+      "name": "Izakaya Masa",
+      "address": "928 Fort Stockton Dr, San Diego, CA 92103",
+      "location": "Mission Hills, SD",
+      "coordinates": {
+        "lat": 32.7512013,
+        "lng": -117.1719403
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "the_crispy_burger_4898_convoy_st_ste_103_san_diego": {
+      "name": "The Crispy Burger",
+      "address": "4898 Convoy St STE 103, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8305711,
+        "lng": -117.1538189
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "havana_grill_5450_clairemont_mesa_blvd_suite_g_san": {
+      "name": "Havana Grill",
+      "address": "5450 Clairemont Mesa Blvd Suite G, San Diego, CA 92117",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8345971,
+        "lng": -117.1735775
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "cafe_calabria_3933_30th_st_suite_2_san_diego_ca_92": {
+      "name": "Cafe Calabria",
+      "address": "3933 30th St Suite 2, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7492063,
+        "lng": -117.1297383
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "restaurant_de_langosta_la_guerita_blvd_benito_ju_r": {
+      "name": "Restaurant de Langosta La Guerita",
+      "address": "Blvd. Benito Juárez 204, Machado Sur, 22703 Playas de Rosarito, B.C., Mexico",
+      "location": "Rosarito, Mexico",
+      "coordinates": {
+        "lat": 32.35131790000001,
+        "lng": -117.0595168
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "la_carnada_47_01_111th_street_corona_ny": {
+      "name": "La Carnada",
+      "address": "47-01 111th Street Corona, NY",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "treat_yourself_jerk_47_01_111th_street_corona_ny": {
+      "name": "Treat Yourself Jerk",
+      "address": "47-01 111th Street Corona, NY",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "matylda_s_47_01_111th_street_corona_ny": {
+      "name": "Matylda's",
+      "address": "47-01 111th Street Corona, NY",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "sambuxa_47_01_111th_street_corona_ny": {
+      "name": "Sambuxa",
+      "address": "47-01 111th Street Corona, NY",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "szechuan_47_01_111th_street_corona_ny": {
+      "name": "Szechuan",
+      "address": "47-01 111th Street Corona, NY",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "steamy_piggy_4681_convoy_st_a_san_diego_ca_92111": {
+      "name": "Steamy Piggy",
+      "address": "4681 Convoy St # A, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.825581,
+        "lng": -117.1544993
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "lucca_italian_sandwich_shop_600_b_st_san_diego_ca_": {
+      "name": "Lucca Italian Sandwich Shop",
+      "address": "600 B St, San Diego, CA 92101",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7179135,
+        "lng": -117.1586911
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "red_s_615_kitchen_115_27th_ave_n_nashville_tn_3721": {
+      "name": "Red's 615 Kitchen",
+      "address": "115 27th Ave N., Nashville, TN 37210",
+      "location": "Nashville, TN",
+      "coordinates": {
+        "lat": 36.1463345,
+        "lng": -86.8122664
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "epic_wings_12075_carmel_mountain_rd_suite_201_san_": {
+      "name": "Epic Wings",
+      "address": "12075 Carmel Mountain Rd Suite 201, San Diego, CA 92128",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.98286,
+        "lng": -117.0742136
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "chacarero_101_arch_st_boston_ma_02110": {
+      "name": "Chacarero",
+      "address": "101 Arch St, Boston, MA 02110",
+      "location": "Boston, MA",
+      "coordinates": {
+        "lat": 42.3550133,
+        "lng": -71.05878369999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "forno_castel_sant_angelo_via_del_banco_di_santo_sp": {
+      "name": "Forno Castel Sant'Angelo",
+      "address": "Via del Banco di Santo Spirito, 44, 00186 Roma RM, Italy",
+      "location": "Rome, Italy",
+      "coordinates": {
+        "lat": 41.9003778,
+        "lng": 12.4665491
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "nonna_betta_via_del_portico_d_ottavia_16_00186_rom": {
+      "name": "Nonna Betta",
+      "address": "Via del Portico d'Ottavia, 16, 00186 Roma RM, Italy",
+      "location": "Rome, Italy",
+      "coordinates": {
+        "lat": 41.8928612,
+        "lng": 12.4780961
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "trattoria_vecchia_roma_via_ferruccio_12_b_c_00185_": {
+      "name": "Trattoria Vecchia Roma",
+      "address": "Via Ferruccio, 12/b/c, 00185 Roma RM, Italy",
+      "location": "Rome, Italy",
+      "coordinates": {
+        "lat": 41.8938492,
+        "lng": 12.502279
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "afuri_ramen_japan_151_0051_tokyo_shibuya_sendagaya": {
+      "name": "Afuri Ramen",
+      "address": "Japan, 〒151-0051 Tokyo, Shibuya, Sendagaya, 3 Chome−63−1 グランデフォレスタ原宿 1F",
+      "location": "Tokyo, Japan",
+      "coordinates": {
+        "lat": 35.6730135,
+        "lng": 139.7037905
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "pauli_s_65_salem_st_boston_ma_02113": {
+      "name": "Pauli's",
+      "address": "65 Salem St, Boston, MA 02113",
+      "location": "Boston, MA",
+      "coordinates": {
+        "lat": 42.3632696,
+        "lng": -71.0558937
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "i_frattelini_via_dei_cimatori_38_r_50122_firenze_f": {
+      "name": "I Frattelini",
+      "address": "Via dei Cimatori, 38/r, 50122 Firenze FI, Italy",
+      "location": "Florence, Italy",
+      "coordinates": {
+        "lat": 43.77062490000001,
+        "lng": 11.2554835
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.824Z"
+    },
+    "panetteria_e_stuzzicheria_de_neri_via_dei_neri_18_": {
+      "name": "Panetteria e Stuzzicheria De Neri",
+      "address": "Via dei Neri, 18/r, 50122 Firenze FI, Italy",
+      "location": "Florence, Italy",
+      "coordinates": {
+        "lat": 43.7679671,
+        "lng": 11.2588158
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "pino_s_sandwiches_via_giuseppe_verdi_36r_50122_fir": {
+      "name": "Pino's Sandwiches",
+      "address": "Via Giuseppe Verdi, 36R, 50122 Firenze FI, Italy",
+      "location": "Florence, Italy",
+      "coordinates": {
+        "lat": 43.7704566,
+        "lng": 11.2618382
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "smokin_j_s_bbq_14035_midland_rd_poway_ca_92064": {
+      "name": "Smokin J's BBQ",
+      "address": "14035 Midland Rd, Poway, CA 92064",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.9683166,
+        "lng": -117.0359938
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "yamashiro_1999_n_sycamore_ave_los_angeles_ca_90068": {
+      "name": "Yamashiro",
+      "address": "1999 N Sycamore Ave, Los Angeles, CA 90068",
+      "location": "Los Angeles, CA",
+      "coordinates": {
+        "lat": 34.1057395,
+        "lng": -118.3421769
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "casa_de_la_mozzarella_604_e_187th_st_bronx_ny_1045": {
+      "name": "Casa de la Mozzarella",
+      "address": "604 E 187th St, Bronx, NY 10458",
+      "location": "Bronx,NY",
+      "coordinates": {
+        "lat": 40.8553469,
+        "lng": -73.8874242
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "raki_raki_ramen_9995_carmel_mountain_rd_b6_san_die": {
+      "name": "Raki Raki Ramen",
+      "address": "9995 Carmel Mountain Rd b6, San Diego, CA 92129",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.9597875,
+        "lng": -117.112571
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "sushi_blossom_2720_3rd_ave_seattle_wa_98121": {
+      "name": "Sushi Blossom",
+      "address": "2720 3rd Ave, Seattle, WA 98121",
+      "location": "Seattle, WA",
+      "coordinates": {
+        "lat": 47.6176129,
+        "lng": -122.349048
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "trattoria_za_za_piazza_del_mercato_centrale_26r_50": {
+      "name": "Trattoria Za Za",
+      "address": "Piazza del Mercato Centrale, 26r, 50123 Firenze FI, Italy",
+      "location": "Florence, Italy",
+      "coordinates": {
+        "lat": 43.7763407,
+        "lng": 11.2544936
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "trattoria_dall_oste_borgo_s_lorenzo_31_50121_firen": {
+      "name": "Trattoria Dall'Oste",
+      "address": "Borgo S. Lorenzo, 31, 50121 Firenze FI, Italy",
+      "location": "Florence, Italy",
+      "coordinates": {
+        "lat": 43.7741946,
+        "lng": 11.2547378
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "soi_30th_3442_30th_st_san_diego_ca_92104": {
+      "name": "Soi 30th",
+      "address": "3442 30th St, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7419282,
+        "lng": -117.1302779
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "trattoria_rialto_novo_s_polo_518_30125_venezia_ve_": {
+      "name": "Trattoria Rialto Novo",
+      "address": "S. Polo, 518, 30125 Venezia VE, Italy",
+      "location": "Venice, Italy",
+      "coordinates": {
+        "lat": 45.4383584,
+        "lng": 12.3349099
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "only_brunch_via_s_rocco_2_30174_venezia_ve_italy": {
+      "name": "Only Brunch",
+      "address": "Via S. Rocco, 2, 30174 Venezia VE, Italy",
+      "location": "Venice, Italy",
+      "coordinates": {
+        "lat": 45.495682,
+        "lng": 12.241487
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "hostaria_osottoosopra_santa_croce_164_30135_venezi": {
+      "name": "Hostaria Osottoosopra",
+      "address": "Santa Croce, 164, 30135 Venezia VE, Italy",
+      "location": "Venice, Italy",
+      "coordinates": {
+        "lat": 45.4370789,
+        "lng": 12.3213333
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "bruxie_3870_e_ocean_blvd_long_beach_ca_90803": {
+      "name": "Bruxie",
+      "address": "3870 E Ocean Blvd, Long Beach, CA 90803",
+      "location": "Long Beach, CA",
+      "coordinates": {
+        "lat": 33.7600528,
+        "lng": -118.1480228
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "brasserie_lipp_151_bd_saint_germain_75006_paris_fr": {
+      "name": "Brasserie Lipp",
+      "address": "151 Bd Saint-Germain, 75006 Paris, France",
+      "location": "Paris, France",
+      "coordinates": {
+        "lat": 48.85368,
+        "lng": 2.3324137
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "le_bouchon_parisien_28_av_de_suffren_75015_paris_f": {
+      "name": "Le Bouchon Parisien",
+      "address": "28 Av. de Suffren, 75015 Paris, France",
+      "location": "Paris, France",
+      "coordinates": {
+        "lat": 48.85483019999999,
+        "lng": 2.2941357
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "la_banquette_marais_92_rue_de_turenne_75003_paris_": {
+      "name": "La Banquette Marais",
+      "address": "92 Rue de Turenne, 75003 Paris, France",
+      "location": "Paris, France",
+      "coordinates": {
+        "lat": 48.8617532,
+        "lng": 2.3648056
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "zab_linda_6925_linda_vista_rd_b_san_diego_ca_92111": {
+      "name": "Zab Linda",
+      "address": "6925 Linda Vista Rd B, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7844149,
+        "lng": -117.1708941
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "kin_len_thai_street_eats_3934_30th_st_san_diego_ca": {
+      "name": "Kin Len Thai Street Eats",
+      "address": "3934 30th St, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7492031,
+        "lng": -117.1303969
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "granite_6_rue_bailleul_75001_paris_france": {
+      "name": "Granite",
+      "address": "6 Rue Bailleul, 75001 Paris, France",
+      "location": "Paris, France",
+      "coordinates": {
+        "lat": 48.8610628,
+        "lng": 2.3419366
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "portos_bakery_7640_beach_blvd_buena_park_ca_90620": {
+      "name": "Portos Bakery",
+      "address": "7640 Beach Blvd, Buena Park, CA 90620",
+      "location": "Los Angeles, CA",
+      "coordinates": {
+        "lat": 33.852337,
+        "lng": -117.9974776
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "koon_thai_3860_convoy_st_suite_102_san_diego_ca_92": {
+      "name": "Koon Thai",
+      "address": "3860 Convoy St Suite 102, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8145619,
+        "lng": -117.1539374
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "mekong_cuisine_3904_convoy_st_112_san_diego_ca_921": {
+      "name": "Mekong Cuisine",
+      "address": "3904 Convoy St #112, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8145168,
+        "lng": -117.1546241
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "tacos_los_juanes_puebla_326_roma_nte_cuauht_moc_06": {
+      "name": "Tacos Los Juanes",
+      "address": "Puebla 326, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX, Mexico",
+      "location": "Mexico City, MX",
+      "coordinates": {
+        "lat": 19.4205919,
+        "lng": -99.1711742
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "tacos_hola_el_g_ero_msterdam_135_hip_dromo_cuauht_": {
+      "name": "Tacos Hola El Güero",
+      "address": "Ámsterdam 135, Hipódromo, Cuauhtémoc, 06100 Ciudad de México, CDMX, Mexico",
+      "location": "Mexico City, MX",
+      "coordinates": {
+        "lat": 19.4116518,
+        "lng": -99.17158049999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "los_panchos_restaurant_tolstoi_9_anzures_miguel_hi": {
+      "name": "Los Panchos Restaurant",
+      "address": "Tolstoi 9, Anzures, Miguel Hidalgo, 11590 Ciudad de México, CDMX, Mexico",
+      "location": "Mexico City, MX",
+      "coordinates": {
+        "lat": 19.425512,
+        "lng": -99.17730569999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "p_ramo_av_yucat_n_84_roma_nte_cuauht_moc_06700_ciu": {
+      "name": "Páramo",
+      "address": "Av. Yucatán 84, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX, Mexico",
+      "location": "Mexico City, MX",
+      "coordinates": {
+        "lat": 19.4141333,
+        "lng": -99.162615
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "popup_bagels_370_7th_ave_new_york_ny_10001": {
+      "name": "Popup Bagels",
+      "address": "370 7th Ave, New York, NY 10001",
+      "location": "New York, NY",
+      "coordinates": {
+        "lat": 40.7489275,
+        "lng": -73.9925231
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "sushi_yorimichi_2405_ulric_st_san_diego_ca_92111": {
+      "name": "Sushi Yorimichi",
+      "address": "2405 Ulric St, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7868976,
+        "lng": -117.1706254
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "quintonil_av_isaac_newton_55_polanco_polanco_iv_se": {
+      "name": "Quintonil",
+      "address": "Av. Isaac Newton 55, Polanco, Polanco IV Secc, Miguel Hidalgo, 11560 Ciudad de México, CDMX, Mexico",
+      "location": "Mexico City, MX",
+      "coordinates": {
+        "lat": 19.4308735,
+        "lng": -99.1917309
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "sidny_s_bagel_deli_11981_bernardo_plaza_dr_san_die": {
+      "name": "Sidny's Bagel & Deli",
+      "address": "11981 Bernardo Plaza Dr, San Diego, CA 92128",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 33.0199514,
+        "lng": -117.0725012
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "armando_s_2295_palm_ave_san_diego_ca_92154": {
+      "name": "Armando's",
+      "address": "2295 Palm Ave, San Diego, CA 92154",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.5834199,
+        "lng": -117.0845519
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "buffalo_jump_nyc_47_01_111th_st_corona_ny_11368": {
+      "name": "Buffalo Jump NYC",
+      "address": "47-01 111th St, Corona, NY 11368",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "arepalicious_47_01_111th_st_corona_ny_11368": {
+      "name": "Arepalicious",
+      "address": "47-01 111th St, Corona, NY 11368",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "joey_bats_cafe_47_01_111th_st_corona_ny_11368": {
+      "name": "Joey Bats Cafe",
+      "address": "47-01 111th St, Corona, NY 11368",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "pikunico_japanese_fried_chicken_767_s_alameda_st_s": {
+      "name": "Pikunico Japanese Fried Chicken",
+      "address": "767 S Alameda St Suite 122, Los Angeles, CA 90021",
+      "location": "Los Angeles, CA",
+      "coordinates": {
+        "lat": 34.0352606,
+        "lng": -118.2403461
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "the_friendly_4681_convoy_st_f_san_diego_ca_92111": {
+      "name": "The Friendly",
+      "address": "4681 Convoy St F, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8254435,
+        "lng": -117.1544368
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "banh_mi_47_01_111th_st_corona_ny_11368": {
+      "name": "Banh Mi",
+      "address": "47-01 111th St, Corona, NY 11368",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "vincent_farms_natural_foods_47_01_111th_st_corona_": {
+      "name": "Vincent Farms Natural Foods",
+      "address": "47-01 111th St, Corona, NY 11368",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "matylda_s_47_01_111th_st_corona_ny_11368": {
+      "name": "Matylda's",
+      "address": "47-01 111th St, Corona, NY 11368",
+      "location": "Corona, NY",
+      "coordinates": {
+        "lat": 40.747126,
+        "lng": -73.8515139
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "cuscatlan_salvadorean_cuisine_more_7516_mesa_colle": {
+      "name": "Cuscatlan Salvadorean Cuisine & More",
+      "address": "7516 Mesa College Dr, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.801531,
+        "lng": -117.1590574
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "chaba_thai_kitchen_8010_clairemont_mesa_blvd_san_d": {
+      "name": "Chaba Thai Kitchen",
+      "address": "8010 Clairemont Mesa Blvd, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8331879,
+        "lng": -117.1499933
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "utopia_bagels_26_11_jackson_ave_long_island_city_n": {
+      "name": "Utopia Bagels",
+      "address": "26-11 Jackson Ave, Long Island City, NY 11101",
+      "location": "Long Island City, NY",
+      "coordinates": {
+        "lat": 40.7474291,
+        "lng": -73.9420097
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "empanada_kitchen_2855_el_cajon_blvd_suite_3_san_di": {
+      "name": "Empanada Kitchen",
+      "address": "2855 El Cajon Blvd Suite 3, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7549047,
+        "lng": -117.1323498
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "the_wise_ox_2855_el_cajon_blvd_1_san_diego_ca_9210": {
+      "name": "The Wise Ox",
+      "address": "2855 El Cajon Blvd #1, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7548868,
+        "lng": -117.1324825
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "yemenat_7721_5th_ave_brooklyn_ny_11209": {
+      "name": "Yemenat",
+      "address": "7721 5th Ave, Brooklyn, NY 11209",
+      "location": "Brooklyn, NY",
+      "coordinates": {
+        "lat": 40.627296,
+        "lng": -74.0232928
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "shawarma_guys_5525_jackson_dr_b_la_mesa_ca_91942": {
+      "name": "Shawarma Guys",
+      "address": "5525 Jackson Dr B, La Mesa, CA 91942",
+      "location": "San Diego",
+      "coordinates": {
+        "lat": 32.7792525,
+        "lng": -117.0183089
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "astoria_bagel_shop_28_12_ditmars_blvd_astoria_ny_1": {
+      "name": "Astoria Bagel Shop",
+      "address": "28-12 Ditmars Blvd, Astoria, NY 11105",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7768732,
+        "lng": -73.9122415
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "antojitos_arepas_2040_imperial_ave_san_diego_ca_92": {
+      "name": "Antojitos Arepas",
+      "address": "2040 Imperial Ave, San Diego, CA 92102",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7066043,
+        "lng": -117.1451566
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.825Z"
+    },
+    "philly_frank_s_151_s_rancho_santa_fe_rd_san_marcos": {
+      "name": "Philly Frank's",
+      "address": "151 S Rancho Santa Fe Rd, San Marcos, CA 92069",
+      "location": "San Marcos, CA",
+      "coordinates": {
+        "lat": 33.1473872,
+        "lng": -117.1988207
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "dhaka_garden_72_23_37th_ave_jackson_heights_ny_113": {
+      "name": "Dhaka Garden",
+      "address": "72-23 37th Ave, Jackson Heights, NY 11372",
+      "location": "Jackson Heights, NY",
+      "coordinates": {
+        "lat": 40.74907839999999,
+        "lng": -73.89305689999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "sazon_grill_303_highland_ave_national_city_ca_9195": {
+      "name": "Sazon Grill",
+      "address": "303 Highland Ave, National City, CA 91950",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.6832736,
+        "lng": -117.0991166
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "veganic_thai_cafe_1417_suit_a_university_ave_san_d": {
+      "name": "Veganic Thai Cafe",
+      "address": "1417 Suit A, University Ave, San Diego, CA 92103",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7485172,
+        "lng": -117.1546264
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "apollo_bagels_133_n_7th_st_brooklyn_ny_11249": {
+      "name": "Apollo Bagels",
+      "address": "133 N 7th St, Brooklyn, NY 11249",
+      "location": "Brooklyn, NY",
+      "coordinates": {
+        "lat": 40.7185536,
+        "lng": -73.9585736
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "costas_latin_street_food_30_w_35th_st_new_york_ny_": {
+      "name": "Costas Latin Street Food",
+      "address": "30 W 35th St, New York, NY 10001",
+      "location": "New York, NY",
+      "coordinates": {
+        "lat": 40.749572,
+        "lng": -73.98578669999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "lupe_s_mexican_eatery_7621_linda_vista_rd_san_dieg": {
+      "name": "Lupe's Mexican Eatery",
+      "address": "7621 Linda Vista Rd, San Diego, CA 92111, United States",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8014966,
+        "lng": -117.1571964
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "balkh_shish_kebab_house_23_10_31st_st_astoria_ny_1": {
+      "name": "Balkh Shish Kebab House",
+      "address": "23-10 31st St, Astoria, NY 11105",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7742778,
+        "lng": -73.913418
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "cluck_n_sip_120w_washington_st_suite_b_san_diego_c": {
+      "name": "Cluck N'Sip",
+      "address": "120w Washington St Suite B, San Diego, CA 92103",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7501424,
+        "lng": -117.1637781
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "the_signature_sd_pop_up_thesignature_sd_": {
+      "name": "The Signature SD",
+      "address": "Pop-up! (@thesignature.sd)",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 43.9695148,
+        "lng": -99.9018131
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "cote_korean_steakhouse_16_w_22nd_st_new_york_ny_10": {
+      "name": "Cote Korean Steakhouse",
+      "address": "16 W 22nd St, New York, NY 10010",
+      "location": "New York, NY",
+      "coordinates": {
+        "lat": 40.7411848,
+        "lng": -73.99131299999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "cross_street_4403_convoy_st_san_diego_ca_92111": {
+      "name": "Cross Street",
+      "address": "4403 Convoy St, San Diego, CA 92111",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8201891,
+        "lng": -117.1547499
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "giorgino_s_1237_28th_st_san_diego_ca_92102": {
+      "name": "Giorgino's",
+      "address": "1237 28th St, San Diego, CA 92102",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7186966,
+        "lng": -117.1336102
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "tito_rad_s_grill_49_10_queens_blvd_woodside_ny_113": {
+      "name": "Tito Rad's Grill",
+      "address": "49-10 Queens Blvd, Woodside, NY 11377",
+      "location": "Woodside, NY",
+      "coordinates": {
+        "lat": 40.7424512,
+        "lng": -73.91555989999999
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "working_class_4095_30th_st_san_diego_ca_92104": {
+      "name": "Working Class",
+      "address": "4095 30th St, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7520717,
+        "lng": -117.1300028
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "supannee_house_of_thai_2907_shelter_island_dr_unit": {
+      "name": "Supannee House of Thai",
+      "address": "2907 Shelter Island Dr UNIT 110, San Diego, CA 92106",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7217259,
+        "lng": -117.2306049
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "russ_daughters_502_w_34th_st_new_york_ny_10001": {
+      "name": "Russ & Daughters",
+      "address": "502 W 34th St., New York, NY 10001",
+      "location": "Manhattan, NY",
+      "coordinates": {
+        "lat": 40.7544987,
+        "lng": -73.9995268
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "kuljem_8895_towne_centre_dr_suite_101_san_diego_ca": {
+      "name": "Kuljem",
+      "address": "8895 Towne Centre Dr Suite 101, San Diego, CA 92122",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.8669506,
+        "lng": -117.20639
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "the_eggcart_sd_7335_girard_ave_la_jolla_ca_92037": {
+      "name": "The Eggcart SD",
+      "address": "7335 Girard Ave, La Jolla, CA 92037",
+      "location": "La Jolla, CA",
+      "coordinates": {
+        "lat": 32.8383947,
+        "lng": -117.2714423
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "angelo_s_pizzeria_736_s_9th_st_philadelphia_pa_191": {
+      "name": "Angelo's Pizzeria",
+      "address": "736 S 9th St, Philadelphia, PA 19147",
+      "location": "Philadelphia, PA",
+      "coordinates": {
+        "lat": 39.940663,
+        "lng": -75.1577594
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "arepa_lady_34_39_31st_st_queens_ny_11106": {
+      "name": "Arepa Lady",
+      "address": "34-39 31st St, Queens, NY 11106",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7583874,
+        "lng": -73.9279839
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "san_diego_chicken_pie_shop_2633_el_cajon_blvd_san_": {
+      "name": "San Diego Chicken Pie Shop",
+      "address": "2633 El Cajon Blvd, San Diego, CA 92104",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7549886,
+        "lng": -117.1354494
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "gaglione_bro_s_10450_friars_rd_b_san_diego_ca_9212": {
+      "name": "Gaglione Bro's",
+      "address": "10450 Friars Rd B, San Diego, CA 92120",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7926078,
+        "lng": -117.0987131
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-13T21:27:29.826Z"
     }
   }
 }
