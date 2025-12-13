@@ -416,7 +416,66 @@ async function cachedThumbnailExists(thumbnailPath) {
     }
 }
 
-// Extract city from address string
+// Location mapping and standardization system
+const LOCATION_MAPPINGS = {
+    // US States and territories
+    'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
+    'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware', 'FL': 'Florida', 'GA': 'Georgia',
+    'HI': 'Hawaii', 'ID': 'Idaho', 'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa',
+    'KS': 'Kansas', 'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+    'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi', 'MO': 'Missouri',
+    'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada', 'NH': 'New Hampshire', 'NJ': 'New Jersey',
+    'NM': 'New Mexico', 'NY': 'New York', 'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio',
+    'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+    'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont',
+    'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming',
+    'PR': 'Puerto Rico', 'DC': 'District of Columbia',
+    
+    // Countries (common abbreviations)
+    'MX': 'Mexico', 'JP': 'Japan', 'UK': 'United Kingdom', 'FR': 'France', 'DE': 'Germany',
+    'IT': 'Italy', 'ES': 'Spain', 'AU': 'Australia', 'NZ': 'New Zealand', 'SG': 'Singapore',
+    'TH': 'Thailand', 'PH': 'Philippines', 'KR': 'South Korea', 'TW': 'Taiwan', 'HK': 'Hong Kong'
+};
+
+// Parse location from Location column (not address)
+function parseLocationData(locationString) {
+    if (!locationString) return { city: '', region: '', fullLocation: '', searchableLocation: '' };
+    
+    // Parse "City, Region" format from Location column
+    const parts = locationString.split(',').map(part => part.trim());
+    
+    if (parts.length >= 2) {
+        const city = parts[0];
+        const region = parts[1];
+        
+        // Get full region name for display (e.g., "PR" -> "Puerto Rico")
+        const fullRegion = LOCATION_MAPPINGS[region.toUpperCase()] || region;
+        
+        // Create searchable location string (for filtering)
+        const searchableLocation = `${city}, ${fullRegion}`.toLowerCase();
+        
+        return {
+            city: city,
+            region: region,
+            fullRegion: fullRegion,
+            fullLocation: `${city}, ${fullRegion}`,
+            searchableLocation: searchableLocation,
+            originalLocation: locationString
+        };
+    }
+    
+    // Fallback for single location (just city)
+    return {
+        city: locationString,
+        region: '',
+        fullRegion: '',
+        fullLocation: locationString,
+        searchableLocation: locationString.toLowerCase(),
+        originalLocation: locationString
+    };
+}
+
+// Extract city from address string (fallback only)
 function extractCityFromAddress(address) {
     if (!address) return '';
     
@@ -448,7 +507,24 @@ function extractCityFromAddress(address) {
     return '';
 }
 
-// Format address with clickable city
+// Format address with clickable location (city for filtering)
+function formatAddressWithClickableLocation(address, locationData) {
+    if (!locationData || !locationData.city) return address;
+    
+    const city = locationData.city;
+    
+    // Replace the city part in the address with a clickable span
+    const cityRegex = new RegExp(`(,\\s*)(${city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(\\s*,|\\s+[A-Z]{2}|\\s*$)`, 'i');
+    
+    // Use the full display location (e.g., "San Juan, Puerto Rico") for the filter
+    const filterLocation = locationData.fullLocation;
+    
+    return address.replace(cityRegex, (match, beforeCity, cityMatch, afterCity) => {
+        return `${beforeCity}<span class="clickable-city" onclick="selectLocationTag(event, '${filterLocation}')" title="Filter by ${filterLocation}">${cityMatch}</span>${afterCity}`;
+    });
+}
+
+// Legacy function for backwards compatibility
 function formatAddressWithClickableCity(address, city) {
     if (!city) return address;
     
@@ -561,7 +637,8 @@ async function processRestaurantData(rawData) {
         const csvThumbnailUrl = row['TikTok Thumbnail'] ? row['TikTok Thumbnail'].trim() : '';
         
         const address = row.Address.trim();
-        const city = extractCityFromAddress(address);
+        const locationData = parseLocationData(row.Location);
+        const city = locationData.city; // Use city from Location column, not extracted from address
         
         // Process coordinates with full precision
         const latString = row.Latitude.toString().replace('@', '');
@@ -585,7 +662,8 @@ async function processRestaurantData(rawData) {
             reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
             restaurant: row.Restaurant.trim(),
             tags: tags,
-            location: row.Location ? row.Location.trim() : '',
+            location: locationData.originalLocation, // Original location string from CSV
+            locationData: locationData, // Full parsed location data
             address: address,
             city: city,
             googleMapsLink: row['Google Maps Link'] ? row['Google Maps Link'].trim() : '',
@@ -627,7 +705,7 @@ function createMapMarkers() {
 
 // Create popup content for map markers
 function createPopupContent(restaurant) {
-    const formattedAddress = formatAddressWithClickableCity(restaurant.address, restaurant.city);
+    const formattedAddress = formatAddressWithClickableLocation(restaurant.address, restaurant.locationData);
     
     return `
         <div class="popup-content">
@@ -636,6 +714,7 @@ function createPopupContent(restaurant) {
                 ''
             }
             <div class="popup-name">${restaurant.restaurant}</div>
+            <div class="popup-location">📍 <span class="clickable-location" onclick="selectLocationTag(event, '${restaurant.locationData.fullLocation}')" title="Filter by ${restaurant.locationData.fullLocation}">${restaurant.locationData.fullLocation}</span></div>
             <div class="popup-address">${formattedAddress}</div>
             <div class="popup-rating">
                 <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
@@ -727,7 +806,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
         card.dataset.index = originalIndex; // Use original index for filtering
         
         const tagsHtml = restaurant.tags.map(tag => `<span class="tag clickable-tag" onclick="selectTag('${tag}')">${tag}</span>`).join('');
-        const formattedAddress = formatAddressWithClickableCity(restaurant.address, restaurant.city);
+        const formattedAddress = formatAddressWithClickableLocation(restaurant.address, restaurant.locationData);
         
         card.innerHTML = `
             ${restaurant.tikTokThumbnail ? 
@@ -736,6 +815,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
             }
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
+                <div class="restaurant-location">📍 <span class="clickable-location" onclick="selectLocationTag(event, '${restaurant.locationData.fullLocation}')" title="Filter by ${restaurant.locationData.fullLocation}">${restaurant.locationData.fullLocation}</span></div>
                 <div class="restaurant-address">${formattedAddress}</div>
                 <div class="restaurant-rating">
                     <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
@@ -923,10 +1003,16 @@ function setupTagSearch() {
                     );
                     // Or check if it matches the reviewer
                     const matchesReviewer = restaurant.reviewer.toLowerCase() === selectedTag.toLowerCase();
-                    // Or check if it matches the city
-                    const matchesCity = restaurant.city && restaurant.city.toLowerCase() === selectedTag.toLowerCase();
+                    // Or check if it matches location data
+                    let matchesLocation = false;
+                    if (restaurant.locationData) {
+                        const cityMatch = restaurant.locationData.city && restaurant.locationData.city.toLowerCase() === selectedTag.toLowerCase();
+                        const fullLocationMatch = restaurant.locationData.fullLocation && restaurant.locationData.fullLocation.toLowerCase() === selectedTag.toLowerCase();
+                        const regionMatch = restaurant.locationData.fullRegion && restaurant.locationData.fullRegion.toLowerCase() === selectedTag.toLowerCase();
+                        matchesLocation = cityMatch || fullLocationMatch || regionMatch;
+                    }
                     
-                    return matchesTag || matchesReviewer || matchesCity;
+                    return matchesTag || matchesReviewer || matchesLocation;
                 });
             }
             
@@ -939,9 +1025,20 @@ function setupTagSearch() {
                 if (restaurant.reviewer) {
                     availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
                 }
-                // Add this restaurant's city as available tag
-                if (restaurant.city) {
-                    availableTagsFromFilteredRestaurants.add(restaurant.city);
+                // Add location-based tags
+                if (restaurant.locationData) {
+                    // Add the city name
+                    if (restaurant.locationData.city) {
+                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.city);
+                    }
+                    // Add the full location (e.g., "San Juan, Puerto Rico")
+                    if (restaurant.locationData.fullLocation) {
+                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullLocation);
+                    }
+                    // Add the region name (e.g., "Puerto Rico", "New York")
+                    if (restaurant.locationData.fullRegion) {
+                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullRegion);
+                    }
                 }
             }
         });
@@ -1020,6 +1117,15 @@ function selectCityTag(event, city) {
     selectTag(city);
 }
 
+// Select location tag with event handling (prevents card click zooming)
+function selectLocationTag(event, location) {
+    // Prevent event from bubbling up to the restaurant card click handler
+    event.stopPropagation();
+    
+    // Use the regular selectTag function for the filtering logic
+    selectTag(location);
+}
+
 // Auto-expand filters on mobile when interaction happens
 function expandFiltersOnMobile() {
     // Check if we're on mobile (filter toggle is visible)
@@ -1087,10 +1193,16 @@ function getFilteredRestaurants() {
                 );
                 // Or check if it matches the reviewer
                 const matchesReviewer = restaurant.reviewer.toLowerCase().trim() === cleanSelectedTag;
-                // Or check if it matches the city
-                const matchesCity = restaurant.city && restaurant.city.toLowerCase().trim() === cleanSelectedTag;
+                // Or check if it matches location data
+                let matchesLocation = false;
+                if (restaurant.locationData) {
+                    const cityMatch = restaurant.locationData.city && restaurant.locationData.city.toLowerCase().trim() === cleanSelectedTag;
+                    const fullLocationMatch = restaurant.locationData.fullLocation && restaurant.locationData.fullLocation.toLowerCase().trim() === cleanSelectedTag;
+                    const regionMatch = restaurant.locationData.fullRegion && restaurant.locationData.fullRegion.toLowerCase().trim() === cleanSelectedTag;
+                    matchesLocation = cityMatch || fullLocationMatch || regionMatch;
+                }
                 
-                return matchesTag || matchesReviewer || matchesCity;
+                return matchesTag || matchesReviewer || matchesLocation;
             });
             if (!hasAllSelectedTags) show = false;
         }
