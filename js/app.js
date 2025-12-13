@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.1.4',
+    version: '2.2.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -42,31 +42,6 @@ function initializeMap() {
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
-    
-    // Debug: Test coordinate precision with a known location
-    console.log('🔬 Testing coordinate precision with test marker...');
-    const testLat = 32.7780686;
-    const testLng = -117.2870695;
-    console.log('Input coordinates:', { lat: testLat, lng: testLng });
-    
-    // Create a test marker to verify precision
-    const testMarker = L.marker([testLat, testLng])
-        .addTo(map)
-        .bindPopup(`Test marker<br>Lat: ${testLat}<br>Lng: ${testLng}`);
-    
-    // Get the marker's actual position
-    const actualPos = testMarker.getLatLng();
-    console.log('Marker actual position:', { lat: actualPos.lat, lng: actualPos.lng });
-    console.log('Position difference:', { 
-        lat: Math.abs(testLat - actualPos.lat), 
-        lng: Math.abs(testLng - actualPos.lng) 
-    });
-    
-    // Remove test marker after 5 seconds
-    setTimeout(() => {
-        map.removeLayer(testMarker);
-        console.log('Test marker removed');
-    }, 5000);
 }
 
 // Setup event listeners
@@ -604,10 +579,10 @@ async function processRestaurantData(rawData) {
     // Filter valid rows
     const validData = validationResults.filter(result => result.isValid).map(result => result.row);
     
-    // Debug logging summary
-    console.log(`📊 Validation summary: ${validData.length}/${rawData.length} rows valid`);
+    // Log validation summary
+    console.log(`✅ Loaded ${validData.length}/${rawData.length} restaurants from CSV`);
     if (validData.length === 0) {
-        console.error('❌ No valid rows found! Check the debug logs above for validation failures.');
+        console.error('❌ No valid restaurants found in CSV data');
     }
     
     const processedData = validData.map((row, index) => {
@@ -646,17 +621,6 @@ async function processRestaurantData(rawData) {
         const latitude = parseFloat(latString);
         const longitude = parseFloat(lngString);
         
-        // Debug coordinate precision for first few restaurants
-        if (index < 3) {
-            console.log(`🗺️ Coordinate precision check for "${row.Restaurant}":`, {
-                originalLat: latString,
-                originalLng: lngString,
-                parsedLat: latitude,
-                parsedLng: longitude,
-                latPrecision: latString.split('.')[1]?.length || 0,
-                lngPrecision: lngString.split('.')[1]?.length || 0
-            });
-        }
         
         return {
             reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
@@ -683,19 +647,9 @@ async function processRestaurantData(rawData) {
 // Create map markers
 function createMapMarkers() {
     restaurants.forEach((restaurant, index) => {
-        // Debug marker placement for first few restaurants
-        if (index < 3) {
-            console.log(`🎯 Creating marker for "${restaurant.restaurant}":`, {
-                coords: [restaurant.latitude, restaurant.longitude],
-                precision: `${restaurant.latitude.toString().split('.')[1]?.length || 0} / ${restaurant.longitude.toString().split('.')[1]?.length || 0} digits`
-            });
-        }
-        
         const marker = L.marker([restaurant.latitude, restaurant.longitude])
             .addTo(map)
             .bindPopup(createPopupContent(restaurant));
-        
-        // Popup images now load normally
         
         // Store reference to restaurant data
         marker.restaurantIndex = index;
@@ -929,7 +883,6 @@ function goToPage(page) {
 // Setup filter controls
 function setupFilters() {
     setupDynamicRatingSlider();
-    console.log(`🔧 Filters ready - ${Array.from(allTags).length} tags available for search`);
 }
 
 // Setup dynamic rating slider based on actual data
@@ -971,7 +924,6 @@ function setupDynamicRatingSlider() {
         applyFilters();
     });
     
-    console.log(`🎚️ Rating slider: ${minRating} - ${maxRating}`);
 }
 
 // Setup tag search with autocomplete and multi-select
@@ -1307,7 +1259,6 @@ function centerMapOnCenterOfMass() {
             maxZoom: 12 // Don't zoom in too close even if restaurants are clustered
         });
         
-        console.log(`🗺️ Map fitted to show all ${count} restaurants across both coasts`);
     } else {
         // Fallback to NYC if no valid coordinates
         map.setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
