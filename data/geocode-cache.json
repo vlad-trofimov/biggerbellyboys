@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-12-13T18:00:00Z",
+  "source": "Sample cache structure - add your geocoded restaurant data here",
+  "restaurants": {
+    "plern_thai_22_55_31st_st_astoria_ny_11105": {
+      "name": "Plern Thai",
+      "address": "22-55 31st St, Astoria, NY 11105",
+      "location": "Astoria, NY",
+      "coordinates": {
+        "lat": 40.7749284,
+        "lng": -73.9120251
+      },
+      "source": "geocode_api",
+      "lastGeocoded": "2025-12-13T18:00:00Z"
+    }
+  }
+}

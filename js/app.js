@@ -1,8 +1,12 @@
 // Configuration
 const CONFIG = {
-    version: '2.3.1',
+    version: '2.5.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
+    
+    // Geocode cache configuration
+    cacheUrl: 'data/geocode-cache.json',
+    enableCache: true,
     
     // Default map center (will be updated based on restaurant locations)
     defaultCenter: [40.7128, -74.0060], // New York City
@@ -21,6 +25,10 @@ let currentSort = 'newest';
 let currentPage = 1;
 let itemsPerPage = 24;
 let totalFilteredRestaurants = 0;
+
+// Cache variables
+let geocodeCache = null;
+let csvData = null;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -45,6 +53,117 @@ function goToHomePage() {
     
     // Re-display all restaurants
     sortAndDisplayRestaurants();
+}
+
+// Load geocode cache from JSON file
+async function loadGeocodeCache() {
+    if (!CONFIG.enableCache) return null;
+    
+    try {
+        const response = await fetch(`${CONFIG.cacheUrl}?_t=${Date.now()}`);
+        if (!response.ok) {
+            console.log('📦 No geocode cache found, will use CSV data only');
+            return null;
+        }
+        
+        const cache = await response.json();
+        console.log(`📦 Loaded geocode cache v${cache.version} (${Object.keys(cache.restaurants).length} entries)`);
+        return cache;
+    } catch (error) {
+        console.warn('⚠️ Failed to load geocode cache:', error.message);
+        return null;
+    }
+}
+
+// Generate restaurant hash for cache key
+function generateRestaurantHash(restaurant, address) {
+    // Create a simple hash from restaurant name + address
+    const key = `${restaurant}_${address}`.toLowerCase()
+        .replace(/[^a-z0-9]/g, '_')
+        .replace(/_+/g, '_')
+        .substring(0, 50);
+    return key;
+}
+
+// Get coordinates from cache or CSV
+function getRestaurantCoordinates(row, cache) {
+    const restaurantHash = generateRestaurantHash(row.Restaurant, row.Address);
+    
+    // Try cache first
+    if (cache && cache.restaurants[restaurantHash]) {
+        const cached = cache.restaurants[restaurantHash];
+        return {
+            lat: cached.coordinates.lat,
+            lng: cached.coordinates.lng,
+            source: 'cache'
+        };
+    }
+    
+    // Try GeoCode Script from CSV
+    const geoCodeScript = row['GeoCode Script'] ? row['GeoCode Script'].toString().trim() : '';
+    if (geoCodeScript) {
+        const coords = geoCodeScript.split(',').map(coord => coord.trim());
+        if (coords.length === 2) {
+            const lat = parseFloat(coords[0]);
+            const lng = parseFloat(coords[1]);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                return {
+                    lat: lat,
+                    lng: lng,
+                    source: 'csv_geocode'
+                };
+            }
+        }
+    }
+    
+    // No valid coordinates found
+    return {
+        lat: NaN,
+        lng: NaN,
+        source: 'none'
+    };
+}
+
+// Update cache with new coordinate data (for future use)
+function updateCacheEntry(restaurant, address, location, lat, lng, source = 'geocode_api') {
+    if (!geocodeCache) {
+        geocodeCache = {
+            version: "1.0.0",
+            lastUpdated: new Date().toISOString(),
+            restaurants: {}
+        };
+    }
+    
+    const hash = generateRestaurantHash(restaurant, address);
+    geocodeCache.restaurants[hash] = {
+        name: restaurant,
+        address: address,
+        location: location,
+        coordinates: { lat: lat, lng: lng },
+        source: source,
+        lastGeocoded: new Date().toISOString()
+    };
+    
+    geocodeCache.lastUpdated = new Date().toISOString();
+}
+
+// Save cache to JSON file (requires server-side support)
+async function saveGeocodeCache() {
+    // Note: This would require a server endpoint to write files
+    // For now, this is a placeholder for future implementation
+    console.log('💾 Cache save requested - requires server-side implementation');
+    console.log('Cache data:', geocodeCache);
+}
+
+// Get cache statistics
+function getCacheStats() {
+    if (!geocodeCache) return { entries: 0, version: 'none' };
+    
+    return {
+        entries: Object.keys(geocodeCache.restaurants).length,
+        version: geocodeCache.version,
+        lastUpdated: geocodeCache.lastUpdated
+    };
 }
 
 // Initialize Leaflet map
@@ -289,7 +408,7 @@ function setupBrowserNavigation() {
 
 // Lazy loading removed for better user experience
 
-// Load restaurant data from CSV
+// Load restaurant data from cache and CSV
 async function loadRestaurantData() {
     const loadingElement = document.getElementById('loading');
     
@@ -298,6 +417,10 @@ async function loadRestaurantData() {
             throw new Error('Please update the CSV URL in the CONFIG object');
         }
         
+        // Load geocode cache first
+        geocodeCache = await loadGeocodeCache();
+        
+        // Load CSV data
         const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -305,7 +428,9 @@ async function loadRestaurantData() {
         
         const csvText = await response.text();
         const parsedData = parseCSV(csvText);
-        restaurants = await processRestaurantData(parsedData);
+        csvData = parsedData; // Store for future cache updates
+        
+        restaurants = await processRestaurantData(parsedData, geocodeCache);
         
         if (restaurants.length === 0) {
             throw new Error('No valid restaurant data found');
@@ -542,7 +667,7 @@ function getReviewerIcon(reviewer) {
 }
 
 // Process and validate restaurant data
-async function processRestaurantData(rawData) {
+async function processRestaurantData(rawData, cache) {
     const requiredFields = ['Restaurant', 'Address'];
     
     const validationResults = await Promise.all(rawData.map(async (row, index) => {
@@ -554,37 +679,11 @@ async function processRestaurantData(rawData) {
             }
         });
         
-        // Parse coordinates from GeoCode Script column (format: "lat, lng")
-        const geoCodeScript = row['GeoCode Script'] ? row['GeoCode Script'].toString().trim() : '';
-        let lat = NaN;
-        let lng = NaN;
-        let coordinateSource = 'none';
-        
-        // Debug: Log first few rows to see what's in GeoCode Script
-        if (index < 3) {
-            console.log(`🔍 Row ${index + 1} - "${row.Restaurant}":`, {
-                'GeoCode Script raw': row['GeoCode Script'],
-                'GeoCode Script trimmed': geoCodeScript,
-                'GeoCode Script type': typeof row['GeoCode Script'],
-                'Available columns': Object.keys(row).filter(key => key.toLowerCase().includes('geo') || key.toLowerCase().includes('code')),
-                'Column with "Script"': Object.keys(row).filter(key => key.includes('Script'))
-            });
-        }
-        
-        if (geoCodeScript) {
-            // Parse "lat, lng" format from GeoCode Script
-            const coords = geoCodeScript.split(',').map(coord => coord.trim());
-            if (coords.length === 2) {
-                lat = parseFloat(coords[0]);
-                lng = parseFloat(coords[1]);
-                if (!isNaN(lat) && !isNaN(lng)) {
-                    coordinateSource = 'geocode';
-                }
-            }
-        }
-        
-        // REMOVED: Fallback to original Latitude/Longitude columns 
-        // Now ONLY using GeoCode Script column as requested
+        // Get coordinates from cache or CSV
+        const coordinates = getRestaurantCoordinates(row, cache);
+        const lat = coordinates.lat;
+        const lng = coordinates.lng;
+        const coordinateSource = coordinates.source;
         
         const validCoordinates = !isNaN(lat) && !isNaN(lng) && 
                                 lat >= -90 && lat <= 90 && 
@@ -629,7 +728,7 @@ async function processRestaurantData(rawData) {
     
     // Log validation summary with coordinate source breakdown
     console.log(`✅ Loaded ${validData.length}/${rawData.length} restaurants from CSV`);
-    console.log(`📍 Coordinates: ${coordinateStats.geocode || 0} from GeoCode Script, ${coordinateStats.fallback || 0} from Lat/Lng columns`);
+    console.log(`📍 Coordinates: ${coordinateStats.cache || 0} from cache, ${coordinateStats.csv_geocode || 0} from CSV GeoCode Script, ${coordinateStats.none || 0} missing`);
     if (validData.length === 0) {
         console.error('❌ No valid restaurants found in CSV data');
     }

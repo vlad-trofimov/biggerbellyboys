@@ -1,0 +1,3 @@
+# Geocode cache files - exclude from git if desired
+# Uncomment the line below to exclude cache from version control
+# geocode-cache.json

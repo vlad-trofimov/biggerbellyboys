@@ -1,0 +1,244 @@
+name: Cache Restaurant Geocodes
+
+on:
+  schedule:
+    # Runs daily at 7am UTC (after thumbnails at 6am)
+    - cron: '0 7 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  cache-geocodes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch CSV and cache geocodes
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
+          const https = require('https');
+          const http = require('http');
+
+          // === CONFIGURATION ===
+          const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv';
+          const CACHE_FILE = './data/geocode-cache.json';
+          const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+          
+          // CSV Column indices (0-based)
+          const RESTAURANT_COL = 1;
+          const LOCATION_COL = 3;
+          const ADDRESS_COL = 4;
+
+          // Helper: fetch URL and return buffer/text
+          function fetch(url) {
+            return new Promise((resolve, reject) => {
+              const client = url.startsWith('https') ? https : http;
+              client.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
+                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                  // Follow redirect
+                  return fetch(res.headers.location).then(resolve).catch(reject);
+                }
+                const chunks = [];
+                res.on('data', (chunk) => chunks.push(chunk));
+                res.on('end', () => resolve(Buffer.concat(chunks)));
+                res.on('error', reject);
+              }).on('error', reject);
+            });
+          }
+
+          // Generate restaurant hash for cache key
+          function generateRestaurantHash(restaurant, address) {
+            const key = `${restaurant}_${address}`.toLowerCase()
+              .replace(/[^a-z0-9]/g, '_')
+              .replace(/_+/g, '_')
+              .substring(0, 50);
+            return key;
+          }
+
+          // Geocode address using Google Maps API
+          async function geocodeAddress(address) {
+            if (!GOOGLE_MAPS_API_KEY) {
+              console.log('No Google Maps API key provided, skipping geocoding');
+              return null;
+            }
+
+            const encodedAddress = encodeURIComponent(address);
+            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
+            
+            try {
+              const buffer = await fetch(geocodeUrl);
+              const response = JSON.parse(buffer.toString());
+              
+              if (response.status === 'OK' && response.results.length > 0) {
+                const location = response.results[0].geometry.location;
+                return {
+                  lat: location.lat,
+                  lng: location.lng,
+                  formatted_address: response.results[0].formatted_address
+                };
+              } else {
+                console.log(`Geocoding failed for "${address}": ${response.status}`);
+                return null;
+              }
+            } catch (error) {
+              console.log(`Geocoding error for "${address}": ${error.message}`);
+              return null;
+            }
+          }
+
+          // Parse CSV (simple parser for Google Sheets output)
+          function parseCSV(text) {
+            const lines = text.split('\n');
+            const rows = [];
+            for (let i = 1; i < lines.length; i++) { // Skip header
+              if (lines[i].trim()) {
+                // Handle quoted fields with commas
+                const row = [];
+                let field = '';
+                let inQuotes = false;
+                for (const char of lines[i]) {
+                  if (char === '"') {
+                    inQuotes = !inQuotes;
+                  } else if (char === ',' && !inQuotes) {
+                    row.push(field.trim().replace(/"/g, ''));
+                    field = '';
+                  } else {
+                    field += char;
+                  }
+                }
+                row.push(field.trim().replace(/"/g, ''));
+                rows.push(row);
+              }
+            }
+            return rows;
+          }
+
+          async function main() {
+            // Ensure data directory exists
+            if (!fs.existsSync('./data')) {
+              fs.mkdirSync('./data', { recursive: true });
+              console.log('Created data directory');
+            }
+            
+            // Load existing cache
+            let cache = {
+              version: "1.0.0",
+              lastUpdated: new Date().toISOString(),
+              restaurants: {}
+            };
+            
+            if (fs.existsSync(CACHE_FILE)) {
+              try {
+                cache = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+                console.log(`Loaded existing cache with ${Object.keys(cache.restaurants).length} entries`);
+              } catch (error) {
+                console.log('Failed to load existing cache, starting fresh');
+              }
+            }
+            
+            console.log('Fetching CSV...');
+            const csvBuffer = await fetch(CSV_URL);
+            const csvText = csvBuffer.toString();
+            const rows = parseCSV(csvText);
+            
+            console.log(`Found ${rows.length} restaurants in CSV`);
+
+            let geocoded = 0;
+            let skipped = 0;
+            let errors = 0;
+
+            for (const row of rows) {
+              const restaurant = row[RESTAURANT_COL];
+              const location = row[LOCATION_COL];
+              const address = row[ADDRESS_COL];
+              
+              if (!restaurant || !address) {
+                console.log(`Skipping row - missing restaurant or address`);
+                continue;
+              }
+
+              const hash = generateRestaurantHash(restaurant, address);
+
+              // Check if already geocoded
+              if (cache.restaurants[hash]) {
+                console.log(`Skipping ${restaurant} - already geocoded`);
+                skipped++;
+                continue;
+              }
+
+              try {
+                console.log(`Geocoding ${restaurant} at "${address}"...`);
+                const geocodeResult = await geocodeAddress(address);
+                
+                if (!geocodeResult) {
+                  console.log(`Failed to geocode ${restaurant}`);
+                  errors++;
+                  continue;
+                }
+
+                // Add to cache
+                cache.restaurants[hash] = {
+                  name: restaurant,
+                  address: address,
+                  location: location || '',
+                  coordinates: {
+                    lat: geocodeResult.lat,
+                    lng: geocodeResult.lng
+                  },
+                  formatted_address: geocodeResult.formatted_address,
+                  source: 'google_maps_api',
+                  lastGeocoded: new Date().toISOString()
+                };
+
+                console.log(`Geocoded ${restaurant}: ${geocodeResult.lat}, ${geocodeResult.lng}`);
+                geocoded++;
+
+                // Rate limiting: wait 200ms between requests (5 requests/second)
+                await new Promise(r => setTimeout(r, 200));
+              } catch (err) {
+                console.log(`Error processing ${restaurant}: ${err.message}`);
+                errors++;
+              }
+            }
+
+            // Update cache metadata
+            cache.lastUpdated = new Date().toISOString();
+            cache.version = "1.0.0";
+
+            // Save updated cache
+            fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
+
+            console.log('\n=== Geocoding Summary ===');
+            console.log(`Geocoded: ${geocoded}`);
+            console.log(`Skipped (already cached): ${skipped}`);
+            console.log(`Errors: ${errors}`);
+            console.log(`Total cached entries: ${Object.keys(cache.restaurants).length}`);
+          }
+
+          main().catch(console.error);
+          EOF
+
+      - name: Commit and push if changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/geocode-cache.json
+          if git diff --staged --quiet; then
+            echo "No new geocodes to commit"
+          else
+            git commit -m "Update geocode cache with new restaurant locations"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
