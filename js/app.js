@@ -543,7 +543,7 @@ function getReviewerIcon(reviewer) {
 
 // Process and validate restaurant data
 async function processRestaurantData(rawData) {
-    const requiredFields = ['Restaurant', 'Address', 'Latitude', 'Longitude'];
+    const requiredFields = ['Restaurant', 'Address'];
     
     const validationResults = await Promise.all(rawData.map(async (row, index) => {
         // Check each required field
@@ -554,12 +554,35 @@ async function processRestaurantData(rawData) {
             }
         });
         
-        // Validate coordinates (handle @ symbol prefix in latitude)
-        const cleanLat = row.Latitude ? row.Latitude.toString().replace('@', '') : '';
-        const cleanLng = row.Longitude ? row.Longitude.toString() : '';
+        // Parse coordinates from GeoCode Script column (format: "lat, lng")
+        const geoCodeScript = row['GeoCode Script'] ? row['GeoCode Script'].toString().trim() : '';
+        let lat = NaN;
+        let lng = NaN;
+        let coordinateSource = 'none';
         
-        const lat = parseFloat(cleanLat);
-        const lng = parseFloat(cleanLng);
+        if (geoCodeScript) {
+            // Parse "lat, lng" format from GeoCode Script
+            const coords = geoCodeScript.split(',').map(coord => coord.trim());
+            if (coords.length === 2) {
+                lat = parseFloat(coords[0]);
+                lng = parseFloat(coords[1]);
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    coordinateSource = 'geocode';
+                }
+            }
+        }
+        
+        // Fallback to original Latitude/Longitude columns if GeoCode Script is empty or invalid
+        if (isNaN(lat) || isNaN(lng)) {
+            const cleanLat = row.Latitude ? row.Latitude.toString().replace('@', '') : '';
+            const cleanLng = row.Longitude ? row.Longitude.toString() : '';
+            lat = parseFloat(cleanLat);
+            lng = parseFloat(cleanLng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                coordinateSource = 'fallback';
+            }
+        }
+        
         const validCoordinates = !isNaN(lat) && !isNaN(lng) && 
                                 lat >= -90 && lat <= 90 && 
                                 lng >= -180 && lng <= 180;
@@ -588,14 +611,22 @@ async function processRestaurantData(rawData) {
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
-        return { row, isValid };
+        return { row, isValid, coordinateSource };
     }));
     
-    // Filter valid rows
-    const validData = validationResults.filter(result => result.isValid).map(result => result.row);
+    // Filter valid rows and collect coordinate source stats
+    const validResults = validationResults.filter(result => result.isValid);
+    const validData = validResults.map(result => result.row);
     
-    // Log validation summary
+    // Count coordinate sources
+    const coordinateStats = validResults.reduce((stats, result) => {
+        stats[result.coordinateSource] = (stats[result.coordinateSource] || 0) + 1;
+        return stats;
+    }, {});
+    
+    // Log validation summary with coordinate source breakdown
     console.log(`✅ Loaded ${validData.length}/${rawData.length} restaurants from CSV`);
+    console.log(`📍 Coordinates: ${coordinateStats.geocode || 0} from GeoCode Script, ${coordinateStats.fallback || 0} from Lat/Lng columns`);
     if (validData.length === 0) {
         console.error('❌ No valid restaurants found in CSV data');
     }
@@ -630,11 +661,9 @@ async function processRestaurantData(rawData) {
         const locationData = parseLocationData(row.Location);
         const city = locationData.city; // Use city from Location column, not extracted from address
         
-        // Process coordinates with full precision
-        const latString = row.Latitude.toString().replace('@', '');
-        const lngString = row.Longitude.toString();
-        const latitude = parseFloat(latString);
-        const longitude = parseFloat(lngString);
+        // Use coordinates from validation section (already parsed from GeoCode Script or fallback)
+        const latitude = lat;
+        const longitude = lng;
         
         
         return {
