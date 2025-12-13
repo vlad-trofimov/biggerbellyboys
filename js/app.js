@@ -32,6 +32,21 @@ document.addEventListener('DOMContentLoaded', function() {
     loadRestaurantData();
 });
 
+// Go to home page (clear all filters and URL parameters)
+function goToHomePage() {
+    // Clear all filters
+    clearAllFilters();
+    
+    // Remove all URL parameters and go to base URL
+    window.history.pushState({}, '', window.location.pathname);
+    
+    // Reset to first page
+    currentPage = 1;
+    
+    // Re-display all restaurants
+    sortAndDisplayRestaurants();
+}
+
 // Initialize Leaflet map
 function initializeMap() {
     map = L.map('map').setView(CONFIG.defaultCenter, CONFIG.defaultZoom);

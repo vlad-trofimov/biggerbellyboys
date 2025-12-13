@@ -49,6 +49,18 @@ header {
     gap: 1.5rem;
 }
 
+.header-home-link {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.header-home-link:hover {
+    opacity: 0.8;
+}
+
 .logo {
     height: 80px;
     width: auto;
@@ -413,6 +425,17 @@ header h1 {
 }
 
 .clickable-city:hover {
+    color: var(--accent-color);
+}
+
+.clickable-location {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.clickable-location:hover {
     color: var(--accent-color);
 }
 
