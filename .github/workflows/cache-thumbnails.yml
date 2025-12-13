@@ -34,7 +34,7 @@ jobs:
 
           // === CONFIGURATION ===
           const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv';
-          const TIKTOK_VIDEO_COLUMN = 9; // Column J (0-indexed = 9) - adjust if needed
+          const TIKTOK_VIDEO_COLUMN = 7; // Column H - TikTok Video (0-indexed = 7)
           const THUMBNAILS_DIR = './thumbnails';
 
           // Helper: fetch URL and return buffer

@@ -21,9 +21,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch CSV and cache geocodes
-        env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      - name: Extract geocodes from CSV and update cache
         run: |
           node << 'EOF'
           const fs = require('fs');
@@ -33,12 +31,12 @@ jobs:
           // === CONFIGURATION ===
           const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv';
           const CACHE_FILE = './data/geocode-cache.json';
-          const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
           
           // CSV Column indices (0-based)
-          const RESTAURANT_COL = 1;
-          const LOCATION_COL = 3;
-          const ADDRESS_COL = 4;
+          const RESTAURANT_COL = 1; // Column B
+          const LOCATION_COL = 3;   // Column D  
+          const ADDRESS_COL = 4;    // Column E
+          const GEOCODE_SCRIPT_COL = 5; // Column F - GeoCode Script
 
           // Helper: fetch URL and return buffer/text
           function fetch(url) {
@@ -66,35 +64,25 @@ jobs:
             return key;
           }
 
-          // Geocode address using Google Maps API
-          async function geocodeAddress(address) {
-            if (!GOOGLE_MAPS_API_KEY) {
-              console.log('No Google Maps API key provided, skipping geocoding');
+          // Parse geocode data from CSV column (format: "lat, lng")
+          function parseGeocodeScript(geoCodeScript) {
+            if (!geoCodeScript || geoCodeScript.trim() === '') {
               return null;
             }
-
-            const encodedAddress = encodeURIComponent(address);
-            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${GOOGLE_MAPS_API_KEY}`;
             
-            try {
-              const buffer = await fetch(geocodeUrl);
-              const response = JSON.parse(buffer.toString());
-              
-              if (response.status === 'OK' && response.results.length > 0) {
-                const location = response.results[0].geometry.location;
-                return {
-                  lat: location.lat,
-                  lng: location.lng,
-                  formatted_address: response.results[0].formatted_address
-                };
-              } else {
-                console.log(`Geocoding failed for "${address}": ${response.status}`);
-                return null;
-              }
-            } catch (error) {
-              console.log(`Geocoding error for "${address}": ${error.message}`);
+            const coords = geoCodeScript.split(',').map(coord => coord.trim());
+            if (coords.length !== 2) {
               return null;
             }
+            
+            const lat = parseFloat(coords[0]);
+            const lng = parseFloat(coords[1]);
+            
+            if (isNaN(lat) || isNaN(lng)) {
+              return null;
+            }
+            
+            return { lat, lng };
           }
 
           // Parse CSV (simple parser for Google Sheets output)
@@ -154,7 +142,7 @@ jobs:
             
             console.log(`Found ${rows.length} restaurants in CSV`);
 
-            let geocoded = 0;
+            let cached = 0;
             let skipped = 0;
             let errors = 0;
 
@@ -162,6 +150,7 @@ jobs:
               const restaurant = row[RESTAURANT_COL];
               const location = row[LOCATION_COL];
               const address = row[ADDRESS_COL];
+              const geoCodeScript = row[GEOCODE_SCRIPT_COL];
               
               if (!restaurant || !address) {
                 console.log(`Skipping row - missing restaurant or address`);
@@ -170,19 +159,19 @@ jobs:
 
               const hash = generateRestaurantHash(restaurant, address);
 
-              // Check if already geocoded
+              // Check if already in cache
               if (cache.restaurants[hash]) {
-                console.log(`Skipping ${restaurant} - already geocoded`);
+                console.log(`Skipping ${restaurant} - already in cache`);
                 skipped++;
                 continue;
               }
 
               try {
-                console.log(`Geocoding ${restaurant} at "${address}"...`);
-                const geocodeResult = await geocodeAddress(address);
+                console.log(`Processing ${restaurant}...`);
+                const coordinates = parseGeocodeScript(geoCodeScript);
                 
-                if (!geocodeResult) {
-                  console.log(`Failed to geocode ${restaurant}`);
+                if (!coordinates) {
+                  console.log(`No valid coordinates in GeoCode Script for ${restaurant}`);
                   errors++;
                   continue;
                 }
@@ -193,19 +182,15 @@ jobs:
                   address: address,
                   location: location || '',
                   coordinates: {
-                    lat: geocodeResult.lat,
-                    lng: geocodeResult.lng
+                    lat: coordinates.lat,
+                    lng: coordinates.lng
                   },
-                  formatted_address: geocodeResult.formatted_address,
-                  source: 'google_maps_api',
-                  lastGeocoded: new Date().toISOString()
+                  source: 'csv_geocode_script',
+                  lastCached: new Date().toISOString()
                 };
 
-                console.log(`Geocoded ${restaurant}: ${geocodeResult.lat}, ${geocodeResult.lng}`);
-                geocoded++;
-
-                // Rate limiting: wait 200ms between requests (5 requests/second)
-                await new Promise(r => setTimeout(r, 200));
+                console.log(`Cached ${restaurant}: ${coordinates.lat}, ${coordinates.lng}`);
+                cached++;
               } catch (err) {
                 console.log(`Error processing ${restaurant}: ${err.message}`);
                 errors++;
@@ -219,10 +204,10 @@ jobs:
             // Save updated cache
             fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
 
-            console.log('\n=== Geocoding Summary ===');
-            console.log(`Geocoded: ${geocoded}`);
+            console.log('\n=== Cache Update Summary ===');
+            console.log(`Cached: ${cached}`);
             console.log(`Skipped (already cached): ${skipped}`);
-            console.log(`Errors: ${errors}`);
+            console.log(`Errors (missing geocode data): ${errors}`);
             console.log(`Total cached entries: ${Object.keys(cache.restaurants).length}`);
           }
 
@@ -237,8 +222,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f data/geocode-cache.json
           if git diff --staged --quiet; then
-            echo "No new geocodes to commit"
+            echo "No geocode cache changes to commit"
           else
-            git commit -m "Update geocode cache with new restaurant locations"
+            git commit -m "Update geocode cache from CSV GeoCode Script column"
             git push origin HEAD:${{ github.ref_name }}
           fi
