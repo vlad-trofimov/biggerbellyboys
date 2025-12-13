@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.5.0',
+    version: '2.5.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -720,15 +720,8 @@ async function processRestaurantData(rawData, cache) {
     const validResults = validationResults.filter(result => result.isValid);
     const validData = validResults.map(result => result.row);
     
-    // Count coordinate sources
-    const coordinateStats = validResults.reduce((stats, result) => {
-        stats[result.coordinateSource] = (stats[result.coordinateSource] || 0) + 1;
-        return stats;
-    }, {});
-    
-    // Log validation summary with coordinate source breakdown
+    // Log validation summary
     console.log(`✅ Loaded ${validData.length}/${rawData.length} restaurants from CSV`);
-    console.log(`📍 Coordinates: ${coordinateStats.cache || 0} from cache, ${coordinateStats.csv_geocode || 0} from CSV GeoCode Script, ${coordinateStats.none || 0} missing`);
     if (validData.length === 0) {
         console.error('❌ No valid restaurants found in CSV data');
     }
