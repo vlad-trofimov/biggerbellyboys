@@ -187,6 +187,8 @@ jobs:
           if git diff --staged --quiet; then
             echo "No new thumbnails to commit"
           else
-            git commit -m "Cache new TikTok thumbnails"
+            # Pull latest changes first to avoid conflicts
+            git pull origin ${{ github.ref_name }} --rebase || true
+            git commit -m "Cache new TikTok thumbnails" || true
             git push origin HEAD:${{ github.ref_name }}
           fi

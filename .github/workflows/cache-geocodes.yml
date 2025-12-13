@@ -224,6 +224,8 @@ jobs:
           if git diff --staged --quiet; then
             echo "No geocode cache changes to commit"
           else
-            git commit -m "Update geocode cache from CSV GeoCode Script column"
+            # Pull latest changes first to avoid conflicts
+            git pull origin ${{ github.ref_name }} --rebase || true
+            git commit -m "Update geocode cache from CSV GeoCode Script column" || true
             git push origin HEAD:${{ github.ref_name }}
           fi
