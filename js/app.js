@@ -659,8 +659,6 @@ function createMapMarkers() {
 
 // Create popup content for map markers
 function createPopupContent(restaurant) {
-    const formattedAddress = formatAddressWithClickableLocation(restaurant.address, restaurant.locationData);
-    
     return `
         <div class="popup-content">
             ${restaurant.tikTokThumbnail ? 
@@ -669,7 +667,7 @@ function createPopupContent(restaurant) {
             }
             <div class="popup-name">${restaurant.restaurant}</div>
             <div class="popup-location">📍 <span class="clickable-location" onclick="selectLocationTag(event, '${restaurant.locationData.fullLocation}')" title="Filter by ${restaurant.locationData.fullLocation}">${restaurant.locationData.fullLocation}</span></div>
-            <div class="popup-address">${formattedAddress}</div>
+            <div class="popup-address">${restaurant.address}</div>
             <div class="popup-rating">
                 <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
                 <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
@@ -760,7 +758,6 @@ function displayPaginatedRestaurants(filteredRestaurants) {
         card.dataset.index = originalIndex; // Use original index for filtering
         
         const tagsHtml = restaurant.tags.map(tag => `<span class="tag clickable-tag" onclick="selectTag('${tag}')">${tag}</span>`).join('');
-        const formattedAddress = formatAddressWithClickableLocation(restaurant.address, restaurant.locationData);
         
         card.innerHTML = `
             ${restaurant.tikTokThumbnail ? 
@@ -770,7 +767,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
             <div class="restaurant-info">
                 <div class="restaurant-name">${restaurant.restaurant}</div>
                 <div class="restaurant-location">📍 <span class="clickable-location" onclick="selectLocationTag(event, '${restaurant.locationData.fullLocation}')" title="Filter by ${restaurant.locationData.fullLocation}">${restaurant.locationData.fullLocation}</span></div>
-                <div class="restaurant-address">${formattedAddress}</div>
+                <div class="restaurant-address">${restaurant.address}</div>
                 <div class="restaurant-rating">
                     <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
                     <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
