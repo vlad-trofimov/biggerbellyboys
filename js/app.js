@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.3.0',
+    version: '2.3.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -560,6 +560,17 @@ async function processRestaurantData(rawData) {
         let lng = NaN;
         let coordinateSource = 'none';
         
+        // Debug: Log first few rows to see what's in GeoCode Script
+        if (index < 3) {
+            console.log(`🔍 Row ${index + 1} - "${row.Restaurant}":`, {
+                'GeoCode Script raw': row['GeoCode Script'],
+                'GeoCode Script trimmed': geoCodeScript,
+                'GeoCode Script type': typeof row['GeoCode Script'],
+                'Available columns': Object.keys(row).filter(key => key.toLowerCase().includes('geo') || key.toLowerCase().includes('code')),
+                'Column with "Script"': Object.keys(row).filter(key => key.includes('Script'))
+            });
+        }
+        
         if (geoCodeScript) {
             // Parse "lat, lng" format from GeoCode Script
             const coords = geoCodeScript.split(',').map(coord => coord.trim());
@@ -572,16 +583,8 @@ async function processRestaurantData(rawData) {
             }
         }
         
-        // Fallback to original Latitude/Longitude columns if GeoCode Script is empty or invalid
-        if (isNaN(lat) || isNaN(lng)) {
-            const cleanLat = row.Latitude ? row.Latitude.toString().replace('@', '') : '';
-            const cleanLng = row.Longitude ? row.Longitude.toString() : '';
-            lat = parseFloat(cleanLat);
-            lng = parseFloat(cleanLng);
-            if (!isNaN(lat) && !isNaN(lng)) {
-                coordinateSource = 'fallback';
-            }
-        }
+        // REMOVED: Fallback to original Latitude/Longitude columns 
+        // Now ONLY using GeoCode Script column as requested
         
         const validCoordinates = !isNaN(lat) && !isNaN(lng) && 
                                 lat >= -90 && lat <= 90 && 
