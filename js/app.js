@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.2.0',
+    version: '2.3.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -611,7 +611,7 @@ async function processRestaurantData(rawData) {
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
-        return { row, isValid, coordinateSource };
+        return { row, isValid, coordinateSource, latitude: lat, longitude: lng };
     }));
     
     // Filter valid rows and collect coordinate source stats
@@ -631,7 +631,8 @@ async function processRestaurantData(rawData) {
         console.error('❌ No valid restaurants found in CSV data');
     }
     
-    const processedData = validData.map((row, index) => {
+    const processedData = validResults.map((result, index) => {
+        const row = result.row;
         // Process tags
         const tags = row.Tags ? 
             row.Tags.split(',').map(tag => tag.trim()).filter(tag => tag) : 
@@ -662,8 +663,8 @@ async function processRestaurantData(rawData) {
         const city = locationData.city; // Use city from Location column, not extracted from address
         
         // Use coordinates from validation section (already parsed from GeoCode Script or fallback)
-        const latitude = lat;
-        const longitude = lng;
+        const latitude = result.latitude;
+        const longitude = result.longitude;
         
         
         return {
