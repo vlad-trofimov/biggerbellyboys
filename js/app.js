@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.5.7',
+    version: '2.5.8',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -168,15 +168,17 @@ function getCacheStats() {
 
 // Initialize Leaflet map
 function initializeMap() {
-    map = L.map('map').setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
+    map = L.map('map', {
+        worldCopyJump: true,
+        maxZoom: 20,
+        minZoom: 2
+    }).setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
     
     // Add CartoDB Positron tiles (clean, minimal style)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap contributors © CARTO',
         subdomains: 'abcd',
-        maxZoom: 20,
-        worldCopyJump: true,
-        noWrap: true
+        maxZoom: 20
     }).addTo(map);
 }
 
