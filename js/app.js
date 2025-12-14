@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.6.0',
+    version: '2.6.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -579,7 +579,11 @@ function parseLocationData(locationString) {
             fullRegion: fullRegion,
             fullLocation: `${city}, ${fullRegion}`,
             searchableLocation: searchableLocation,
-            originalLocation: locationString
+            originalLocation: locationString,
+            // Standardized versions for filtering
+            cityStandardized: standardizeTag(city),
+            fullRegionStandardized: standardizeTag(fullRegion),
+            fullLocationStandardized: standardizeTag(`${city}, ${fullRegion}`)
         };
     }
     
@@ -590,7 +594,11 @@ function parseLocationData(locationString) {
         fullRegion: '',
         fullLocation: locationString,
         searchableLocation: locationString.toLowerCase(),
-        originalLocation: locationString
+        originalLocation: locationString,
+        // Standardized versions for filtering
+        cityStandardized: standardizeTag(locationString),
+        fullRegionStandardized: '',
+        fullLocationStandardized: standardizeTag(locationString)
     };
 }
 
@@ -668,6 +676,11 @@ function getReviewerIcon(reviewer) {
         default:
             return 'src/vlad-bbb.png';
     }
+}
+
+// Standardize tag formatting (lowercase, trimmed)
+function standardizeTag(tag) {
+    return tag ? tag.toString().toLowerCase().trim() : '';
 }
 
 // Generate Google Maps link from address and coordinates
@@ -755,19 +768,19 @@ async function processRestaurantData(rawData, cache) {
     
     const processedData = validResults.map((result, index) => {
         const row = result.row;
-        // Process tags
+        // Process tags with standardization
         const tags = row.Tags ? 
-            row.Tags.split(',').map(tag => tag.trim()).filter(tag => tag) : 
+            row.Tags.split(',')
+                .map(tag => standardizeTag(tag))
+                .filter(tag => tag) : 
             [];
         
-        // Tags processed and ready
-        
-        // Add tags to global set
+        // Add tags to global set (standardized)
         tags.forEach(tag => allTags.add(tag));
         
-        // Add reviewer to global sets
+        // Add reviewer to global sets (standardized)
         if (row.Reviewer && row.Reviewer.trim()) {
-            const reviewerName = row.Reviewer.trim();
+            const reviewerName = standardizeTag(row.Reviewer);
             allReviewers.add(reviewerName);
             // Don't add reviewer to allTags here - we'll handle it in the search logic
         }
@@ -790,13 +803,13 @@ async function processRestaurantData(rawData, cache) {
         
         
         return {
-            reviewer: row.Reviewer ? row.Reviewer.trim() : 'Unknown',
+            reviewer: row.Reviewer ? standardizeTag(row.Reviewer) : 'unknown',
             restaurant: row.Restaurant.trim(),
             tags: tags,
             location: locationData.originalLocation, // Original location string from CSV
             locationData: locationData, // Full parsed location data
             address: address,
-            city: city,
+            city: standardizeTag(city), // Standardize city for consistency
             googleMapsLink: row['Google Maps Link'] ? row['Google Maps Link'].trim() : '',
             latitude: latitude,
             longitude: longitude,
@@ -1115,18 +1128,20 @@ function setupTagSearch() {
             let matchesSelectedTags = true;
             if (selectedTags.size > 0) {
                 matchesSelectedTags = Array.from(selectedTags).every(selectedTag => {
-                    // Check if it matches a regular tag
+                    const standardizedSelectedTag = standardizeTag(selectedTag);
+                    
+                    // Check if it matches a regular tag (already standardized)
                     const matchesTag = restaurant.tags.some(restaurantTag => 
-                        restaurantTag.toLowerCase() === selectedTag.toLowerCase()
+                        restaurantTag === standardizedSelectedTag
                     );
-                    // Or check if it matches the reviewer
-                    const matchesReviewer = restaurant.reviewer.toLowerCase() === selectedTag.toLowerCase();
-                    // Or check if it matches location data
+                    // Or check if it matches the reviewer (already standardized)
+                    const matchesReviewer = restaurant.reviewer === standardizedSelectedTag;
+                    // Or check if it matches location data (use standardized versions)
                     let matchesLocation = false;
                     if (restaurant.locationData) {
-                        const cityMatch = restaurant.locationData.city && restaurant.locationData.city.toLowerCase() === selectedTag.toLowerCase();
-                        const fullLocationMatch = restaurant.locationData.fullLocation && restaurant.locationData.fullLocation.toLowerCase() === selectedTag.toLowerCase();
-                        const regionMatch = restaurant.locationData.fullRegion && restaurant.locationData.fullRegion.toLowerCase() === selectedTag.toLowerCase();
+                        const cityMatch = restaurant.locationData.cityStandardized === standardizedSelectedTag;
+                        const fullLocationMatch = restaurant.locationData.fullLocationStandardized === standardizedSelectedTag;
+                        const regionMatch = restaurant.locationData.fullRegionStandardized === standardizedSelectedTag;
                         matchesLocation = cityMatch || fullLocationMatch || regionMatch;
                     }
                     
@@ -1137,25 +1152,25 @@ function setupTagSearch() {
             const matchesRating = restaurant.rating >= currentRating;
             
             if (matchesSelectedTags && matchesRating) {
-                // Add regular tags
+                // Add regular tags (already standardized during processing)
                 restaurant.tags.forEach(tag => availableTagsFromFilteredRestaurants.add(tag));
-                // Add this restaurant's reviewer as available tag
+                // Add this restaurant's reviewer as available tag (already standardized)
                 if (restaurant.reviewer) {
                     availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
                 }
-                // Add location-based tags
+                // Add location-based tags (use standardized versions)
                 if (restaurant.locationData) {
                     // Add the city name
-                    if (restaurant.locationData.city) {
-                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.city);
+                    if (restaurant.locationData.cityStandardized) {
+                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.cityStandardized);
                     }
-                    // Add the full location (e.g., "San Juan, Puerto Rico")
-                    if (restaurant.locationData.fullLocation) {
-                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullLocation);
+                    // Add the full location (e.g., "san juan, puerto rico")
+                    if (restaurant.locationData.fullLocationStandardized) {
+                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullLocationStandardized);
                     }
-                    // Add the region name (e.g., "Puerto Rico", "New York")
-                    if (restaurant.locationData.fullRegion) {
-                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullRegion);
+                    // Add the region name (e.g., "puerto rico", "new york")
+                    if (restaurant.locationData.fullRegionStandardized) {
+                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullRegionStandardized);
                     }
                 }
             }
@@ -1204,12 +1219,14 @@ function setupTagSearch() {
 }
 
 function selectTag(tag) {
-    // Don't add if already selected
-    if (selectedTags.has(tag)) {
+    const standardizedTag = standardizeTag(tag);
+    
+    // Don't add if already selected (check standardized version)
+    if (Array.from(selectedTags).some(selectedTag => standardizeTag(selectedTag) === standardizedTag)) {
         return;
     }
     
-    selectedTags.add(tag);
+    selectedTags.add(standardizedTag);
     updateSelectedTagsDisplay();
     
     // Clear input and hide suggestions
@@ -1302,21 +1319,20 @@ function getFilteredRestaurants() {
         // Filter by selected tags (must have ALL selected tags - includes reviewers)
         if (selectedTags.size > 0) {
             const hasAllSelectedTags = Array.from(selectedTags).every(selectedTag => {
-                // Clean and normalize the selected tag
-                const cleanSelectedTag = selectedTag.toLowerCase().trim();
+                const standardizedSelectedTag = standardizeTag(selectedTag);
                 
-                // Check if it matches a regular tag
+                // Check if it matches a regular tag (already standardized)
                 const matchesTag = restaurant.tags.some(restaurantTag => 
-                    restaurantTag.toLowerCase().trim() === cleanSelectedTag
+                    restaurantTag === standardizedSelectedTag
                 );
-                // Or check if it matches the reviewer
-                const matchesReviewer = restaurant.reviewer.toLowerCase().trim() === cleanSelectedTag;
-                // Or check if it matches location data
+                // Or check if it matches the reviewer (already standardized)
+                const matchesReviewer = restaurant.reviewer === standardizedSelectedTag;
+                // Or check if it matches location data (use standardized versions)
                 let matchesLocation = false;
                 if (restaurant.locationData) {
-                    const cityMatch = restaurant.locationData.city && restaurant.locationData.city.toLowerCase().trim() === cleanSelectedTag;
-                    const fullLocationMatch = restaurant.locationData.fullLocation && restaurant.locationData.fullLocation.toLowerCase().trim() === cleanSelectedTag;
-                    const regionMatch = restaurant.locationData.fullRegion && restaurant.locationData.fullRegion.toLowerCase().trim() === cleanSelectedTag;
+                    const cityMatch = restaurant.locationData.cityStandardized === standardizedSelectedTag;
+                    const fullLocationMatch = restaurant.locationData.fullLocationStandardized === standardizedSelectedTag;
+                    const regionMatch = restaurant.locationData.fullRegionStandardized === standardizedSelectedTag;
                     matchesLocation = cityMatch || fullLocationMatch || regionMatch;
                 }
                 
