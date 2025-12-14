@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.6.2',
+    version: '2.6.4',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -678,6 +678,17 @@ function getReviewerIcon(reviewer) {
     }
 }
 
+// Get rating icon with special case for 6.7
+function getRatingIcon(rating, reviewer) {
+    // Special case for 6.7 - use numeric image
+    if (rating === 6.7) {
+        return 'src/67.png';
+    }
+    
+    // For all other ratings, use reviewer-specific icon
+    return getReviewerIcon(reviewer);
+}
+
 // Standardize tag formatting (lowercase, trimmed)
 function standardizeTag(tag) {
     return tag ? tag.toString().toLowerCase().trim() : '';
@@ -852,7 +863,7 @@ function createPopupContent(restaurant) {
             <div class="popup-address">${restaurant.address}</div>
             <div class="popup-rating">
                 <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
-                <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
+                <img src="${getRatingIcon(restaurant.rating, restaurant.reviewer)}" alt="Bigger Belly Rating ${restaurant.rating.toFixed(1)}" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
             </div>
             <div class="popup-links">
                 ${restaurant.tikTokVideo ? 
@@ -952,7 +963,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
                 <div class="restaurant-address">${restaurant.address}</div>
                 <div class="restaurant-rating">
                     <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
-                    <img src="${getReviewerIcon(restaurant.reviewer)}" alt="Bigger Belly Rating" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
+                    <img src="${getRatingIcon(restaurant.rating, restaurant.reviewer)}" alt="Bigger Belly Rating ${restaurant.rating.toFixed(1)}" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
                 </div>
                 <div class="restaurant-tags">${tagsHtml}</div>
                 <div class="restaurant-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${restaurant.reviewer}</span></div>
