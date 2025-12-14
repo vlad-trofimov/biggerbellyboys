@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.7.0',
+    version: '2.7.1',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -102,15 +102,14 @@ function getRestaurantCoordinates(row, cache) {
         };
     }
     
-    // Try GeoCode Script from CSV with formula error detection
+    // Try GeoCode Script from CSV
     const geoCodeScript = row['GeoCode Script'] ? row['GeoCode Script'].toString().trim() : '';
-    if (geoCodeScript && !geoCodeScript.includes('#NAME') && !geoCodeScript.includes('#ERROR') && 
-        !geoCodeScript.includes('#REF') && !geoCodeScript.includes('#VALUE')) {
+    if (geoCodeScript) {
         const coords = geoCodeScript.split(',').map(coord => coord.trim());
         if (coords.length === 2) {
             const lat = parseFloat(coords[0]);
             const lng = parseFloat(coords[1]);
-            if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+            if (!isNaN(lat) && !isNaN(lng)) {
                 return {
                     lat: lat,
                     lng: lng,
@@ -118,8 +117,6 @@ function getRestaurantCoordinates(row, cache) {
                 };
             }
         }
-    } else if (geoCodeScript && (geoCodeScript.includes('#NAME') || geoCodeScript.includes('#ERROR'))) {
-        console.log(`🚫 Formula error in GeoCode Script for ${row.Restaurant}: ${geoCodeScript}`);
     }
     
     // No valid coordinates found
@@ -431,45 +428,6 @@ function setupBrowserNavigation() {
 
 // Lazy loading removed for better user experience
 
-// Fetch CSV with retry logic to handle Google Sheets formula errors
-async function fetchCSVWithRetry(url, maxRetries = 3) {
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-        try {
-            console.log(`📊 Fetching CSV (attempt ${attempt}/${maxRetries})...`);
-            const response = await fetch(`${url}&_t=${Date.now()}`);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const csvText = await response.text();
-            
-            // Check for common Google Sheets formula errors
-            const errorCount = (csvText.match(/#NAME\?|#ERROR!|#REF!|#VALUE!/g) || []).length;
-            
-            if (errorCount === 0) {
-                console.log(`✅ CSV fetch successful on attempt ${attempt}`);
-                return csvText;
-            } else {
-                console.log(`⚠️ CSV contains ${errorCount} formula errors on attempt ${attempt}`);
-                if (attempt === maxRetries) {
-                    console.log(`❌ Max retries reached, proceeding with ${errorCount} errors`);
-                    return csvText;
-                }
-                
-                // Wait before retry (exponential backoff)
-                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
-            }
-        } catch (error) {
-            console.log(`❌ CSV fetch failed on attempt ${attempt}:`, error.message);
-            if (attempt === maxRetries) throw error;
-            
-            // Wait before retry
-            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
-        }
-    }
-}
-
 // Load restaurant data from cache and CSV
 async function loadRestaurantData() {
     const loadingElement = document.getElementById('loading');
@@ -482,8 +440,13 @@ async function loadRestaurantData() {
         // Load geocode cache first
         geocodeCache = await loadGeocodeCache();
         
-        // Load CSV data with retry logic
-        const csvText = await fetchCSVWithRetry(CONFIG.csvUrl);
+        // Load CSV data
+        const response = await fetch(`${CONFIG.csvUrl}&_t=${Date.now()}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const csvText = await response.text();
         const parsedData = parseCSV(csvText);
         csvData = parsedData; // Store for future cache updates
         
