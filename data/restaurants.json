@@ -1,6 +1,6 @@
 {
-  "version": "2025-12-14T21:42:06.047Z",
-  "lastUpdated": "2025-12-14T21:42:06.047Z",
+  "version": "2025-12-14T21:52:37.170Z",
+  "lastUpdated": "2025-12-14T21:52:37.170Z",
   "totalRestaurants": 175,
   "restaurants": [
     {
@@ -4380,16 +4380,16 @@
         "sandwich",
         "series"
       ],
-      "location": "San Diego",
+      "location": "San Diego, CA",
       "locationData": {
         "city": "San Diego",
-        "region": "",
-        "fullRegion": "",
-        "fullLocation": "San Diego",
-        "originalLocation": "San Diego",
+        "region": "CA",
+        "fullRegion": "California",
+        "fullLocation": "San Diego, California",
+        "originalLocation": "San Diego, CA",
         "cityStandardized": "san diego",
-        "fullRegionStandardized": "",
-        "fullLocationStandardized": "san diego"
+        "fullRegionStandardized": "california",
+        "fullLocationStandardized": "san diego, california"
       },
       "address": "5525 Jackson Dr B, La Mesa, CA 91942",
       "city": "san diego",
