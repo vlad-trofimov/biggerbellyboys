@@ -1,0 +1,40 @@
+name: Update Restaurant Data
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm install node-fetch
+      
+    - name: Update restaurant data
+      run: node .github/scripts/update-restaurant-data.js
+      env:
+        GOOGLE_SHEETS_URL: ${{ secrets.GOOGLE_SHEETS_URL }}
+        
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/restaurants.json
+        if ! git diff --staged --quiet; then
+          git commit -m "Update restaurant data - $(date)"
+          git push
+        else
+          echo "No changes to commit"
+        fi
