@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.6.4',
+    version: '2.6.5',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -694,6 +694,12 @@ function standardizeTag(tag) {
     return tag ? tag.toString().toLowerCase().trim() : '';
 }
 
+// Capitalize first letter for display purposes
+function capitalizeForDisplay(text) {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
 // Generate Google Maps link from address and coordinates
 function generateGoogleMapsLink(restaurant) {
     // If we have a manual Google Maps link, use it
@@ -875,7 +881,7 @@ function createPopupContent(restaurant) {
                     ''
                 }
             </div>
-            <div class="popup-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${restaurant.reviewer}</span></div>
+            <div class="popup-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${capitalizeForDisplay(restaurant.reviewer)}</span></div>
         </div>
     `;
 }
@@ -966,7 +972,7 @@ function displayPaginatedRestaurants(filteredRestaurants) {
                     <img src="${getRatingIcon(restaurant.rating, restaurant.reviewer)}" alt="Bigger Belly Rating ${restaurant.rating.toFixed(1)}" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
                 </div>
                 <div class="restaurant-tags">${tagsHtml}</div>
-                <div class="restaurant-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${restaurant.reviewer}</span></div>
+                <div class="restaurant-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${capitalizeForDisplay(restaurant.reviewer)}</span></div>
             </div>
         `;
         
