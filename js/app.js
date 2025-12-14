@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.5.9',
+    version: '2.6.0',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -677,14 +677,17 @@ function generateGoogleMapsLink(restaurant) {
         return restaurant.googleMapsLink.trim();
     }
     
-    // Generate link from address and coordinates
-    const address = restaurant.address;
+    // Generate search query with restaurant name and address
+    const restaurantName = restaurant.restaurant || '';
+    const address = restaurant.address || '';
+    const searchQuery = `${restaurantName} ${address}`.trim();
+    
     if (restaurant.latitude && restaurant.longitude && !isNaN(restaurant.latitude) && !isNaN(restaurant.longitude)) {
-        // Use coordinates with address for better accuracy
-        return `https://www.google.com/maps/search/${encodeURIComponent(address)}/@${restaurant.latitude},${restaurant.longitude},15z`;
-    } else if (address) {
-        // Fallback to address-only search
-        return `https://www.google.com/maps/search/${encodeURIComponent(address)}`;
+        // Use coordinates with restaurant name + address for better accuracy
+        return `https://www.google.com/maps/search/${encodeURIComponent(searchQuery)}/@${restaurant.latitude},${restaurant.longitude},15z`;
+    } else if (searchQuery) {
+        // Fallback to restaurant name + address search
+        return `https://www.google.com/maps/search/${encodeURIComponent(searchQuery)}`;
     }
     
     return null;
