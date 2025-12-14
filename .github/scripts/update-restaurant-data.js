@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Fetch CSV with retry logic
-async function fetchCSVWithRetry(url, maxRetries = 3) {
+async function fetchCSVWithRetry(url, maxRetries = 5) {
     const fetch = (await import('node-fetch')).default;
     
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -29,14 +29,19 @@ async function fetchCSVWithRetry(url, maxRetries = 3) {
                     return csvText;
                 }
                 
-                // Wait before retry (exponential backoff)
-                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+                // Wait before retry (10 seconds * attempt number)
+                const waitTime = 10000 * attempt;
+                console.log(`⏱️ Waiting ${waitTime/1000} seconds before retry...`);
+                await new Promise(resolve => setTimeout(resolve, waitTime));
             }
         } catch (error) {
             console.log(`❌ CSV fetch failed on attempt ${attempt}:`, error.message);
             if (attempt === maxRetries) throw error;
             
-            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+            // Wait before retry (10 seconds * attempt number)
+            const waitTime = 10000 * attempt;
+            console.log(`⏱️ Waiting ${waitTime/1000} seconds before retry...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
         }
     }
 }
