@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2025-12-14T02:46:10.955Z",
+  "lastUpdated": "2025-12-14T02:52:02.368Z",
   "source": "Sample cache structure - add your geocoded restaurant data here",
   "restaurants": {
     "plern_thai_22_55_31st_st_astoria_ny_11105": {
@@ -1883,6 +1883,28 @@
       },
       "source": "csv_geocode_script",
       "lastCached": "2025-12-13T21:27:29.826Z"
+    },
+    "the_signature_sd_1550_el_prado_san_diego_ca_92101": {
+      "name": "The Signature SD",
+      "address": "1550 El Prado, San Diego, CA 92101",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7325031,
+        "lng": -117.1492423
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-14T02:52:02.368Z"
+    },
+    "asado_guacho_2820_historic_decatur_rd_san_diego_ca": {
+      "name": "Asado Guacho",
+      "address": "2820 Historic Decatur Rd, San Diego, CA 92106",
+      "location": "San Diego, CA",
+      "coordinates": {
+        "lat": 32.7402027,
+        "lng": -117.2111137
+      },
+      "source": "csv_geocode_script",
+      "lastCached": "2025-12-14T02:52:02.368Z"
     }
   }
 }
