@@ -176,15 +176,19 @@ function getCachedThumbnailPath(tikTokVideoUrl) {
 
 // Main processing function
 async function main() {
-    try {
-        const csvUrl = process.env.GOOGLE_SHEETS_URL;
-        if (!csvUrl) {
-            throw new Error('GOOGLE_SHEETS_URL environment variable is required');
-        }
-        
-        // Fetch and parse CSV data
-        const csvText = await fetchCSVWithRetry(csvUrl);
-        const rawData = parseCSV(csvText);
+    const csvUrl = process.env.GOOGLE_SHEETS_URL;
+    if (!csvUrl) {
+        throw new Error('GOOGLE_SHEETS_URL environment variable is required');
+    }
+    
+    // Retry the entire process if we get too many coordinate errors
+    for (let mainAttempt = 1; mainAttempt <= 3; mainAttempt++) {
+        try {
+            console.log(`🚀 Main processing attempt ${mainAttempt}/3`);
+            
+            // Fetch and parse CSV data
+            const csvText = await fetchCSVWithRetry(csvUrl);
+            const rawData = parseCSV(csvText);
         
         console.log(`📋 Processing ${rawData.length} rows from CSV...`);
         
@@ -192,6 +196,7 @@ async function main() {
         const restaurants = [];
         let validCount = 0;
         let skippedCount = 0;
+        let coordinateErrors = 0;
         
         for (const row of rawData) {
             // Check required fields
@@ -206,6 +211,7 @@ async function main() {
             if (!coords) {
                 console.log(`⚠️ Skipping ${row.Restaurant}: invalid coordinates`);
                 skippedCount++;
+                coordinateErrors++;
                 continue;
             }
             
@@ -261,6 +267,13 @@ async function main() {
         }
         
         console.log(`✅ Processed ${validCount} valid restaurants, skipped ${skippedCount}`);
+        console.log(`📍 Coordinate errors: ${coordinateErrors}/${rawData.length} restaurants`);
+        
+        // Check if we have too many coordinate errors (likely means CSV has formula errors)
+        const coordinateErrorRate = coordinateErrors / rawData.length;
+        if (coordinateErrorRate > 0.5 && coordinateErrors > 10) {
+            throw new Error(`High coordinate error rate (${Math.round(coordinateErrorRate * 100)}%) - likely CSV formula errors. Will retry.`);
+        }
         
         // Create output data structure
         const outputData = {
@@ -276,15 +289,27 @@ async function main() {
             fs.mkdirSync(dataDir, { recursive: true });
         }
         
-        // Write to JSON file
-        const outputPath = path.join(dataDir, 'restaurants.json');
-        fs.writeFileSync(outputPath, JSON.stringify(outputData, null, 2));
-        
-        console.log(`🎉 Successfully wrote ${validCount} restaurants to ${outputPath}`);
-        
-    } catch (error) {
-        console.error('❌ Error processing restaurant data:', error);
-        process.exit(1);
+            // Write to JSON file
+            const outputPath = path.join(dataDir, 'restaurants.json');
+            fs.writeFileSync(outputPath, JSON.stringify(outputData, null, 2));
+            
+            console.log(`🎉 Successfully wrote ${validCount} restaurants to ${outputPath}`);
+            
+            // Success! Break out of retry loop
+            return;
+            
+        } catch (error) {
+            console.error(`❌ Attempt ${mainAttempt} failed:`, error.message);
+            
+            if (mainAttempt === 3) {
+                console.error('❌ All retry attempts failed');
+                process.exit(1);
+            }
+            
+            // Wait before retrying main process (30 seconds)
+            console.log('⏱️ Waiting 30 seconds before retry...');
+            await new Promise(resolve => setTimeout(resolve, 30000));
+        }
     }
 }
 
