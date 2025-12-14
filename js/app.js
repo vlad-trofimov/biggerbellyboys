@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.6.5',
+    version: '2.6.6',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -25,6 +25,9 @@ let currentSort = 'newest';
 let currentPage = 1;
 let itemsPerPage = 12;
 let totalFilteredRestaurants = 0;
+
+// Debounce timer for rating slider
+let ratingSliderDebounceTimer = null;
 
 // Cache variables
 let geocodeCache = null;
@@ -206,7 +209,20 @@ function setupEventListeners() {
         const value = parseFloat(this.value);
         ratingValueDisplay.textContent = value === 0 ? '0+' : `${value}+`;
         currentPage = 1; // Reset to first page when rating changes
-        applyFilters();
+        
+        // Clear existing timer
+        if (ratingSliderDebounceTimer) {
+            clearTimeout(ratingSliderDebounceTimer);
+        }
+        
+        // Apply filters immediately (for instant visual feedback)
+        applyFilters(true); // Skip URL update
+        
+        // Set new timer to update URL after user stops sliding
+        ratingSliderDebounceTimer = setTimeout(() => {
+            updateUrl(); // Update URL after 500ms delay
+            ratingSliderDebounceTimer = null;
+        }, 500);
     });
     
     // Sort filter
@@ -1110,14 +1126,26 @@ function setupDynamicRatingSlider() {
         <span>${maxRating}</span>
     `;
     
-    // Re-attach the event listener for the updated slider
+    // Re-attach the event listener for the updated slider with debounce
     ratingSlider.addEventListener('input', function() {
         const value = parseFloat(this.value);
         const newRatingValueDisplay = document.getElementById('rating-value');
         newRatingValueDisplay.textContent = `${value}+`;
         currentPage = 1; // Reset to first page when rating changes
-        updateUrl();
-        applyFilters();
+        
+        // Clear existing timer
+        if (ratingSliderDebounceTimer) {
+            clearTimeout(ratingSliderDebounceTimer);
+        }
+        
+        // Apply filters immediately (for instant visual feedback)
+        applyFilters(true); // Skip URL update
+        
+        // Set new timer to update URL after user stops sliding
+        ratingSliderDebounceTimer = setTimeout(() => {
+            updateUrl(); // Update URL after 500ms delay
+            ratingSliderDebounceTimer = null;
+        }, 500);
     });
     
 }
