@@ -23,7 +23,7 @@ let selectedTags = new Set();
 // selectedReviewer removed - now using tags
 let currentSort = 'newest';
 let currentPage = 1;
-let itemsPerPage = 24;
+let itemsPerPage = 12;
 let totalFilteredRestaurants = 0;
 
 // Cache variables
