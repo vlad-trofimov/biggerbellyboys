@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.5.8',
+    version: '2.5.9',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -670,6 +670,26 @@ function getReviewerIcon(reviewer) {
     }
 }
 
+// Generate Google Maps link from address and coordinates
+function generateGoogleMapsLink(restaurant) {
+    // If we have a manual Google Maps link, use it
+    if (restaurant.googleMapsLink && restaurant.googleMapsLink.trim()) {
+        return restaurant.googleMapsLink.trim();
+    }
+    
+    // Generate link from address and coordinates
+    const address = restaurant.address;
+    if (restaurant.latitude && restaurant.longitude && !isNaN(restaurant.latitude) && !isNaN(restaurant.longitude)) {
+        // Use coordinates with address for better accuracy
+        return `https://www.google.com/maps/search/${encodeURIComponent(address)}/@${restaurant.latitude},${restaurant.longitude},15z`;
+    } else if (address) {
+        // Fallback to address-only search
+        return `https://www.google.com/maps/search/${encodeURIComponent(address)}`;
+    }
+    
+    return null;
+}
+
 // Process and validate restaurant data
 async function processRestaurantData(rawData, cache) {
     const requiredFields = ['Restaurant', 'Address'];
@@ -803,6 +823,8 @@ function createMapMarkers() {
 
 // Create popup content for map markers
 function createPopupContent(restaurant) {
+    const mapsLink = generateGoogleMapsLink(restaurant);
+    
     return `
         <div class="popup-content">
             ${restaurant.tikTokThumbnail ? 
@@ -821,8 +843,8 @@ function createPopupContent(restaurant) {
                     `<a href="${restaurant.tikTokVideo}" target="_blank">Watch Review</a>` : 
                     ''
                 }
-                ${restaurant.googleMapsLink ? 
-                    `<a href="${restaurant.googleMapsLink}" target="_blank">View on Maps</a>` : 
+                ${mapsLink ? 
+                    `<a href="${mapsLink}" target="_blank">View on Maps</a>` : 
                     ''
                 }
             </div>
