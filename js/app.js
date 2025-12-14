@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.6.6',
+    version: '2.6.7',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -786,6 +786,24 @@ async function processRestaurantData(rawData, cache) {
         
         const isValid = missingFields.length === 0 && validCoordinates && validThumbnailUrl;
         
+        // Debug logging for specific restaurant
+        if (row.Restaurant && row.Restaurant.includes('Signature')) {
+            console.log('🐛 Validating The Signature SD:', {
+                restaurant: row.Restaurant,
+                missingFields: missingFields,
+                validCoordinates: validCoordinates,
+                lat: lat,
+                lng: lng,
+                coordinateSource: coordinateSource,
+                tikTokThumbnail: tikTokThumbnail,
+                cachedThumbnailPath: cachedThumbnailPath,
+                hasCachedThumbnail: hasCachedThumbnail,
+                hasValidExternalUrl: hasValidExternalUrl,
+                validThumbnailUrl: validThumbnailUrl,
+                isValid: isValid
+            });
+        }
+        
         return { row, isValid, coordinateSource, latitude: lat, longitude: lng };
     }));
     
@@ -800,6 +818,18 @@ async function processRestaurantData(rawData, cache) {
     }
     
     const processedData = validResults.map((result, index) => {
+        // Debug logging for specific restaurant
+        if (result.row.Restaurant && result.row.Restaurant.includes('Signature')) {
+            console.log('🐛 Processing The Signature SD:', {
+                restaurant: result.row.Restaurant,
+                isValid: result.isValid,
+                coordinateSource: result.coordinateSource,
+                latitude: result.latitude,
+                longitude: result.longitude,
+                tikTokThumbnail: result.row['TikTok Thumbnail'],
+                tikTokVideo: result.row['TikTok Video']
+            });
+        }
         const row = result.row;
         // Process tags with standardization
         const tags = row.Tags ? 
