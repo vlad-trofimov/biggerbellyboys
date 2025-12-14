@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    version: '2.6.1',
+    version: '2.6.2',
     // Replace this URL with your actual Google Sheets CSV URL
     csvUrl: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQtrN1wVBB0UvqmHkDvlme4DbWnIs2C29q8-vgJfSzM-OwAV0LMUJRm4CgTKXI0VqQkayz3eiv_a3tE/pub?gid=1869802255&single=true&output=csv',
     
@@ -1136,14 +1136,9 @@ function setupTagSearch() {
                     );
                     // Or check if it matches the reviewer (already standardized)
                     const matchesReviewer = restaurant.reviewer === standardizedSelectedTag;
-                    // Or check if it matches location data (use standardized versions)
-                    let matchesLocation = false;
-                    if (restaurant.locationData) {
-                        const cityMatch = restaurant.locationData.cityStandardized === standardizedSelectedTag;
-                        const fullLocationMatch = restaurant.locationData.fullLocationStandardized === standardizedSelectedTag;
-                        const regionMatch = restaurant.locationData.fullRegionStandardized === standardizedSelectedTag;
-                        matchesLocation = cityMatch || fullLocationMatch || regionMatch;
-                    }
+                    // Or check if it matches location data (only city name)
+                    const matchesLocation = restaurant.locationData && 
+                                          restaurant.locationData.cityStandardized === standardizedSelectedTag;
                     
                     return matchesTag || matchesReviewer || matchesLocation;
                 });
@@ -1158,20 +1153,9 @@ function setupTagSearch() {
                 if (restaurant.reviewer) {
                     availableTagsFromFilteredRestaurants.add(restaurant.reviewer);
                 }
-                // Add location-based tags (use standardized versions)
-                if (restaurant.locationData) {
-                    // Add the city name
-                    if (restaurant.locationData.cityStandardized) {
-                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.cityStandardized);
-                    }
-                    // Add the full location (e.g., "san juan, puerto rico")
-                    if (restaurant.locationData.fullLocationStandardized) {
-                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullLocationStandardized);
-                    }
-                    // Add the region name (e.g., "puerto rico", "new york")
-                    if (restaurant.locationData.fullRegionStandardized) {
-                        availableTagsFromFilteredRestaurants.add(restaurant.locationData.fullRegionStandardized);
-                    }
+                // Add location-based tags (only city name)
+                if (restaurant.locationData && restaurant.locationData.cityStandardized) {
+                    availableTagsFromFilteredRestaurants.add(restaurant.locationData.cityStandardized);
                 }
             }
         });
@@ -1257,8 +1241,11 @@ function selectLocationTag(event, location) {
     // Prevent event from bubbling up to the restaurant card click handler
     event.stopPropagation();
     
-    // Use the regular selectTag function for the filtering logic
-    selectTag(location);
+    // Extract city name from full location (everything before the first comma)
+    const cityName = location.split(',')[0].trim();
+    
+    // Use the regular selectTag function with just the city name
+    selectTag(cityName);
 }
 
 // Auto-expand filters on mobile when interaction happens
@@ -1327,14 +1314,9 @@ function getFilteredRestaurants() {
                 );
                 // Or check if it matches the reviewer (already standardized)
                 const matchesReviewer = restaurant.reviewer === standardizedSelectedTag;
-                // Or check if it matches location data (use standardized versions)
-                let matchesLocation = false;
-                if (restaurant.locationData) {
-                    const cityMatch = restaurant.locationData.cityStandardized === standardizedSelectedTag;
-                    const fullLocationMatch = restaurant.locationData.fullLocationStandardized === standardizedSelectedTag;
-                    const regionMatch = restaurant.locationData.fullRegionStandardized === standardizedSelectedTag;
-                    matchesLocation = cityMatch || fullLocationMatch || regionMatch;
-                }
+                // Or check if it matches location data (only city name)
+                const matchesLocation = restaurant.locationData && 
+                                      restaurant.locationData.cityStandardized === standardizedSelectedTag;
                 
                 return matchesTag || matchesReviewer || matchesLocation;
             });
