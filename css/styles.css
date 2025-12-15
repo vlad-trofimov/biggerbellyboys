@@ -1267,6 +1267,44 @@ header h1 {
     background: var(--background-white);
 }
 
+/* Search Container Styles */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    padding-right: 45px; /* Make room for clear button */
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.clear-search-btn:hover {
+    color: var(--text-dark);
+    background-color: var(--background-light);
+}
+
+.clear-search-btn.hidden {
+    display: none;
+}
+
 .form-group select {
     cursor: pointer;
     -webkit-appearance: none;

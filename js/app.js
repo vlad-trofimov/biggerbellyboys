@@ -1324,6 +1324,16 @@ function setupPlaceSearch() {
     // Setup search input event listener
     searchInput.addEventListener('input', function(e) {
         const query = e.target.value.trim();
+        const clearBtn = document.getElementById('clearSearchBtn');
+        
+        // Show/hide clear button based on content
+        if (clearBtn) {
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+        }
         
         // Clear previous timeout
         clearTimeout(searchTimeout);
@@ -1650,6 +1660,12 @@ function selectPlace(place) {
     document.getElementById('restaurantSearch').value = name;
     hideSearchResults();
     
+    // Show clear button since we now have content
+    const clearBtn = document.getElementById('clearSearchBtn');
+    if (clearBtn) {
+        clearBtn.classList.remove('hidden');
+    }
+    
     // Validate form
     validateForm();
 }
@@ -1658,6 +1674,35 @@ function hideSearchResults() {
     const searchResults = document.getElementById('searchResults');
     if (searchResults) {
         searchResults.classList.add('hidden');
+    }
+}
+
+function clearRestaurantSearch() {
+    // Clear search input
+    const searchInput = document.getElementById('restaurantSearch');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    
+    // Clear auto-populated fields
+    document.getElementById('restaurantName').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('latitude').value = '';
+    document.getElementById('longitude').value = '';
+    
+    // Hide search results and clear button
+    hideSearchResults();
+    const clearBtn = document.getElementById('clearSearchBtn');
+    if (clearBtn) {
+        clearBtn.classList.add('hidden');
+    }
+    
+    // Validate form (will likely show required field errors)
+    validateForm();
+    
+    // Focus back to search input
+    if (searchInput) {
+        searchInput.focus();
     }
 }
 
