@@ -187,22 +187,20 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="socialPlatform">Social Media Platform <span class="required">*</span></label>
-                        <select id="socialPlatform" name="socialPlatform" required>
-                            <option value="">Select platform...</option>
-                            <option value="instagram">Instagram</option>
-                            <option value="tiktok">TikTok</option>
-                            <option value="youtube">YouTube</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="socialUsername">Username <span class="required">*</span></label>
-                        <div class="username-input-container">
-                            <span id="usernamePrefix" class="username-prefix">@</span>
-                            <input type="text" id="socialUsername" name="socialUsername" placeholder="username" required autocomplete="off">
+                        <label for="socialAccount">Social Media Account <span class="required">*</span></label>
+                        <div class="social-account-row">
+                            <select id="socialPlatform" name="socialPlatform" required>
+                                <option value="">Platform...</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="youtube">YouTube</option>
+                            </select>
+                            <div class="username-input-container">
+                                <span id="usernamePrefix" class="username-prefix">@</span>
+                                <input type="text" id="socialUsername" name="socialUsername" placeholder="username" required autocomplete="off">
+                            </div>
                         </div>
-                        <small class="help-text">Enter just your username (without @ or platform URL)</small>
+                        <small class="help-text">Select platform and enter your username (without @ symbol)</small>
                     </div>
                     
                     <!-- Hidden field to store the complete URL -->

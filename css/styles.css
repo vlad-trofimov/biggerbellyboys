@@ -1296,8 +1296,20 @@ header h1 {
     font-style: normal;
 }
 
-/* Username input with prefix */
-.username-input-container {
+/* Social Media Account Row */
+.social-account-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: stretch;
+}
+
+.social-account-row select {
+    flex: 0 0 140px; /* Fixed width for platform selector */
+    min-width: 140px;
+}
+
+.social-account-row .username-input-container {
+    flex: 1; /* Take remaining space */
     position: relative;
     display: flex;
     align-items: center;
@@ -1314,12 +1326,26 @@ header h1 {
 }
 
 .username-input-container input {
+    width: 100%;
     padding-left: 2rem !important;
 }
 
 /* Hide prefix when platform is not selected */
 .username-prefix.hidden {
     opacity: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .social-account-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .social-account-row select {
+        flex: none;
+        width: 100%;
+    }
 }
 
 /* Search Container */
