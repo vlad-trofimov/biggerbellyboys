@@ -1242,6 +1242,7 @@ function setupTabNavigation() {
     
     // Set up restaurant form if suggest tab exists
     setupRestaurantForm();
+    setupSocialMediaValidation();
 }
 
 function switchTab(tabName) {
@@ -1430,29 +1431,9 @@ function selectPlace(place) {
     const address = place.display_name || '';
     const name = extractPlaceName(place);
     
-    // Parse city and state from address
-    const addressParts = address.split(',').map(part => part.trim());
-    let city = '';
-    let state = '';
-    
-    // Look for state abbreviations or full state names
-    const stateAbbrev = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
-    
-    for (let i = addressParts.length - 1; i >= 0; i--) {
-        const part = addressParts[i].toUpperCase();
-        if (stateAbbrev.includes(part) || part.includes('USA')) {
-            if (i > 0) {
-                state = addressParts[i];
-                city = addressParts[i - 1];
-            }
-            break;
-        }
-    }
-    
     // Populate form fields
     document.getElementById('restaurantName').value = name;
     document.getElementById('address').value = address;
-    document.getElementById('location').value = city && state ? `${city}, ${state}` : '';
     document.getElementById('latitude').value = place.lat || '';
     document.getElementById('longitude').value = place.lon || '';
     
@@ -1478,22 +1459,75 @@ function escapeHtml(text) {
 }
 
 function validateForm() {
-    const requiredFields = ['restaurantName', 'address', 'location', 'submitterName'];
+    const requiredFields = ['restaurantName', 'address', 'submitterName', 'socialMediaUrl'];
     let allValid = true;
+    let errors = [];
     
+    // Check required fields
     requiredFields.forEach(fieldId => {
         const field = document.getElementById(fieldId);
         if (!field.value.trim()) {
             allValid = false;
+            errors.push(`${field.labels[0].textContent.replace(' *', '')} is required`);
         }
     });
     
+    // Validate social media URL with regex
+    const socialMediaUrl = document.getElementById('socialMediaUrl').value.trim();
+    if (socialMediaUrl && !validateSocialMediaUrl(socialMediaUrl)) {
+        allValid = false;
+        errors.push('Please provide a valid Instagram, TikTok, or YouTube profile URL');
+    }
+    
+    // Update submit button state
     const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) {
         submitBtn.disabled = !allValid;
     }
     
+    // Show validation errors (optional)
+    if (errors.length > 0) {
+        console.log('Validation errors:', errors);
+    }
+    
     return allValid;
+}
+
+function validateSocialMediaUrl(url) {
+    // Only allow Instagram, TikTok, and YouTube
+    const patterns = {
+        instagram: /^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9._]+\/?$/,
+        tiktok: /^https?:\/\/(www\.)?tiktok\.com\/@[a-zA-Z0-9._]+\/?$/,
+        youtube: /^https?:\/\/(www\.)?youtube\.com\/(channel\/[a-zA-Z0-9_-]+|c\/[a-zA-Z0-9_-]+|user\/[a-zA-Z0-9_-]+|@[a-zA-Z0-9._-]+)\/?$/
+    };
+    
+    // Check if URL matches any of the allowed patterns
+    return Object.values(patterns).some(pattern => pattern.test(url));
+}
+
+function setupSocialMediaValidation() {
+    const socialMediaInput = document.getElementById('socialMediaUrl');
+    if (!socialMediaInput) return;
+    
+    // Add real-time validation
+    socialMediaInput.addEventListener('input', function(e) {
+        const url = e.target.value.trim();
+        const field = e.target;
+        
+        // Remove previous validation classes
+        field.classList.remove('valid', 'invalid');
+        
+        if (url) {
+            if (validateSocialMediaUrl(url)) {
+                field.classList.add('valid');
+            } else {
+                field.classList.add('invalid');
+            }
+        }
+        
+        // Revalidate form
+        validateForm();
+    });
 }
 
 // Restaurant Form Setup

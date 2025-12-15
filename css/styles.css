@@ -1199,6 +1199,12 @@ header h1 {
     color: var(--text-light);
     margin-top: 0.25rem;
     font-style: italic;
+    line-height: 1.4;
+}
+
+.help-text strong {
+    color: var(--text-dark);
+    font-style: normal;
 }
 
 /* Search Container */
@@ -1276,6 +1282,16 @@ header h1 {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(212, 101, 26, 0.1);
+}
+
+.form-group input.valid {
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.form-group input.invalid {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
 .form-group textarea {
