@@ -1,126 +1,8 @@
 {
-  "version": "2025-12-15T02:03:58.042Z",
-  "lastUpdated": "2025-12-15T02:03:58.042Z",
-  "totalRestaurants": 175,
+  "version": "2025-12-15T04:46:10.822Z",
+  "lastUpdated": "2025-12-15T04:46:10.822Z",
+  "totalRestaurants": 86,
   "restaurants": [
-    {
-      "reviewer": "vlad",
-      "restaurant": "Plern Thai",
-      "tags": [
-        "thai",
-        "asian",
-        "astoria"
-      ],
-      "location": "Astoria, NY",
-      "locationData": {
-        "city": "Astoria",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Astoria, New York",
-        "originalLocation": "Astoria, NY",
-        "cityStandardized": "astoria",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "astoria, new york"
-      },
-      "address": "22-55 31st St, Astoria, NY 11105",
-      "city": "astoria",
-      "googleMapsLink": "",
-      "latitude": 40.7749284,
-      "longitude": -73.9120251,
-      "rating": 8.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7455158368693407018",
-      "tikTokThumbnail": "thumbnails/7455158368693407018.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osndB4jCIAgVCfmCEgA2yDA2AVFiCSfONgoDoE~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=mkplN4gbXsU0sWvlfb%2FtL4fqwDA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/2/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Rosario's",
-      "tags": [
-        "pizza",
-        "astoria"
-      ],
-      "location": "Astoria, NY",
-      "locationData": {
-        "city": "Astoria",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Astoria, New York",
-        "originalLocation": "Astoria, NY",
-        "cityStandardized": "astoria",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "astoria, new york"
-      },
-      "address": "22-55 31st St, Astoria, NY 11105",
-      "city": "astoria",
-      "googleMapsLink": "",
-      "latitude": 40.7749284,
-      "longitude": -73.9120251,
-      "rating": 6.9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7455363872267029806",
-      "tikTokThumbnail": "thumbnails/7455363872267029806.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEq2fQgIE3DAdScFs4CaBnxT8A4DVCAAEjP5fj~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=EHmqpP1TvL19aYwyli%2FZsaHn7Ug%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/3/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Tavola Nostra",
-      "tags": [
-        "italian",
-        "pizza"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "1040 University Ave B101, San Diego, CA 92103",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7486939,
-      "longitude": -117.1540716,
-      "rating": 9.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7456176150889401642",
-      "tikTokThumbnail": "thumbnails/7456176150889401642.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0BJgqBzgtisECdbmELUPbivIx5v3Z56AtB4o~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=J7muY98N%2B1kNL7zJFcdTkCxpYvY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/4/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Piroshki",
-      "tags": [
-        "russian",
-        "piroshki",
-        "bakery"
-      ],
-      "location": "Seattle, WA",
-      "locationData": {
-        "city": "Seattle",
-        "region": "WA",
-        "fullRegion": "Washington",
-        "fullLocation": "Seattle, Washington",
-        "originalLocation": "Seattle, WA",
-        "cityStandardized": "seattle",
-        "fullRegionStandardized": "washington",
-        "fullLocationStandardized": "seattle, washington"
-      },
-      "address": "1219 Madison St, Seattle, WA 98104",
-      "city": "seattle",
-      "googleMapsLink": "",
-      "latitude": 47.6099342,
-      "longitude": -122.3231709,
-      "rating": 6.9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7456982254401735978",
-      "tikTokThumbnail": "thumbnails/7456982254401735978.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8cdX9svAAAeAWrCAELkehIGrefs8ZQIOJJB8I~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=DJrTvuaiOwoZMWEtsAkrn5kcAJw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/7/2025"
-    },
     {
       "reviewer": "jason",
       "restaurant": "Chicha San Chen",
@@ -148,7 +30,7 @@
       "rating": 9.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7456952154885033262",
       "tikTokThumbnail": "thumbnails/7456952154885033262.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0HQIgoUAAHeOfJNWW8MNdMJWAeDYQJlfAM1Ax~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=4A0rG4LraH6NBxTXGXgXNXlmT9k%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "1/8/2025"
     },
     {
@@ -179,7 +61,7 @@
       "rating": 9.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7458031098312805675",
       "tikTokThumbnail": "thumbnails/7458031098312805675.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o88DRBgRIASkgyAEyDPiQlfAmECRgAivnACs3f~tplv-tiktokx-dmt-logom:tos-useast5-i-0068-tx/oA6fEJGKyBA8PIAiABi2BIzACCZwRBtwIuPaAi.image?dr=9634&x-expires=1765936800&x-signature=m60MFLaa8PiClFMaSIeLU79Eck0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "1/9/2025"
     },
     {
@@ -208,100 +90,8 @@
       "rating": 9.1,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7459585832861584683",
       "tikTokThumbnail": "thumbnails/7459585832861584683.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okEFIADAVxlhA4DnEFCdfcpAYTeCuEAgS1cOCW~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=77hmIi7u%2Bc2RtMPZHJ7UDg2KHsg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "1/14/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "DeAvedura",
-      "tags": [
-        "pr",
-        "boricua",
-        "travel food series"
-      ],
-      "location": "San Juan, PR",
-      "locationData": {
-        "city": "San Juan",
-        "region": "PR",
-        "fullRegion": "Puerto Rico",
-        "fullLocation": "San Juan, Puerto Rico",
-        "originalLocation": "San Juan, PR",
-        "cityStandardized": "san juan",
-        "fullRegionStandardized": "puerto rico",
-        "fullLocationStandardized": "san juan, puerto rico"
-      },
-      "address": "200 Sol St, San Juan, 00901",
-      "city": "san juan",
-      "googleMapsLink": "",
-      "latitude": 18.466782,
-      "longitude": -66.11640059999999,
-      "rating": 6.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7459914680207756590",
-      "tikTokThumbnail": "thumbnails/7459914680207756590.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYp8MAA5zCBsI8tGB9iiwhBnBwAKE9AIElfhJ3~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=%2FGQTNsM7QDF38kBaVhXDt%2FZB8q0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/15/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Fortunate Son",
-      "tags": [
-        "chinese",
-        "wings",
-        "dandan",
-        "noodles",
-        "general tso"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2943 Adams Ave, San Diego, CA 92116",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7627468,
-      "longitude": -117.1304879,
-      "rating": 8.1,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7460628838570167598?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7460628838570167598.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocmEMfXSrgvRDcAQAW9EArCSeDiFILP8nmp9AE~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=GfvyT2xGsQU3ZH7OkvhA4f5Beck%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/16/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Miss Arepa",
-      "tags": [
-        "arepa",
-        "latin",
-        "gluten free"
-      ],
-      "location": "Maui, HI",
-      "locationData": {
-        "city": "Maui",
-        "region": "HI",
-        "fullRegion": "Hawaii",
-        "fullLocation": "Maui, Hawaii",
-        "originalLocation": "Maui, HI",
-        "cityStandardized": "maui",
-        "fullRegionStandardized": "hawaii",
-        "fullLocationStandardized": "maui, hawaii"
-      },
-      "address": "3600 Lower Honoapiilani Rd suite a, Lahaina, HI 96761",
-      "city": "maui",
-      "googleMapsLink": "",
-      "latitude": 20.9527733,
-      "longitude": -156.686325,
-      "rating": 8.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7462207311902264619",
-      "tikTokThumbnail": "thumbnails/7462207311902264619.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8legaAgI3GAHksLiOEkIPKvsALHrEAAQNfVeW~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=fo6TSslKLJS2HV6fWRmtr3d9Vno%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "1/21/2025"
     },
     {
       "reviewer": "jason",
@@ -329,129 +119,8 @@
       "rating": 8.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7462201174339472686",
       "tikTokThumbnail": "thumbnails/7462201174339472686.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQliDAZQxq1A4GlJDCEAgUP4AAPyiPBCE5k8I~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=BeC6bAptcKUvKvRx%2FaCIRnQTF8E%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQliDAZQxq1A4GlJDCEAgUP4AAPyiPBCE5k8I~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=eEjhdLCOjBOD%2FKW2hyG3NdfnQDE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "1/22/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Pho Dunyen Mai",
-      "tags": [
-        "banh mi",
-        "steak sub",
-        "vietnamese"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "5375 Kearny Villa Rd #111, San Diego, CA 92123",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8306521,
-      "longitude": -117.1388964,
-      "rating": 8.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7463226894255803690?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7463226894255803690.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEEi1wIwEiWYgWkZAtAKZ4JWCLBJ3xAZS5BvA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=mjCBHBkVaR83GKPQ2sqI7yNbn7M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/23/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Pomegranate",
-      "tags": [
-        "russian",
-        "georgian",
-        "meat",
-        "borscht"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2312 El Cajon Blvd, San Diego, CA 92104",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7555759,
-      "longitude": -117.1396878,
-      "rating": 8.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7465020755101732142",
-      "tikTokThumbnail": "thumbnails/7465020755101732142.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocFBYi6BwrABMpcifAzKBAA4ELZAPzIUI9uCuJ~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=2dYEAEV8Vf5kZWJiRPORUZ63B%2FA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/28/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "White Bear",
-      "tags": [
-        "wonton",
-        "nyc",
-        "flushing food tour"
-      ],
-      "location": "Flushing, NY",
-      "locationData": {
-        "city": "Flushing",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Flushing, New York",
-        "originalLocation": "Flushing, NY",
-        "cityStandardized": "flushing",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "flushing, new york"
-      },
-      "address": "135-02 Roosevelt Ave, Flushing, NY 11354",
-      "city": "flushing",
-      "googleMapsLink": "",
-      "latitude": 40.7588674,
-      "longitude": -73.83167759999999,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7465132890528058670",
-      "tikTokThumbnail": "thumbnails/7465132890528058670.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAEDlUDnFABJmeyWAVX2ACBCCvtIQSAfgnXMwE~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=C39gpARUQ%2FxMCiXCCTv%2Fbw3Q1Qc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/29/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Shanghai You Garden",
-      "tags": [
-        "peking duck",
-        "nyc",
-        "flushing food tour"
-      ],
-      "location": "Flushing, NY",
-      "locationData": {
-        "city": "Flushing",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Flushing, New York",
-        "originalLocation": "Flushing, NY",
-        "cityStandardized": "flushing",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "flushing, new york"
-      },
-      "address": "135-33 40th Rd, Flushing, NY 11354",
-      "city": "flushing",
-      "googleMapsLink": "",
-      "latitude": 40.7589365,
-      "longitude": -73.8305462,
-      "rating": 6,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7465132890528058670",
-      "tikTokThumbnail": "thumbnails/7465132890528058670.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAEDlUDnFABJmeyWAVX2ACBCCvtIQSAfgnXMwE~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=C39gpARUQ%2FxMCiXCCTv%2Fbw3Q1Qc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/29/2025"
     },
     {
       "reviewer": "jason",
@@ -480,220 +149,8 @@
       "rating": 8.1,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7465132890528058670",
       "tikTokThumbnail": "thumbnails/7465132890528058670.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAEDlUDnFABJmeyWAVX2ACBCCvtIQSAfgnXMwE~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=C39gpARUQ%2FxMCiXCCTv%2Fbw3Q1Qc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "1/29/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Spot Dessert Bar",
-      "tags": [
-        "dessert",
-        "nyc",
-        "flushing food tour"
-      ],
-      "location": "Flushing, NY",
-      "locationData": {
-        "city": "Flushing",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Flushing, New York",
-        "originalLocation": "Flushing, NY",
-        "cityStandardized": "flushing",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "flushing, new york"
-      },
-      "address": "39-16 Prince St, Flushing, NY 11354",
-      "city": "flushing",
-      "googleMapsLink": "",
-      "latitude": 40.759141,
-      "longitude": -73.83181139999999,
-      "rating": 7.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7465132890528058670",
-      "tikTokThumbnail": "thumbnails/7465132890528058670.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAEDlUDnFABJmeyWAVX2ACBCCvtIQSAfgnXMwE~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=C39gpARUQ%2FxMCiXCCTv%2Fbw3Q1Qc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "1/29/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Golden City",
-      "tags": [
-        "chinese",
-        "orange chicken"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "5375 Kearny Villa Rd, San Diego, CA 92123",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8305181,
-      "longitude": -117.1389872,
-      "rating": 7.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7465825549462621482?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7465825549462621482.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocCmSEfIBaNhfC8tgivPA6AAOiVjAnDEH8URbb~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=8ARB%2FJ8GfD3ZrsGTPxMWO5j2ywQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "1/30/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "An's Dry Cleaning",
-      "tags": [
-        "ice cream",
-        "dessert"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "3017 Adams Ave, San Diego, CA 92116",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7627034,
-      "longitude": -117.1297498,
-      "rating": 9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7467373570050575658",
-      "tikTokThumbnail": "thumbnails/7467373570050575658.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUun05BfAAAgAVrigEFFocSD9fO70HXEDCCChI~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=zxTVpxXrOQiqe3zChhlQWByT3pY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "2/4/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Raku",
-      "tags": [
-        "udon",
-        "japanese food",
-        "nyc"
-      ],
-      "location": "SoHo, NY",
-      "locationData": {
-        "city": "SoHo",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "SoHo, New York",
-        "originalLocation": "SoHo, NY",
-        "cityStandardized": "soho",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "soho, new york"
-      },
-      "address": "48 MacDougal St, New York, NY 10012",
-      "city": "soho",
-      "googleMapsLink": "",
-      "latitude": 40.727289,
-      "longitude": -74.0026139,
-      "rating": 8.9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7468081964839374126",
-      "tikTokThumbnail": "thumbnails/7468081964839374126.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owfnCjVAiKRiUC9AigoEoshAVqNsBDA6CfVIcS~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=O7aCp4cFNHSnIH7LKzyfa12mjj8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "2/5/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Flavors of East Africa",
-      "tags": [
-        "east african",
-        "chicken",
-        "rice",
-        "lentils",
-        "fm"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "4900 Newport Ave, San Diego, CA 92107",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7460533,
-      "longitude": -117.2492724,
-      "rating": 8.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7468421673688124715?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7468421673688124715.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8hKAqgpfAIHSoFeADRnGACMVEDSFEAtiSAQNi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=4DFb1L6xCydrovRhmqiHHQj9wC0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "2/6/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Pinoyshki",
-      "tags": [
-        "russian",
-        "filipino",
-        "fusion",
-        "bakery",
-        "borscht"
-      ],
-      "location": "Seattle, WA",
-      "locationData": {
-        "city": "Seattle",
-        "region": "WA",
-        "fullRegion": "Washington",
-        "fullLocation": "Seattle, Washington",
-        "originalLocation": "Seattle, WA",
-        "cityStandardized": "seattle",
-        "fullRegionStandardized": "washington",
-        "fullLocationStandardized": "seattle, washington"
-      },
-      "address": "715 E Pine St, Seattle, WA 98122",
-      "city": "seattle",
-      "googleMapsLink": "",
-      "latitude": 47.6150702,
-      "longitude": -122.3226252,
-      "rating": 8.4,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7469651418434096430",
-      "tikTokThumbnail": "thumbnails/7469651418434096430.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osnFIh6CADEBMgAAupeCfF9mPDS7oQL7VNs4sA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=%2BcSdPVShae53dzXAml4jHrIqakY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "2/11/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Haile",
-      "tags": [
-        "global belly food tour",
-        "ethiopia",
-        "nyc"
-      ],
-      "location": "East Village, NY",
-      "locationData": {
-        "city": "East Village",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "East Village, New York",
-        "originalLocation": "East Village, NY",
-        "cityStandardized": "east village",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "east village, new york"
-      },
-      "address": "182 Avenue B #1, New York, NY 10009",
-      "city": "east village",
-      "googleMapsLink": "",
-      "latitude": 40.7278052,
-      "longitude": -73.97946449999999,
-      "rating": 8.6,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7469886294387346734",
-      "tikTokThumbnail": "thumbnails/7469886294387346734.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okC6fvIgS2AFSEluF6VumqfKA1DkDCAQZAtn7U~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=WN%2BY2BBlY9HdH2DTDq8B5ohjIwE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "2/12/2025"
     },
     {
       "reviewer": "andrew",
@@ -723,37 +180,8 @@
       "rating": 8.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7471056488383991086?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7471056488383991086.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oonASQuvYCnEoAFReDFI6lgAArEhgXfCZZhDEn~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=T43%2Fl0T2xTOVze9Yj8C1Orr2%2Fes%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "2/13/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Un Bien",
-      "tags": [
-        "caribbean",
-        "sandwich"
-      ],
-      "location": "Seattle, WA",
-      "locationData": {
-        "city": "Seattle",
-        "region": "WA",
-        "fullRegion": "Washington",
-        "fullLocation": "Seattle, Washington",
-        "originalLocation": "Seattle, WA",
-        "cityStandardized": "seattle",
-        "fullRegionStandardized": "washington",
-        "fullLocationStandardized": "seattle, washington"
-      },
-      "address": "6226 Seaview Ave NW, Seattle, WA 98107",
-      "city": "seattle",
-      "googleMapsLink": "",
-      "latitude": 47.67480399999999,
-      "longitude": -122.4061144,
-      "rating": 8.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7472440620200578347",
-      "tikTokThumbnail": "thumbnails/7472440620200578347.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8c4NECAPAcgVQ7nAZ6ATlhklAzxii7yIKBUt~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=EKI7VhkjIVdkd8NaBWqM2mfZnGY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "2/18/2025"
     },
     {
       "reviewer": "jason",
@@ -782,7 +210,7 @@
       "rating": 9.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7472787211344465198",
       "tikTokThumbnail": "thumbnails/7472787211344465198.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogwRoeACEESDF4ADKqnC0DhCtIs6ShAfgAvFCV~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=l2ghqPg%2FMtWxyzdWRoA0pMSmf%2FQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "2/19/2025"
     },
     {
@@ -814,7 +242,7 @@
       "rating": 8.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7473655268430368046?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7473655268430368046.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEfEvr6ADACEAngQ1SD1SnQftIAH7gRj8FgEFl~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=q%2BirkypQjaY%2BnzM19LhjiQEmhCs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEfEvr6ADACEAngQ1SD1SnQftIAH7gRj8FgEFl~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=APCUN8yn5nYMXCRlGpxl94l9cew%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "2/20/2025"
     },
     {
@@ -844,7 +272,7 @@
       "rating": 7.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7474729153112280366",
       "tikTokThumbnail": "thumbnails/7474729153112280366.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEzDAKnQ3n6DfCTJgOSR5fEwFCAVFAu812WDAI~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=CRI9IVqqJNbaj1fKLvP4LwCNh6c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "2/25/2025"
     },
     {
@@ -874,67 +302,8 @@
       "rating": 5.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7475110454436564270",
       "tikTokThumbnail": "thumbnails/7475110454436564270.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osgikSvVAsAE7B12iA7SDZ84CtI4lVlPAAzMp~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=B%2F5D7PHOWKsRYpatnk%2B8GmmcaGA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "2/26/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Argentinian Street Food",
-      "tags": [
-        "argentinian",
-        "fm"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "4900 Newport Ave, San Diego, CA 92107",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7460533,
-      "longitude": -117.2492724,
-      "rating": 7.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7476252975564868910?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7476252975564868910.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooAD0ynqAfRjECOEFPAGpIQDBgCSwADC6KfGI4~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Jke9AmDBX37t6GpDjY7kW8JfVGw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "2/27/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Yesenia's",
-      "tags": [
-        "cali burrito",
-        "mexican",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2505 El Cajon Blvd, San Diego, CA 92104",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7550548,
-      "longitude": -117.1372845,
-      "rating": 5.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7477262469757668654",
-      "tikTokThumbnail": "thumbnails/7477262469757668654.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owrGeHzGAeAQLAXPuSkLIV5iIEIe0AIJdAGJE0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=bKQ8jzIPwtCH0wY85eM0zPZmoS4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "3/4/2025"
     },
     {
       "reviewer": "vlad",
@@ -963,7 +332,7 @@
       "rating": 7.9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7477262469757668654",
       "tikTokThumbnail": "thumbnails/7477262469757668654.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owrGeHzGAeAQLAXPuSkLIV5iIEIe0AIJdAGJE0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=T0UXOUK%2Fa9nWDVS8M9Ca2DURvJE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "3/4/2025"
     },
     {
@@ -993,7 +362,7 @@
       "rating": 9.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7478358697803107626",
       "tikTokThumbnail": "thumbnails/7478358697803107626.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAgv73A7ZIBIl4kLoADj3it0YA48diEZAhZAd~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=%2FJSaRmOABjXwGGV6a4DQ8tY6deg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "3/5/2025"
     },
     {
@@ -1022,68 +391,8 @@
       "rating": 8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7478853615541620014?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7478853615541620014.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8AeHLOfA5GjSGX5QacHVeAtGbIIlPVkAAEUIL~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=O2O73CkVoe%2FXIfoPc%2BMiNyUIBr4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "3/6/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "The Taco Stand",
-      "tags": [
-        "cali burrito",
-        "mexican",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "3000 Upas St #105, San Diego, CA 92104",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.74125720000001,
-      "longitude": -117.1296924,
-      "rating": 5.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7480311597089525034",
-      "tikTokThumbnail": "thumbnails/7480311597089525034.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osw8PA7iskAL0EIPDnFfHEAmDZsAfpE2rADeEC~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Qzt0VRdWq2zEHOFZyF4icATpn2g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "3/11/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Levant",
-      "tags": [
-        "middle eastern",
-        "feteer",
-        "nyc"
-      ],
-      "location": "Astoria, NY",
-      "locationData": {
-        "city": "Astoria",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Astoria, New York",
-        "originalLocation": "Astoria, NY",
-        "cityStandardized": "astoria",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "astoria, new york"
-      },
-      "address": "25-64 Steinway St, Astoria, NY 11103",
-      "city": "astoria",
-      "googleMapsLink": "",
-      "latitude": 40.7665026,
-      "longitude": -73.9131681,
-      "rating": 9.1,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7480718023171624234",
-      "tikTokThumbnail": "thumbnails/7480718023171624234.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogEZQ92AivTiD6BIA4lrglADZ4y8AXEPIV3Ak~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=l1uiNyQlSlYI5d88OvtrjNaKx3I%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "3/12/2025"
     },
     {
       "reviewer": "andrew",
@@ -1111,7 +420,7 @@
       "rating": 7.1,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7481432735286824235?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7481432735286824235.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oc6jGpIGmAef9mkuIUbvxDAIGeAGLHAdQEAPsQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=oQRq8NfjdVhhgE1y8rLFN7B1Mjs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "3/13/2025"
     },
     {
@@ -1140,100 +449,8 @@
       "rating": 8.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7480962159418084650",
       "tikTokThumbnail": "thumbnails/7480962159418084650.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0EARn8CBCbA4gV5e1IADFEDdtDY40ACOfgw3S~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=n6NbSf2JYB%2BsrxEko4q1UOS8BoU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0EARn8CBCbA4gV5e1IADFEDdtDY40ACOfgw3S~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=ERd1gwBin%2Bpq5yIen33puIL0TNs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "3/18/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Oxomoco",
-      "tags": [
-        "michelin star series",
-        "mexican",
-        "nyc"
-      ],
-      "location": "Brooklyn, NY",
-      "locationData": {
-        "city": "Brooklyn",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Brooklyn, New York",
-        "originalLocation": "Brooklyn, NY",
-        "cityStandardized": "brooklyn",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "brooklyn, new york"
-      },
-      "address": "128 Greenpoint Ave, Brooklyn, NY 11222",
-      "city": "brooklyn",
-      "googleMapsLink": "",
-      "latitude": 40.7298151,
-      "longitude": -73.9554763,
-      "rating": 6,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7482979874026556715",
-      "tikTokThumbnail": "thumbnails/7482979874026556715.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8cJi4BeEiAEI7B7TAiJA4BAByHYPKdYzjnDwj~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=IBzi%2BX%2FnBH4tgD8P%2BiPcDGu6yPU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "3/19/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "The Shed & Sidecar",
-      "tags": [
-        "burger",
-        "fries",
-        "dive bar",
-        "pool",
-        "arcade"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "1312 Morena Blvd, San Diego, CA 92110",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7719716,
-      "longitude": -117.2023499,
-      "rating": 8.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7484032412800929066?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7484032412800929066.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAAQAQOAMfuIfAP85AecGnfsxvvMiSXlQjJcIf~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=MCSr%2BAc2yYVY18MLhS0zLuBQSdg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "3/20/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Perla #3",
-      "tags": [
-        "cali burrito",
-        "mexican",
-        "series"
-      ],
-      "location": "Point Loma, SD",
-      "locationData": {
-        "city": "Point Loma",
-        "region": "SD",
-        "fullRegion": "South Dakota",
-        "fullLocation": "Point Loma, South Dakota",
-        "originalLocation": "Point Loma, SD",
-        "cityStandardized": "point loma",
-        "fullRegionStandardized": "south dakota",
-        "fullLocationStandardized": "point loma, south dakota"
-      },
-      "address": "1224 Rosecrans St, San Diego, CA 92106",
-      "city": "point loma",
-      "googleMapsLink": "",
-      "latitude": 32.7231616,
-      "longitude": -117.2309616,
-      "rating": 9.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7480964576415092014",
-      "tikTokThumbnail": "thumbnails/7480964576415092014.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4GICAcsEFA5f0AgQVEDSn1WbMcAm5njlD9fC0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=3Otxu8rEs%2Fu%2Fz9if4aWsyTsv7oU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "3/25/2025"
     },
     {
       "reviewer": "jason",
@@ -1262,39 +479,8 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7485373897035205934",
       "tikTokThumbnail": "thumbnails/7485373897035205934.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYfFsfAFhO0ISjQfcAgAQVfe3EdAULQGAkQSUY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=6wnC8z0MOeKskF1E9HjaSpAZ31c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYfFsfAFhO0ISjQfcAgAQVfe3EdAULQGAkQSUY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=XGDvTchH6G6DoHOiC5bhx3L69Xs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "3/26/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Island Life Foods",
-      "tags": [
-        "bbq",
-        "hawaiian bbq",
-        "island bbq",
-        "fm"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "3960 Normal St #3960, San Diego, CA 92103",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7505094,
-      "longitude": -117.149235,
-      "rating": 9.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7484674462604856622?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7484674462604856622.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAGegIHQG2Xe5k5mAIe8ANAAfLL7Ae4lw1iZye~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=6VYEA2coaLuUFuvYtwEP9p09Pb8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "3/27/2025"
     },
     {
       "reviewer": "vlad",
@@ -1322,38 +508,8 @@
       "rating": 9.3,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7482462331428097326",
       "tikTokThumbnail": "thumbnails/7482462331428097326.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owv7uAB8CQA2uEQfGXFfcSAe3FTAeQILsAD0Se~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=E1XqS4GFlRQtLtMRYUnE%2FrB7YFo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "4/1/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Karczma",
-      "tags": [
-        "global belly food tour",
-        "poland",
-        "nyc"
-      ],
-      "location": "Brooklyn, NY",
-      "locationData": {
-        "city": "Brooklyn",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Brooklyn, New York",
-        "originalLocation": "Brooklyn, NY",
-        "cityStandardized": "brooklyn",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "brooklyn, new york"
-      },
-      "address": "136 Greenpoint Ave, Brooklyn, NY 11222",
-      "city": "brooklyn",
-      "googleMapsLink": "",
-      "latitude": 40.7298911,
-      "longitude": -73.95511549999999,
-      "rating": 7.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7487311017400175918",
-      "tikTokThumbnail": "thumbnails/7487311017400175918.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8AuAfXUDDDnFAfCZoEREBEF6CSI90Tg1nV3RA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=gvmHWyOehldxf2eOcZ6psyjUhgU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "4/2/2025"
     },
     {
       "reviewer": "andrew",
@@ -1381,98 +537,8 @@
       "rating": 6.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7484674112506350891?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7484674112506350891.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okE6O7IAkQAXyQc5G1rWfv8EA7M9HEAQ6A3Pee~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Bwk70vSRL70B0xZrImznUlMoihs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "4/3/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Mike's Taco Club",
-      "tags": [
-        "cali burrito",
-        "mexican",
-        "series"
-      ],
-      "location": "Ocean Beach, SD",
-      "locationData": {
-        "city": "Ocean Beach",
-        "region": "SD",
-        "fullRegion": "South Dakota",
-        "fullLocation": "Ocean Beach, South Dakota",
-        "originalLocation": "Ocean Beach, SD",
-        "cityStandardized": "ocean beach",
-        "fullRegionStandardized": "south dakota",
-        "fullLocationStandardized": "ocean beach, south dakota"
-      },
-      "address": "5060 Newport Ave, San Diego, CA 92107",
-      "city": "ocean beach",
-      "googleMapsLink": "",
-      "latitude": 32.747649,
-      "longitude": -117.2520091,
-      "rating": 8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7483203511006596394",
-      "tikTokThumbnail": "thumbnails/7483203511006596394.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4HZVaxtnESACAD6rC2FmD4EIhDAlkAAZgf3he~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=J3bPK%2Fo1eRI8kqVLqo1cYsFbh08%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "4/7/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "El Lado Taco",
-      "tags": [
-        "mexican",
-        "breakfast tacos",
-        "nyc"
-      ],
-      "location": "Astoria, NY",
-      "locationData": {
-        "city": "Astoria",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Astoria, New York",
-        "originalLocation": "Astoria, NY",
-        "cityStandardized": "astoria",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "astoria, new york"
-      },
-      "address": "34-14 30th Ave, Astoria, NY 11103",
-      "city": "astoria",
-      "googleMapsLink": "",
-      "latitude": 40.7654061,
-      "longitude": -73.91866259999999,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7489128180201180459",
-      "tikTokThumbnail": "thumbnails/7489128180201180459.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oABIKABueD6v6AOSuvxOJKUiAy7iEBz8BIwAlU~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=vR3%2BWv7UnnlTGdJ%2BZU0T1ITDt1o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "4/9/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Mike's Red Tacos",
-      "tags": [
-        "tacos",
-        "birria",
-        "churros"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "4310 Genesee Ave #105-106, San Diego, CA 92117",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8215556,
-      "longitude": -117.1834192,
-      "rating": 9.1,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7489508363194141994?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7489508363194141994.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8ECjDieEEBRi9AAorAgf1iWnwIXVIXDSAEAFC~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=unqHo06PIS3yQdb7d%2BVSctgz4jc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "4/10/2025"
     },
     {
       "reviewer": "vlad",
@@ -1500,7 +566,7 @@
       "rating": 8.9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7483940882170006830",
       "tikTokThumbnail": "thumbnails/7483940882170006830.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8HEEfJcjA6rDRAIA25EAeEkTHuFEvRePoj5AD~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=r%2Bbw9swrCemhprpxuT01nu5hPRQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "4/14/2025"
     },
     {
@@ -1530,37 +596,8 @@
       "rating": 9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7492004242409180462",
       "tikTokThumbnail": "thumbnails/7492004242409180462.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0Sf8PADfAEhA2DEEkF4J1IA0FrTPekA1kEEHU~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=CP8V4YSNiiZ9ayYAps8oDuWaHN8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0Sf8PADfAEhA2DEEkF4J1IA0FrTPekA1kEEHU~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=0K8ExJQQxUvF%2Bawi1jGFU7PPPKk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "4/16/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Pollos Asados",
-      "tags": [
-        "chicken",
-        "rotisserie"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2436 Ulric St, San Diego, CA 92111",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7871805,
-      "longitude": -117.1716064,
-      "rating": 9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7484682984239402286?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7484682984239402286.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osQV9SnAuNudUlIeDDIP53FGEAACDgf8E7CAy2~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=2zo5OQZhuDs%2FmWmI%2FnTGG5RWJxs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "4/17/2025"
     },
     {
       "reviewer": "vlad",
@@ -1589,38 +626,8 @@
       "rating": 6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7484792829651193134",
       "tikTokThumbnail": "thumbnails/7484792829651193134.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQherR2OAAAeAZylAIuefUgYr4cfB2Ug4lkGfQ~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=0DhPsTCsn7gXKrNqwnliWUeYGQ0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "4/21/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Halftime King of Pizza",
-      "tags": [
-        "travel food series",
-        "boston",
-        "pizza"
-      ],
-      "location": "Boston, MA",
-      "locationData": {
-        "city": "Boston",
-        "region": "MA",
-        "fullRegion": "Massachusetts",
-        "fullLocation": "Boston, Massachusetts",
-        "originalLocation": "Boston, MA",
-        "cityStandardized": "boston",
-        "fullRegionStandardized": "massachusetts",
-        "fullLocationStandardized": "boston, massachusetts"
-      },
-      "address": "115 Causeway St, Boston, MA 02114",
-      "city": "boston",
-      "googleMapsLink": "",
-      "latitude": 42.3650551,
-      "longitude": -71.0614617,
-      "rating": 4.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7490287123782847790",
-      "tikTokThumbnail": "thumbnails/7490287123782847790.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAlAiDAiyEA4DVAghFCeUxIWll2IBfFCSJVnjy~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=V5M0qLZRoX0iotHH4qLE8K5FYv8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "4/23/2025"
     },
     {
       "reviewer": "andrew",
@@ -1649,7 +656,7 @@
       "rating": 8.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7489139759487421739?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7489139759487421739.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osisnDQ7TADGgYASIWHCC4ndYSFaV76EeAQFfA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=akNcWrymF1edpuCZfl8PxrJUPSg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osisnDQ7TADGgYASIWHCC4ndYSFaV76EeAQFfA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=l7VGdyhJgwz9iR18Z%2BICBlmQLeg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "4/24/2025"
     },
     {
@@ -1679,7 +686,7 @@
       "rating": 7.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7497737702360599851",
       "tikTokThumbnail": "thumbnails/7497737702360599851.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oI62U0AAfAB2AtBhBMgNhYIwhiKOqBWAMJiEB7~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=pp5JIg1QL49xP5dn9PFPYo2NHFA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "4/28/2025"
     },
     {
@@ -1709,7 +716,7 @@
       "rating": 7.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7491146082815069483",
       "tikTokThumbnail": "thumbnails/7491146082815069483.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQePE1EAEzXFMD5AcArE6dWArV1cDHAfEfPISk~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=vTb47kvJVemtmnM0xXXE7f9giGA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "4/30/2025"
     },
     {
@@ -1739,38 +746,8 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7499956612556229934?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7499956612556229934.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYIqQAOAGZQVA4MgeWAe8xVBWuLRfQAAIfMdJX~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=UG97FGA0w%2FDRk81FNg%2BNeVrMa8U%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "5/2/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Izakaya Sakura",
-      "tags": [
-        "japanese",
-        "curry",
-        "series"
-      ],
-      "location": "Kearny Mesa, SD",
-      "locationData": {
-        "city": "Kearny Mesa",
-        "region": "SD",
-        "fullRegion": "South Dakota",
-        "fullLocation": "Kearny Mesa, South Dakota",
-        "originalLocation": "Kearny Mesa, SD",
-        "cityStandardized": "kearny mesa",
-        "fullRegionStandardized": "south dakota",
-        "fullLocationStandardized": "kearny mesa, south dakota"
-      },
-      "address": "3904 Convoy St #121, San Diego, CA 92111",
-      "city": "kearny mesa",
-      "googleMapsLink": "",
-      "latitude": 32.8148375,
-      "longitude": -117.1549191,
-      "rating": 7.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7500281143728573738",
-      "tikTokThumbnail": "thumbnails/7500281143728573738.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4LKkLGGrEH1iQA7NsIIVPEAsAeAfJA1LQeWGA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=lXveUsdtFiyweadIqUk%2BssQs024%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/5/2025"
     },
     {
       "reviewer": "jason",
@@ -1800,69 +777,7 @@
       "rating": 8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7501707736208526638",
       "tikTokThumbnail": "thumbnails/7501707736208526638.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owviaAA4BGiAAtAbA3lEIqhKgbt8aQrI0zBk9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5PvoP6hUGQHMEPhDLPyxtjAFTCw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/7/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Sanuki Mengyo",
-      "tags": [
-        "travel food series",
-        "japan",
-        "tokyo",
-        "seafood"
-      ],
-      "location": "Tokyo, Japan",
-      "locationData": {
-        "city": "Tokyo",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Tokyo, Japan",
-        "originalLocation": "Tokyo, Japan",
-        "cityStandardized": "tokyo",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "tokyo, japan"
-      },
-      "address": "Japan, 〒100-0005 Tokyo, Chiyoda City, Marunouchi, 1 Chome−9−1 東京駅一番街 B1F",
-      "city": "tokyo",
-      "googleMapsLink": "",
-      "latitude": 35.6822889,
-      "longitude": 139.7684903,
-      "rating": 9.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7501707736208526638",
-      "tikTokThumbnail": "thumbnails/7501707736208526638.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owviaAA4BGiAAtAbA3lEIqhKgbt8aQrI0zBk9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5PvoP6hUGQHMEPhDLPyxtjAFTCw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/7/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Gyukatsu Motomura",
-      "tags": [
-        "travel food series",
-        "japan",
-        "tokyo",
-        "beef katsu"
-      ],
-      "location": "Tokyo, Japan",
-      "locationData": {
-        "city": "Tokyo",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Tokyo, Japan",
-        "originalLocation": "Tokyo, Japan",
-        "cityStandardized": "tokyo",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "tokyo, japan"
-      },
-      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 3 Chome−23−2 青山ＮＳビル B1F",
-      "city": "tokyo",
-      "googleMapsLink": "",
-      "latitude": 35.6706585,
-      "longitude": 139.7072227,
-      "rating": 7.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7501707736208526638",
-      "tikTokThumbnail": "thumbnails/7501707736208526638.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owviaAA4BGiAAtAbA3lEIqhKgbt8aQrI0zBk9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5PvoP6hUGQHMEPhDLPyxtjAFTCw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "5/7/2025"
     },
     {
@@ -1893,69 +808,8 @@
       "rating": 9.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7501707736208526638",
       "tikTokThumbnail": "thumbnails/7501707736208526638.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owviaAA4BGiAAtAbA3lEIqhKgbt8aQrI0zBk9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=ffJjxrlpsBBGOUnTSPDJ9xPTDEg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "5/7/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Yoriniku",
-      "tags": [
-        "travel food series",
-        "japan",
-        "tokyo",
-        "yakiniku bbq"
-      ],
-      "location": "Tokyo, Japan",
-      "locationData": {
-        "city": "Tokyo",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Tokyo, Japan",
-        "originalLocation": "Tokyo, Japan",
-        "cityStandardized": "tokyo",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "tokyo, japan"
-      },
-      "address": "Japan, 〒107-0062 Tokyo, Minato City, Minamiaoyama, 6 Chome−6−22 LunaRossa南青山 B1",
-      "city": "tokyo",
-      "googleMapsLink": "",
-      "latitude": 35.6602079,
-      "longitude": 139.7175935,
-      "rating": 9.9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7501707736208526638",
-      "tikTokThumbnail": "thumbnails/7501707736208526638.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owviaAA4BGiAAtAbA3lEIqhKgbt8aQrI0zBk9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5PvoP6hUGQHMEPhDLPyxtjAFTCw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/7/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Pelicana Kitchen",
-      "tags": [
-        "kfc",
-        "korean",
-        "wings"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "7767 Balboa Ave, San Diego, CA 92111",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8212681,
-      "longitude": -117.1559327,
-      "rating": 8.4,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7502523493976722734?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7502523493976722734.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAAeRLW8jQQRAkH7EaMeiMWKAYUPAAfIdWUAQI~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=8u1DnDJLvIuO0mWVz%2B8hfEQywO4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/9/2025"
     },
     {
       "reviewer": "vlad",
@@ -1984,7 +838,7 @@
       "rating": 6.9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7503277389531761966",
       "tikTokThumbnail": "thumbnails/7503277389531761966.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/os8NCABEVS9f28BifgAPPQAIIAKosgDo5TxDFC~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=tfI27kn1FAknsR95tKCOGY4wY2I%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "5/12/2025"
     },
     {
@@ -2015,37 +869,7 @@
       "rating": 6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7504105664474664222",
       "tikTokThumbnail": "thumbnails/7504105664474664222.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYEjIAIAr7fRAWGQzLAKeepkP8qErIAAq895ED~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=f6SKtHYcSPWA0%2B4By0B4YYm4S4s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/14/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Katsakura Tonkatsu Sanjo",
-      "tags": [
-        "travel food series",
-        "japan",
-        "kyoto"
-      ],
-      "location": "Kyoto, Japan",
-      "locationData": {
-        "city": "Kyoto",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Kyoto, Japan",
-        "originalLocation": "Kyoto, Japan",
-        "cityStandardized": "kyoto",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "kyoto, japan"
-      },
-      "address": "Japan, 〒604-8036 Kyoto, Nakagyo Ward, Ishibashicho, 16 三条通寺町東入ル",
-      "city": "kyoto",
-      "googleMapsLink": "",
-      "latitude": 35.0088234,
-      "longitude": 135.7678434,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7504105664474664222",
-      "tikTokThumbnail": "thumbnails/7504105664474664222.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYEjIAIAr7fRAWGQzLAKeepkP8qErIAAq895ED~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=f6SKtHYcSPWA0%2B4By0B4YYm4S4s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYEjIAIAr7fRAWGQzLAKeepkP8qErIAAq895ED~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=ni38E7%2BWwdHbni5AIWZX3ImuQz4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "5/14/2025"
     },
     {
@@ -2076,7 +900,7 @@
       "rating": 5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7504105664474664222",
       "tikTokThumbnail": "thumbnails/7504105664474664222.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYEjIAIAr7fRAWGQzLAKeepkP8qErIAAq895ED~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=ut5rv7z%2Bf4bZtsIzBKiKugTLKLM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oYEjIAIAr7fRAWGQzLAKeepkP8qErIAAq895ED~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=ni38E7%2BWwdHbni5AIWZX3ImuQz4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "5/14/2025"
     },
     {
@@ -2108,100 +932,8 @@
       "rating": 9.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7505134281023606062?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7505134281023606062.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0iFe27eZPcgLOANgefgGL2GAILRInNYsBnugl~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=FLtx6tMO7nL5FZokyDRTtQOZgMc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0iFe27eZPcgLOANgefgGL2GAILRInNYsBnugl~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=5mt3ACtOFU3FxcPy%2B6AUDqZ6bHg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "5/16/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "EE Nami Tonkatsu Izakaya",
-      "tags": [
-        "japanese",
-        "curry",
-        "series"
-      ],
-      "location": "Clairemont, SD",
-      "locationData": {
-        "city": "Clairemont",
-        "region": "SD",
-        "fullRegion": "South Dakota",
-        "fullLocation": "Clairemont, South Dakota",
-        "originalLocation": "Clairemont, SD",
-        "cityStandardized": "clairemont",
-        "fullRegionStandardized": "south dakota",
-        "fullLocationStandardized": "clairemont, south dakota"
-      },
-      "address": "4706 Clairemont Mesa Blvd, San Diego, CA 92117",
-      "city": "clairemont",
-      "googleMapsLink": "",
-      "latitude": 32.8354842,
-      "longitude": -117.1892022,
-      "rating": 8.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7506194924812127534",
-      "tikTokThumbnail": "thumbnails/7506194924812127534.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0A4X1cfDIALyriyABFASBV3ECfToADEEzggCK~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=aFK6v6XZ0EgJaFVDm%2B9zF8lwOds%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/19/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Fukutaro",
-      "tags": [
-        "travel food series",
-        "japan",
-        "osaka",
-        "okonomiyaki"
-      ],
-      "location": "Osaka, Japan",
-      "locationData": {
-        "city": "Osaka",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Osaka, Japan",
-        "originalLocation": "Osaka, Japan",
-        "cityStandardized": "osaka",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "osaka, japan"
-      },
-      "address": "2 Chome-3-17 Sennichimae, Chuo Ward, Osaka, 542-0074, Japan",
-      "city": "osaka",
-      "googleMapsLink": "",
-      "latitude": 34.665589,
-      "longitude": 135.5045345,
-      "rating": 8.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083",
-      "tikTokThumbnail": "thumbnails/7506358536390135083.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oova14xaHA8b9sUBARlxErR4knvArCgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=43cieuumcRFVo1u1YJWcufWwN3M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/21/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Sulk Green Cafe",
-      "tags": [
-        "travel food series",
-        "japan",
-        "osaka",
-        "breakfast"
-      ],
-      "location": "Osaka, Japan",
-      "locationData": {
-        "city": "Osaka",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Osaka, Japan",
-        "originalLocation": "Osaka, Japan",
-        "cityStandardized": "osaka",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "osaka, japan"
-      },
-      "address": "3-65 Banbacho, Chuo Ward, Osaka, 540-0007, Japan",
-      "city": "osaka",
-      "googleMapsLink": "",
-      "latitude": 34.6823654,
-      "longitude": 135.5220066,
-      "rating": 7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083",
-      "tikTokThumbnail": "thumbnails/7506358536390135083.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oova14xaHA8b9sUBARlxErR4knvArCgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=43cieuumcRFVo1u1YJWcufWwN3M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "5/21/2025"
     },
     {
       "reviewer": "jason",
@@ -2231,7 +963,7 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083",
       "tikTokThumbnail": "thumbnails/7506358536390135083.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oova14xaHA8b9sUBARlxErR4knvArCgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=43cieuumcRFVo1u1YJWcufWwN3M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oova14xaHA8b9sUBARlxErR4knvArCgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=segtnWcEstBx9HjHEACjyaZVCms%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "5/21/2025"
     },
     {
@@ -2262,7 +994,7 @@
       "rating": 9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083",
       "tikTokThumbnail": "thumbnails/7506358536390135083.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oova14xaHA8b9sUBARlxErR4knvArCgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=43cieuumcRFVo1u1YJWcufWwN3M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "5/21/2025"
     },
     {
@@ -2292,98 +1024,8 @@
       "rating": 8.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7507774132663209258?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7507774132663209258.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okk4OFGTILA4QfEYeAIkALIAHwisejdiQzhBA2~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=aMrijA4tJG9b7dYb5Tg1U76zJSI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/okk4OFGTILA4QfEYeAIkALIAHwisejdiQzhBA2~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=i1fk2hsfhQhmRdXC7QEu7r5FKvg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "5/23/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Handroll Project",
-      "tags": [
-        "fish",
-        "sushi",
-        "hand roll"
-      ],
-      "location": "San Francisco, CA",
-      "locationData": {
-        "city": "San Francisco",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Francisco, California",
-        "originalLocation": "San Francisco, CA",
-        "cityStandardized": "san francisco",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san francisco, california"
-      },
-      "address": "598 Guerrero St, San Francisco, CA 94110",
-      "city": "san francisco",
-      "googleMapsLink": "",
-      "latitude": 37.7616968,
-      "longitude": -122.424146,
-      "rating": 8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7507714395510705451",
-      "tikTokThumbnail": "thumbnails/7507714395510705451.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMAATDEIEDgoA9MfVwFSwLAyEoKDwCAXDCMVAe~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=E1dxBYRkp1lA3oMs3dElfN5%2BB1g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "5/27/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "BHC Chicken",
-      "tags": [
-        "kfc",
-        "korean",
-        "wings"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "11983 Bernardo Plaza Dr, San Diego, CA 92128",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 33.0199589,
-      "longitude": -117.0725127,
-      "rating": 8.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7510316214237891883?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7510316214237891883.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQB6AJAeIBlH0EiOPPIACg9BPBHjQwjxAyAAi0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=JZcc1FPb11iDXSETRb62V7fRTo0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "5/30/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Izakaya Masa",
-      "tags": [
-        "japanese",
-        "curry",
-        "series"
-      ],
-      "location": "Mission Hills, SD",
-      "locationData": {
-        "city": "Mission Hills",
-        "region": "SD",
-        "fullRegion": "South Dakota",
-        "fullLocation": "Mission Hills, South Dakota",
-        "originalLocation": "Mission Hills, SD",
-        "cityStandardized": "mission hills",
-        "fullRegionStandardized": "south dakota",
-        "fullLocationStandardized": "mission hills, south dakota"
-      },
-      "address": "928 Fort Stockton Dr, San Diego, CA 92103",
-      "city": "mission hills",
-      "googleMapsLink": "",
-      "latitude": 32.7512013,
-      "longitude": -117.1719403,
-      "rating": 7.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7511397955190951211",
-      "tikTokThumbnail": "thumbnails/7511397955190951211.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQigfD24A3iCdjSoV16CDpE0LEIkEAF9AAAPfD~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=xDMplC8N2xlYbL8D%2FUmk5uiz%2B6A%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "6/2/2025"
     },
     {
       "reviewer": "andrew",
@@ -2412,37 +1054,8 @@
       "rating": 6.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7512914347715349806?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7512914347715349806.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMIGQADARduQAyDo8FCbfufZEvtEuEAgS7z9C0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=fiGjD9wBjRED0W5iF8%2B5TtpsQcs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMIGQADARduQAyDo8FCbfufZEvtEuEAgS7z9C0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=WYZY7LCU0zvfkd%2F0BM0ZVsDFrSc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "6/7/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Havana Grill",
-      "tags": [
-        "latin",
-        "cuban"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "5450 Clairemont Mesa Blvd Suite G, San Diego, CA 92117",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8345971,
-      "longitude": -117.1735775,
-      "rating": 7.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7514000239150370091",
-      "tikTokThumbnail": "thumbnails/7514000239150370091.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYIDQjA7lWIiEEfkGieHcAAAEBk4HKAEoAfFrF~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=c%2FxXJRn%2B1XdjIhAa7eMYbGK7GSw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "6/10/2025"
     },
     {
       "reviewer": "andrew",
@@ -2471,7 +1084,7 @@
       "rating": 9.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7515563707427130670?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7515563707427130670.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocSCTexACKEDOOv5AAARxMfWEiDFZSEogIGQTg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=454wSgWqZSL%2BPVPbuTuiVGbMmC0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "6/13/2025"
     },
     {
@@ -2500,38 +1113,8 @@
       "rating": 8.3,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7515863731700714798",
       "tikTokThumbnail": "thumbnails/7515863731700714798.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUADAepb7hoQfCXA8CDb3IutSTaVEXFgATHCcS~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=R%2F3VSTP4cD9r9MhmDSsFT55XV1I%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUADAepb7hoQfCXA8CDb3IutSTaVEXFgATHCcS~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=oSUzBTvEEPrUah95WwUKxyrPTGM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "6/16/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "La Carnada",
-      "tags": [
-        "queens night market",
-        "nyc",
-        "mexican"
-      ],
-      "location": "Corona, NY",
-      "locationData": {
-        "city": "Corona",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Corona, New York",
-        "originalLocation": "Corona, NY",
-        "cityStandardized": "corona",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "corona, new york"
-      },
-      "address": "47-01 111th Street Corona, NY",
-      "city": "corona",
-      "googleMapsLink": "",
-      "latitude": 40.747126,
-      "longitude": -73.8515139,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7517546368110497037",
-      "tikTokThumbnail": "thumbnails/7517546368110497037.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMwEO8eGIIHGWohJOXleCTjrnJeADIfALAAZQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Tw7M9O%2FayOngAqM6vjUzGWE8%2Bq4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "6/19/2025"
     },
     {
       "reviewer": "jason",
@@ -2560,7 +1143,7 @@
       "rating": 7.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7517546368110497037",
       "tikTokThumbnail": "thumbnails/7517546368110497037.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMwEO8eGIIHGWohJOXleCTjrnJeADIfALAAZQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Tw7M9O%2FayOngAqM6vjUzGWE8%2Bq4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "6/19/2025"
     },
     {
@@ -2590,7 +1173,7 @@
       "rating": 7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7517546368110497037",
       "tikTokThumbnail": "thumbnails/7517546368110497037.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMwEO8eGIIHGWohJOXleCTjrnJeADIfALAAZQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Tw7M9O%2FayOngAqM6vjUzGWE8%2Bq4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "6/19/2025"
     },
     {
@@ -2620,7 +1203,7 @@
       "rating": 8.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7517546368110497037",
       "tikTokThumbnail": "thumbnails/7517546368110497037.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMwEO8eGIIHGWohJOXleCTjrnJeADIfALAAZQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Tw7M9O%2FayOngAqM6vjUzGWE8%2Bq4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMwEO8eGIIHGWohJOXleCTjrnJeADIfALAAZQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=TsJRgUW1X4I8POgIMSuP3uKMkus%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "6/19/2025"
     },
     {
@@ -2651,7 +1234,7 @@
       "rating": 8.9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7517546368110497037",
       "tikTokThumbnail": "thumbnails/7517546368110497037.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMwEO8eGIIHGWohJOXleCTjrnJeADIfALAAZQA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=eFNKyRF9cgPTRXf2Do9MEZoRR2Q%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "6/19/2025"
     },
     {
@@ -2682,7 +1265,7 @@
       "rating": 8.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7518162679383526670?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7518162679383526670.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMBVAJBWIBHKZEi0SfI4C3xBBCCGvwAhAzAAi0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=jdtNiCY%2BxZHe3W94MCYJH0HRenk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMBVAJBWIBHKZEi0SfI4C3xBBCCGvwAhAzAAi0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=pponbNBTN0e%2B5%2FYIYdhZTeIY8E0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "6/20/2025"
     },
     {
@@ -2711,96 +1294,8 @@
       "rating": 9.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7518845410446773518",
       "tikTokThumbnail": "thumbnails/7518845410446773518.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAoWB6qTIAEnCkPCEAAYjDAxAVFcASf6ZgfD3E~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=uPaWez%2BcF4MsN4zrcgoJlurBxX8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAoWB6qTIAEnCkPCEAAYjDAxAVFcASf6ZgfD3E~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=syFlv8BMcCB21bWXyQjyLLuxFNE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "6/23/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Red's 615 Kitchen",
-      "tags": [
-        "travel food series",
-        "nashville",
-        "hot chicken"
-      ],
-      "location": "Nashville, TN",
-      "locationData": {
-        "city": "Nashville",
-        "region": "TN",
-        "fullRegion": "Tennessee",
-        "fullLocation": "Nashville, Tennessee",
-        "originalLocation": "Nashville, TN",
-        "cityStandardized": "nashville",
-        "fullRegionStandardized": "tennessee",
-        "fullLocationStandardized": "nashville, tennessee"
-      },
-      "address": "115 27th Ave N., Nashville, TN 37210",
-      "city": "nashville",
-      "googleMapsLink": "",
-      "latitude": 36.1463345,
-      "longitude": -86.8122664,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7520203933160082702",
-      "tikTokThumbnail": "thumbnails/7520203933160082702.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooZCDXbSzIAS6AlUPAIGdfAsfgEy1CDBoElVAF~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=KdvvaDjsCTo5toyxv9iczoizgNo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "6/26/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Epic Wings",
-      "tags": [
-        "wings",
-        "sports bar"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "12075 Carmel Mountain Rd Suite 201, San Diego, CA 92128",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.98286,
-      "longitude": -117.0742136,
-      "rating": 5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7520752225690438967?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7520752225690438967.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0oCIfmEADEjmgAAKFuCfFHiRDSD4Qi6RxXHiA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5LAW3dLPOCRC4xDJoBXmm9LoPmw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "6/27/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Chacarero",
-      "tags": [
-        "sandwich",
-        "chilean"
-      ],
-      "location": "Boston, MA",
-      "locationData": {
-        "city": "Boston",
-        "region": "MA",
-        "fullRegion": "Massachusetts",
-        "fullLocation": "Boston, Massachusetts",
-        "originalLocation": "Boston, MA",
-        "cityStandardized": "boston",
-        "fullRegionStandardized": "massachusetts",
-        "fullLocationStandardized": "boston, massachusetts"
-      },
-      "address": "101 Arch St, Boston, MA 02110",
-      "city": "boston",
-      "googleMapsLink": "",
-      "latitude": 42.3550133,
-      "longitude": -71.05878369999999,
-      "rating": 8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7521709526135999757",
-      "tikTokThumbnail": "thumbnails/7521709526135999757.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMMApceI8AExDfKQXQSYtfAdAJIeLpSAGnDe8E~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5TrRXjKtHtubzXcYqACFzU09HzM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/1/2025"
     },
     {
       "reviewer": "jason",
@@ -2829,37 +1324,7 @@
       "rating": 6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7522279350188789006",
       "tikTokThumbnail": "thumbnails/7522279350188789006.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8lABI45GTBBSASkEAAiAEacgAkNPgCiRXiGP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=eYKodDQnjBqriGorgseYcP4J8Ys%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/2/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Nonna Betta",
-      "tags": [
-        "travel food series",
-        "rome",
-        "jewish cuisine"
-      ],
-      "location": "Rome, Italy",
-      "locationData": {
-        "city": "Rome",
-        "region": "Italy",
-        "fullRegion": "Italy",
-        "fullLocation": "Rome, Italy",
-        "originalLocation": "Rome, Italy",
-        "cityStandardized": "rome",
-        "fullRegionStandardized": "italy",
-        "fullLocationStandardized": "rome, italy"
-      },
-      "address": "Via del Portico d'Ottavia, 16, 00186 Roma RM, Italy",
-      "city": "rome",
-      "googleMapsLink": "",
-      "latitude": 41.8928612,
-      "longitude": 12.4780961,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7522279350188789006",
-      "tikTokThumbnail": "thumbnails/7522279350188789006.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8lABI45GTBBSASkEAAiAEacgAkNPgCiRXiGP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=eYKodDQnjBqriGorgseYcP4J8Ys%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8lABI45GTBBSASkEAAiAEacgAkNPgCiRXiGP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=NITsVd4pLbuRn54ZPA%2FhixkJgeE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "7/2/2025"
     },
     {
@@ -2889,39 +1354,8 @@
       "rating": 9.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7522279350188789006",
       "tikTokThumbnail": "thumbnails/7522279350188789006.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8lABI45GTBBSASkEAAiAEacgAkNPgCiRXiGP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=eYKodDQnjBqriGorgseYcP4J8Ys%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "7/2/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Afuri Ramen",
-      "tags": [
-        "ramen",
-        "karaage",
-        "spicy",
-        "japanese"
-      ],
-      "location": "Tokyo, Japan",
-      "locationData": {
-        "city": "Tokyo",
-        "region": "Japan",
-        "fullRegion": "Japan",
-        "fullLocation": "Tokyo, Japan",
-        "originalLocation": "Tokyo, Japan",
-        "cityStandardized": "tokyo",
-        "fullRegionStandardized": "japan",
-        "fullLocationStandardized": "tokyo, japan"
-      },
-      "address": "Japan, 〒151-0051 Tokyo, Shibuya, Sendagaya, 3 Chome−63−1 グランデフォレスタ原宿 1F",
-      "city": "tokyo",
-      "googleMapsLink": "",
-      "latitude": 35.6730135,
-      "longitude": 139.7037905,
-      "rating": 8.6,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7523435105281445175?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7523435105281445175.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4UjEkVoxGAHnfAiATLeHjQABIHAiEp0IyeooI~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=2YtoPyRzfUqvva0egfgIKQWuxMM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "7/4/2025"
     },
     {
       "reviewer": "vlad",
@@ -2950,7 +1384,7 @@
       "rating": 7.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7524385526137294135",
       "tikTokThumbnail": "thumbnails/7524385526137294135.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogAefLkzAJQWTGe5QifOpuA0DpIJrhbIAAJXI3~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=aZhuYS%2Fo8sRl0lumqpHav2bZwOk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogAefLkzAJQWTGe5QifOpuA0DpIJrhbIAAJXI3~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=GbQD1TD59ej67dG%2FQ5UVmcrQUww%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "7/7/2025"
     },
     {
@@ -2980,189 +1414,8 @@
       "rating": 7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7524856323444444429",
       "tikTokThumbnail": "thumbnails/7524856323444444429.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osDEOUEWI6gCSTbCVbfDfD4Vi3AFAAagAFvoQR~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=moG3WLSsV%2FZTXlcIj58HjRn0t3o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "7/9/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Panetteria e Stuzzicheria De Neri",
-      "tags": [
-        "travel food series",
-        "florence",
-        "sandwich"
-      ],
-      "location": "Florence, Italy",
-      "locationData": {
-        "city": "Florence",
-        "region": "Italy",
-        "fullRegion": "Italy",
-        "fullLocation": "Florence, Italy",
-        "originalLocation": "Florence, Italy",
-        "cityStandardized": "florence",
-        "fullRegionStandardized": "italy",
-        "fullLocationStandardized": "florence, italy"
-      },
-      "address": "Via dei Neri, 18/r, 50122 Firenze FI, Italy",
-      "city": "florence",
-      "googleMapsLink": "",
-      "latitude": 43.7679671,
-      "longitude": 11.2588158,
-      "rating": 8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7524856323444444429",
-      "tikTokThumbnail": "thumbnails/7524856323444444429.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osDEOUEWI6gCSTbCVbfDfD4Vi3AFAAagAFvoQR~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=moG3WLSsV%2FZTXlcIj58HjRn0t3o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "7/9/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Pino's Sandwiches",
-      "tags": [
-        "travel food series",
-        "florence",
-        "sandwich"
-      ],
-      "location": "Florence, Italy",
-      "locationData": {
-        "city": "Florence",
-        "region": "Italy",
-        "fullRegion": "Italy",
-        "fullLocation": "Florence, Italy",
-        "originalLocation": "Florence, Italy",
-        "cityStandardized": "florence",
-        "fullRegionStandardized": "italy",
-        "fullLocationStandardized": "florence, italy"
-      },
-      "address": "Via Giuseppe Verdi, 36R, 50122 Firenze FI, Italy",
-      "city": "florence",
-      "googleMapsLink": "",
-      "latitude": 43.7704566,
-      "longitude": 11.2618382,
-      "rating": 9.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7524856323444444429",
-      "tikTokThumbnail": "thumbnails/7524856323444444429.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osDEOUEWI6gCSTbCVbfDfD4Vi3AFAAagAFvoQR~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=moG3WLSsV%2FZTXlcIj58HjRn0t3o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/9/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Smokin J's BBQ",
-      "tags": [
-        "bbq",
-        "southern",
-        "pulled pork",
-        "meat"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "14035 Midland Rd, Poway, CA 92064",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.9683166,
-      "longitude": -117.0359938,
-      "rating": 8.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7525947308840586509?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7525947308840586509.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIAHAVfxAbQIeEjAIBGxaEhqk4ijIKLAArNINf~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=1GlKp5ej5dd1MOTT2HBW22904rY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/11/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Yamashiro",
-      "tags": [
-        "japanese",
-        "date night"
-      ],
-      "location": "Los Angeles, CA",
-      "locationData": {
-        "city": "Los Angeles",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "Los Angeles, California",
-        "originalLocation": "Los Angeles, CA",
-        "cityStandardized": "los angeles",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "los angeles, california"
-      },
-      "address": "1999 N Sycamore Ave, Los Angeles, CA 90068",
-      "city": "los angeles",
-      "googleMapsLink": "",
-      "latitude": 34.1057395,
-      "longitude": -118.3421769,
-      "rating": 9.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7526729424788622605",
-      "tikTokThumbnail": "thumbnails/7526729424788622605.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owBKBiwFEw0AjmBHIB0AwJiAcO2aUBfiyMAdg7~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Wd4y8X%2BJtgMsoV2lQsTnkk5id7g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/14/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Casa de la Mozzarella",
-      "tags": [
-        "nyc",
-        "italian",
-        "sandwich"
-      ],
-      "location": "Bronx,NY",
-      "locationData": {
-        "city": "Bronx",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Bronx, New York",
-        "originalLocation": "Bronx,NY",
-        "cityStandardized": "bronx",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "bronx, new york"
-      },
-      "address": "604 E 187th St, Bronx, NY 10458",
-      "city": "bronx",
-      "googleMapsLink": "",
-      "latitude": 40.8553469,
-      "longitude": -73.8874242,
-      "rating": 6.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7527484397235277111",
-      "tikTokThumbnail": "thumbnails/7527484397235277111.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYIAthJJOJfAsAWeFuQADWQO5fMMx2Ate84XyI~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=mGzvZiix1ajdPpOO%2FUJJ4%2Buw2yA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "7/16/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Raki Raki Ramen",
-      "tags": [
-        "ramen",
-        "karaage",
-        "spicy",
-        "japanese"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "9995 Carmel Mountain Rd b6, San Diego, CA 92129",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.9597875,
-      "longitude": -117.112571,
-      "rating": 8.4,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7528547126037482766?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7528547126037482766.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIArAAEH4SgFFgArBB6kEIQBAqvxt2idV1Bia~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=VqQQL1qwF9JQHSzd9yzypARFLuA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "7/18/2025"
     },
     {
       "reviewer": "vlad",
@@ -3191,7 +1444,7 @@
       "rating": 8.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7529246263766699277",
       "tikTokThumbnail": "thumbnails/7529246263766699277.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0kDEAsAEBkAIiFAQBBAMPTfb4frEgEf9EHWoc~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=pijQHQcismyHBSmRSVumU6TH9k4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "7/21/2025"
     },
     {
@@ -3222,37 +1475,7 @@
       "rating": 7.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7530113824058395959",
       "tikTokThumbnail": "thumbnails/7530113824058395959.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMpQBf5ZBijJILV60A0wiBQAEEKCAAkRCBNAW9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=p%2F%2BD4VWJ1vHZLVK52sDc26y4f9g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/23/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Trattoria Dall'Oste",
-      "tags": [
-        "travel food series",
-        "florence",
-        "florentine steak"
-      ],
-      "location": "Florence, Italy",
-      "locationData": {
-        "city": "Florence",
-        "region": "Italy",
-        "fullRegion": "Italy",
-        "fullLocation": "Florence, Italy",
-        "originalLocation": "Florence, Italy",
-        "cityStandardized": "florence",
-        "fullRegionStandardized": "italy",
-        "fullLocationStandardized": "florence, italy"
-      },
-      "address": "Borgo S. Lorenzo, 31, 50121 Firenze FI, Italy",
-      "city": "florence",
-      "googleMapsLink": "",
-      "latitude": 43.7741946,
-      "longitude": 11.2547378,
-      "rating": 9.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7530113824058395959",
-      "tikTokThumbnail": "thumbnails/7530113824058395959.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMpQBf5ZBijJILV60A0wiBQAEEKCAAkRCBNAW9~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=p%2F%2BD4VWJ1vHZLVK52sDc26y4f9g%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "7/23/2025"
     },
     {
@@ -3282,70 +1505,8 @@
       "rating": 7.9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7532191004770782519",
       "tikTokThumbnail": "thumbnails/7532191004770782519.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4JPfR30EFj2AFWEPAkIAAHb1hADEKD3EQefrU~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=tiA8vtbtZOwHcq03O49LIdz8S%2Bw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4JPfR30EFj2AFWEPAkIAAHb1hADEKD3EQefrU~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=9PSavFMbFOpcciLXh%2FaSVJuO7FQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "7/28/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Trattoria Rialto Novo",
-      "tags": [
-        "travel food series",
-        "venice",
-        "charcuterie",
-        "gnocchi",
-        "crab"
-      ],
-      "location": "Venice, Italy",
-      "locationData": {
-        "city": "Venice",
-        "region": "Italy",
-        "fullRegion": "Italy",
-        "fullLocation": "Venice, Italy",
-        "originalLocation": "Venice, Italy",
-        "cityStandardized": "venice",
-        "fullRegionStandardized": "italy",
-        "fullLocationStandardized": "venice, italy"
-      },
-      "address": "S. Polo, 518, 30125 Venezia VE, Italy",
-      "city": "venice",
-      "googleMapsLink": "",
-      "latitude": 45.4383584,
-      "longitude": 12.3349099,
-      "rating": 7.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7532868039579012365",
-      "tikTokThumbnail": "thumbnails/7532868039579012365.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMvMKJwABABiANw5w8BsJ0IsREAe5HKxQiRBC4~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=4hAp3MuUYwXiy1eytW0s%2B0bexkg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "7/30/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Only Brunch",
-      "tags": [
-        "travel food series",
-        "venice",
-        "brunch"
-      ],
-      "location": "Venice, Italy",
-      "locationData": {
-        "city": "Venice",
-        "region": "Italy",
-        "fullRegion": "Italy",
-        "fullLocation": "Venice, Italy",
-        "originalLocation": "Venice, Italy",
-        "cityStandardized": "venice",
-        "fullRegionStandardized": "italy",
-        "fullLocationStandardized": "venice, italy"
-      },
-      "address": "Via S. Rocco, 2, 30174 Venezia VE, Italy",
-      "city": "venice",
-      "googleMapsLink": "",
-      "latitude": 45.495682,
-      "longitude": 12.241487,
-      "rating": 8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7532868039579012365",
-      "tikTokThumbnail": "thumbnails/7532868039579012365.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMvMKJwABABiANw5w8BsJ0IsREAe5HKxQiRBC4~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=4hAp3MuUYwXiy1eytW0s%2B0bexkg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "7/30/2025"
     },
     {
       "reviewer": "jason",
@@ -3376,7 +1537,7 @@
       "rating": 9.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7532868039579012365",
       "tikTokThumbnail": "thumbnails/7532868039579012365.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMvMKJwABABiANw5w8BsJ0IsREAe5HKxQiRBC4~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=4hAp3MuUYwXiy1eytW0s%2B0bexkg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "7/30/2025"
     },
     {
@@ -3408,40 +1569,8 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7533740921213422862?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7533740921213422862.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4ZNRoArjCZEEOZcDAIAnfmfS8KgFFEDAJSCoT~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=trDMbOubOb%2FJVD3sH2%2F7wceiAvI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4ZNRoArjCZEEOZcDAIAnfmfS8KgFFEDAJSCoT~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=0ln8i6xSgEU%2FwTYefZrfF1L88pM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "8/1/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Brasserie Lipp",
-      "tags": [
-        "travel food series",
-        "paris",
-        "cheese",
-        "chicken",
-        "french fries"
-      ],
-      "location": "Paris, France",
-      "locationData": {
-        "city": "Paris",
-        "region": "France",
-        "fullRegion": "France",
-        "fullLocation": "Paris, France",
-        "originalLocation": "Paris, France",
-        "cityStandardized": "paris",
-        "fullRegionStandardized": "france",
-        "fullLocationStandardized": "paris, france"
-      },
-      "address": "151 Bd Saint-Germain, 75006 Paris, France",
-      "city": "paris",
-      "googleMapsLink": "",
-      "latitude": 48.85368,
-      "longitude": 2.3324137,
-      "rating": 7.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7535534591742856461",
-      "tikTokThumbnail": "thumbnails/7535534591742856461.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0VCjFDqADKfCfkAMo3TAtSTZAECIAPkD5mHEg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Q%2FntxHwshEKUjF8oDkLVsr8t%2F8Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "8/6/2025"
     },
     {
       "reviewer": "jason",
@@ -3471,129 +1600,8 @@
       "rating": 4.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7535534591742856461",
       "tikTokThumbnail": "thumbnails/7535534591742856461.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0VCjFDqADKfCfkAMo3TAtSTZAECIAPkD5mHEg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Uo%2FyIKpzrw3dSp2Q4UyD57c4f18%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "8/6/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "La Banquette Marais",
-      "tags": [
-        "travel food series",
-        "paris",
-        "octopus",
-        "shakshuka"
-      ],
-      "location": "Paris, France",
-      "locationData": {
-        "city": "Paris",
-        "region": "France",
-        "fullRegion": "France",
-        "fullLocation": "Paris, France",
-        "originalLocation": "Paris, France",
-        "cityStandardized": "paris",
-        "fullRegionStandardized": "france",
-        "fullLocationStandardized": "paris, france"
-      },
-      "address": "92 Rue de Turenne, 75003 Paris, France",
-      "city": "paris",
-      "googleMapsLink": "",
-      "latitude": 48.8617532,
-      "longitude": 2.3648056,
-      "rating": 4,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7535534591742856461",
-      "tikTokThumbnail": "thumbnails/7535534591742856461.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0VCjFDqADKfCfkAMo3TAtSTZAECIAPkD5mHEg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Q%2FntxHwshEKUjF8oDkLVsr8t%2F8Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "8/6/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Zab Linda",
-      "tags": [
-        "khao soi",
-        "asian",
-        "thai"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "6925 Linda Vista Rd B, San Diego, CA 92111",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7844149,
-      "longitude": -117.1708941,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7536320558015745293?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7536320558015745293.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYmIDhfDSE87RWoEeYPbClnmWC6A1EOAFAApIg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=5nZzh6lIU71ciLdGIkW7eFNxTIk%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "8/8/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Kin Len Thai Street Eats",
-      "tags": [
-        "thai",
-        "khao soi",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "3934 30th St, San Diego, CA 92104",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7492031,
-      "longitude": -117.1303969,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7537400574623419703",
-      "tikTokThumbnail": "thumbnails/7537400574623419703.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogTA6BiRUnBAK0w8yIAXiPaBf9JAC0IBO4EhVv~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=7OevqAmfOkn8gbDOOVhno4GRjVc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "8/11/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Granite",
-      "tags": [
-        "michelin star series",
-        "paris",
-        "lunch special"
-      ],
-      "location": "Paris, France",
-      "locationData": {
-        "city": "Paris",
-        "region": "France",
-        "fullRegion": "France",
-        "fullLocation": "Paris, France",
-        "originalLocation": "Paris, France",
-        "cityStandardized": "paris",
-        "fullRegionStandardized": "france",
-        "fullLocationStandardized": "paris, france"
-      },
-      "address": "6 Rue Bailleul, 75001 Paris, France",
-      "city": "paris",
-      "googleMapsLink": "",
-      "latitude": 48.8610628,
-      "longitude": 2.3419366,
-      "rating": 9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7537892963104443661",
-      "tikTokThumbnail": "thumbnails/7537892963104443661.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooYGLJvffJBAyEN3IAAaIeYNIeb7iQAkoOWWAY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=AGWT9iobdMYnIv%2F4cVkk6udT%2Fww%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "8/13/2025"
     },
     {
       "reviewer": "andrew",
@@ -3625,7 +1633,7 @@
       "rating": 9.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7538937582583860535?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7538937582583860535.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owAFXrWrGgJeofnfAwLAQ9NLFSegEAcQIYA1if~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=ipOSEV6bxlu2IYwg%2FQsi136dEh0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "8/15/2025"
     },
     {
@@ -3655,7 +1663,7 @@
       "rating": 7.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7539969915533495607",
       "tikTokThumbnail": "thumbnails/7539969915533495607.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIEiaYI4liqog3k9AWANY4BcCcB9j2AajKAPA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=8sOnkretrrBPfICnaCN2MVFrl7U%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "8/18/2025"
     },
     {
@@ -3685,7 +1693,7 @@
       "rating": 9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7542652863927913742",
       "tikTokThumbnail": "thumbnails/7542652863927913742.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oM0VC3EuIAlRBU6BE6AsbBAVAKinUJfVIwmB0i~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=RN5iI4ww25c47A9dRSVeQ5BV7i8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oM0VC3EuIAlRBU6BE6AsbBAVAKinUJfVIwmB0i~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=C5wj6DT2Gc6phYfZnx2pSsEarLo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "8/25/2025"
     },
     {
@@ -3715,7 +1723,7 @@
       "rating": 6.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7543266416204467511",
       "tikTokThumbnail": "thumbnails/7543266416204467511.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Wnw4de1w2kC2QOh77DvTcC8dzrc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "8/27/2025"
     },
     {
@@ -3745,7 +1753,7 @@
       "rating": 7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7543266416204467511",
       "tikTokThumbnail": "thumbnails/7543266416204467511.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Wnw4de1w2kC2QOh77DvTcC8dzrc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "8/27/2025"
     },
     {
@@ -3775,7 +1783,7 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7543266416204467511",
       "tikTokThumbnail": "thumbnails/7543266416204467511.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Wnw4de1w2kC2QOh77DvTcC8dzrc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=jxNfgkPZ1Xg4E1KexgOITh4BN8s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "8/27/2025"
     },
     {
@@ -3805,7 +1813,7 @@
       "rating": 9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7543266416204467511",
       "tikTokThumbnail": "thumbnails/7543266416204467511.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Wnw4de1w2kC2QOh77DvTcC8dzrc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=jxNfgkPZ1Xg4E1KexgOITh4BN8s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "8/27/2025"
     },
     {
@@ -3833,7 +1841,7 @@
       "rating": 9.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7544826091756735758?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7544826091756735758.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMlpuoiTEdPJAFfFKASIAgDNlDAtCSDiEQwfRz~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=3Y3Mxoim5vK3VPIAr51BZXItywo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "8/31/2025"
     },
     {
@@ -3862,7 +1870,7 @@
       "rating": 7.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7545127417543675150",
       "tikTokThumbnail": "thumbnails/7545127417543675150.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooSDwATAECXAIrFgoCgAeqafrqhVCwCt1EDLMx~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=gLCg%2BkyGOOYDLWVvvkz11HWp27o%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "9/1/2025"
     },
     {
@@ -3891,37 +1899,8 @@
       "rating": 8.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7543266416204467511",
       "tikTokThumbnail": "thumbnails/7543266416204467511.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Wnw4de1w2kC2QOh77DvTcC8dzrc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/og0AJ9vkeBsE4AiK2BAIYPpAAVBgwnvCsZDBiY~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=jxNfgkPZ1Xg4E1KexgOITh4BN8s%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "9/3/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Sidny's Bagel & Deli",
-      "tags": [
-        "deli",
-        "sandwiches"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "11981 Bernardo Plaza Dr, San Diego, CA 92128",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 33.0199514,
-      "longitude": -117.0725012,
-      "rating": 8.6,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7547426256959163703?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7547426256959163703.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0FhES1fJDAE29AkAdFoDRoACETglCYvIAfu9E~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=QEDT4u%2BsOkyglyoSYR77yJxsO5M%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/7/2025"
     },
     {
       "reviewer": "vlad",
@@ -3950,7 +1929,7 @@
       "rating": 8.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7547792480142494990",
       "tikTokThumbnail": "thumbnails/7547792480142494990.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o88h8t7AOAJQAKAB1NMoIigffQAnAkWfkWUJLf~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=HFM%2B29fHWKHN2EMjnfe%2FzVeSYrs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "9/8/2025"
     },
     {
@@ -3980,37 +1959,7 @@
       "rating": 7.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7548458655390223671",
       "tikTokThumbnail": "thumbnails/7548458655390223671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rGD8ezQbcdXyNmtss11WNyTEdjg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/10/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Arepalicious",
-      "tags": [
-        "queens night market",
-        "nyc",
-        "colombian"
-      ],
-      "location": "Corona, NY",
-      "locationData": {
-        "city": "Corona",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Corona, New York",
-        "originalLocation": "Corona, NY",
-        "cityStandardized": "corona",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "corona, new york"
-      },
-      "address": "47-01 111th St, Corona, NY 11368",
-      "city": "corona",
-      "googleMapsLink": "",
-      "latitude": 40.747126,
-      "longitude": -73.8515139,
-      "rating": 7.9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7548458655390223671",
-      "tikTokThumbnail": "thumbnails/7548458655390223671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rGD8ezQbcdXyNmtss11WNyTEdjg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=n1uxEeqfQfDPFAQFsXGQpie%2BWZ4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "9/10/2025"
     },
     {
@@ -4040,39 +1989,8 @@
       "rating": 7.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7548458655390223671",
       "tikTokThumbnail": "thumbnails/7548458655390223671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rGD8ezQbcdXyNmtss11WNyTEdjg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "9/10/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Pikunico Japanese Fried Chicken",
-      "tags": [
-        "japanese",
-        "fried chicken",
-        "jfc",
-        "karaage"
-      ],
-      "location": "Los Angeles, CA",
-      "locationData": {
-        "city": "Los Angeles",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "Los Angeles, California",
-        "originalLocation": "Los Angeles, CA",
-        "cityStandardized": "los angeles",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "los angeles, california"
-      },
-      "address": "767 S Alameda St Suite 122, Los Angeles, CA 90021",
-      "city": "los angeles",
-      "googleMapsLink": "",
-      "latitude": 34.0352606,
-      "longitude": -118.2403461,
-      "rating": 8.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7549657766814666039?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7549657766814666039.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEFA4DfESgxdoZXSeICXRcAJAGEkFNEAD9DcxF~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=vJpV7BvJzrv%2F9gSX2x4GF3jDKFs%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/13/2025"
     },
     {
       "reviewer": "vlad",
@@ -4101,38 +2019,8 @@
       "rating": 8.6,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7550399368428277006",
       "tikTokThumbnail": "thumbnails/7550399368428277006.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o84vAimAh3Bg5IOMnaDrIkJEAibZDTAlQh4A6~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=sad2hhQKHnrqvy%2BanxtKR0qT%2F7A%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o84vAimAh3Bg5IOMnaDrIkJEAibZDTAlQh4A6~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=AEahYUZDQsUuvgEH1dt8mzatcQo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "9/15/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Banh Mi",
-      "tags": [
-        "queens night market",
-        "nyc",
-        "vietnamese"
-      ],
-      "location": "Corona, NY",
-      "locationData": {
-        "city": "Corona",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Corona, New York",
-        "originalLocation": "Corona, NY",
-        "cityStandardized": "corona",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "corona, new york"
-      },
-      "address": "47-01 111th St, Corona, NY 11368",
-      "city": "corona",
-      "googleMapsLink": "",
-      "latitude": 40.747126,
-      "longitude": -73.8515139,
-      "rating": 8.9,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7548458655390223671",
-      "tikTokThumbnail": "thumbnails/7548458655390223671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rGD8ezQbcdXyNmtss11WNyTEdjg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/19/2025"
     },
     {
       "reviewer": "jason",
@@ -4161,126 +2049,8 @@
       "rating": 7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7548458655390223671",
       "tikTokThumbnail": "thumbnails/7548458655390223671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rGD8ezQbcdXyNmtss11WNyTEdjg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "9/19/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Matylda's",
-      "tags": [
-        "queens night market",
-        "nyc",
-        "polish"
-      ],
-      "location": "Corona, NY",
-      "locationData": {
-        "city": "Corona",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Corona, New York",
-        "originalLocation": "Corona, NY",
-        "cityStandardized": "corona",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "corona, new york"
-      },
-      "address": "47-01 111th St, Corona, NY 11368",
-      "city": "corona",
-      "googleMapsLink": "",
-      "latitude": 40.747126,
-      "longitude": -73.8515139,
-      "rating": 7.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7548458655390223671",
-      "tikTokThumbnail": "thumbnails/7548458655390223671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUvYD47aWAgJzy2BA7lDEBZckXGD6MgiAIAAi~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rGD8ezQbcdXyNmtss11WNyTEdjg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "9/19/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Cuscatlan Salvadorean Cuisine & More",
-      "tags": [
-        "pupusas",
-        "salvadoran"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "7516 Mesa College Dr, San Diego, CA 92111",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.801531,
-      "longitude": -117.1590574,
-      "rating": 6.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7552295464301841678?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7552295464301841678.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oETJMeJ8RAeWGyAgAjDIAfJIkOPLQf2ij0EtAM~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=8%2FmjOhFDHHpFA%2BEm%2BB8assN6UNA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/20/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Chaba Thai Kitchen",
-      "tags": [
-        "thai",
-        "khao soi",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "8010 Clairemont Mesa Blvd, San Diego, CA 92111",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8331879,
-      "longitude": -117.1499933,
-      "rating": 9.1,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7552985921440828727",
-      "tikTokThumbnail": "thumbnails/7552985921440828727.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4QegnGRELA6IPEokAIkAlEAHeyXerVRRO0DAd~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=oIZZFspjgvVJGYvztggAOzvcTcM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/22/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Utopia Bagels",
-      "tags": [
-        "bagel series",
-        "nyc"
-      ],
-      "location": "Long Island City, NY",
-      "locationData": {
-        "city": "Long Island City",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Long Island City, New York",
-        "originalLocation": "Long Island City, NY",
-        "cityStandardized": "long island city",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "long island city, new york"
-      },
-      "address": "26-11 Jackson Ave, Long Island City, NY 11101",
-      "city": "long island city",
-      "googleMapsLink": "",
-      "latitude": 40.7474291,
-      "longitude": -73.9420097,
-      "rating": 6,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7553407217504947469",
-      "tikTokThumbnail": "thumbnails/7553407217504947469.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oweAQOAWiIACGWAAW7JTfeQFp6LPM8UJI4ejkm~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Mz8hXuuLbBaTfhTuRQjabKT3gQ8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "9/24/2025"
     },
     {
       "reviewer": "andrew",
@@ -4309,38 +2079,8 @@
       "rating": 7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7554878601733131575?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7554878601733131575.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osikTEkvjgSiYB4BuUYDAAIMAaLIAhNrEp0qs~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=YTPmeJk%2BTHxCZPyi3Cyo92xq%2F24%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osikTEkvjgSiYB4BuUYDAAIMAaLIAhNrEp0qs~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=QFNhbE%2BzpUGmdvV3r0HWxcnb7k8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "9/26/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "The Wise Ox",
-      "tags": [
-        "cheesesteak",
-        "sandwich",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2855 El Cajon Blvd #1, San Diego, CA 92104",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7548868,
-      "longitude": -117.1324825,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7555592018936876302",
-      "tikTokThumbnail": "thumbnails/7555592018936876302.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8O0RAJB0B20wsMiiAAWxAEcBBVafbkwUKIlDs~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=mkxQwXQDw%2BIoANa7HTHDr%2BwDT8U%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "9/29/2025"
     },
     {
       "reviewer": "jason",
@@ -4369,7 +2109,7 @@
       "rating": 10,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7556096522853666062",
       "tikTokThumbnail": "thumbnails/7556096522853666062.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oULcABLEIAilBRtfBwzc7J0dpDKXbAOiiInBAu~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Aywy%2Ba1uePyac0RmS10Pb556A3U%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "10/1/2025"
     },
     {
@@ -4399,7 +2139,7 @@
       "rating": 6.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7557804642613153037",
       "tikTokThumbnail": "thumbnails/7557804642613153037.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQDAZDfECg4ZoYqSfICWVvA0AJEhFwCADmDrti~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=DvwZubvMDunt5Lzp8ae3xEsqqEg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "10/6/2025"
     },
     {
@@ -4428,39 +2168,8 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7558659522638777655",
       "tikTokThumbnail": "thumbnails/7558659522638777655.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ogfIly8ADACEAcgfm8DZSoID5EAACwVscFOCDJ~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=FZKYlDsEuE2rvfaJfGaL1zXWABc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "10/8/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Antojitos Arepas",
-      "tags": [
-        "arepas",
-        "colombian",
-        "latin",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2040 Imperial Ave, San Diego, CA 92102",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7066043,
-      "longitude": -117.1451566,
-      "rating": 7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7559601352545013005?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7559601352545013005.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4AvO0GaAYAGv7ruB7EgAgLDAIlkiyBA4plki~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=3LDy%2BHpZ1klj%2FdXiQN%2BQBbY%2BwfM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "10/10/2025"
     },
     {
       "reviewer": "vlad",
@@ -4489,7 +2198,7 @@
       "rating": 7.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7560712826357140749",
       "tikTokThumbnail": "thumbnails/7560712826357140749.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4DaAE2A5QH7aFQCGSQfHZkLe6A8CVglYoIAAD~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=viDpcgRMuhd66Yz2DB9H1Ve%2BzeQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o4DaAE2A5QH7aFQCGSQfHZkLe6A8CVglYoIAAD~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=i6tLoVg4BIBqe0noHXoQSrWzc8k%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "10/13/2025"
     },
     {
@@ -4519,39 +2228,8 @@
       "rating": 8.5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7561222500861037837",
       "tikTokThumbnail": "thumbnails/7561222500861037837.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAkWlF8FaBDgjAA1yHAuP7EAiAOiaI2Sk47Dn~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Pram4hM6Txpk0mjqn7elPtup4ag%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAkWlF8FaBDgjAA1yHAuP7EAiAOiaI2Sk47Dn~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=CnNIk7h%2FQ5s4slphsBl%2FY11lkbE%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "10/15/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Sazon Grill",
-      "tags": [
-        "arepas",
-        "latin",
-        "venezuelan",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "303 Highland Ave, National City, CA 91950",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.6832736,
-      "longitude": -117.0991166,
-      "rating": 9.2,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7561914864571010317?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7561914864571010317.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oE4WDBrpxPVjJRVarAIk2AiUFvglEAb64iA7A~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=sJHK5Is50VF%2FmN3hIQRt8rmoVXw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "10/17/2025"
     },
     {
       "reviewer": "vlad",
@@ -4580,37 +2258,8 @@
       "rating": 8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7563326805726285070",
       "tikTokThumbnail": "thumbnails/7563326805726285070.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osIBoeA7liMyCC7q5mpDMOAAiDSJ2PAElgfiVV~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=lPrt57iw6Z14EeA%2ByZOrcAg%2FchM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osIBoeA7liMyCC7q5mpDMOAAiDSJ2PAElgfiVV~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=GrBACVALw9eG4SRMXgWY%2BshfSFM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "10/20/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Apollo Bagels",
-      "tags": [
-        "bagel series",
-        "nyc"
-      ],
-      "location": "Brooklyn, NY",
-      "locationData": {
-        "city": "Brooklyn",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Brooklyn, New York",
-        "originalLocation": "Brooklyn, NY",
-        "cityStandardized": "brooklyn",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "brooklyn, new york"
-      },
-      "address": "133 N 7th St, Brooklyn, NY 11249",
-      "city": "brooklyn",
-      "googleMapsLink": "",
-      "latitude": 40.7185536,
-      "longitude": -73.9585736,
-      "rating": 7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7563773832172031287",
-      "tikTokThumbnail": "thumbnails/7563773832172031287.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQAA9I97RHAT20FSAGEeHiG7LAhIkQerEE8ev0~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=3XnrfuvjxH9QkGoVqU%2BOYhej2sI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "10/22/2025"
     },
     {
       "reviewer": "andrew",
@@ -4640,7 +2289,7 @@
       "rating": 8.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7564592912881782071?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7564592912881782071.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owLPAPAlEViug36A5AV1QxikBDA4YrHADIaog~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=WtD7ylZRIyx1kmBATAvfS1mIGl4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "10/24/2025"
     },
     {
@@ -4670,38 +2319,8 @@
       "rating": 8.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7565946366980132151",
       "tikTokThumbnail": "thumbnails/7565946366980132151.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o0efR0lIfJOLdM8QAg4ArAAVq5ZAmjQjGJWfIP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=pHRSssLG9sGCkZGuwuJljQqteXM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "10/26/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Balkh Shish Kebab House",
-      "tags": [
-        "global belly food tour",
-        "nyc",
-        "afghanistan"
-      ],
-      "location": "Astoria, NY",
-      "locationData": {
-        "city": "Astoria",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Astoria, New York",
-        "originalLocation": "Astoria, NY",
-        "cityStandardized": "astoria",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "astoria, new york"
-      },
-      "address": "23-10 31st St, Astoria, NY 11105",
-      "city": "astoria",
-      "googleMapsLink": "",
-      "latitude": 40.7742778,
-      "longitude": -73.913418,
-      "rating": 7.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7566649039068892429",
-      "tikTokThumbnail": "thumbnails/7566649039068892429.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ow9r4AkiaPwlABU9AHjxrAI0C7QAEgIMAIiAP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=eEsbwc486e92BT6jQU9SeoalQbc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "10/29/2025"
     },
     {
       "reviewer": "andrew",
@@ -4729,39 +2348,8 @@
       "rating": 8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7567457204178095415?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7567457204178095415.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooIBDfnaCEuSIhAfWApgFCrFEWVQAAKxADoAsX~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Bl54RABgCoJt3Nd6C1hCn0lvf%2BA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "10/31/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "The Signature SD",
-      "tags": [
-        "cheesesteak",
-        "sandwich",
-        "series",
-        "pop up"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "1550 El Prado, San Diego, CA 92101",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7325031,
-      "longitude": -117.1492423,
-      "rating": 9.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7568628205305859341",
-      "tikTokThumbnail": "thumbnails/7568628205305859341.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ooE9nVCpGCJKqF1x2fADpgACSWDfAZlAcIAyES~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=T9NAQthxVndHqFbPc4d6nQgvdwo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "11/3/2025"
     },
     {
       "reviewer": "jason",
@@ -4790,99 +2378,8 @@
       "rating": 9.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7569582978494401805",
       "tikTokThumbnail": "thumbnails/7569582978494401805.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUAEIIi6AAexOge4WLeNikGJwAMi3IJf9AN5AM~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Yo4qa7CzR6F3opayY3%2FOVYpL9oo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "11/6/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Cross Street",
-      "tags": [
-        "kfc",
-        "korean",
-        "wings",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "4403 Convoy St, San Diego, CA 92111",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8201891,
-      "longitude": -117.1547499,
-      "rating": 8.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7570099532495670583?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7570099532495670583.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oc5lAikABZgiai3l5i4A82EcOIAAh82gQDAYP~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=itzI7M5l2R7NsSjXefPXjtIGQQ4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "11/7/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Giorgino's",
-      "tags": [
-        "cheesesteak",
-        "sandwich",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "1237 28th St, San Diego, CA 92102",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7186966,
-      "longitude": -117.1336102,
-      "rating": 7.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7571178742618295565",
-      "tikTokThumbnail": "thumbnails/7571178742618295565.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oEeIAjJEehAOHnSrvLHnE8IASGLhePA4rAEQAk~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=qN1pcOod8N%2BqTv%2BJDid%2FSeBXZqo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "11/10/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Tito Rad's Grill",
-      "tags": [
-        "global belly food tour",
-        "nyc",
-        "philippines"
-      ],
-      "location": "Woodside, NY",
-      "locationData": {
-        "city": "Woodside",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Woodside, New York",
-        "originalLocation": "Woodside, NY",
-        "cityStandardized": "woodside",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "woodside, new york"
-      },
-      "address": "49-10 Queens Blvd, Woodside, NY 11377",
-      "city": "woodside",
-      "googleMapsLink": "",
-      "latitude": 40.7424512,
-      "longitude": -73.91555989999999,
-      "rating": 6.5,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7571673368231939383",
-      "tikTokThumbnail": "thumbnails/7571673368231939383.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8AAHdEQIHASXKJfHfFknvAKSBwrDEACDEfrAr~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=27NJp4cld52r5P%2FYGjKbmWdCzsw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "11/12/2025"
     },
     {
       "reviewer": "andrew",
@@ -4912,7 +2409,7 @@
       "rating": 8.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7572703246934953229?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7572703246934953229.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/ocXRO0B5EiAJIuBiLAiJApBAB696fKNX05PAwM~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=3QS020MUCp0D90ZgFvzY%2B7fNiME%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "11/14/2025"
     },
     {
@@ -4942,7 +2439,7 @@
       "rating": 7.9,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7573748061009087757",
       "tikTokThumbnail": "thumbnails/7573748061009087757.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owZpDffDSEilVHpCuWPCAGD1bC9A7EvAFAAWIg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=p9Mk7bgV4EKueK5%2BdqBUMn84AF0%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owZpDffDSEilVHpCuWPCAGD1bC9A7EvAFAAWIg~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=DUGqPARqcsmGORZOI93hd6F%2BwSc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "11/17/2025"
     },
     {
@@ -4971,39 +2468,8 @@
       "rating": 9.8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7574297120316886286",
       "tikTokThumbnail": "thumbnails/7574297120316886286.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIKgcIR5PAoAAAiTiRXE3dD14lAaBkOAquBlA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=Tuoach6s8tUlygKczJvue%2BSGvg8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oIKgcIR5PAoAAAiTiRXE3dD14lAaBkOAquBlA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=n5IjfUTM8CsBr7bCXPYOuFv2g58%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
       "datePosted": "11/19/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Kuljem",
-      "tags": [
-        "kfc",
-        "korean",
-        "wings",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "8895 Towne Centre Dr Suite 101, San Diego, CA 92122",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.8669506,
-      "longitude": -117.20639,
-      "rating": 8.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7575256169116208439?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7575256169116208439.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oM71fABkLtAB1iKB0oOvuAJBwEigBO8IAA8FiC~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=nsXkJsXk7tI%2Fdl2yhgYcSs1s0qQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "11/21/2025"
     },
     {
       "reviewer": "vlad",
@@ -5032,7 +2498,7 @@
       "rating": 8.7,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7576354496872287501",
       "tikTokThumbnail": "thumbnails/7576354496872287501.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMnwDoncAc6Bk7J0K1QBBK4XTiISEAikAAAkfB~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=pd8FMBgaF3Qg2OhP6DWm8wxgKl8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "11/24/2025"
     },
     {
@@ -5061,7 +2527,7 @@
       "rating": 5,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7576487976830635278",
       "tikTokThumbnail": "thumbnails/7576487976830635278.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8kASBio5GBAKhwIvrAviElBf6JAA0IBFdEIcl~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=D5c0BJKHvZi46IsLx2aWso8Nazo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/o8kASBio5GBAKhwIvrAviElBf6JAA0IBFdEIcl~tplv-tiktokx-origin.image?dr=9636&x-expires=1765944000&x-signature=BsmWi3yCVu7dLfaVY%2FblLVTYh%2BU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
       "datePosted": "11/26/2025"
     },
     {
@@ -5092,160 +2558,8 @@
       "rating": 9.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7576482037213711671?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7576482037213711671.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oAYln0wIimBAkJ3iohBXA0Ek7AQBKBAAEHkFfA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=lQBKPsA0R2qwZvZ%2F%2BUMSCLO6eYc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "11/28/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "Gaglione Bro's",
-      "tags": [
-        "cheesesteak",
-        "sandwich",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "10450 Friars Rd B, San Diego, CA 92120",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7926078,
-      "longitude": -117.0987131,
-      "rating": 9.3,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7578948092091698487",
-      "tikTokThumbnail": "thumbnails/7578948092091698487.jpeg",
-      "tikTokThumbnailFallback": "https://p19-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/owliCAaUuBPA4DC6FPEAg8PSAAtziLBA1yk3I~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=aG%2BOI0DFAube%2BrR%2BdJIKpcuaQJY%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "12/1/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Arepa Lady",
-      "tags": [
-        "global belly food tour",
-        "nyc",
-        "colombia"
-      ],
-      "location": "Astoria, NY",
-      "locationData": {
-        "city": "Astoria",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Astoria, New York",
-        "originalLocation": "Astoria, NY",
-        "cityStandardized": "astoria",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "astoria, new york"
-      },
-      "address": "34-39 31st St, Queens, NY 11106",
-      "city": "astoria",
-      "googleMapsLink": "",
-      "latitude": 40.7583874,
-      "longitude": -73.9279839,
-      "rating": 8.8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7579453107784994061",
-      "tikTokThumbnail": "thumbnails/7579453107784994061.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMfpSwVACZDLWvtEbnF7GEAsDAALIgCf5wASSA~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=gg2VWl6ojBD%2FdD%2F06ybxNiqM%2Bwc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "12/3/2025"
-    },
-    {
-      "reviewer": "andrew",
-      "restaurant": "Main Chick",
-      "tags": [
-        "tenders",
-        "nashville",
-        "hot chicken",
-        "tendies",
-        "series"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "5175 Linda Vista Rd, San Diego, CA 92110",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7647962,
-      "longitude": -117.1971935,
-      "rating": 9.1,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7580843207374753079?is_from_webapp=1&sender_device=pc",
-      "tikTokThumbnail": "thumbnails/7580843207374753079.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oMA8XA6kkEBGicIlQAQ7Ta4iDASABAMPx0g0S~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=4CKnylncqwk7jsoaOykdikuNx7c%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8",
-      "datePosted": "12/6/2025"
-    },
-    {
-      "reviewer": "vlad",
-      "restaurant": "San Diego Chicken Pie Shop",
-      "tags": [
-        "historic",
-        "chicken",
-        "budget"
-      ],
-      "location": "San Diego, CA",
-      "locationData": {
-        "city": "San Diego",
-        "region": "CA",
-        "fullRegion": "California",
-        "fullLocation": "San Diego, California",
-        "originalLocation": "San Diego, CA",
-        "cityStandardized": "san diego",
-        "fullRegionStandardized": "california",
-        "fullLocationStandardized": "san diego, california"
-      },
-      "address": "2633 El Cajon Blvd, San Diego, CA 92104",
-      "city": "san diego",
-      "googleMapsLink": "",
-      "latitude": 32.7549886,
-      "longitude": -117.1354494,
-      "rating": 7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7581152001250037047",
-      "tikTokThumbnail": "thumbnails/7581152001250037047.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oYADrmpxAqVzErhCFaAAqEID1gsSNAPCZtfFaf~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=vr6%2FaFxmLduYqdPcW%2Bl1x75VcIo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "12/8/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Massawa",
-      "tags": [
-        "eritrea",
-        "nyc",
-        "global belly food tour"
-      ],
-      "location": "New York, NY",
-      "locationData": {
-        "city": "New York",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "New York, New York",
-        "originalLocation": "New York, NY",
-        "cityStandardized": "new york",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "new york, new york"
-      },
-      "address": "1239 Amsterdam Ave, New York, NY 10027",
-      "city": "new york",
-      "googleMapsLink": "",
-      "latitude": 40.8097806,
-      "longitude": -73.9585846,
-      "rating": 7.1,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7582272134353833271",
-      "tikTokThumbnail": "thumbnails/7582272134353833271.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oUKAdB1gA7AIiAG04NJiiIYnEBDfkAv5FwBpBc~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=rdwksyKlfGO4QIjdqHhFY2ZXuSo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
-      "datePosted": "12/10/2025"
     },
     {
       "reviewer": "andrew",
@@ -5274,7 +2588,7 @@
       "rating": 8.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7583097087978409271",
       "tikTokThumbnail": "thumbnails/7583097087978409271.jpeg",
-      "tikTokThumbnailFallback": "https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/osilrA30nAkEBTZAi4PkAIkBJP8fIbjACE9wEB~tplv-tiktokx-origin.image?dr=9636&x-expires=1765936800&x-signature=2H5fIdGmlMNO5quAhct5ekDVOys%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "tikTokThumbnailFallback": "Loading...",
       "datePosted": "12/12/2025"
     }
   ]
