@@ -1618,11 +1618,41 @@ function showTabs() {
     }
 }
 
-// Debug function to switch to suggest tab
+// Function to show the suggest form (called by header button)
+function showSuggestForm() {
+    // Hide restaurants content and show suggest form
+    const restaurantsTab = document.getElementById('restaurants-tab');
+    const suggestTab = document.getElementById('suggest-tab');
+    
+    if (restaurantsTab && suggestTab) {
+        restaurantsTab.classList.add('hidden');
+        suggestTab.classList.remove('hidden');
+        
+        // Load required scripts for the form
+        setupPlaceSearch();
+        loadRecaptcha();
+        
+        // Scroll to top of form
+        suggestTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        console.log('✅ Opened restaurant suggestion form');
+    }
+}
+
+// Function to hide the suggest form and return to restaurants
+function hideSuggestForm() {
+    const restaurantsTab = document.getElementById('restaurants-tab');
+    const suggestTab = document.getElementById('suggest-tab');
+    
+    if (restaurantsTab && suggestTab) {
+        restaurantsTab.classList.remove('hidden');
+        suggestTab.classList.add('hidden');
+        
+        console.log('✅ Returned to restaurants view');
+    }
+}
+
+// Debug function to switch to suggest tab (keep for console access)
 function showSuggestTab() {
-    showTabs();
-    setTimeout(() => {
-        switchTab('suggest');
-        console.log('✅ Switched to Suggest Restaurant tab');
-    }, 100);
+    showSuggestForm();
 }
