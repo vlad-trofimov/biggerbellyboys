@@ -1255,8 +1255,9 @@ function switchTab(tabName) {
         content.classList.toggle('hidden', content.id !== `${tabName}-tab`);
     });
     
-    // Load reCAPTCHA if switching to suggest tab
+    // Load required scripts if switching to suggest tab
     if (tabName === 'suggest') {
+        setupPlaceSearch();
         loadRecaptcha();
     }
 }
@@ -1277,6 +1278,222 @@ function loadRecaptcha() {
         document.getElementById('recaptcha-container').style.display = 'block';
     };
     document.head.appendChild(script);
+}
+
+// OpenStreetMap Place Search Setup
+function setupPlaceSearch() {
+    const searchInput = document.getElementById('restaurantSearch');
+    const searchResults = document.getElementById('searchResults');
+    
+    if (!searchInput || !searchResults) return;
+    
+    let searchTimeout;
+    
+    // Setup search input event listener
+    searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.trim();
+        
+        // Clear previous timeout
+        clearTimeout(searchTimeout);
+        
+        if (query.length < 3) {
+            hideSearchResults();
+            return;
+        }
+        
+        // Debounce search for better UX
+        searchTimeout = setTimeout(() => {
+            searchPlaces(query);
+        }, 300);
+    });
+    
+    // Hide results when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            hideSearchResults();
+        }
+    });
+}
+
+async function searchPlaces(query) {
+    const searchResults = document.getElementById('searchResults');
+    
+    try {
+        // Show loading state
+        searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
+        searchResults.classList.remove('hidden');
+        
+        // Search OpenStreetMap Nominatim for restaurants/food establishments
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
+                q: `${query}`,
+                format: 'json',
+                addressdetails: '1',
+                limit: '8',
+                countrycodes: 'us', // Limit to US for better results
+                extratags: '1'
+            }), {
+                headers: {
+                    'User-Agent': 'BiggerBellyBoys/1.0' // Required by Nominatim
+                }
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error('Search failed');
+        }
+        
+        const results = await response.json();
+        
+        // Filter for restaurants and food places
+        const restaurantResults = results.filter(place => {
+            const type = place.type || '';
+            const category = place.category || '';
+            const amenity = place.extratags?.amenity || '';
+            
+            return (
+                type.includes('restaurant') ||
+                type.includes('cafe') ||
+                type.includes('bar') ||
+                type.includes('pub') ||
+                type.includes('fast_food') ||
+                category.includes('amenity') ||
+                amenity.includes('restaurant') ||
+                amenity.includes('cafe') ||
+                amenity.includes('bar') ||
+                amenity.includes('fast_food') ||
+                place.display_name.toLowerCase().includes('restaurant') ||
+                place.display_name.toLowerCase().includes('cafe') ||
+                place.display_name.toLowerCase().includes('pizza') ||
+                place.display_name.toLowerCase().includes('food')
+            );
+        });
+        
+        displaySearchResults(restaurantResults.slice(0, 5)); // Limit to top 5
+        
+    } catch (error) {
+        console.error('Search error:', error);
+        searchResults.innerHTML = '<div class="search-no-results">Search failed. Please try again.</div>';
+    }
+}
+
+function displaySearchResults(results) {
+    const searchResults = document.getElementById('searchResults');
+    
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-results">No restaurants found. Try a different search term.</div>';
+        return;
+    }
+    
+    const resultsHTML = results.map(place => {
+        const name = extractPlaceName(place);
+        const address = place.display_name || '';
+        const type = getPlaceType(place);
+        
+        return `
+            <div class="search-result-item" onclick="selectPlace(${JSON.stringify(place).replace(/"/g, '&quot;')})">
+                <div class="search-result-name">${escapeHtml(name)}</div>
+                <div class="search-result-address">${escapeHtml(address)}</div>
+                ${type ? `<div class="search-result-type">${escapeHtml(type)}</div>` : ''}
+            </div>
+        `;
+    }).join('');
+    
+    searchResults.innerHTML = resultsHTML;
+}
+
+function extractPlaceName(place) {
+    // Try to get a clean restaurant name from the display_name
+    if (place.name) {
+        return place.name;
+    }
+    
+    // Fallback: extract first part of display_name before first comma
+    const displayName = place.display_name || '';
+    const firstPart = displayName.split(',')[0];
+    return firstPart || 'Unknown Restaurant';
+}
+
+function getPlaceType(place) {
+    const type = place.type || '';
+    const amenity = place.extratags?.amenity || '';
+    
+    if (amenity) return amenity.replace('_', ' ');
+    if (type) return type.replace('_', ' ');
+    return '';
+}
+
+function selectPlace(place) {
+    console.log('Place selected:', place);
+    
+    // Extract address components
+    const address = place.display_name || '';
+    const name = extractPlaceName(place);
+    
+    // Parse city and state from address
+    const addressParts = address.split(',').map(part => part.trim());
+    let city = '';
+    let state = '';
+    
+    // Look for state abbreviations or full state names
+    const stateAbbrev = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+    
+    for (let i = addressParts.length - 1; i >= 0; i--) {
+        const part = addressParts[i].toUpperCase();
+        if (stateAbbrev.includes(part) || part.includes('USA')) {
+            if (i > 0) {
+                state = addressParts[i];
+                city = addressParts[i - 1];
+            }
+            break;
+        }
+    }
+    
+    // Populate form fields
+    document.getElementById('restaurantName').value = name;
+    document.getElementById('address').value = address;
+    document.getElementById('location').value = city && state ? `${city}, ${state}` : '';
+    document.getElementById('latitude').value = place.lat || '';
+    document.getElementById('longitude').value = place.lon || '';
+    
+    // Clear search and hide results
+    document.getElementById('restaurantSearch').value = name;
+    hideSearchResults();
+    
+    // Validate form
+    validateForm();
+}
+
+function hideSearchResults() {
+    const searchResults = document.getElementById('searchResults');
+    if (searchResults) {
+        searchResults.classList.add('hidden');
+    }
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function validateForm() {
+    const requiredFields = ['restaurantName', 'address', 'location', 'submitterName'];
+    let allValid = true;
+    
+    requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+            allValid = false;
+        }
+    });
+    
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) {
+        submitBtn.disabled = !allValid;
+    }
+    
+    return allValid;
 }
 
 // Restaurant Form Setup
@@ -1355,11 +1572,22 @@ function setupRestaurantForm() {
     });
 }
 
-// Debug function to show suggest tab (remove after testing)
-function showSuggestTab() {
-    const suggestBtn = document.querySelector('[data-tab="suggest"]');
-    if (suggestBtn) {
-        suggestBtn.style.display = 'block';
-        suggestBtn.classList.remove('hidden-tab');
+// Debug function to show tab navigation (remove after testing)
+function showTabs() {
+    const tabNav = document.querySelector('.tab-navigation');
+    if (tabNav) {
+        tabNav.style.display = 'flex';
+        console.log('✅ Tab navigation is now visible');
+    } else {
+        console.log('❌ Tab navigation not found');
     }
+}
+
+// Debug function to switch to suggest tab
+function showSuggestTab() {
+    showTabs();
+    setTimeout(() => {
+        switchTab('suggest');
+        console.log('✅ Switched to Suggest Restaurant tab');
+    }, 100);
 }
