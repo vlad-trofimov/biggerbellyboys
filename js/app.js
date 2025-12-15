@@ -1466,9 +1466,10 @@ function validateForm() {
     // Check required fields
     requiredFields.forEach(fieldId => {
         const field = document.getElementById(fieldId);
-        if (!field.value.trim()) {
+        if (!field || !field.value.trim()) {
             allValid = false;
-            errors.push(`${field.labels[0].textContent.replace(' *', '')} is required`);
+            const fieldName = field ? field.labels[0].textContent.replace(' *', '') : fieldId;
+            errors.push(`${fieldName} is required`);
         }
     });
     
