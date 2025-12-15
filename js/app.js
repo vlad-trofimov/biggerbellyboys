@@ -1379,20 +1379,25 @@ function setupSocialMediaForm() {
                 usernamePrefix.textContent = '@';
                 usernamePrefix.classList.remove('hidden');
                 usernameInput.placeholder = 'username';
+                usernameInput.disabled = false;
                 break;
             case 'tiktok':
                 usernamePrefix.textContent = '@';
                 usernamePrefix.classList.remove('hidden');
                 usernameInput.placeholder = 'username';
+                usernameInput.disabled = false;
                 break;
             case 'youtube':
                 usernamePrefix.textContent = '@';
                 usernamePrefix.classList.remove('hidden');
-                usernameInput.placeholder = 'channelname or @handle';
+                usernameInput.placeholder = 'channelname';
+                usernameInput.disabled = false;
                 break;
             default:
                 usernamePrefix.classList.add('hidden');
-                usernameInput.placeholder = 'Select platform first';
+                usernameInput.placeholder = '';
+                usernameInput.disabled = true;
+                usernameInput.value = '';
         }
     }
     
