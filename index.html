@@ -27,6 +27,9 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- reCAPTCHA (only loaded when form tab is active) -->
+    <script id="recaptcha-script"></script>
 </head>
 <body>
     <header>
@@ -63,8 +66,16 @@
     <div class="container">
         <!-- Left Side: Restaurant Cards with Filters -->
         <aside class="left-panel">
-            <!-- Filters at top -->
-            <div class="filter-section">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="restaurants">Restaurants</button>
+                <button class="tab-btn hidden-tab" data-tab="suggest" style="display: none;">Suggest Restaurant</button>
+            </div>
+            
+            <!-- Restaurants Tab Content -->
+            <div class="tab-content" id="restaurants-tab">
+                <!-- Filters at top -->
+                <div class="filter-section">
                 <div class="filter-toggle">
                     <button id="filter-toggle-btn">☰ Filters</button>
                 </div>
@@ -118,6 +129,61 @@
                     <!-- Pagination controls will be added here -->
                 </div>
             </div>
+        </div>
+        
+        <!-- Suggest Restaurant Tab Content (Hidden) -->
+        <div class="tab-content hidden" id="suggest-tab">
+            <div class="form-container">
+                <h2>🍕 Suggest a Restaurant</h2>
+                <p>Help us discover great restaurants! Fill out this form to suggest a new spot.</p>
+                
+                <form id="restaurantForm">
+                    <div class="form-group">
+                        <label for="restaurantName">Restaurant Name <span class="required">*</span></label>
+                        <input type="text" id="restaurantName" name="restaurantName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address <span class="required">*</span></label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Location (City, State) <span class="required">*</span></label>
+                        <input type="text" id="location" name="location" placeholder="e.g., New York, NY" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="submitterName">Your Name <span class="required">*</span></label>
+                        <input type="text" id="submitterName" name="submitterName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="googleMapsUrl">Google Maps Link (Optional)</label>
+                        <input type="url" id="googleMapsUrl" name="googleMapsUrl" placeholder="https://maps.google.com/...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="socialMediaUrl">Social Media Link (Optional)</label>
+                        <input type="url" id="socialMediaUrl" name="socialMediaUrl" placeholder="Instagram, TikTok, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Notes/Comments (Optional)</label>
+                        <textarea id="notes" name="notes" placeholder="Tell us what makes this place special..."></textarea>
+                    </div>
+                    
+                    <!-- Honeypot field (hidden from users, catches bots) -->
+                    <input type="text" name="website" style="display: none;" tabindex="-1" autocomplete="off">
+                    
+                    <div id="recaptcha-container" class="g-recaptcha" data-sitekey="6LcNxSssAAAAABTVx39Xspvsw5l44hdlQhSOSWod" style="display: none;"></div>
+                    
+                    <button type="submit" id="submitBtn">Submit Restaurant Suggestion</button>
+                </form>
+                
+                <div id="result" class="result"></div>
+            </div>
+        </div>
         </aside>
 
         <!-- Right Side: Map -->

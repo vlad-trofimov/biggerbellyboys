@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupBrowserNavigation();
     initializeFromUrl();
     loadRestaurantDataFromJSON();
+    setupTabNavigation();
 });
 
 // Go to home page (clear all filters and URL parameters)
@@ -1229,4 +1230,136 @@ function centerMapOnRestaurants() {
     
     const group = new L.featureGroup(markers);
     map.fitBounds(group.getBounds().pad(0.1));
+}
+
+// Tab Navigation Setup
+function setupTabNavigation() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+    
+    // Set up restaurant form if suggest tab exists
+    setupRestaurantForm();
+}
+
+function switchTab(tabName) {
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+    
+    // Update tab content
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.toggle('hidden', content.id !== `${tabName}-tab`);
+    });
+    
+    // Load reCAPTCHA if switching to suggest tab
+    if (tabName === 'suggest') {
+        loadRecaptcha();
+    }
+}
+
+function loadRecaptcha() {
+    // Check if reCAPTCHA script is already loaded
+    if (window.grecaptcha) {
+        document.getElementById('recaptcha-container').style.display = 'block';
+        return;
+    }
+    
+    // Load reCAPTCHA script
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+        document.getElementById('recaptcha-container').style.display = 'block';
+    };
+    document.head.appendChild(script);
+}
+
+// Restaurant Form Setup
+function setupRestaurantForm() {
+    const form = document.getElementById('restaurantForm');
+    if (!form) return;
+    
+    const WORKER_URL = 'https://restaurant-form-handler.vlad-trofimov.workers.dev';
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const result = document.getElementById('result');
+        
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        result.style.display = 'none';
+        
+        try {
+            // Get form data
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            // Get reCAPTCHA token
+            if (window.grecaptcha) {
+                const recaptchaResponse = grecaptcha.getResponse();
+                if (!recaptchaResponse) {
+                    throw new Error('Please complete the reCAPTCHA verification');
+                }
+                data.recaptchaToken = recaptchaResponse;
+            } else {
+                throw new Error('reCAPTCHA not loaded. Please try again.');
+            }
+            
+            // Remove empty honeypot field if present
+            delete data.website;
+            
+            console.log('Submitting restaurant suggestion:', data);
+            
+            // Submit to worker
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            console.log('Response status:', response.status);
+            const responseData = await response.json();
+            console.log('Response data:', responseData);
+            
+            if (responseData.success) {
+                result.className = 'result success';
+                result.textContent = responseData.message || 'Restaurant submitted successfully! Thank you for your suggestion.';
+                e.target.reset(); // Clear form
+                if (window.grecaptcha) {
+                    grecaptcha.reset(); // Reset reCAPTCHA
+                }
+            } else {
+                throw new Error(responseData.error || 'Submission failed');
+            }
+            
+        } catch (error) {
+            console.error('Submission error:', error);
+            result.className = 'result error';
+            result.textContent = 'Error: ' + error.message;
+        }
+        
+        // Re-enable button and show result
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Restaurant Suggestion';
+        result.style.display = 'block';
+    });
+}
+
+// Debug function to show suggest tab (remove after testing)
+function showSuggestTab() {
+    const suggestBtn = document.querySelector('[data-tab="suggest"]');
+    if (suggestBtn) {
+        suggestBtn.style.display = 'block';
+        suggestBtn.classList.remove('hidden-tab');
+    }
 }
