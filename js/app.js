@@ -44,6 +44,9 @@ function goToHomePage() {
     // Clear all filters
     clearAllFilters();
     
+    // Hide suggest form if shown
+    hideSuggestFormFromUrl();
+    
     // Remove all URL parameters and go to base URL
     window.history.pushState({}, '', window.location.pathname);
     
@@ -230,6 +233,15 @@ function initializeFromUrl() {
         }
     }
     
+    // Get suggest form state from URL
+    const suggestParam = urlParams.get('suggest');
+    if (suggestParam === 'true') {
+        // Delay showing suggest form until after DOM is ready
+        setTimeout(() => {
+            showSuggestFormFromUrl();
+        }, 0);
+    }
+    
     // Create initial history entry with current state
     const url = new URL(window.location);
     if (currentPage > 1) {
@@ -243,6 +255,9 @@ function initializeFromUrl() {
     }
     if (ratingParam && !isNaN(parseFloat(ratingParam))) {
         url.searchParams.set('rating', ratingParam);
+    }
+    if (suggestParam === 'true') {
+        url.searchParams.set('suggest', 'true');
     }
     window.history.replaceState({}, '', url);
 }
@@ -260,6 +275,14 @@ function initializeFromUrlForNavigation() {
         }
     } else {
         currentPage = 1;
+    }
+    
+    // Get suggest form state from URL
+    const suggestParam = urlParams.get('suggest');
+    if (suggestParam === 'true') {
+        showSuggestFormFromUrl();
+    } else {
+        hideSuggestFormFromUrl();
     }
     
     // Get sort from URL
@@ -347,6 +370,14 @@ function updateUrl() {
         } else {
             url.searchParams.delete('rating');
         }
+    }
+    
+    // Set suggest parameter (for suggest form state)
+    const suggestTab = document.getElementById('suggest-tab');
+    if (suggestTab && !suggestTab.classList.contains('hidden')) {
+        url.searchParams.set('suggest', 'true');
+    } else {
+        url.searchParams.delete('suggest');
     }
     
     const newUrl = url.href;
@@ -1635,12 +1666,48 @@ function showSuggestForm() {
         // Scroll to top of form
         suggestTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
         
+        // Update URL to include suggest parameter
+        updateUrl();
+        
         console.log('✅ Opened restaurant suggestion form');
+    }
+}
+
+// Function to show suggest form from URL (no scrolling)
+function showSuggestFormFromUrl() {
+    const restaurantsTab = document.getElementById('restaurants-tab');
+    const suggestTab = document.getElementById('suggest-tab');
+    
+    if (restaurantsTab && suggestTab) {
+        restaurantsTab.classList.add('hidden');
+        suggestTab.classList.remove('hidden');
+        
+        // Load required scripts for the form
+        setupPlaceSearch();
+        loadRecaptcha();
+        
+        console.log('✅ Showed restaurant suggestion form from URL');
     }
 }
 
 // Function to hide the suggest form and return to restaurants
 function hideSuggestForm() {
+    const restaurantsTab = document.getElementById('restaurants-tab');
+    const suggestTab = document.getElementById('suggest-tab');
+    
+    if (restaurantsTab && suggestTab) {
+        restaurantsTab.classList.remove('hidden');
+        suggestTab.classList.add('hidden');
+        
+        // Update URL to remove suggest parameter
+        updateUrl();
+        
+        console.log('✅ Closed restaurant suggestion form');
+    }
+}
+
+// Function to hide suggest form from URL navigation (no URL update)
+function hideSuggestFormFromUrl() {
     const restaurantsTab = document.getElementById('restaurants-tab');
     const suggestTab = document.getElementById('suggest-tab');
     
