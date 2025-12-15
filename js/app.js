@@ -1345,6 +1345,165 @@ function setupPlaceSearch() {
             hideSearchResults();
         }
     });
+    
+    // Setup social media functionality
+    setupSocialMediaForm();
+}
+
+// Setup social media platform and username functionality
+function setupSocialMediaForm() {
+    const platformSelect = document.getElementById('socialPlatform');
+    const usernameInput = document.getElementById('socialUsername');
+    const usernamePrefix = document.getElementById('usernamePrefix');
+    const hiddenUrlInput = document.getElementById('socialMediaUrl');
+    
+    if (!platformSelect || !usernameInput || !usernamePrefix || !hiddenUrlInput) return;
+    
+    // Platform selection handler
+    platformSelect.addEventListener('change', function() {
+        updateUsernamePrefix();
+        generateSocialMediaUrl();
+    });
+    
+    // Username input handler
+    usernameInput.addEventListener('input', function() {
+        generateSocialMediaUrl();
+        validateSocialMediaForm();
+    });
+    
+    function updateUsernamePrefix() {
+        const platform = platformSelect.value;
+        
+        switch(platform) {
+            case 'instagram':
+                usernamePrefix.textContent = '@';
+                usernamePrefix.classList.remove('hidden');
+                usernameInput.placeholder = 'username';
+                break;
+            case 'tiktok':
+                usernamePrefix.textContent = '@';
+                usernamePrefix.classList.remove('hidden');
+                usernameInput.placeholder = 'username';
+                break;
+            case 'youtube':
+                usernamePrefix.textContent = '@';
+                usernamePrefix.classList.remove('hidden');
+                usernameInput.placeholder = 'channelname or @handle';
+                break;
+            default:
+                usernamePrefix.classList.add('hidden');
+                usernameInput.placeholder = 'Select platform first';
+        }
+    }
+    
+    function generateSocialMediaUrl() {
+        const platform = platformSelect.value;
+        const username = usernameInput.value.trim();
+        
+        if (!platform || !username) {
+            hiddenUrlInput.value = '';
+            return;
+        }
+        
+        let url = '';
+        const cleanUsername = username.replace(/^[@]/, ''); // Remove @ if user typed it
+        
+        switch(platform) {
+            case 'instagram':
+                url = `https://instagram.com/${cleanUsername}`;
+                break;
+            case 'tiktok':
+                url = `https://tiktok.com/@${cleanUsername}`;
+                break;
+            case 'youtube':
+                // Handle both @handle and channel formats
+                if (cleanUsername.startsWith('@') || !cleanUsername.includes('/')) {
+                    url = `https://youtube.com/@${cleanUsername}`;
+                } else {
+                    url = `https://youtube.com/${cleanUsername}`;
+                }
+                break;
+        }
+        
+        hiddenUrlInput.value = url;
+    }
+    
+    function validateSocialMediaForm() {
+        const platform = platformSelect.value;
+        const username = usernameInput.value.trim();
+        const url = hiddenUrlInput.value;
+        
+        // Remove previous validation classes
+        platformSelect.classList.remove('valid', 'invalid');
+        usernameInput.classList.remove('valid', 'invalid');
+        
+        if (platform && username && url) {
+            if (validateSocialMediaUrl(url)) {
+                platformSelect.classList.add('valid');
+                usernameInput.classList.add('valid');
+            } else {
+                usernameInput.classList.add('invalid');
+            }
+        }
+    }
+    
+    // Initialize prefix state
+    updateUsernamePrefix();
+}
+
+// Prepare multiple search query variations for better results
+function prepareSearchQueries(originalQuery) {
+    const queries = [];
+    const query = originalQuery.trim().toLowerCase();
+    
+    // 1. Original query
+    queries.push(originalQuery);
+    
+    // 2. Remove common articles and prepositions
+    const commonWords = ['the', 'a', 'an', 'at', 'in', 'on', 'of'];
+    let cleanedQuery = query.split(' ')
+        .filter(word => !commonWords.includes(word))
+        .join(' ');
+    
+    if (cleanedQuery && cleanedQuery !== query) {
+        queries.push(cleanedQuery);
+    }
+    
+    // 3. Try with "restaurant" appended
+    if (!query.includes('restaurant') && !query.includes('cafe') && !query.includes('bar')) {
+        queries.push(`${cleanedQuery || originalQuery} restaurant`);
+    }
+    
+    // 4. Try just the first significant word(s) if multiple words
+    const words = (cleanedQuery || query).split(' ').filter(w => w.length > 2);
+    if (words.length > 1) {
+        queries.push(words.slice(0, 2).join(' ')); // First two significant words
+    }
+    
+    // 5. Try individual significant words
+    if (words.length > 1) {
+        words.forEach(word => {
+            if (word.length > 3) {
+                queries.push(word);
+            }
+        });
+    }
+    
+    // Remove duplicates and empty queries
+    return [...new Set(queries)].filter(q => q.trim());
+}
+
+// Remove duplicate search results
+function removeDuplicateResults(results) {
+    const seen = new Set();
+    return results.filter(place => {
+        const key = `${place.display_name}-${place.lat}-${place.lon}`;
+        if (seen.has(key)) {
+            return false;
+        }
+        seen.add(key);
+        return true;
+    });
 }
 
 async function searchPlaces(query) {
@@ -1355,30 +1514,44 @@ async function searchPlaces(query) {
         searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
         searchResults.classList.remove('hidden');
         
-        // Search OpenStreetMap Nominatim for restaurants/food establishments
-        const response = await fetch(
-            `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
-                q: `${query}`,
-                format: 'json',
-                addressdetails: '1',
-                limit: '8',
-                countrycodes: 'us', // Limit to US for better results
-                extratags: '1'
-            }), {
-                headers: {
-                    'User-Agent': 'BiggerBellyBoys/1.0' // Required by Nominatim
-                }
-            }
-        );
+        // Prepare multiple search variations for better results
+        const searchQueries = prepareSearchQueries(query);
+        let allResults = [];
         
-        if (!response.ok) {
-            throw new Error('Search failed');
+        // Try each search variation
+        for (const searchQuery of searchQueries) {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
+                    q: searchQuery,
+                    format: 'json',
+                    addressdetails: '1',
+                    limit: '10',
+                    countrycodes: 'us',
+                    extratags: '1'
+                }), {
+                    headers: {
+                        'User-Agent': 'BiggerBellyBoys/1.0'
+                    }
+                }
+            );
+            
+            if (response.ok) {
+                const results = await response.json();
+                allResults = allResults.concat(results);
+                
+                // If we found good results, no need to try more variations
+                if (results.length >= 3) break;
+            }
+            
+            // Small delay between requests to be respectful to the API
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
         
-        const results = await response.json();
+        // Remove duplicates based on display_name and coordinates
+        const uniqueResults = removeDuplicateResults(allResults);
         
         // Filter for restaurants and food places
-        const restaurantResults = results.filter(place => {
+        const restaurantResults = uniqueResults.filter(place => {
             const type = place.type || '';
             const category = place.category || '';
             const amenity = place.extratags?.amenity || '';
@@ -1490,7 +1663,7 @@ function escapeHtml(text) {
 }
 
 function validateForm() {
-    const requiredFields = ['restaurantName', 'address', 'submitterName', 'socialMediaUrl'];
+    const requiredFields = ['restaurantName', 'address', 'submitterName', 'socialPlatform', 'socialUsername'];
     let allValid = true;
     let errors = [];
     
@@ -1581,6 +1754,20 @@ function setupRestaurantForm() {
         result.style.display = 'none';
         
         try {
+            // Validate form before submission
+            if (!validateForm()) {
+                throw new Error('Please fill in all required fields correctly');
+            }
+            
+            // Ensure social media URL is generated
+            const platformSelect = document.getElementById('socialPlatform');
+            const usernameInput = document.getElementById('socialUsername');
+            if (platformSelect && usernameInput && platformSelect.value && usernameInput.value) {
+                // Trigger URL generation one more time to be safe
+                const event = new Event('input', { bubbles: true });
+                usernameInput.dispatchEvent(event);
+            }
+            
             // Get form data
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);

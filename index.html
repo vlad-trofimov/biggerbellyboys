@@ -187,13 +187,26 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="socialMediaUrl">Instagram, TikTok, or YouTube Account <span class="required">*</span></label>
-                        <input type="url" id="socialMediaUrl" name="socialMediaUrl" placeholder="https://instagram.com/username" required autocomplete="off">
-                        <small class="help-text"><strong>Accepted formats:</strong><br>
-                        • Instagram: https://instagram.com/username<br>
-                        • TikTok: https://tiktok.com/@username<br>
-                        • YouTube: https://youtube.com/@username or https://youtube.com/channel/...</small>
+                        <label for="socialPlatform">Social Media Platform <span class="required">*</span></label>
+                        <select id="socialPlatform" name="socialPlatform" required>
+                            <option value="">Select platform...</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="youtube">YouTube</option>
+                        </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="socialUsername">Username <span class="required">*</span></label>
+                        <div class="username-input-container">
+                            <span id="usernamePrefix" class="username-prefix">@</span>
+                            <input type="text" id="socialUsername" name="socialUsername" placeholder="username" required autocomplete="off">
+                        </div>
+                        <small class="help-text">Enter just your username (without @ or platform URL)</small>
+                    </div>
+                    
+                    <!-- Hidden field to store the complete URL -->
+                    <input type="hidden" id="socialMediaUrl" name="socialMediaUrl">
                     
                     <div class="form-group">
                         <label for="notes">Notes/Comments (Optional)</label>

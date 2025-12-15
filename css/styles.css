@@ -1256,7 +1256,8 @@ header h1 {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid var(--border-color);
@@ -1264,6 +1265,15 @@ header h1 {
     font-size: 1rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     background: var(--background-white);
+}
+
+.form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
 }
 
 .form-group input[readonly] {
@@ -1284,6 +1294,32 @@ header h1 {
 .help-text strong {
     color: var(--text-dark);
     font-style: normal;
+}
+
+/* Username input with prefix */
+.username-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.username-prefix {
+    position: absolute;
+    left: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.username-input-container input {
+    padding-left: 2rem !important;
+}
+
+/* Hide prefix when platform is not selected */
+.username-prefix.hidden {
+    opacity: 0;
 }
 
 /* Search Container */
