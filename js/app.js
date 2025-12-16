@@ -1466,6 +1466,49 @@ function setupSocialMediaForm() {
     updateUsernamePrefix();
 }
 
+// Convert Photon API response format to Nominatim-compatible format
+function convertPhotonToNominatim(feature) {
+    const props = feature.properties || {};
+    const coords = feature.geometry?.coordinates || [0, 0];
+    
+    // Build address components
+    const address = {
+        house_number: props.housenumber || '',
+        road: props.street || '',
+        city: props.city || '',
+        state: props.state || '',
+        postcode: props.postcode || '',
+        country: props.country || 'United States',
+        country_code: 'us'
+    };
+    
+    // Build display name
+    const nameParts = [
+        props.name,
+        props.housenumber,
+        props.street,
+        props.city,
+        props.state,
+        props.postcode,
+        'United States'
+    ].filter(Boolean);
+    
+    return {
+        place_id: feature.properties.osm_id || Math.random(),
+        lat: coords[1]?.toString() || '0',
+        lon: coords[0]?.toString() || '0', 
+        display_name: nameParts.join(', '),
+        type: props.osm_value || 'restaurant',
+        class: props.osm_key || 'amenity',
+        category: 'amenity',
+        address: address,
+        extratags: {
+            amenity: props.osm_value || 'restaurant',
+            name: props.name || ''
+        }
+    };
+}
+
 // Minimal search query variations for maximum speed
 function prepareSearchQueries(originalQuery) {
     const queries = [];
@@ -1515,13 +1558,10 @@ async function searchPlaces(query) {
                 const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
                 
                 const response = await fetch(
-                    `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
+                    `https://photon.komoot.io/api/?` + new URLSearchParams({
                         q: searchQuery,
-                        format: 'json',
-                        addressdetails: '1',
-                        limit: '3', // Further reduced to 3 per query for speed
-                        countrycodes: 'us',
-                        extratags: '1'
+                        limit: '5',
+                        osm_tag: 'amenity:restaurant,amenity:cafe,amenity:fast_food,amenity:bar,amenity:pub'
                     }), {
                         headers: {
                             'User-Agent': 'BiggerBellyBoys/1.0'
@@ -1533,7 +1573,9 @@ async function searchPlaces(query) {
                 clearTimeout(timeoutId);
             
                 if (response.ok) {
-                    const results = await response.json();
+                    const data = await response.json();
+                    // Photon returns {features: [...]} format, convert to Nominatim-like format
+                    const results = data.features ? data.features.map(convertPhotonToNominatim) : [];
                     allResults = allResults.concat(results);
                     
                     // AGGRESSIVE: Exit immediately after first successful result set
@@ -1552,31 +1594,13 @@ async function searchPlaces(query) {
         // Remove duplicates based on display_name and coordinates
         const uniqueResults = removeDuplicateResults(allResults);
         
-        // Filter for restaurants and food places
+        // Photon API already filters for restaurants, so minimal additional filtering needed
         const restaurantResults = uniqueResults.filter(place => {
-            const type = place.type || '';
-            const category = place.category || '';
-            const amenity = place.extratags?.amenity || '';
-            
-            return (
-                type.includes('restaurant') ||
-                type.includes('cafe') ||
-                type.includes('bar') ||
-                type.includes('pub') ||
-                type.includes('fast_food') ||
-                category.includes('amenity') ||
-                amenity.includes('restaurant') ||
-                amenity.includes('cafe') ||
-                amenity.includes('bar') ||
-                amenity.includes('fast_food') ||
-                place.display_name.toLowerCase().includes('restaurant') ||
-                place.display_name.toLowerCase().includes('cafe') ||
-                place.display_name.toLowerCase().includes('pizza') ||
-                place.display_name.toLowerCase().includes('food')
-            );
+            // Just verify we have basic required fields
+            return place.display_name && place.lat && place.lon;
         });
         
-        displaySearchResults(restaurantResults.slice(0, 5)); // Limit to top 5
+        displaySearchResults(restaurantResults.slice(0, 8)); // Show more results since they're pre-filtered
         
     } catch (error) {
         console.error('Search error:', error);
