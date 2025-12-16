@@ -682,7 +682,7 @@ header h1 {
 }
 
 .restaurant-card:hover {
-    transform: translateY(-5px) rotate(1deg);
+    transform: scale(1.02);
     box-shadow: 0 6px 20px var(--shadow);
     border-color: var(--primary-color);
 }
