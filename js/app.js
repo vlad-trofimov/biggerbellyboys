@@ -1466,32 +1466,20 @@ function setupSocialMediaForm() {
     updateUsernamePrefix();
 }
 
-// Prepare optimized search query variations for speed
+// Minimal search query variations for maximum speed
 function prepareSearchQueries(originalQuery) {
     const queries = [];
     const query = originalQuery.trim().toLowerCase();
     
-    // 1. Original query (most likely to be correct)
+    // 1. Always try original query first
     queries.push(originalQuery);
     
-    // 2. Only add "restaurant" if query is short and specific
-    if (query.length <= 15 && !query.includes('restaurant') && !query.includes('cafe') && !query.includes('bar')) {
+    // 2. Only ONE fallback: add "restaurant" if query is short and doesn't contain restaurant words
+    if (query.length <= 20 && !query.includes('restaurant') && !query.includes('cafe') && !query.includes('bar')) {
         queries.push(`${originalQuery} restaurant`);
     }
     
-    // 3. Only clean query if it's long and has common words
-    if (query.length > 10 && /\b(the|a|an|at|in|on|of)\b/.test(query)) {
-        const commonWords = ['the', 'a', 'an', 'at', 'in', 'on', 'of'];
-        let cleanedQuery = query.split(' ')
-            .filter(word => !commonWords.includes(word))
-            .join(' ');
-        
-        if (cleanedQuery && cleanedQuery !== query) {
-            queries.push(cleanedQuery);
-        }
-    }
-    
-    return queries.slice(0, 3); // Limit to max 3 variations for speed
+    return queries.slice(0, 2); // Maximum 2 queries for speed
 }
 
 // Remove duplicate search results
@@ -1519,29 +1507,42 @@ async function searchPlaces(query) {
         const searchQueries = prepareSearchQueries(query);
         let allResults = [];
         
-        // Try each search variation but optimize for speed
+        // Try each search variation with timeout protection
         for (const searchQuery of searchQueries) {
-            const response = await fetch(
-                `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
-                    q: searchQuery,
-                    format: 'json',
-                    addressdetails: '1',
-                    limit: '5', // Reduced from 10 to 5 per query
-                    countrycodes: 'us',
-                    extratags: '1'
-                }), {
-                    headers: {
-                        'User-Agent': 'BiggerBellyBoys/1.0'
-                    }
-                }
-            );
-            
-            if (response.ok) {
-                const results = await response.json();
-                allResults = allResults.concat(results);
+            try {
+                // Add timeout to prevent hanging requests
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
                 
-                // Exit early if we have enough good results
-                if (allResults.length >= 15) break; // Stop at 15 total results
+                const response = await fetch(
+                    `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
+                        q: searchQuery,
+                        format: 'json',
+                        addressdetails: '1',
+                        limit: '3', // Further reduced to 3 per query for speed
+                        countrycodes: 'us',
+                        extratags: '1'
+                    }), {
+                        headers: {
+                            'User-Agent': 'BiggerBellyBoys/1.0'
+                        },
+                        signal: controller.signal
+                    }
+                );
+                
+                clearTimeout(timeoutId);
+            
+                if (response.ok) {
+                    const results = await response.json();
+                    allResults = allResults.concat(results);
+                    
+                    // AGGRESSIVE: Exit immediately after first successful result set
+                    if (results.length > 0) break; // Stop as soon as we get ANY results
+                }
+            } catch (error) {
+                // Skip failed/timeout requests and continue to next query
+                console.log(`Search query "${searchQuery}" failed or timed out:`, error.message);
+                continue;
             }
             
             // Reduced delay for better responsiveness
