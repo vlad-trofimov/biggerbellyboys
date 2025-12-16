@@ -1,6 +1,56 @@
 const fs = require('fs');
 const path = require('path');
 
+// TikTok thumbnail fetching function
+async function fetchTikTokThumbnail(url) {
+    if (!url || !url.includes('tiktok.com')) return null;
+    
+    try {
+        const fetch = (await import('node-fetch')).default;
+        const response = await fetch(`https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`);
+        
+        if (!response.ok) {
+            console.log(`⚠️ TikTok thumbnail fetch failed for ${url}: ${response.status}`);
+            return null;
+        }
+        
+        const json = await response.json();
+        return json.thumbnail_url || null;
+    } catch (error) {
+        console.log(`⚠️ Error fetching TikTok thumbnail for ${url}:`, error.message);
+        return null;
+    }
+}
+
+// Geocoding function
+async function geocodeAddress(address, apiKey) {
+    if (!address || address === '') return null;
+    
+    try {
+        const fetch = (await import('node-fetch')).default;
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.log(`⚠️ Geocoding failed for ${address}: ${response.status}`);
+            return null;
+        }
+        
+        const json = await response.json();
+        
+        if (json.status === 'OK' && json.results.length > 0) {
+            const location = json.results[0].geometry.location;
+            return `${location.lat}, ${location.lng}`;
+        } else {
+            console.log(`⚠️ Address not found: ${address} (status: ${json.status})`);
+            return null;
+        }
+    } catch (error) {
+        console.log(`⚠️ Error geocoding address ${address}:`, error.message);
+        return null;
+    }
+}
+
 // Fetch CSV with retry logic
 async function fetchCSVWithRetry(url, maxRetries = 5) {
     const fetch = (await import('node-fetch')).default;
@@ -177,8 +227,14 @@ function getCachedThumbnailPath(tikTokVideoUrl) {
 // Main processing function
 async function main() {
     const csvUrl = process.env.GOOGLE_SHEETS_URL;
+    const googleApiKey = process.env.GOOGLE_MAPS_API_KEY;
+    
     if (!csvUrl) {
         throw new Error('GOOGLE_SHEETS_URL environment variable is required');
+    }
+    
+    if (!googleApiKey) {
+        throw new Error('GOOGLE_MAPS_API_KEY environment variable is required');
     }
     
     // Retry the entire process if we get too many coordinate errors
@@ -206,29 +262,41 @@ async function main() {
                 continue;
             }
             
-            // Validate coordinates
-            const coords = validateCoordinates(row['GeoCode Script']);
-            if (!coords) {
-                console.log(`⚠️ Skipping ${row.Restaurant}: invalid coordinates`);
+            console.log(`🔄 Processing ${row.Restaurant}...`);
+            
+            // Generate coordinates using geocoding API
+            const geocodeResult = await geocodeAddress(row.Address?.trim(), googleApiKey);
+            if (!geocodeResult) {
+                console.log(`⚠️ Skipping ${row.Restaurant}: unable to geocode address`);
                 skippedCount++;
                 coordinateErrors++;
                 continue;
             }
             
-            // Check for thumbnail (either cached or external URL)
+            const coords = validateCoordinates(geocodeResult);
+            if (!coords) {
+                console.log(`⚠️ Skipping ${row.Restaurant}: invalid coordinates from geocoding`);
+                skippedCount++;
+                coordinateErrors++;
+                continue;
+            }
+            
+            // Generate thumbnail for TikTok video
             const tikTokVideoUrl = row['TikTok Video']?.trim() || '';
             const cachedThumbnailPath = getCachedThumbnailPath(tikTokVideoUrl);
-            const externalThumbnailUrl = row['TikTok Thumbnail']?.trim() || '';
+            let thumbnailUrl = cachedThumbnailPath;
             
-            const hasValidThumbnail = cachedThumbnailPath || (
-                externalThumbnailUrl && 
-                !externalThumbnailUrl.includes('#NAME?') && 
-                !externalThumbnailUrl.includes('#ERROR') && 
-                externalThumbnailUrl.startsWith('https://')
-            );
+            // If no cached thumbnail and we have a TikTok URL, fetch thumbnail
+            if (!cachedThumbnailPath && tikTokVideoUrl) {
+                const fetchedThumbnail = await fetchTikTokThumbnail(tikTokVideoUrl);
+                if (fetchedThumbnail) {
+                    thumbnailUrl = fetchedThumbnail;
+                }
+            }
             
-            if (!hasValidThumbnail) {
-                console.log(`⚠️ Skipping ${row.Restaurant}: no valid thumbnail`);
+            // Skip if no valid thumbnail available
+            if (!thumbnailUrl) {
+                console.log(`⚠️ Skipping ${row.Restaurant}: no valid thumbnail available`);
                 skippedCount++;
                 continue;
             }
@@ -257,8 +325,8 @@ async function main() {
                 longitude: coords.lng,
                 rating: parseFloat(row['Bigger Belly Rating']) || 0,
                 tikTokVideo: tikTokVideoUrl,
-                tikTokThumbnail: cachedThumbnailPath || externalThumbnailUrl,
-                tikTokThumbnailFallback: externalThumbnailUrl,
+                tikTokThumbnail: thumbnailUrl,
+                tikTokThumbnailFallback: thumbnailUrl,
                 datePosted: row['Date of Posted Video']?.trim() || ''
             };
             

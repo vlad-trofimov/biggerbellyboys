@@ -31,6 +31,7 @@ jobs:
         run: node .github/scripts/update-restaurant-data.js
         env:
           GOOGLE_SHEETS_URL: ${{ secrets.GOOGLE_SHEETS_URL }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           
       - name: Commit and push if changes
         env:
