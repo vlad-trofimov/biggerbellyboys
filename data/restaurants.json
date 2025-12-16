@@ -1,6 +1,6 @@
 {
-  "version": "2025-12-16T18:29:17.491Z",
-  "lastUpdated": "2025-12-16T18:29:17.491Z",
+  "version": "2025-12-16T18:34:13.982Z",
+  "lastUpdated": "2025-12-16T18:34:13.982Z",
   "totalRestaurants": 177,
   "restaurants": [
     {
@@ -2266,32 +2266,36 @@
       "datePosted": "5/21/2025"
     },
     {
-      "reviewer": "egg sando,osaka",
-      "restaurant": "Japan,Grand-K",
+      "reviewer": "jason",
+      "restaurant": "My Neighbor",
       "tags": [
-        "1 chome-13-33 nishihonmachi"
+        "travel food series",
+        "japan",
+        "osaka",
+        "breakfast",
+        "egg sando"
       ],
-      "location": "Nishi Ward",
+      "location": "Osaka, Japan",
       "locationData": {
-        "city": "Nishi Ward",
-        "region": "",
-        "fullRegion": "",
-        "fullLocation": "Nishi Ward",
-        "originalLocation": "Nishi Ward",
-        "cityStandardized": "nishi ward",
-        "fullRegionStandardized": "",
-        "fullLocationStandardized": "nishi ward"
+        "city": "Osaka",
+        "region": "Japan",
+        "fullRegion": "Japan",
+        "fullLocation": "Osaka, Japan",
+        "originalLocation": "Osaka, Japan",
+        "cityStandardized": "osaka",
+        "fullRegionStandardized": "japan",
+        "fullLocationStandardized": "osaka, japan"
       },
-      "address": "Osaka",
-      "city": "nishi ward",
+      "address": "Grand-K, 1 Chome-13-33 Nishihonmachi, Nishi Ward, Osaka, 550-0005, Japan",
+      "city": "osaka",
       "googleMapsLink": "",
-      "latitude": 34.6937249,
-      "longitude": 135.5022535,
-      "rating": 550,
-      "tikTokVideo": "Japan,9.2,https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083,5/21/2025",
+      "latitude": 34.6833563,
+      "longitude": 135.4937215,
+      "rating": 9.2,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083",
       "tikTokThumbnail": "thumbnails/7506358536390135083.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7506358536390135083.jpeg",
-      "datePosted": ""
+      "datePosted": "5/21/2025"
     },
     {
       "reviewer": "andrew",
