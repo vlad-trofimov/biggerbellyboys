@@ -1565,31 +1565,8 @@ async function searchPlaces(query) {
         // Remove duplicates based on display_name and coordinates
         const uniqueResults = removeDuplicateResults(allResults);
         
-        // Filter for restaurants and food places
-        const restaurantResults = uniqueResults.filter(place => {
-            const type = place.type || '';
-            const category = place.category || '';
-            const amenity = place.extratags?.amenity || '';
-            
-            return (
-                type.includes('restaurant') ||
-                type.includes('cafe') ||
-                type.includes('bar') ||
-                type.includes('pub') ||
-                type.includes('fast_food') ||
-                category.includes('amenity') ||
-                amenity.includes('restaurant') ||
-                amenity.includes('cafe') ||
-                amenity.includes('bar') ||
-                amenity.includes('fast_food') ||
-                place.display_name.toLowerCase().includes('restaurant') ||
-                place.display_name.toLowerCase().includes('cafe') ||
-                place.display_name.toLowerCase().includes('pizza') ||
-                place.display_name.toLowerCase().includes('food')
-            );
-        });
-        
-        displaySearchResults(restaurantResults.slice(0, 5)); // Limit to top 5
+        // Display all unique results without filtering (better performance)
+        displaySearchResults(uniqueResults.slice(0, 10)); // Show top 10 results
         
     } catch (error) {
         console.error('Search error:', error);
@@ -1646,6 +1623,9 @@ function getPlaceType(place) {
 function selectPlace(place) {
     console.log('Place selected:', place);
     
+    // Save the selected place data for validation
+    window.selectedPlaceData = place;
+    
     // Extract address components
     const address = place.display_name || '';
     const name = extractPlaceName(place);
@@ -1684,6 +1664,9 @@ function clearRestaurantSearch() {
         searchInput.value = '';
     }
     
+    // Clear selected place data
+    window.selectedPlaceData = null;
+    
     // Clear auto-populated fields
     document.getElementById('restaurantName').value = '';
     document.getElementById('address').value = '';
@@ -1712,6 +1695,42 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+function isValidRestaurantLocation() {
+    // Get the currently selected place data
+    const selectedPlaceData = window.selectedPlaceData;
+    
+    // If no place is selected, consider it invalid
+    if (!selectedPlaceData) {
+        return false;
+    }
+    
+    const type = selectedPlaceData.type || '';
+    const category = selectedPlaceData.category || '';
+    const amenity = selectedPlaceData.extratags?.amenity || '';
+    const displayName = selectedPlaceData.display_name?.toLowerCase() || '';
+    
+    return (
+        type.includes('restaurant') ||
+        type.includes('cafe') ||
+        type.includes('bar') ||
+        type.includes('pub') ||
+        type.includes('fast_food') ||
+        category.includes('amenity') ||
+        amenity.includes('restaurant') ||
+        amenity.includes('cafe') ||
+        amenity.includes('bar') ||
+        amenity.includes('fast_food') ||
+        displayName.includes('restaurant') ||
+        displayName.includes('cafe') ||
+        displayName.includes('pizza') ||
+        displayName.includes('food') ||
+        displayName.includes('bakery') ||
+        displayName.includes('bistro') ||
+        displayName.includes('diner') ||
+        displayName.includes('eatery')
+    );
+}
+
 function validateForm() {
     const requiredFields = ['restaurantName', 'address', 'submitterName', 'socialPlatform', 'socialUsername'];
     let allValid = true;
@@ -1726,6 +1745,12 @@ function validateForm() {
             errors.push(`${fieldName} is required`);
         }
     });
+    
+    // Validate that the selected location is restaurant-related
+    if (!isValidRestaurantLocation()) {
+        allValid = false;
+        errors.push('Please select a restaurant, cafe, bar, or food establishment from the search results');
+    }
     
     // Validate social media URL with regex
     const socialMediaUrl = document.getElementById('socialMediaUrl').value.trim();
