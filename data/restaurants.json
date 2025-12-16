@@ -1,6 +1,6 @@
 {
-  "version": "2025-12-16T18:27:38.950Z",
-  "lastUpdated": "2025-12-16T18:27:38.950Z",
+  "version": "2025-12-16T18:29:17.491Z",
+  "lastUpdated": "2025-12-16T18:29:17.491Z",
   "totalRestaurants": 177,
   "restaurants": [
     {
@@ -2266,6 +2266,34 @@
       "datePosted": "5/21/2025"
     },
     {
+      "reviewer": "egg sando,osaka",
+      "restaurant": "Japan,Grand-K",
+      "tags": [
+        "1 chome-13-33 nishihonmachi"
+      ],
+      "location": "Nishi Ward",
+      "locationData": {
+        "city": "Nishi Ward",
+        "region": "",
+        "fullRegion": "",
+        "fullLocation": "Nishi Ward",
+        "originalLocation": "Nishi Ward",
+        "cityStandardized": "nishi ward",
+        "fullRegionStandardized": "",
+        "fullLocationStandardized": "nishi ward"
+      },
+      "address": "Osaka",
+      "city": "nishi ward",
+      "googleMapsLink": "",
+      "latitude": 34.6937249,
+      "longitude": 135.5022535,
+      "rating": 550,
+      "tikTokVideo": "Japan,9.2,https://www.tiktok.com/@biggerbellyboys/video/7506358536390135083,5/21/2025",
+      "tikTokThumbnail": "thumbnails/7506358536390135083.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7506358536390135083.jpeg",
+      "datePosted": ""
+    },
+    {
       "reviewer": "andrew",
       "restaurant": "Wagyu Shawarma Grill",
       "tags": [
@@ -3224,34 +3252,6 @@
       "tikTokThumbnail": "thumbnails/7530113824058395959.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7530113824058395959.jpeg",
       "datePosted": "7/23/2025"
-    },
-    {
-      "reviewer": "duomo,travel food series",
-      "restaurant": "florence",
-      "tags": [
-        "gelato"
-      ],
-      "location": "dessert,Florence",
-      "locationData": {
-        "city": "dessert",
-        "region": "Florence",
-        "fullRegion": "Florence",
-        "fullLocation": "dessert, Florence",
-        "originalLocation": "dessert,Florence",
-        "cityStandardized": "dessert",
-        "fullRegionStandardized": "florence",
-        "fullLocationStandardized": "dessert, florence"
-      },
-      "address": "Italy,Via Ricasoli",
-      "city": "dessert",
-      "googleMapsLink": "",
-      "latitude": 43.7754328,
-      "longitude": 11.2574932,
-      "rating": 50122,
-      "tikTokVideo": "Italy,Error: Service invoked too many times for one day: urlfetch.,9.6,https://www.tiktok.com/@biggerbellyboys/video/7530113824058395959,Error: Service invoked too many times for one day: urlfetch.,7/23/2025",
-      "tikTokThumbnail": "thumbnails/7530113824058395959.jpeg",
-      "tikTokThumbnailFallback": "thumbnails/7530113824058395959.jpeg",
-      "datePosted": ""
     },
     {
       "reviewer": "jason",
