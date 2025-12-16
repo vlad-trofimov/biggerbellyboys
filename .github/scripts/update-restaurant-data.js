@@ -98,13 +98,37 @@ async function fetchCSVWithRetry(url, maxRetries = 5) {
 
 // Parse CSV data
 function parseCSV(csvText) {
-    const lines = csvText.trim().split('\n');
+    const lines = [];
+    let currentLine = '';
+    let inQuotes = false;
+    
+    // First, properly split lines while handling multiline quoted fields
+    for (let i = 0; i < csvText.length; i++) {
+        const char = csvText[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+            currentLine += char;
+        } else if (char === '\n' && !inQuotes) {
+            if (currentLine.trim()) {
+                lines.push(currentLine.trim());
+            }
+            currentLine = '';
+        } else {
+            currentLine += char;
+        }
+    }
+    
+    // Add the last line if there's content
+    if (currentLine.trim()) {
+        lines.push(currentLine.trim());
+    }
     
     if (lines.length < 2) {
         return [];
     }
     
-    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+    const headers = parseCSVLine(lines[0]).map(h => h.trim().replace(/"/g, ''));
     const data = [];
     
     for (let i = 1; i < lines.length; i++) {
@@ -112,7 +136,10 @@ function parseCSV(csvText) {
         const row = {};
         
         headers.forEach((header, index) => {
-            row[header] = values[index] ? values[index].trim().replace(/"/g, '') : '';
+            let value = values[index] ? values[index].trim().replace(/"/g, '') : '';
+            // Replace any embedded newlines with spaces
+            value = value.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+            row[header] = value;
         });
         
         data.push(row);
