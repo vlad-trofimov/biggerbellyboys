@@ -1,7 +1,7 @@
 {
-  "version": "2025-12-16T18:34:13.982Z",
-  "lastUpdated": "2025-12-16T18:34:13.982Z",
-  "totalRestaurants": 177,
+  "version": "2025-12-16T18:35:54.255Z",
+  "lastUpdated": "2025-12-16T18:35:54.255Z",
+  "totalRestaurants": 180,
   "restaurants": [
     {
       "reviewer": "vlad",
@@ -2020,6 +2020,40 @@
     },
     {
       "reviewer": "jason",
+      "restaurant": "Nishiki Market",
+      "tags": [
+        "travel food series",
+        "japan",
+        "kyoto",
+        "teriyaki",
+        "fruits",
+        "dessert",
+        "tempura"
+      ],
+      "location": "Kyoto, Japan",
+      "locationData": {
+        "city": "Kyoto",
+        "region": "Japan",
+        "fullRegion": "Japan",
+        "fullLocation": "Kyoto, Japan",
+        "originalLocation": "Kyoto, Japan",
+        "cityStandardized": "kyoto",
+        "fullRegionStandardized": "japan",
+        "fullLocationStandardized": "kyoto, japan"
+      },
+      "address": "Nakagyo Ward, Kyoto, 604-8055, Japan",
+      "city": "kyoto",
+      "googleMapsLink": "",
+      "latitude": 35.0050995,
+      "longitude": 135.7643904,
+      "rating": 7.3,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7504105664474664222",
+      "tikTokThumbnail": "thumbnails/7504105664474664222.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7504105664474664222.jpeg",
+      "datePosted": "5/14/2025"
+    },
+    {
+      "reviewer": "jason",
       "restaurant": "Katsakura Tonkatsu Sanjo",
       "tags": [
         "travel food series",
@@ -3259,6 +3293,37 @@
     },
     {
       "reviewer": "jason",
+      "restaurant": "La Strega Nocciola Gelateria Artigianale - Firenze Duomo",
+      "tags": [
+        "travel food series",
+        "florence",
+        "gelato",
+        "dessert"
+      ],
+      "location": "Florence, Italy",
+      "locationData": {
+        "city": "Florence",
+        "region": "Italy",
+        "fullRegion": "Italy",
+        "fullLocation": "Florence, Italy",
+        "originalLocation": "Florence, Italy",
+        "cityStandardized": "florence",
+        "fullRegionStandardized": "italy",
+        "fullLocationStandardized": "florence, italy"
+      },
+      "address": "Via Ricasoli, 16R, 50122 Firenze FI, Italy",
+      "city": "florence",
+      "googleMapsLink": "",
+      "latitude": 43.7739599,
+      "longitude": 11.2564328,
+      "rating": 9.6,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7530113824058395959",
+      "tikTokThumbnail": "thumbnails/7530113824058395959.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7530113824058395959.jpeg",
+      "datePosted": "7/23/2025"
+    },
+    {
+      "reviewer": "jason",
       "restaurant": "Trattoria Dall'Oste",
       "tags": [
         "travel food series",
@@ -3501,6 +3566,38 @@
       "latitude": 48.85483019999999,
       "longitude": 2.2941357,
       "rating": 4.5,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7535534591742856461",
+      "tikTokThumbnail": "thumbnails/7535534591742856461.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7535534591742856461.jpeg",
+      "datePosted": "8/6/2025"
+    },
+    {
+      "reviewer": "jason",
+      "restaurant": "Café Charlot",
+      "tags": [
+        "travel food series",
+        "paris",
+        "calamari",
+        "french fries",
+        "beef tartare"
+      ],
+      "location": "Paris, France",
+      "locationData": {
+        "city": "Paris",
+        "region": "France",
+        "fullRegion": "France",
+        "fullLocation": "Paris, France",
+        "originalLocation": "Paris, France",
+        "cityStandardized": "paris",
+        "fullRegionStandardized": "france",
+        "fullLocationStandardized": "paris, france"
+      },
+      "address": "38 Rue de Bretagne, 75003 Paris, France",
+      "city": "paris",
+      "googleMapsLink": "",
+      "latitude": 48.8630744,
+      "longitude": 2.3624588,
+      "rating": 4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7535534591742856461",
       "tikTokThumbnail": "thumbnails/7535534591742856461.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7535534591742856461.jpeg",
