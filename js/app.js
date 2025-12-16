@@ -1343,10 +1343,10 @@ function setupPlaceSearch() {
             return;
         }
         
-        // Debounce search for better UX
+        // Optimized debounce for faster response
         searchTimeout = setTimeout(() => {
             searchPlaces(query);
-        }, 300);
+        }, 200); // Reduced from 300ms to 200ms for faster response
     });
     
     // Hide results when clicking outside
@@ -1466,46 +1466,32 @@ function setupSocialMediaForm() {
     updateUsernamePrefix();
 }
 
-// Prepare multiple search query variations for better results
+// Prepare optimized search query variations for speed
 function prepareSearchQueries(originalQuery) {
     const queries = [];
     const query = originalQuery.trim().toLowerCase();
     
-    // 1. Original query
+    // 1. Original query (most likely to be correct)
     queries.push(originalQuery);
     
-    // 2. Remove common articles and prepositions
-    const commonWords = ['the', 'a', 'an', 'at', 'in', 'on', 'of'];
-    let cleanedQuery = query.split(' ')
-        .filter(word => !commonWords.includes(word))
-        .join(' ');
-    
-    if (cleanedQuery && cleanedQuery !== query) {
-        queries.push(cleanedQuery);
+    // 2. Only add "restaurant" if query is short and specific
+    if (query.length <= 15 && !query.includes('restaurant') && !query.includes('cafe') && !query.includes('bar')) {
+        queries.push(`${originalQuery} restaurant`);
     }
     
-    // 3. Try with "restaurant" appended
-    if (!query.includes('restaurant') && !query.includes('cafe') && !query.includes('bar')) {
-        queries.push(`${cleanedQuery || originalQuery} restaurant`);
+    // 3. Only clean query if it's long and has common words
+    if (query.length > 10 && /\b(the|a|an|at|in|on|of)\b/.test(query)) {
+        const commonWords = ['the', 'a', 'an', 'at', 'in', 'on', 'of'];
+        let cleanedQuery = query.split(' ')
+            .filter(word => !commonWords.includes(word))
+            .join(' ');
+        
+        if (cleanedQuery && cleanedQuery !== query) {
+            queries.push(cleanedQuery);
+        }
     }
     
-    // 4. Try just the first significant word(s) if multiple words
-    const words = (cleanedQuery || query).split(' ').filter(w => w.length > 2);
-    if (words.length > 1) {
-        queries.push(words.slice(0, 2).join(' ')); // First two significant words
-    }
-    
-    // 5. Try individual significant words
-    if (words.length > 1) {
-        words.forEach(word => {
-            if (word.length > 3) {
-                queries.push(word);
-            }
-        });
-    }
-    
-    // Remove duplicates and empty queries
-    return [...new Set(queries)].filter(q => q.trim());
+    return queries.slice(0, 3); // Limit to max 3 variations for speed
 }
 
 // Remove duplicate search results
@@ -1533,14 +1519,14 @@ async function searchPlaces(query) {
         const searchQueries = prepareSearchQueries(query);
         let allResults = [];
         
-        // Try each search variation
+        // Try each search variation but optimize for speed
         for (const searchQuery of searchQueries) {
             const response = await fetch(
                 `https://nominatim.openstreetmap.org/search?` + new URLSearchParams({
                     q: searchQuery,
                     format: 'json',
                     addressdetails: '1',
-                    limit: '10',
+                    limit: '5', // Reduced from 10 to 5 per query
                     countrycodes: 'us',
                     extratags: '1'
                 }), {
@@ -1554,19 +1540,42 @@ async function searchPlaces(query) {
                 const results = await response.json();
                 allResults = allResults.concat(results);
                 
-                // If we found good results, no need to try more variations
-                if (results.length >= 3) break;
+                // Exit early if we have enough good results
+                if (allResults.length >= 15) break; // Stop at 15 total results
             }
             
-            // Small delay between requests to be respectful to the API
-            await new Promise(resolve => setTimeout(resolve, 100));
+            // Reduced delay for better responsiveness
+            await new Promise(resolve => setTimeout(resolve, 50));
         }
         
         // Remove duplicates based on display_name and coordinates
         const uniqueResults = removeDuplicateResults(allResults);
         
-        // Display all unique results without filtering (better performance)
-        displaySearchResults(uniqueResults.slice(0, 10)); // Show top 10 results
+        // Filter for restaurants and food places
+        const restaurantResults = uniqueResults.filter(place => {
+            const type = place.type || '';
+            const category = place.category || '';
+            const amenity = place.extratags?.amenity || '';
+            
+            return (
+                type.includes('restaurant') ||
+                type.includes('cafe') ||
+                type.includes('bar') ||
+                type.includes('pub') ||
+                type.includes('fast_food') ||
+                category.includes('amenity') ||
+                amenity.includes('restaurant') ||
+                amenity.includes('cafe') ||
+                amenity.includes('bar') ||
+                amenity.includes('fast_food') ||
+                place.display_name.toLowerCase().includes('restaurant') ||
+                place.display_name.toLowerCase().includes('cafe') ||
+                place.display_name.toLowerCase().includes('pizza') ||
+                place.display_name.toLowerCase().includes('food')
+            );
+        });
+        
+        displaySearchResults(restaurantResults.slice(0, 5)); // Limit to top 5
         
     } catch (error) {
         console.error('Search error:', error);
@@ -1623,8 +1632,6 @@ function getPlaceType(place) {
 function selectPlace(place) {
     console.log('Place selected:', place);
     
-    // Save the selected place data for validation
-    window.selectedPlaceData = place;
     
     // Extract address components
     const address = place.display_name || '';
@@ -1664,8 +1671,6 @@ function clearRestaurantSearch() {
         searchInput.value = '';
     }
     
-    // Clear selected place data
-    window.selectedPlaceData = null;
     
     // Clear auto-populated fields
     document.getElementById('restaurantName').value = '';
@@ -1695,41 +1700,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-function isValidRestaurantLocation() {
-    // Get the currently selected place data
-    const selectedPlaceData = window.selectedPlaceData;
-    
-    // If no place is selected, consider it invalid
-    if (!selectedPlaceData) {
-        return false;
-    }
-    
-    const type = selectedPlaceData.type || '';
-    const category = selectedPlaceData.category || '';
-    const amenity = selectedPlaceData.extratags?.amenity || '';
-    const displayName = selectedPlaceData.display_name?.toLowerCase() || '';
-    
-    return (
-        type.includes('restaurant') ||
-        type.includes('cafe') ||
-        type.includes('bar') ||
-        type.includes('pub') ||
-        type.includes('fast_food') ||
-        category.includes('amenity') ||
-        amenity.includes('restaurant') ||
-        amenity.includes('cafe') ||
-        amenity.includes('bar') ||
-        amenity.includes('fast_food') ||
-        displayName.includes('restaurant') ||
-        displayName.includes('cafe') ||
-        displayName.includes('pizza') ||
-        displayName.includes('food') ||
-        displayName.includes('bakery') ||
-        displayName.includes('bistro') ||
-        displayName.includes('diner') ||
-        displayName.includes('eatery')
-    );
-}
 
 function validateForm() {
     const requiredFields = ['restaurantName', 'address', 'submitterName', 'socialPlatform', 'socialUsername'];
@@ -1746,11 +1716,6 @@ function validateForm() {
         }
     });
     
-    // Validate that the selected location is restaurant-related
-    if (!isValidRestaurantLocation()) {
-        allValid = false;
-        errors.push('Please select a restaurant, cafe, bar, or food establishment from the search results');
-    }
     
     // Validate social media URL with regex
     const socialMediaUrl = document.getElementById('socialMediaUrl').value.trim();
