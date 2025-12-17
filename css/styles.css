@@ -1654,6 +1654,22 @@ header h1 {
     line-height: 1.2;
 }
 
+/* Country restaurant popup styling */
+.country-restaurant-popup .leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 2px solid var(--primary-color);
+}
+
+.country-restaurant-popup .leaflet-popup-content {
+    margin: 0;
+    font-family: inherit;
+}
+
+.country-restaurant-popup .leaflet-popup-tip {
+    border-top-color: var(--primary-color);
+}
+
 /* Ensure global map container stays styled during interactions */
 .global-map-container {
     position: relative;

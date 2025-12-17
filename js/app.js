@@ -2177,23 +2177,74 @@ function addCountryMarkersFromRestaurants(restaurants) {
             iconAnchor: [22, 22]
         });
         
-        // Create popup content with restaurant list
-        let popupContent = `<strong>${info.flag} ${info.name}</strong><br>`;
-        popupContent += `<span style="color: #d4651a;">${restaurantList.length} restaurant${restaurantList.length > 1 ? 's' : ''}</span><br><br>`;
+        // Create popup content with restaurant list (similar to local map tiles)
+        let popupContent = `
+            <div style="max-width: 350px;">
+                <div style="text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #d4651a;">
+                    <strong style="font-size: 18px;">${info.flag} ${info.name}</strong><br>
+                    <span style="color: #d4651a; font-weight: bold;">${restaurantList.length} restaurant${restaurantList.length > 1 ? 's' : ''} visited</span>
+                </div>`;
         
-        // List restaurants
-        restaurantList.forEach(restaurant => {
-            popupContent += `<div style="margin-bottom: 8px;">
-                <strong>${restaurant.restaurant}</strong><br>
-                <span style="font-size: 0.9rem;">Rating: ${restaurant.rating}/10 by ${restaurant.reviewer}</span>
-            </div>`;
+        // List restaurants with full details
+        restaurantList.forEach((restaurant, index) => {
+            popupContent += `
+                <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #d4651a;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <strong style="color: #333; font-size: 16px;">${restaurant.restaurant}</strong>
+                        <span style="background: #d4651a; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">
+                            ${restaurant.rating}/10
+                        </span>
+                    </div>
+                    
+                    <div style="font-size: 14px; color: #666; margin-bottom: 6px;">
+                        <strong>📍 Location:</strong> ${restaurant.address}
+                    </div>
+                    
+                    <div style="font-size: 14px; color: #666; margin-bottom: 6px;">
+                        <strong>👨‍🍳 Reviewed by:</strong> ${restaurant.reviewer}
+                    </div>
+                    
+                    ${restaurant.datePosted ? `
+                        <div style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                            <strong>📅 Date:</strong> ${restaurant.datePosted}
+                        </div>
+                    ` : ''}
+                    
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${restaurant.tikTokVideo ? `
+                            <a href="${restaurant.tikTokVideo}" target="_blank" style="
+                                display: inline-flex; align-items: center; gap: 4px;
+                                background: #000; color: white; text-decoration: none;
+                                padding: 6px 10px; border-radius: 6px; font-size: 12px;
+                            ">
+                                🎵 TikTok
+                            </a>
+                        ` : ''}
+                        
+                        ${restaurant.googleMapsLink ? `
+                            <a href="${restaurant.googleMapsLink}" target="_blank" style="
+                                display: inline-flex; align-items: center; gap: 4px;
+                                background: #4285f4; color: white; text-decoration: none;
+                                padding: 6px 10px; border-radius: 6px; font-size: 12px;
+                            ">
+                                📍 Maps
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>`;
         });
+        
+        popupContent += `</div>`;
         
         const marker = L.marker(coords, { 
             icon: countryIcon,
             isCountryMarker: true
         }).addTo(globalMapInstance)
-        .bindPopup(popupContent, { maxWidth: 300 });
+        .bindPopup(popupContent, { 
+            maxWidth: 400,
+            maxHeight: 500,
+            className: 'country-restaurant-popup'
+        });
     });
     
     // Return the total number of countries for the header
