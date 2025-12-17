@@ -1573,6 +1573,16 @@ header h1 {
     display: none;
 }
 
+/* General hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Specific hiding for map containers */
+.map-container.hidden {
+    display: none !important;
+}
+
 .global-map-header {
     background: var(--primary-color);
     color: white;

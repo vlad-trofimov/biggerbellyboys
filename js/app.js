@@ -2290,7 +2290,8 @@ function updateGlobalMap() {
         const localMap = document.getElementById('map');
         if (localMap) {
             localMap.classList.add('hidden');
-            console.log('🚫 Hidden local map');
+            localMap.style.display = 'none';
+            console.log('🚫 Hidden local map - classes:', localMap.className, 'style:', localMap.style.display);
         }
         
         // Initialize map if not already done
@@ -2314,7 +2315,8 @@ function updateGlobalMap() {
         const localMap = document.getElementById('map');
         if (localMap) {
             localMap.classList.remove('hidden');
-            console.log('✅ Showing local map');
+            localMap.style.display = '';
+            console.log('✅ Showing local map - classes:', localMap.className, 'style:', localMap.style.display);
         }
     }
 }
