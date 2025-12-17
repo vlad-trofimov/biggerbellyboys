@@ -2065,11 +2065,11 @@ function loadCountryBoundaries() {
             // Add each country as a layer
             L.geoJSON(data, {
                 style: {
-                    fillColor: '#f0f0f0',
-                    weight: 1,
-                    opacity: 0.8,
-                    color: 'white',
-                    fillOpacity: 0.3
+                    fillColor: '#e0e0e0',
+                    weight: 0.5,
+                    opacity: 1,
+                    color: '#ffffff',
+                    fillOpacity: 0.6
                 },
                 onEachFeature: (feature, layer) => {
                     const countryName = feature.properties.name;
@@ -2093,6 +2093,18 @@ function loadCountryBoundaries() {
             }).addTo(globalMapInstance);
             
             console.log('🗺️ Available countries loaded:', Object.keys(countryLayers).slice(0, 10), '... (showing first 10)');
+            
+            // Test: Manually highlight a known country to verify styling works
+            const testCountry = countryLayers['united states'];
+            if (testCountry) {
+                console.log('🧪 Testing highlight on United States');
+                testCountry.setStyle({
+                    fillColor: '#ff0000', // Red for test
+                    fillOpacity: 0.8,
+                    color: '#ff0000',
+                    weight: 3
+                });
+            }
             
             // Highlight any pending visited countries
             if (window.pendingVisitedCountries && window.pendingVisitedCountries.length > 0) {
@@ -2159,7 +2171,10 @@ function highlightVisitedCountries(visitedCountries) {
             console.log('✅ Highlighting country:', countryTag);
             layer.setStyle({
                 fillColor: '#d4651a', // Your primary color
-                fillOpacity: 0.7
+                fillOpacity: 0.8,
+                color: '#d4651a',
+                weight: 2,
+                opacity: 1
             });
             
             // Update popup to show it's visited
