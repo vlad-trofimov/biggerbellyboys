@@ -2005,11 +2005,13 @@ function initializeGlobalMap() {
             center: [20, 0], // Center on world
             zoom: 2,
             maxZoom: 6,
-            minZoom: 1,
+            minZoom: 2,
             zoomControl: true,
             scrollWheelZoom: false,
             doubleClickZoom: false,
-            dragging: true
+            dragging: true,
+            maxBounds: [[-85, -180], [85, 180]], // Prevent panning beyond world bounds
+            maxBoundsViscosity: 1.0 // Make bounds completely rigid
         });
 
         // Add world tile layer
