@@ -2024,7 +2024,7 @@ function initializeGlobalMap() {
         <path id="canada" class="country" data-country="canada" d="M200,120 L450,120 L450,200 L200,200 Z" />
         <path id="brazil" class="country" data-country="brazil" d="M350,360 L450,360 L450,450 L350,450 Z" />
         <path id="russia" class="country" data-country="russia" d="M600,80 L900,80 L900,200 L600,200 Z" />
-        <path id="china" class="country" data-country="china" d="L750,180 L850,180 L850,280 L750,280 Z" />
+        <path id="china" class="country" data-country="china" d="M750,180 L850,180 L850,280 L750,280 Z" />
         <path id="australia" class="country" data-country="australia" d="M750,380 L850,380 L850,440 L750,440 Z" />
         <path id="france" class="country" data-country="france" d="M520,200 L560,200 L560,240 L520,240 Z" />
         <path id="germany" class="country" data-country="germany" d="M560,180 L590,180 L590,220 L560,220 Z" />
