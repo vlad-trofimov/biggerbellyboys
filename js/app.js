@@ -2017,9 +2017,15 @@ function initializeGlobalMap() {
         console.log('✅ Global map initialized successfully');
         console.log('🗺️ Map container size:', worldMapContainer.offsetWidth, 'x', worldMapContainer.offsetHeight);
         
-        // Force map to resize to container
+        // Force map to resize to container and prevent container issues
         setTimeout(() => {
             globalMapInstance.invalidateSize();
+            
+            // Ensure container maintains its styling
+            const container = document.getElementById('global-map');
+            if (container && !container.classList.contains('global-map-container')) {
+                container.classList.add('global-map-container');
+            }
         }, 100);
         
     } catch (error) {
@@ -2281,7 +2287,11 @@ function updateGlobalMap() {
         // Show world map, hide local map
         console.log('✅ Showing world map container');
         globalMapContainer.classList.remove('hidden');
-        document.getElementById('map').classList.add('hidden');
+        const localMap = document.getElementById('map');
+        if (localMap) {
+            localMap.classList.add('hidden');
+            console.log('🚫 Hidden local map');
+        }
         
         // Initialize map if not already done
         if (!globalMapInstance) {
@@ -2299,7 +2309,12 @@ function updateGlobalMap() {
         
     } else {
         // Hide world map, show local map
+        console.log('🚫 Hiding world map, showing local map');
         globalMapContainer.classList.add('hidden');
-        document.getElementById('map').classList.remove('hidden');
+        const localMap = document.getElementById('map');
+        if (localMap) {
+            localMap.classList.remove('hidden');
+            console.log('✅ Showing local map');
+        }
     }
 }

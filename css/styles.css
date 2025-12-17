@@ -1635,6 +1635,17 @@ header h1 {
     line-height: 1.2;
 }
 
+/* Ensure global map container stays styled during interactions */
+.global-map-container {
+    position: relative;
+    z-index: 1;
+}
+
+.global-map-container .world-map {
+    position: relative;
+    z-index: 2;
+}
+
 @media (max-width: 768px) {
     .global-map-header h3 {
         font-size: 1.1rem;
