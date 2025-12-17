@@ -2065,15 +2065,29 @@ function loadVectorMapFiles() {
     scriptMain.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.js';
     scriptMain.onload = () => {
         console.log('✅ jVectorMap JS loaded');
-        // Load world map data
+        // Load world map data - try multiple CDNs
         const scriptWorld = document.createElement('script');
-        scriptWorld.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap-world-mill.js';
+        scriptWorld.src = 'https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/jquery-jvectormap-world-mill.js';
         scriptWorld.onload = () => {
             console.log('✅ World map data loaded');
             // Now initialize the map
             setTimeout(() => initializeGlobalMap(), 100);
         };
-        scriptWorld.onerror = () => console.error('❌ Failed to load world map data');
+        scriptWorld.onerror = () => {
+            console.log('❌ Primary CDN failed, trying fallback...');
+            // Try fallback CDN
+            const fallbackScript = document.createElement('script');
+            fallbackScript.src = 'https://unpkg.com/jvectormap@2.0.5/jquery-jvectormap-world-mill.js';
+            fallbackScript.onload = () => {
+                console.log('✅ World map data loaded (fallback)');
+                setTimeout(() => initializeGlobalMap(), 100);
+            };
+            fallbackScript.onerror = () => {
+                console.log('❌ All CDNs failed, using simple fallback map');
+                initializeSimpleMap();
+            };
+            document.head.appendChild(fallbackScript);
+        };
         document.head.appendChild(scriptWorld);
     };
     scriptMain.onerror = () => console.error('❌ Failed to load jVectorMap JS');
@@ -2085,12 +2099,53 @@ function initializeSimpleMap() {
     const worldMapContainer = document.getElementById('world-map');
     if (!worldMapContainer) return;
     
+    console.log('🗺️ Initializing simple fallback map');
+    
+    // Get visited countries for the fallback
+    const filteredRestaurants = getFilteredRestaurants();
+    const visitedCountries = new Set();
+    
+    filteredRestaurants.forEach(restaurant => {
+        restaurant.tags.forEach(tag => {
+            const standardizedTag = standardizeTag(tag);
+            if (standardizedTag !== 'global belly food tour' && 
+                standardizedTag !== 'nyc' && 
+                standardizedTag !== 'ny' &&
+                standardizedTag !== 'new york') {
+                
+                // Country names for display
+                const countryNames = {
+                    'ethiopia': 'Ethiopia',
+                    'poland': 'Poland', 
+                    'cuba': 'Cuba',
+                    'yemen': 'Yemen',
+                    'bangladesh': 'Bangladesh',
+                    'afghanistan': 'Afghanistan',
+                    'philippines': 'Philippines',
+                    'colombia': 'Colombia',
+                    'eritrea': 'Eritrea'
+                };
+                
+                if (countryNames[standardizedTag]) {
+                    visitedCountries.add(countryNames[standardizedTag]);
+                }
+            }
+        });
+    });
+    
+    const countryList = Array.from(visitedCountries).join(', ');
+    
     worldMapContainer.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; min-height: 300px; background: #f8f9fa; border-radius: 8px; color: #666;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; background: #f8f9fa; border-radius: 8px; color: #666; padding: 2rem;">
             <div style="text-align: center;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
-                <div>Global Food Tour Map</div>
-                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Loading interactive world map...</div>
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                <div style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-color);">Countries Visited</div>
+                <div style="font-size: 1rem; line-height: 1.6; max-width: 400px;">
+                    ${countryList || 'No countries found'}
+                </div>
+                <div style="font-size: 0.8rem; margin-top: 1.5rem; opacity: 0.7;">
+                    Interactive world map unavailable
+                </div>
             </div>
         </div>`;
 }
