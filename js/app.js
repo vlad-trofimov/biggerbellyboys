@@ -1979,7 +1979,7 @@ function showSuggestTab() {
     showSuggestForm();
 }
 
-// Global Food Tour Map functionality using jVectorMap
+// Global Food Tour Map functionality using Leaflet
 let globalMapInstance = null;
 
 function initializeGlobalMap() {
@@ -1989,109 +1989,126 @@ function initializeGlobalMap() {
         return;
     }
     
-    console.log('🗺️ Initializing global map...');
+    console.log('🗺️ Initializing global map with Leaflet...');
     
-    // Check if jVectorMap is available, if not load it
-    if (typeof jQuery === 'undefined' || !jQuery.fn.vectorMap) {
-        console.log('📦 Loading jVectorMap library...');
-        loadJVectorMap();
-        return;
-    }
-    
-    // Initialize the world map
     try {
-        globalMapInstance = jQuery('#world-map').vectorMap({
-            map: 'world_mill',
-            backgroundColor: '#e6f3ff',
-            zoomOnScroll: false,
-            regionStyle: {
-                initial: {
-                    fill: '#e0e0e0',
-                    'fill-opacity': 1,
-                    stroke: '#ffffff',
-                    'stroke-width': 0.5,
-                    'stroke-opacity': 1
-                },
-                hover: {
-                    fill: '#ccc',
-                    'fill-opacity': 1
-                },
-                selected: {
-                    fill: '#d4651a', // Your primary color
-                    'fill-opacity': 0.8
-                }
-            },
-            onRegionTipShow: function(e, el, code){
-                const countryName = el.html();
-                el.html(countryName);
-            }
+        // Initialize Leaflet map for world view
+        globalMapInstance = L.map('world-map', {
+            center: [20, 0], // Center on world
+            zoom: 2,
+            maxZoom: 6,
+            minZoom: 1,
+            zoomControl: true,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            dragging: true
         });
+
+        // Add world tile layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors © CARTO',
+            subdomains: 'abcd',
+            maxZoom: 6
+        }).addTo(globalMapInstance);
+        
+        console.log('✅ Global map initialized successfully');
+        
     } catch (error) {
-        console.warn('jVectorMap failed to initialize, falling back to simple map');
+        console.warn('Leaflet global map failed to initialize, falling back to simple map:', error);
         initializeSimpleMap();
     }
 }
 
-function loadJVectorMap() {
-    console.log('📦 Loading jVectorMap dependencies...');
-    // Load jQuery if not present
-    if (typeof jQuery === 'undefined') {
-        console.log('📦 Loading jQuery...');
-        const jqueryScript = document.createElement('script');
-        jqueryScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
-        jqueryScript.onload = () => {
-            console.log('✅ jQuery loaded');
-            loadVectorMapFiles();
-        };
-        jqueryScript.onerror = () => console.error('❌ Failed to load jQuery');
-        document.head.appendChild(jqueryScript);
-    } else {
-        console.log('✅ jQuery already available');
-        loadVectorMapFiles();
-    }
-}
+// Country coordinates for markers (approximate capitals/centers)
+const countryCoordinates = {
+    'ethiopia': [9.1450, 40.4897],
+    'poland': [51.9194, 19.1451], 
+    'cuba': [21.5218, -77.7812],
+    'yemen': [15.552727, 48.516388],
+    'bangladesh': [23.6850, 90.3563],
+    'afghanistan': [33.9391, 67.7100],
+    'philippines': [12.8797, 121.7740],
+    'colombia': [4.5709, -74.2973],
+    'eritrea': [15.7394, 38.9916],
+    'united states': [39.8283, -98.5795],
+    'usa': [39.8283, -98.5795],
+    'mexico': [23.6345, -102.5528],
+    'canada': [56.1304, -106.3468],
+    'brazil': [-14.2350, -51.9253],
+    'russia': [61.5240, 105.3188],
+    'china': [35.8617, 104.1954],
+    'india': [20.5937, 78.9629],
+    'australia': [-25.2744, 133.7751],
+    'france': [46.6034, 1.8883],
+    'germany': [51.1657, 10.4515],
+    'united kingdom': [55.3781, -3.4360],
+    'uk': [55.3781, -3.4360],
+    'south africa': [-30.5595, 22.9375]
+};
 
-function loadVectorMapFiles() {
-    console.log('📦 Loading jVectorMap files...');
-    // Load jVectorMap CSS
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.css';
-    document.head.appendChild(link);
-    console.log('✅ jVectorMap CSS loaded');
+function addCountryMarkers(visitedCountries) {
+    if (!globalMapInstance) return;
     
-    // Load jVectorMap JS
-    const scriptMain = document.createElement('script');
-    scriptMain.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.js';
-    scriptMain.onload = () => {
-        console.log('✅ jVectorMap JS loaded');
-        // Load world map data - try multiple CDNs
-        const scriptWorld = document.createElement('script');
-        scriptWorld.src = 'https://cdn.jsdelivr.net/npm/jvectormap@2.0.5/jquery-jvectormap-world-mill.js';
-        scriptWorld.onload = () => {
-            console.log('✅ World map data loaded');
-            // Now initialize the map
-            setTimeout(() => initializeGlobalMap(), 100);
-        };
-        scriptWorld.onerror = () => {
-            console.log('❌ Primary CDN failed, trying fallback...');
-            // Try fallback CDN
-            const fallbackScript = document.createElement('script');
-            fallbackScript.src = 'https://unpkg.com/jvectormap@2.0.5/jquery-jvectormap-world-mill.js';
-            fallbackScript.onload = () => {
-                console.log('✅ World map data loaded (fallback)');
-                setTimeout(() => initializeGlobalMap(), 100);
+    console.log('🗺️ Adding markers for visited countries:', visitedCountries);
+    
+    // Clear existing markers
+    globalMapInstance.eachLayer((layer) => {
+        if (layer instanceof L.Marker) {
+            globalMapInstance.removeLayer(layer);
+        }
+    });
+    
+    // Add markers for visited countries
+    visitedCountries.forEach(countryTag => {
+        const coords = countryCoordinates[countryTag];
+        if (coords) {
+            // Create custom icon
+            const countryIcon = L.divIcon({
+                className: 'country-marker',
+                html: `<div style="
+                    background: var(--primary-color, #d4651a);
+                    border: 3px solid white;
+                    border-radius: 50%;
+                    width: 20px;
+                    height: 20px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                "></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+            
+            // Country name for display
+            const countryNames = {
+                'ethiopia': 'Ethiopia',
+                'poland': 'Poland', 
+                'cuba': 'Cuba',
+                'yemen': 'Yemen',
+                'bangladesh': 'Bangladesh',
+                'afghanistan': 'Afghanistan',
+                'philippines': 'Philippines',
+                'colombia': 'Colombia',
+                'eritrea': 'Eritrea',
+                'united states': 'United States',
+                'usa': 'United States',
+                'mexico': 'Mexico',
+                'canada': 'Canada',
+                'brazil': 'Brazil',
+                'russia': 'Russia',
+                'china': 'China',
+                'india': 'India',
+                'australia': 'Australia',
+                'france': 'France',
+                'germany': 'Germany',
+                'united kingdom': 'United Kingdom',
+                'uk': 'United Kingdom',
+                'south africa': 'South Africa'
             };
-            fallbackScript.onerror = () => {
-                console.log('❌ All CDNs failed, using simple fallback map');
-                initializeSimpleMap();
-            };
-            document.head.appendChild(fallbackScript);
-        };
-        document.head.appendChild(scriptWorld);
-    };
-    scriptMain.onerror = () => console.error('❌ Failed to load jVectorMap JS');
-    document.head.appendChild(scriptMain);
+            
+            const marker = L.marker(coords, { icon: countryIcon })
+                .addTo(globalMapInstance)
+                .bindPopup(`<strong>${countryNames[countryTag] || countryTag}</strong><br>Global Belly Food Tour`);
+        }
+    });
 }
 
 function initializeSimpleMap() {
@@ -2179,33 +2196,6 @@ function updateGlobalMap() {
         const filteredRestaurants = getFilteredRestaurants();
         const visitedCountries = new Set();
         
-        // Country name mapping for jVectorMap country codes
-        const countryCodeMap = {
-            'ethiopia': 'ET',
-            'poland': 'PL', 
-            'cuba': 'CU',
-            'yemen': 'YE',
-            'bangladesh': 'BD',
-            'afghanistan': 'AF',
-            'philippines': 'PH',
-            'colombia': 'CO',
-            'eritrea': 'ER',
-            'united states': 'US',
-            'usa': 'US',
-            'mexico': 'MX',
-            'canada': 'CA',
-            'brazil': 'BR',
-            'russia': 'RU',
-            'china': 'CN',
-            'india': 'IN',
-            'australia': 'AU',
-            'france': 'FR',
-            'germany': 'DE',
-            'united kingdom': 'GB',
-            'uk': 'GB',
-            'south africa': 'ZA'
-        };
-        
         filteredRestaurants.forEach(restaurant => {
             restaurant.tags.forEach(tag => {
                 const standardizedTag = standardizeTag(tag);
@@ -2216,31 +2206,16 @@ function updateGlobalMap() {
                     standardizedTag !== 'new york') {
                     
                     // Check if this tag matches a known country
-                    const countryCode = countryCodeMap[standardizedTag];
-                    if (countryCode) {
-                        visitedCountries.add(countryCode);
+                    if (countryCoordinates[standardizedTag]) {
+                        visitedCountries.add(standardizedTag);
                     }
                 }
             });
         });
         
-        // Update map colors if jVectorMap is loaded
-        if (globalMapInstance && jQuery('#world-map').vectorMap) {
-            try {
-                // Reset all countries to default
-                const mapObject = jQuery('#world-map').vectorMap('get', 'mapObject');
-                if (mapObject) {
-                    // Clear all selections first
-                    mapObject.clearSelectedRegions();
-                    
-                    // Set visited countries as selected
-                    if (visitedCountries.size > 0) {
-                        mapObject.setSelectedRegions(Array.from(visitedCountries));
-                    }
-                }
-            } catch (error) {
-                console.warn('Error updating map colors:', error);
-            }
+        // Add markers for visited countries
+        if (globalMapInstance) {
+            addCountryMarkers(Array.from(visitedCountries));
         }
         
     } else {
