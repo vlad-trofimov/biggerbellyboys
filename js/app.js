@@ -1165,6 +1165,9 @@ function applyFilters(skipUrlUpdate = false) {
     
     // Display paginated filtered restaurants
     displayPaginatedRestaurants(filteredRestaurants);
+    
+    // Update global map visibility and highlighting
+    updateGlobalMap();
 }
 
 // Clear all filters
@@ -1974,4 +1977,123 @@ function hideSuggestFormFromUrl() {
 // Debug function to switch to suggest tab (keep for console access)
 function showSuggestTab() {
     showSuggestForm();
+}
+
+// Global Food Tour Map functionality
+function initializeGlobalMap() {
+    const worldMapContainer = document.getElementById('world-map');
+    if (!worldMapContainer) return;
+    
+    // Simple SVG world map with key countries
+    const worldMapSVG = `
+    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- United States -->
+        <path id="united-states" class="country" data-country="united states" d="M200,200 L400,200 L400,280 L200,280 Z" />
+        
+        <!-- Mexico -->
+        <path id="mexico" class="country" data-country="mexico" d="M180,280 L380,280 L380,320 L180,320 Z" />
+        
+        <!-- Ethiopia -->
+        <path id="ethiopia" class="country" data-country="ethiopia" d="M620,300 L680,300 L680,340 L620,340 Z" />
+        
+        <!-- Poland -->
+        <path id="poland" class="country" data-country="poland" d="M580,180 L620,180 L620,220 L580,220 Z" />
+        
+        <!-- Cuba -->
+        <path id="cuba" class="country" data-country="cuba" d="M280,270 L320,270 L320,285 L280,285 Z" />
+        
+        <!-- Yemen -->
+        <path id="yemen" class="country" data-country="yemen" d="M640,310 L680,310 L680,340 L640,340 Z" />
+        
+        <!-- Bangladesh -->
+        <path id="bangladesh" class="country" data-country="bangladesh" d="M750,250 L780,250 L780,280 L750,280 Z" />
+        
+        <!-- Afghanistan -->
+        <path id="afghanistan" class="country" data-country="afghanistan" d="M680,220 L720,220 L720,250 L680,250 Z" />
+        
+        <!-- Philippines -->
+        <path id="philippines" class="country" data-country="philippines" d="M820,280 L850,280 L850,320 L820,320 Z" />
+        
+        <!-- Colombia -->
+        <path id="colombia" class="country" data-country="colombia" d="M320,320 L360,320 L360,360 L320,360 Z" />
+        
+        <!-- Eritrea -->
+        <path id="eritrea" class="country" data-country="eritrea" d="M610,290 L640,290 L640,320 L610,320 Z" />
+        
+        <!-- Other major countries for context -->
+        <path id="canada" class="country" data-country="canada" d="M200,120 L450,120 L450,200 L200,200 Z" />
+        <path id="brazil" class="country" data-country="brazil" d="M350,360 L450,360 L450,450 L350,450 Z" />
+        <path id="russia" class="country" data-country="russia" d="M600,80 L900,80 L900,200 L600,200 Z" />
+        <path id="china" class="country" data-country="china" d="L750,180 L850,180 L850,280 L750,280 Z" />
+        <path id="australia" class="country" data-country="australia" d="M750,380 L850,380 L850,440 L750,440 Z" />
+        <path id="france" class="country" data-country="france" d="M520,200 L560,200 L560,240 L520,240 Z" />
+        <path id="germany" class="country" data-country="germany" d="M560,180 L590,180 L590,220 L560,220 Z" />
+        <path id="united-kingdom" class="country" data-country="united kingdom" d="M500,160 L540,160 L540,200 L500,200 Z" />
+        <path id="india" class="country" data-country="india" d="M720,250 L770,250 L770,320 L720,320 Z" />
+        <path id="south-africa" class="country" data-country="south africa" d="M580,380 L620,380 L620,420 L580,420 Z" />
+        
+        <!-- Ocean background -->
+        <rect x="0" y="0" width="1000" height="500" fill="#e6f3ff" style="z-index: -1;" />
+    </svg>`;
+    
+    worldMapContainer.innerHTML = worldMapSVG;
+}
+
+function updateGlobalMap() {
+    const globalMapContainer = document.getElementById('global-map');
+    if (!globalMapContainer) return;
+    
+    // Check if "global belly food tour" is selected
+    const hasGlobalTourTag = Array.from(selectedTags).some(tag => 
+        standardizeTag(tag) === 'global belly food tour'
+    );
+    
+    if (hasGlobalTourTag) {
+        // Show global map
+        globalMapContainer.classList.remove('hidden');
+        
+        // Initialize map if not already done
+        if (!globalMapContainer.querySelector('svg')) {
+            initializeGlobalMap();
+        }
+        
+        // Get filtered restaurants and extract country tags
+        const filteredRestaurants = getFilteredRestaurants();
+        const visitedCountries = new Set();
+        
+        filteredRestaurants.forEach(restaurant => {
+            restaurant.tags.forEach(tag => {
+                const standardizedTag = standardizeTag(tag);
+                // Skip the tour tag itself and common location tags
+                if (standardizedTag !== 'global belly food tour' && 
+                    standardizedTag !== 'nyc' && 
+                    standardizedTag !== 'ny' &&
+                    standardizedTag !== 'new york') {
+                    
+                    // Check if this tag matches a known country
+                    const countryElement = document.querySelector(`[data-country="${standardizedTag}"]`);
+                    if (countryElement) {
+                        visitedCountries.add(standardizedTag);
+                    }
+                }
+            });
+        });
+        
+        // Reset all countries to default state
+        document.querySelectorAll('.world-map .country').forEach(country => {
+            country.classList.remove('visited');
+        });
+        
+        // Highlight visited countries
+        visitedCountries.forEach(countryName => {
+            const countryElement = document.querySelector(`[data-country="${countryName}"]`);
+            if (countryElement) {
+                countryElement.classList.add('visited');
+            }
+        });
+        
+    } else {
+        // Hide global map
+        globalMapContainer.classList.add('hidden');
+    }
 }

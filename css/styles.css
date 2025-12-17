@@ -1559,3 +1559,86 @@ header h1 {
         font-size: 0.9rem;
     }
 }
+
+/* Global Food Tour Map Styles */
+.global-map-container {
+    background: var(--bg-white);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+}
+
+.global-map-container.hidden {
+    display: none;
+}
+
+.global-map-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.global-map-header h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.global-map-header p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.world-map {
+    padding: 1rem;
+    background: #f8f9fa;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.world-map svg {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+.world-map .country {
+    fill: #e0e0e0;
+    stroke: #ffffff;
+    stroke-width: 0.5;
+    transition: fill 0.3s ease;
+}
+
+.world-map .country.visited {
+    fill: var(--primary-color);
+    opacity: 0.8;
+}
+
+.world-map .country.visited:hover {
+    fill: var(--primary-dark);
+    opacity: 1;
+}
+
+.world-map .country:hover {
+    fill: #ccc;
+}
+
+@media (max-width: 768px) {
+    .global-map-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .global-map-header p {
+        font-size: 0.8rem;
+    }
+    
+    .world-map {
+        padding: 0.5rem;
+        min-height: 250px;
+    }
+}
