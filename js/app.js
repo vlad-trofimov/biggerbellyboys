@@ -2006,10 +2006,13 @@ function initializeGlobalMap() {
 
         // Add world tile layer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap contributors © CARTO',
+            attribution: '© OSM',
             subdomains: 'abcd',
             maxZoom: 6
         }).addTo(globalMapInstance);
+        
+        // Load country boundaries
+        loadCountryBoundaries();
         
         console.log('✅ Global map initialized successfully');
         
@@ -2046,67 +2049,112 @@ const countryCoordinates = {
     'south africa': [-30.5595, 22.9375]
 };
 
-function addCountryMarkers(visitedCountries) {
+// Store country layers for highlighting
+let countryLayers = {};
+let visitedCountryLayers = [];
+
+function loadCountryBoundaries() {
+    console.log('🗺️ Loading country boundaries...');
+    
+    // Use a simple GeoJSON source for country boundaries
+    fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
+        .then(response => response.json())
+        .then(data => {
+            console.log('✅ Country boundaries loaded');
+            
+            // Add each country as a layer
+            L.geoJSON(data, {
+                style: {
+                    fillColor: '#f0f0f0',
+                    weight: 1,
+                    opacity: 0.8,
+                    color: 'white',
+                    fillOpacity: 0.3
+                },
+                onEachFeature: (feature, layer) => {
+                    const countryName = feature.properties.name;
+                    if (countryName) {
+                        // Store layer by country name (lowercased)
+                        const countryKey = countryName.toLowerCase();
+                        countryLayers[countryKey] = layer;
+                        
+                        // Also store by common variations
+                        if (countryKey === 'united states of america') {
+                            countryLayers['united states'] = layer;
+                            countryLayers['usa'] = layer;
+                        }
+                        if (countryKey === 'united kingdom') {
+                            countryLayers['uk'] = layer;
+                        }
+                        
+                        layer.bindPopup(`<strong>${countryName}</strong>`);
+                    }
+                }
+            }).addTo(globalMapInstance);
+            
+        })
+        .catch(error => {
+            console.warn('❌ Failed to load country boundaries:', error);
+            // Fallback to markers if GeoJSON fails
+            console.log('🔄 Falling back to marker approach');
+        });
+}
+
+function highlightVisitedCountries(visitedCountries) {
     if (!globalMapInstance) return;
     
-    console.log('🗺️ Adding markers for visited countries:', visitedCountries);
+    console.log('🗺️ Highlighting visited countries:', visitedCountries);
     
-    // Clear existing markers
-    globalMapInstance.eachLayer((layer) => {
-        if (layer instanceof L.Marker) {
-            globalMapInstance.removeLayer(layer);
-        }
+    // Reset all previously highlighted countries
+    visitedCountryLayers.forEach(layer => {
+        layer.setStyle({
+            fillColor: '#f0f0f0',
+            fillOpacity: 0.3
+        });
     });
+    visitedCountryLayers = [];
     
-    // Add markers for visited countries
+    // Country name mapping
+    const countryNames = {
+        'ethiopia': 'Ethiopia',
+        'poland': 'Poland', 
+        'cuba': 'Cuba',
+        'yemen': 'Yemen',
+        'bangladesh': 'Bangladesh',
+        'afghanistan': 'Afghanistan',
+        'philippines': 'Philippines',
+        'colombia': 'Colombia',
+        'eritrea': 'Eritrea',
+        'united states': 'United States',
+        'usa': 'United States',
+        'mexico': 'Mexico',
+        'canada': 'Canada',
+        'brazil': 'Brazil',
+        'russia': 'Russia',
+        'china': 'China',
+        'india': 'India',
+        'australia': 'Australia',
+        'france': 'France',
+        'germany': 'Germany',
+        'united kingdom': 'United Kingdom',
+        'uk': 'United Kingdom',
+        'south africa': 'South Africa'
+    };
+    
+    // Highlight visited countries
     visitedCountries.forEach(countryTag => {
-        const coords = countryCoordinates[countryTag];
-        if (coords) {
-            // Create custom icon
-            const countryIcon = L.divIcon({
-                className: 'country-marker',
-                html: `<div style="
-                    background: var(--primary-color, #d4651a);
-                    border: 3px solid white;
-                    border-radius: 50%;
-                    width: 20px;
-                    height: 20px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                "></div>`,
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
+        const layer = countryLayers[countryTag];
+        if (layer) {
+            layer.setStyle({
+                fillColor: '#d4651a', // Your primary color
+                fillOpacity: 0.7
             });
             
-            // Country name for display
-            const countryNames = {
-                'ethiopia': 'Ethiopia',
-                'poland': 'Poland', 
-                'cuba': 'Cuba',
-                'yemen': 'Yemen',
-                'bangladesh': 'Bangladesh',
-                'afghanistan': 'Afghanistan',
-                'philippines': 'Philippines',
-                'colombia': 'Colombia',
-                'eritrea': 'Eritrea',
-                'united states': 'United States',
-                'usa': 'United States',
-                'mexico': 'Mexico',
-                'canada': 'Canada',
-                'brazil': 'Brazil',
-                'russia': 'Russia',
-                'china': 'China',
-                'india': 'India',
-                'australia': 'Australia',
-                'france': 'France',
-                'germany': 'Germany',
-                'united kingdom': 'United Kingdom',
-                'uk': 'United Kingdom',
-                'south africa': 'South Africa'
-            };
+            // Update popup to show it's visited
+            const countryDisplayName = countryNames[countryTag] || countryTag;
+            layer.bindPopup(`<strong>${countryDisplayName}</strong><br><span style="color: #d4651a;">✓ Global Belly Food Tour</span>`);
             
-            const marker = L.marker(coords, { icon: countryIcon })
-                .addTo(globalMapInstance)
-                .bindPopup(`<strong>${countryNames[countryTag] || countryTag}</strong><br>Global Belly Food Tour`);
+            visitedCountryLayers.push(layer);
         }
     });
 }
@@ -2213,9 +2261,9 @@ function updateGlobalMap() {
             });
         });
         
-        // Add markers for visited countries
-        if (globalMapInstance) {
-            addCountryMarkers(Array.from(visitedCountries));
+        // Highlight visited countries
+        if (globalMapInstance && Object.keys(countryLayers).length > 0) {
+            highlightVisitedCountries(Array.from(visitedCountries));
         }
         
     } else {

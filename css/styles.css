@@ -1628,6 +1628,14 @@ header h1 {
     fill: #ccc;
 }
 
+/* Make attribution smaller on global map */
+.world-map .leaflet-control-attribution {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2px 5px;
+    line-height: 1.2;
+}
+
 @media (max-width: 768px) {
     .global-map-header h3 {
         font-size: 1.1rem;
@@ -1640,5 +1648,10 @@ header h1 {
     .world-map {
         padding: 0.5rem;
         min-height: 250px;
+    }
+    
+    .world-map .leaflet-control-attribution {
+        font-size: 8px;
+        padding: 1px 3px;
     }
 }
