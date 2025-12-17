@@ -1560,13 +1560,19 @@ header h1 {
     }
 }
 
-/* Global Food Tour Map Styles */
+/* Global Food Tour Map Styles - Match local map styling */
 .global-map-container {
-    background: var(--bg-white);
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    border: 2px solid var(--border-color);
+    height: 100%;
+    min-height: 400px;
+    border: 3px solid var(--primary-color);
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(212, 101, 26, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: var(--background-white);
+    position: relative;
 }
 
 .global-map-container.hidden {
