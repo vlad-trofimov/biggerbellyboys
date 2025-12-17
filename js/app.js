@@ -2068,8 +2068,16 @@ function loadCountryBoundaries() {
         .then(data => {
             console.log('✅ Country boundaries loaded');
             
+            // Create a layer group for countries with higher z-index
+            const countryLayerGroup = L.layerGroup().addTo(globalMapInstance);
+            countryLayerGroup.getPane = function() {
+                return globalMapInstance.createPane('countries');
+            };
+            globalMapInstance.getPane('countries').style.zIndex = 450; // Higher than tiles (200)
+            
             // Add each country as a layer
             L.geoJSON(data, {
+                pane: 'countries', // Use custom pane
                 style: {
                     fillColor: '#e0e0e0',
                     weight: 0.5,
