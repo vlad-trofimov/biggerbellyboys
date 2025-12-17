@@ -2177,59 +2177,34 @@ function addCountryMarkersFromRestaurants(restaurants) {
             iconAnchor: [22, 22]
         });
         
-        // Create popup content with restaurant list (similar to local map tiles)
+        // Create popup content using existing restaurant card components
         let popupContent = `
-            <div style="max-width: 350px;">
-                <div style="text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #d4651a;">
-                    <strong style="font-size: 18px;">${info.flag} ${info.name}</strong><br>
-                    <span style="color: #d4651a; font-weight: bold;">${restaurantList.length} restaurant${restaurantList.length > 1 ? 's' : ''} visited</span>
-                </div>`;
+            <div class="country-popup-header" style="text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #d4651a;">
+                <strong style="font-size: 18px;">${info.flag} ${info.name}</strong><br>
+                <span style="color: #d4651a; font-weight: bold;">${restaurantList.length} restaurant${restaurantList.length > 1 ? 's' : ''} visited</span>
+            </div>
+            <div class="country-restaurants-list">`;
         
-        // List restaurants with full details
+        // Generate restaurant cards using the same structure as the main list
         restaurantList.forEach((restaurant, index) => {
+            const tagsHtml = restaurant.tags.map(tag => `<span class="tag clickable-tag" onclick="selectTag('${tag}')">${tag}</span>`).join('');
+            
             popupContent += `
-                <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #d4651a;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                        <strong style="color: #333; font-size: 16px;">${restaurant.restaurant}</strong>
-                        <span style="background: #d4651a; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">
-                            ${restaurant.rating}/10
-                        </span>
-                    </div>
-                    
-                    <div style="font-size: 14px; color: #666; margin-bottom: 6px;">
-                        <strong>📍 Location:</strong> ${restaurant.address}
-                    </div>
-                    
-                    <div style="font-size: 14px; color: #666; margin-bottom: 6px;">
-                        <strong>👨‍🍳 Reviewed by:</strong> ${restaurant.reviewer}
-                    </div>
-                    
-                    ${restaurant.datePosted ? `
-                        <div style="font-size: 14px; color: #666; margin-bottom: 8px;">
-                            <strong>📅 Date:</strong> ${restaurant.datePosted}
+                <div class="restaurant-card popup-card" style="margin-bottom: 15px; border: 1px solid #ddd;">
+                    ${restaurant.tikTokThumbnail ? 
+                        `<img src="${restaurant.tikTokThumbnail}" alt="${restaurant.restaurant}" class="restaurant-thumbnail" onerror="this.src='${restaurant.tikTokThumbnailFallback}'; this.onerror=function(){this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDMwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjBGMEYwIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iNzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K'}">` : 
+                        `<div class="restaurant-thumbnail no-image" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; aspect-ratio: 1177 / 1570;">No Image</div>`
+                    }
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">${restaurant.restaurant}</div>
+                        <div class="restaurant-location">📍 <span class="clickable-location" onclick="selectLocationTag(event, '${restaurant.locationData.fullLocation}')" title="Filter by ${restaurant.locationData.fullLocation}">${restaurant.locationData.fullLocation}</span></div>
+                        <div class="restaurant-address">${restaurant.address}</div>
+                        <div class="restaurant-rating">
+                            <span class="rating-value">${restaurant.rating.toFixed(1)}</span>
+                            <img src="${getRatingIcon(restaurant.rating, restaurant.reviewer)}" alt="Bigger Belly Rating ${restaurant.rating.toFixed(1)}" class="rating-icon" onerror="this.src='src/vlad-bbb.png'">
                         </div>
-                    ` : ''}
-                    
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        ${restaurant.tikTokVideo ? `
-                            <a href="${restaurant.tikTokVideo}" target="_blank" style="
-                                display: inline-flex; align-items: center; gap: 4px;
-                                background: #000; color: white; text-decoration: none;
-                                padding: 6px 10px; border-radius: 6px; font-size: 12px;
-                            ">
-                                🎵 TikTok
-                            </a>
-                        ` : ''}
-                        
-                        ${restaurant.googleMapsLink ? `
-                            <a href="${restaurant.googleMapsLink}" target="_blank" style="
-                                display: inline-flex; align-items: center; gap: 4px;
-                                background: #4285f4; color: white; text-decoration: none;
-                                padding: 6px 10px; border-radius: 6px; font-size: 12px;
-                            ">
-                                📍 Maps
-                            </a>
-                        ` : ''}
+                        <div class="restaurant-tags">${tagsHtml}</div>
+                        <div class="restaurant-reviewer">Reviewed by: <span class="clickable-reviewer" onclick="selectReviewer('${restaurant.reviewer}')">${capitalizeForDisplay(restaurant.reviewer)}</span></div>
                     </div>
                 </div>`;
         });
