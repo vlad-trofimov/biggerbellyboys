@@ -1593,12 +1593,11 @@ header h1 {
 }
 
 .world-map {
-    padding: 1rem;
+    padding: 0;
     background: #f8f9fa;
-    min-height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 400px;
+    height: 400px;
+    position: relative;
 }
 
 .world-map svg {

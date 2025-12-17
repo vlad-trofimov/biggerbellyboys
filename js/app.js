@@ -2015,6 +2015,12 @@ function initializeGlobalMap() {
         loadCountryBoundaries();
         
         console.log('✅ Global map initialized successfully');
+        console.log('🗺️ Map container size:', worldMapContainer.offsetWidth, 'x', worldMapContainer.offsetHeight);
+        
+        // Force map to resize to container
+        setTimeout(() => {
+            globalMapInstance.invalidateSize();
+        }, 100);
         
     } catch (error) {
         console.warn('Leaflet global map failed to initialize, falling back to simple map:', error);
@@ -2093,18 +2099,13 @@ function loadCountryBoundaries() {
             }).addTo(globalMapInstance);
             
             console.log('🗺️ Available countries loaded:', Object.keys(countryLayers).slice(0, 10), '... (showing first 10)');
+            console.log('🗺️ Total map layers:', globalMapInstance._layers ? Object.keys(globalMapInstance._layers).length : 'unknown');
             
-            // Test: Manually highlight a known country to verify styling works
-            const testCountry = countryLayers['united states'];
-            if (testCountry) {
-                console.log('🧪 Testing highlight on United States');
-                testCountry.setStyle({
-                    fillColor: '#ff0000', // Red for test
-                    fillOpacity: 0.8,
-                    color: '#ff0000',
-                    weight: 3
-                });
-            }
+            // Force map to resize after layers are loaded
+            setTimeout(() => {
+                globalMapInstance.invalidateSize();
+                console.log('🔄 Map invalidated and resized');
+            }, 200);
             
             // Highlight any pending visited countries
             if (window.pendingVisitedCountries && window.pendingVisitedCountries.length > 0) {
