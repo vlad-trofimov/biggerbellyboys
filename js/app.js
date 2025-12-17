@@ -2074,7 +2074,7 @@ function loadCountryBoundaries() {
 }
 
 function addCountryMarkersFromRestaurants(restaurants) {
-    if (!globalMapInstance) return;
+    if (!globalMapInstance) return 0;
     
     console.log('🗺️ Adding country markers for restaurants:', restaurants.length);
     
@@ -2133,27 +2133,42 @@ function addCountryMarkersFromRestaurants(restaurants) {
         
         const info = countryInfo[countryTag] || { flag: '🏴', name: countryTag };
         
-        // Create custom icon with restaurant count
+        // Create custom icon with subtle restaurant count
         const countryIcon = L.divIcon({
             className: 'country-restaurant-marker',
             html: `<div style="
                 background: white;
                 border: 3px solid #d4651a;
                 border-radius: 50%;
-                width: 50px;
-                height: 50px;
+                width: 45px;
+                height: 45px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                font-size: 16px;
+                font-size: 18px;
                 box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+                position: relative;
             ">
                 <div>${info.flag}</div>
-                <div style="font-size: 10px; font-weight: bold; color: #d4651a;">${restaurantList.length}</div>
+                ${restaurantList.length > 1 ? `<div style="
+                    position: absolute;
+                    top: -8px;
+                    right: -8px;
+                    background: #d4651a;
+                    color: white;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 10px;
+                    font-weight: bold;
+                ">${restaurantList.length}</div>` : ''}
             </div>`,
-            iconSize: [50, 50],
-            iconAnchor: [25, 25]
+            iconSize: [45, 45],
+            iconAnchor: [22, 22]
         });
         
         // Create popup content with restaurant list
@@ -2174,6 +2189,21 @@ function addCountryMarkersFromRestaurants(restaurants) {
         }).addTo(globalMapInstance)
         .bindPopup(popupContent, { maxWidth: 300 });
     });
+    
+    // Return the total number of countries for the header
+    return countriesWithRestaurants.size;
+}
+
+function updateGlobalMapHeader(countryCount) {
+    const header = document.querySelector('.global-map-header');
+    if (!header) return;
+    
+    const totalRestaurants = getFilteredRestaurants().length;
+    
+    header.innerHTML = `
+        <h3>🌍 Global Belly Food Tour</h3>
+        <p><strong>${countryCount} countries visited</strong> • ${totalRestaurants} restaurants reviewed</p>
+    `;
 }
 
 function initializeSimpleMap() {
@@ -2239,20 +2269,37 @@ function updateGlobalMap() {
         return;
     }
     
-    // Always show the world map (it's now the main map)
-    console.log('✅ Showing world map container');
-    globalMapContainer.classList.remove('hidden');
+    // Check if "global belly food tour" is selected
+    const hasGlobalTourTag = Array.from(selectedTags).some(tag => 
+        standardizeTag(tag) === 'global belly food tour'
+    );
     
-    // Initialize map if not already done
-    if (!globalMapInstance) {
-        initializeGlobalMap();
-    }
+    console.log('🔍 Global tour tag selected:', hasGlobalTourTag);
+    console.log('📋 Selected tags:', Array.from(selectedTags));
     
-    // Get filtered restaurants and show country markers
-    const filteredRestaurants = getFilteredRestaurants();
-    
-    if (globalMapInstance) {
-        console.log('🎯 Adding country markers for filtered restaurants');
-        addCountryMarkersFromRestaurants(filteredRestaurants);
+    if (hasGlobalTourTag) {
+        // Show world map, hide local map
+        console.log('✅ Showing world map container');
+        globalMapContainer.classList.remove('hidden');
+        document.getElementById('map').classList.add('hidden');
+        
+        // Initialize map if not already done
+        if (!globalMapInstance) {
+            initializeGlobalMap();
+        }
+        
+        // Get filtered restaurants and show country markers
+        const filteredRestaurants = getFilteredRestaurants();
+        
+        if (globalMapInstance) {
+            console.log('🎯 Adding country markers for global belly food tour restaurants');
+            const countryCount = addCountryMarkersFromRestaurants(filteredRestaurants);
+            updateGlobalMapHeader(countryCount);
+        }
+        
+    } else {
+        // Hide world map, show local map
+        globalMapContainer.classList.add('hidden');
+        document.getElementById('map').classList.remove('hidden');
     }
 }
