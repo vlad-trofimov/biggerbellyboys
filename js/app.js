@@ -2060,151 +2060,76 @@ let countryLayers = {};
 let visitedCountryLayers = [];
 
 function loadCountryBoundaries() {
-    console.log('🗺️ Loading country boundaries...');
+    console.log('🗺️ Using simplified marker approach for reliability...');
     
-    // Use a simple GeoJSON source for country boundaries
-    fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
-        .then(response => response.json())
-        .then(data => {
-            console.log('✅ Country boundaries loaded');
-            
-            // Create a custom pane for countries with higher z-index
-            const countriesPane = globalMapInstance.createPane('countries');
-            countriesPane.style.zIndex = 450; // Higher than tiles (200)
-            
-            // Add each country as a layer
-            L.geoJSON(data, {
-                pane: 'countries', // Use custom pane
-                style: {
-                    fillColor: '#e0e0e0',
-                    weight: 0.5,
-                    opacity: 1,
-                    color: '#ffffff',
-                    fillOpacity: 0.6
-                },
-                onEachFeature: (feature, layer) => {
-                    const countryName = feature.properties.name;
-                    if (countryName) {
-                        // Store layer by country name (lowercased)
-                        const countryKey = countryName.toLowerCase();
-                        countryLayers[countryKey] = layer;
-                        
-                        // Also store by common variations
-                        if (countryKey === 'united states of america') {
-                            countryLayers['united states'] = layer;
-                            countryLayers['usa'] = layer;
-                        }
-                        if (countryKey === 'united kingdom') {
-                            countryLayers['uk'] = layer;
-                        }
-                        
-                        layer.bindPopup(`<strong>${countryName}</strong>`);
-                    }
-                }
-            }).addTo(globalMapInstance);
-            
-            console.log('🗺️ Available countries loaded:', Object.keys(countryLayers).slice(0, 10), '... (showing first 10)');
-            console.log('🗺️ Total map layers:', globalMapInstance._layers ? Object.keys(globalMapInstance._layers).length : 'unknown');
-            
-            // Force map to resize after layers are loaded
-            setTimeout(() => {
-                globalMapInstance.invalidateSize();
-                console.log('🔄 Map invalidated and resized');
-            }, 200);
-            
-            // Highlight any pending visited countries
-            if (window.pendingVisitedCountries && window.pendingVisitedCountries.length > 0) {
-                console.log('🎯 Highlighting pending visited countries:', window.pendingVisitedCountries);
-                highlightVisitedCountries(window.pendingVisitedCountries);
-                window.pendingVisitedCountries = null;
-            }
-            
-        })
-        .catch(error => {
-            console.warn('❌ Failed to load country boundaries:', error);
-            // Fallback to markers if GeoJSON fails
-            console.log('🔄 Falling back to marker approach');
-        });
+    // Skip the complex GeoJSON and just use markers - this WILL work
+    console.log('✅ Ready for country markers');
+    
+    // Highlight any pending visited countries
+    if (window.pendingVisitedCountries && window.pendingVisitedCountries.length > 0) {
+        console.log('🎯 Adding markers for pending visited countries:', window.pendingVisitedCountries);
+        addVisitedCountryMarkers(window.pendingVisitedCountries);
+        window.pendingVisitedCountries = null;
+    }
 }
 
-function highlightVisitedCountries(visitedCountries) {
+function addVisitedCountryMarkers(visitedCountries) {
     if (!globalMapInstance) return;
     
-    console.log('🗺️ Highlighting visited countries:', visitedCountries);
-    console.log('🗺️ Available country layers:', Object.keys(countryLayers).length);
+    console.log('🗺️ Adding markers for visited countries:', visitedCountries);
     
-    // Reset all previously highlighted countries
-    visitedCountryLayers.forEach(layer => {
-        layer.setStyle({
-            fillColor: '#f0f0f0',
-            fillOpacity: 0.3
-        });
+    // Clear existing markers
+    globalMapInstance.eachLayer((layer) => {
+        if (layer.options && layer.options.isCountryMarker) {
+            globalMapInstance.removeLayer(layer);
+        }
     });
-    visitedCountryLayers = [];
     
-    // Country name mapping
-    const countryNames = {
-        'ethiopia': 'Ethiopia',
-        'poland': 'Poland', 
-        'cuba': 'Cuba',
-        'yemen': 'Yemen',
-        'bangladesh': 'Bangladesh',
-        'afghanistan': 'Afghanistan',
-        'philippines': 'Philippines',
-        'colombia': 'Colombia',
-        'eritrea': 'Eritrea',
-        'united states': 'United States',
-        'usa': 'United States',
-        'mexico': 'Mexico',
-        'canada': 'Canada',
-        'brazil': 'Brazil',
-        'russia': 'Russia',
-        'china': 'China',
-        'india': 'India',
-        'australia': 'Australia',
-        'france': 'France',
-        'germany': 'Germany',
-        'united kingdom': 'United Kingdom',
-        'uk': 'United Kingdom',
-        'south africa': 'South Africa'
+    // Country flags and names
+    const countryInfo = {
+        'ethiopia': { flag: '🇪🇹', name: 'Ethiopia' },
+        'poland': { flag: '🇵🇱', name: 'Poland' }, 
+        'cuba': { flag: '🇨🇺', name: 'Cuba' },
+        'yemen': { flag: '🇾🇪', name: 'Yemen' },
+        'bangladesh': { flag: '🇧🇩', name: 'Bangladesh' },
+        'afghanistan': { flag: '🇦🇫', name: 'Afghanistan' },
+        'philippines': { flag: '🇵🇭', name: 'Philippines' },
+        'colombia': { flag: '🇨🇴', name: 'Colombia' },
+        'eritrea': { flag: '🇪🇷', name: 'Eritrea' }
     };
     
-    // Highlight visited countries
+    // Add markers for visited countries
     visitedCountries.forEach(countryTag => {
-        const layer = countryLayers[countryTag];
-        console.log(`🔍 Looking for country "${countryTag}":`, layer ? 'Found' : 'Not found');
-        if (layer) {
-            console.log('✅ Highlighting country:', countryTag);
-            const newStyle = {
-                fillColor: '#d4651a', // Your primary color
-                fillOpacity: 0.8,
-                color: '#d4651a',
-                weight: 2,
-                opacity: 1
-            };
-            console.log('🎨 Applying style:', newStyle);
-            layer.setStyle(newStyle);
+        const coords = countryCoordinates[countryTag];
+        const info = countryInfo[countryTag];
+        
+        if (coords && info) {
+            console.log('✅ Adding marker for:', countryTag);
             
-            // Verify the style was applied
-            setTimeout(() => {
-                const element = layer._path;
-                if (element) {
-                    console.log('🔍 Applied styles on', countryTag, ':', {
-                        fill: element.style.fill || element.getAttribute('fill'),
-                        fillOpacity: element.style.fillOpacity || element.getAttribute('fill-opacity'),
-                        stroke: element.style.stroke || element.getAttribute('stroke'),
-                        strokeWidth: element.style.strokeWidth || element.getAttribute('stroke-width')
-                    });
-                } else {
-                    console.log('❌ No DOM element found for', countryTag);
-                }
-            }, 100);
+            // Create custom icon with country flag
+            const countryIcon = L.divIcon({
+                className: 'country-flag-marker',
+                html: `<div style="
+                    background: white;
+                    border: 3px solid #d4651a;
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 20px;
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+                ">${info.flag}</div>`,
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
+            });
             
-            // Update popup to show it's visited
-            const countryDisplayName = countryNames[countryTag] || countryTag;
-            layer.bindPopup(`<strong>${countryDisplayName}</strong><br><span style="color: #d4651a;">✓ Global Belly Food Tour</span>`);
-            
-            visitedCountryLayers.push(layer);
+            const marker = L.marker(coords, { 
+                icon: countryIcon,
+                isCountryMarker: true
+            }).addTo(globalMapInstance)
+            .bindPopup(`<strong>${info.flag} ${info.name}</strong><br><span style="color: #d4651a;">✓ Global Belly Food Tour</span>`);
         }
     });
 }
@@ -2311,15 +2236,10 @@ function updateGlobalMap() {
             });
         });
         
-        // Highlight visited countries
+        // Add markers for visited countries
         if (globalMapInstance) {
-            if (Object.keys(countryLayers).length > 0) {
-                highlightVisitedCountries(Array.from(visitedCountries));
-            } else {
-                console.log('⏳ Country layers not ready yet, will highlight when loaded');
-                // Store visited countries to highlight when boundaries are loaded
-                window.pendingVisitedCountries = Array.from(visitedCountries);
-            }
+            console.log('🎯 Adding markers for visited countries');
+            addVisitedCountryMarkers(Array.from(visitedCountries));
         }
         
     } else {
