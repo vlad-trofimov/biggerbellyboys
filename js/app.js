@@ -1676,10 +1676,9 @@ function getPlaceType(place) {
 function selectPlace(place) {
     console.log('Place selected:', place);
     
-    
-    // Extract address components
-    const address = place.display_name || '';
-    const name = extractPlaceName(place);
+    // Extract name and address properly
+    const name = place.display_name || extractPlaceName(place);
+    const address = place.address || place.full_address || '';
     
     // Populate form fields
     document.getElementById('restaurantName').value = name;
