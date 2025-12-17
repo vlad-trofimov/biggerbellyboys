@@ -2094,6 +2094,13 @@ function loadCountryBoundaries() {
             
             console.log('🗺️ Available countries loaded:', Object.keys(countryLayers).slice(0, 10), '... (showing first 10)');
             
+            // Highlight any pending visited countries
+            if (window.pendingVisitedCountries && window.pendingVisitedCountries.length > 0) {
+                console.log('🎯 Highlighting pending visited countries:', window.pendingVisitedCountries);
+                highlightVisitedCountries(window.pendingVisitedCountries);
+                window.pendingVisitedCountries = null;
+            }
+            
         })
         .catch(error => {
             console.warn('❌ Failed to load country boundaries:', error);
@@ -2267,8 +2274,14 @@ function updateGlobalMap() {
         });
         
         // Highlight visited countries
-        if (globalMapInstance && Object.keys(countryLayers).length > 0) {
-            highlightVisitedCountries(Array.from(visitedCountries));
+        if (globalMapInstance) {
+            if (Object.keys(countryLayers).length > 0) {
+                highlightVisitedCountries(Array.from(visitedCountries));
+            } else {
+                console.log('⏳ Country layers not ready yet, will highlight when loaded');
+                // Store visited countries to highlight when boundaries are loaded
+                window.pendingVisitedCountries = Array.from(visitedCountries);
+            }
         }
         
     } else {
