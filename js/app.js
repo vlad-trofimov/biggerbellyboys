@@ -1979,64 +1979,101 @@ function showSuggestTab() {
     showSuggestForm();
 }
 
-// Global Food Tour Map functionality
+// Global Food Tour Map functionality using jVectorMap
+let globalMapInstance = null;
+
 function initializeGlobalMap() {
+    const worldMapContainer = document.getElementById('world-map');
+    if (!worldMapContainer || globalMapInstance) return;
+    
+    // Check if jVectorMap is available, if not load it
+    if (typeof jQuery === 'undefined' || !jQuery.fn.vectorMap) {
+        loadJVectorMap();
+        return;
+    }
+    
+    // Initialize the world map
+    try {
+        globalMapInstance = jQuery('#world-map').vectorMap({
+            map: 'world_mill',
+            backgroundColor: '#e6f3ff',
+            zoomOnScroll: false,
+            regionStyle: {
+                initial: {
+                    fill: '#e0e0e0',
+                    'fill-opacity': 1,
+                    stroke: '#ffffff',
+                    'stroke-width': 0.5,
+                    'stroke-opacity': 1
+                },
+                hover: {
+                    fill: '#ccc',
+                    'fill-opacity': 1
+                },
+                selected: {
+                    fill: '#d4651a', // Your primary color
+                    'fill-opacity': 0.8
+                }
+            },
+            onRegionTipShow: function(e, el, code){
+                const countryName = el.html();
+                el.html(countryName);
+            }
+        });
+    } catch (error) {
+        console.warn('jVectorMap failed to initialize, falling back to simple map');
+        initializeSimpleMap();
+    }
+}
+
+function loadJVectorMap() {
+    // Load jQuery if not present
+    if (typeof jQuery === 'undefined') {
+        const jqueryScript = document.createElement('script');
+        jqueryScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        jqueryScript.onload = () => loadVectorMapFiles();
+        document.head.appendChild(jqueryScript);
+    } else {
+        loadVectorMapFiles();
+    }
+}
+
+function loadVectorMapFiles() {
+    // Load jVectorMap CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.css';
+    document.head.appendChild(link);
+    
+    // Load jVectorMap JS
+    const scriptMain = document.createElement('script');
+    scriptMain.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.js';
+    scriptMain.onload = () => {
+        // Load world map data
+        const scriptWorld = document.createElement('script');
+        scriptWorld.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap-world-mill.js';
+        scriptWorld.onload = () => {
+            // Now initialize the map
+            setTimeout(() => initializeGlobalMap(), 100);
+        };
+        document.head.appendChild(scriptWorld);
+    };
+    document.head.appendChild(scriptMain);
+}
+
+function initializeSimpleMap() {
+    // Fallback simple map if jVectorMap fails
     const worldMapContainer = document.getElementById('world-map');
     if (!worldMapContainer) return;
     
-    // Simple SVG world map with key countries
-    const worldMapSVG = `
-    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-        <!-- United States -->
-        <path id="united-states" class="country" data-country="united states" d="M200,200 L400,200 L400,280 L200,280 Z" />
-        
-        <!-- Mexico -->
-        <path id="mexico" class="country" data-country="mexico" d="M180,280 L380,280 L380,320 L180,320 Z" />
-        
-        <!-- Ethiopia -->
-        <path id="ethiopia" class="country" data-country="ethiopia" d="M620,300 L680,300 L680,340 L620,340 Z" />
-        
-        <!-- Poland -->
-        <path id="poland" class="country" data-country="poland" d="M580,180 L620,180 L620,220 L580,220 Z" />
-        
-        <!-- Cuba -->
-        <path id="cuba" class="country" data-country="cuba" d="M280,270 L320,270 L320,285 L280,285 Z" />
-        
-        <!-- Yemen -->
-        <path id="yemen" class="country" data-country="yemen" d="M640,310 L680,310 L680,340 L640,340 Z" />
-        
-        <!-- Bangladesh -->
-        <path id="bangladesh" class="country" data-country="bangladesh" d="M750,250 L780,250 L780,280 L750,280 Z" />
-        
-        <!-- Afghanistan -->
-        <path id="afghanistan" class="country" data-country="afghanistan" d="M680,220 L720,220 L720,250 L680,250 Z" />
-        
-        <!-- Philippines -->
-        <path id="philippines" class="country" data-country="philippines" d="M820,280 L850,280 L850,320 L820,320 Z" />
-        
-        <!-- Colombia -->
-        <path id="colombia" class="country" data-country="colombia" d="M320,320 L360,320 L360,360 L320,360 Z" />
-        
-        <!-- Eritrea -->
-        <path id="eritrea" class="country" data-country="eritrea" d="M610,290 L640,290 L640,320 L610,320 Z" />
-        
-        <!-- Other major countries for context -->
-        <path id="canada" class="country" data-country="canada" d="M200,120 L450,120 L450,200 L200,200 Z" />
-        <path id="brazil" class="country" data-country="brazil" d="M350,360 L450,360 L450,450 L350,450 Z" />
-        <path id="russia" class="country" data-country="russia" d="M600,80 L900,80 L900,200 L600,200 Z" />
-        <path id="china" class="country" data-country="china" d="M750,180 L850,180 L850,280 L750,280 Z" />
-        <path id="australia" class="country" data-country="australia" d="M750,380 L850,380 L850,440 L750,440 Z" />
-        <path id="france" class="country" data-country="france" d="M520,200 L560,200 L560,240 L520,240 Z" />
-        <path id="germany" class="country" data-country="germany" d="M560,180 L590,180 L590,220 L560,220 Z" />
-        <path id="united-kingdom" class="country" data-country="united kingdom" d="M500,160 L540,160 L540,200 L500,200 Z" />
-        <path id="india" class="country" data-country="india" d="M720,250 L770,250 L770,320 L720,320 Z" />
-        <path id="south-africa" class="country" data-country="south africa" d="M580,380 L620,380 L620,420 L580,420 Z" />
-        
-        <!-- Ocean background -->
-        <rect x="0" y="0" width="1000" height="500" fill="#e6f3ff" style="z-index: -1;" />
-    </svg>`;
-    
-    worldMapContainer.innerHTML = worldMapSVG;
+    worldMapContainer.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: center; min-height: 300px; background: #f8f9fa; border-radius: 8px; color: #666;">
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🗺️</div>
+                <div>Global Food Tour Map</div>
+                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Loading interactive world map...</div>
+            </div>
+        </div>`;
 }
 
 function updateGlobalMap() {
@@ -2053,13 +2090,40 @@ function updateGlobalMap() {
         globalMapContainer.classList.remove('hidden');
         
         // Initialize map if not already done
-        if (!globalMapContainer.querySelector('svg')) {
+        if (!globalMapInstance) {
             initializeGlobalMap();
         }
         
         // Get filtered restaurants and extract country tags
         const filteredRestaurants = getFilteredRestaurants();
         const visitedCountries = new Set();
+        
+        // Country name mapping for jVectorMap country codes
+        const countryCodeMap = {
+            'ethiopia': 'ET',
+            'poland': 'PL', 
+            'cuba': 'CU',
+            'yemen': 'YE',
+            'bangladesh': 'BD',
+            'afghanistan': 'AF',
+            'philippines': 'PH',
+            'colombia': 'CO',
+            'eritrea': 'ER',
+            'united states': 'US',
+            'usa': 'US',
+            'mexico': 'MX',
+            'canada': 'CA',
+            'brazil': 'BR',
+            'russia': 'RU',
+            'china': 'CN',
+            'india': 'IN',
+            'australia': 'AU',
+            'france': 'FR',
+            'germany': 'DE',
+            'united kingdom': 'GB',
+            'uk': 'GB',
+            'south africa': 'ZA'
+        };
         
         filteredRestaurants.forEach(restaurant => {
             restaurant.tags.forEach(tag => {
@@ -2071,26 +2135,32 @@ function updateGlobalMap() {
                     standardizedTag !== 'new york') {
                     
                     // Check if this tag matches a known country
-                    const countryElement = document.querySelector(`[data-country="${standardizedTag}"]`);
-                    if (countryElement) {
-                        visitedCountries.add(standardizedTag);
+                    const countryCode = countryCodeMap[standardizedTag];
+                    if (countryCode) {
+                        visitedCountries.add(countryCode);
                     }
                 }
             });
         });
         
-        // Reset all countries to default state
-        document.querySelectorAll('.world-map .country').forEach(country => {
-            country.classList.remove('visited');
-        });
-        
-        // Highlight visited countries
-        visitedCountries.forEach(countryName => {
-            const countryElement = document.querySelector(`[data-country="${countryName}"]`);
-            if (countryElement) {
-                countryElement.classList.add('visited');
+        // Update map colors if jVectorMap is loaded
+        if (globalMapInstance && jQuery('#world-map').vectorMap) {
+            try {
+                // Reset all countries to default
+                const mapObject = jQuery('#world-map').vectorMap('get', 'mapObject');
+                if (mapObject) {
+                    // Clear all selections first
+                    mapObject.clearSelectedRegions();
+                    
+                    // Set visited countries as selected
+                    if (visitedCountries.size > 0) {
+                        mapObject.setSelectedRegions(Array.from(visitedCountries));
+                    }
+                }
+            } catch (error) {
+                console.warn('Error updating map colors:', error);
             }
-        });
+        }
         
     } else {
         // Hide global map
