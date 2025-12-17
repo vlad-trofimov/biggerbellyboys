@@ -1984,10 +1984,16 @@ let globalMapInstance = null;
 
 function initializeGlobalMap() {
     const worldMapContainer = document.getElementById('world-map');
-    if (!worldMapContainer || globalMapInstance) return;
+    if (!worldMapContainer || globalMapInstance) {
+        console.log('🚫 Cannot initialize global map:', !worldMapContainer ? 'container not found' : 'already initialized');
+        return;
+    }
+    
+    console.log('🗺️ Initializing global map...');
     
     // Check if jVectorMap is available, if not load it
     if (typeof jQuery === 'undefined' || !jQuery.fn.vectorMap) {
+        console.log('📦 Loading jVectorMap library...');
         loadJVectorMap();
         return;
     }
@@ -2027,37 +2033,50 @@ function initializeGlobalMap() {
 }
 
 function loadJVectorMap() {
+    console.log('📦 Loading jVectorMap dependencies...');
     // Load jQuery if not present
     if (typeof jQuery === 'undefined') {
+        console.log('📦 Loading jQuery...');
         const jqueryScript = document.createElement('script');
         jqueryScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
-        jqueryScript.onload = () => loadVectorMapFiles();
+        jqueryScript.onload = () => {
+            console.log('✅ jQuery loaded');
+            loadVectorMapFiles();
+        };
+        jqueryScript.onerror = () => console.error('❌ Failed to load jQuery');
         document.head.appendChild(jqueryScript);
     } else {
+        console.log('✅ jQuery already available');
         loadVectorMapFiles();
     }
 }
 
 function loadVectorMapFiles() {
+    console.log('📦 Loading jVectorMap files...');
     // Load jVectorMap CSS
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.css';
     document.head.appendChild(link);
+    console.log('✅ jVectorMap CSS loaded');
     
     // Load jVectorMap JS
     const scriptMain = document.createElement('script');
     scriptMain.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.js';
     scriptMain.onload = () => {
+        console.log('✅ jVectorMap JS loaded');
         // Load world map data
         const scriptWorld = document.createElement('script');
         scriptWorld.src = 'https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap-world-mill.js';
         scriptWorld.onload = () => {
+            console.log('✅ World map data loaded');
             // Now initialize the map
             setTimeout(() => initializeGlobalMap(), 100);
         };
+        scriptWorld.onerror = () => console.error('❌ Failed to load world map data');
         document.head.appendChild(scriptWorld);
     };
+    scriptMain.onerror = () => console.error('❌ Failed to load jVectorMap JS');
     document.head.appendChild(scriptMain);
 }
 
@@ -2078,15 +2097,22 @@ function initializeSimpleMap() {
 
 function updateGlobalMap() {
     const globalMapContainer = document.getElementById('global-map');
-    if (!globalMapContainer) return;
+    if (!globalMapContainer) {
+        console.log('❌ Global map container not found');
+        return;
+    }
     
     // Check if "global belly food tour" is selected
     const hasGlobalTourTag = Array.from(selectedTags).some(tag => 
         standardizeTag(tag) === 'global belly food tour'
     );
     
+    console.log('🔍 Global tour tag selected:', hasGlobalTourTag);
+    console.log('📋 Selected tags:', Array.from(selectedTags));
+    
     if (hasGlobalTourTag) {
         // Show global map
+        console.log('✅ Showing global map container');
         globalMapContainer.classList.remove('hidden');
         
         // Initialize map if not already done
