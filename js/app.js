@@ -1598,7 +1598,8 @@ async function searchPlaces(query) {
                     type: 'place',
                     class: 'place',
                     category: 'place',
-                    address: place.display_address || place.display_name,
+                    address: place.display_address || '',
+                    full_address: place.display_address || place.display_name,
                     extratags: {
                         name: place.display_place || ''
                     }
@@ -1635,14 +1636,14 @@ function displaySearchResults(results) {
     }
     
     const resultsHTML = results.map(place => {
-        const name = extractPlaceName(place);
-        const address = place.display_name || '';
+        const name = place.display_name || extractPlaceName(place);
+        const address = place.address || '';
         const type = getPlaceType(place);
         
         return `
             <div class="search-result-item" onclick="selectPlace(${JSON.stringify(place).replace(/"/g, '&quot;')})">
                 <div class="search-result-name">${escapeHtml(name)}</div>
-                <div class="search-result-address">${escapeHtml(address)}</div>
+                ${address ? `<div class="search-result-address">${escapeHtml(address)}</div>` : ''}
                 ${type ? `<div class="search-result-type">${escapeHtml(type)}</div>` : ''}
             </div>
         `;
