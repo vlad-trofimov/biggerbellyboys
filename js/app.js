@@ -6,7 +6,13 @@ const CONFIG = {
     
     // Default map center (will be updated based on restaurant locations)
     defaultCenter: [40.7128, -74.0060], // New York City
-    defaultZoom: 10
+    defaultZoom: 10,
+    
+    // LocationIQ API configuration
+    locationIQ: {
+        apiKey: 'pk.20e7d474ebfc4866aad4494bb342ed89',
+        region: 'us1' // us1 for US region, eu1 for Europe region
+    }
 };
 
 // Global variables
@@ -1557,61 +1563,62 @@ async function searchPlaces(query) {
         searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
         searchResults.classList.remove('hidden');
         
-        // Prepare multiple search variations for better results
-        const searchQueries = prepareSearchQueries(query);
+        // Get LocationIQ API configuration
+        const LOCATIONIQ_API_KEY = CONFIG.locationIQ.apiKey;
+        const LOCATIONIQ_REGION = CONFIG.locationIQ.region;
         let allResults = [];
         
-        // Try each search variation with timeout protection
-        for (const searchQuery of searchQueries) {
-            try {
-                // Add timeout to prevent hanging requests
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-                
-                const response = await fetch(
-                    `https://photon.komoot.io/api/?` + new URLSearchParams({
-                        q: searchQuery,
-                        limit: '5',
-                        osm_tag: 'amenity:restaurant,amenity:cafe,amenity:fast_food,amenity:bar,amenity:pub'
-                    }), {
-                        headers: {
-                            'User-Agent': 'BiggerBellyBoys/1.0'
-                        },
-                        signal: controller.signal
-                    }
-                );
-                
-                clearTimeout(timeoutId);
+        // Primary search using LocationIQ Autocomplete API
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
             
-                if (response.ok) {
-                    const data = await response.json();
-                    // Photon returns {features: [...]} format, convert to Nominatim-like format
-                    const results = data.features ? data.features.map(convertPhotonToNominatim) : [];
-                    allResults = allResults.concat(results);
-                    
-                    // AGGRESSIVE: Exit immediately after first successful result set
-                    if (results.length > 0) break; // Stop as soon as we get ANY results
+            const autocompleteResponse = await fetch(
+                `https://${LOCATIONIQ_REGION}.locationiq.com/v1/autocomplete?` + new URLSearchParams({
+                    key: LOCATIONIQ_API_KEY,
+                    q: query,
+                    limit: '10',
+                    countrycodes: 'us' // Focus on US results
+                }), {
+                    signal: controller.signal
                 }
-            } catch (error) {
-                // Skip failed/timeout requests and continue to next query
-                console.log(`Search query "${searchQuery}" failed or timed out:`, error.message);
-                continue;
-            }
+            );
             
-            // Reduced delay for better responsiveness
-            await new Promise(resolve => setTimeout(resolve, 50));
+            clearTimeout(timeoutId);
+            
+            if (autocompleteResponse.ok) {
+                const autocompleteData = await autocompleteResponse.json();
+                
+                // Transform LocationIQ results to match expected format
+                const transformedResults = autocompleteData.map(place => ({
+                    place_id: place.place_id || Math.random(),
+                    lat: place.lat,
+                    lon: place.lon,
+                    display_name: place.display_place || place.display_name,
+                    type: 'place',
+                    class: 'place',
+                    category: 'place',
+                    address: place.display_address || place.display_name,
+                    extratags: {
+                        name: place.display_place || ''
+                    }
+                }));
+                
+                allResults = transformedResults;
+            }
+        } catch (error) {
+            console.log('LocationIQ autocomplete search failed:', error.message);
         }
         
         // Remove duplicates based on display_name and coordinates
         const uniqueResults = removeDuplicateResults(allResults);
         
-        // Photon API already filters for restaurants, so minimal additional filtering needed
-        const restaurantResults = uniqueResults.filter(place => {
-            // Just verify we have basic required fields
+        // Filter and validate results
+        const validResults = uniqueResults.filter(place => {
             return place.display_name && place.lat && place.lon;
         });
         
-        displaySearchResults(restaurantResults.slice(0, 8)); // Show more results since they're pre-filtered
+        displaySearchResults(validResults.slice(0, 8));
         
     } catch (error) {
         console.error('Search error:', error);
