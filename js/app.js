@@ -2185,24 +2185,14 @@ function addCountryMarkersFromRestaurants(restaurants) {
             iconAnchor: [22, 22]
         });
         
-        // Create popup container
+        // Create popup container with just the restaurant cards
         const popupContainer = document.createElement('div');
-        popupContainer.innerHTML = `
-            <div class="country-popup-header" style="text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #d4651a;">
-                <strong style="font-size: 18px;">${info.flag} ${info.name}</strong><br>
-                <span style="color: #d4651a; font-weight: bold;">${restaurantList.length} restaurant${restaurantList.length > 1 ? 's' : ''} visited</span>
-            </div>
-            <div class="country-restaurants-list"></div>
-        `;
-        
-        const restaurantsContainer = popupContainer.querySelector('.country-restaurants-list');
         
         // Generate restaurant cards using the same function as main list
         restaurantList.forEach((restaurant, index) => {
             const card = createRestaurantCardElement(restaurant, false); // No click event for popup
-            card.classList.add('popup-card');
             card.style.marginBottom = '12px';
-            restaurantsContainer.appendChild(card);
+            popupContainer.appendChild(card);
         });
         
         const popupContent = popupContainer.innerHTML;
