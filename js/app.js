@@ -2170,13 +2170,30 @@ function highlightVisitedCountries(visitedCountries) {
         console.log(`🔍 Looking for country "${countryTag}":`, layer ? 'Found' : 'Not found');
         if (layer) {
             console.log('✅ Highlighting country:', countryTag);
-            layer.setStyle({
+            const newStyle = {
                 fillColor: '#d4651a', // Your primary color
                 fillOpacity: 0.8,
                 color: '#d4651a',
                 weight: 2,
                 opacity: 1
-            });
+            };
+            console.log('🎨 Applying style:', newStyle);
+            layer.setStyle(newStyle);
+            
+            // Verify the style was applied
+            setTimeout(() => {
+                const element = layer._path;
+                if (element) {
+                    console.log('🔍 Applied styles on', countryTag, ':', {
+                        fill: element.style.fill || element.getAttribute('fill'),
+                        fillOpacity: element.style.fillOpacity || element.getAttribute('fill-opacity'),
+                        stroke: element.style.stroke || element.getAttribute('stroke'),
+                        strokeWidth: element.style.strokeWidth || element.getAttribute('stroke-width')
+                    });
+                } else {
+                    console.log('❌ No DOM element found for', countryTag);
+                }
+            }, 100);
             
             // Update popup to show it's visited
             const countryDisplayName = countryNames[countryTag] || countryTag;
