@@ -2092,6 +2092,8 @@ function loadCountryBoundaries() {
                 }
             }).addTo(globalMapInstance);
             
+            console.log('🗺️ Available countries loaded:', Object.keys(countryLayers).slice(0, 10), '... (showing first 10)');
+            
         })
         .catch(error => {
             console.warn('❌ Failed to load country boundaries:', error);
@@ -2104,6 +2106,7 @@ function highlightVisitedCountries(visitedCountries) {
     if (!globalMapInstance) return;
     
     console.log('🗺️ Highlighting visited countries:', visitedCountries);
+    console.log('🗺️ Available country layers:', Object.keys(countryLayers).length);
     
     // Reset all previously highlighted countries
     visitedCountryLayers.forEach(layer => {
@@ -2144,7 +2147,9 @@ function highlightVisitedCountries(visitedCountries) {
     // Highlight visited countries
     visitedCountries.forEach(countryTag => {
         const layer = countryLayers[countryTag];
+        console.log(`🔍 Looking for country "${countryTag}":`, layer ? 'Found' : 'Not found');
         if (layer) {
+            console.log('✅ Highlighting country:', countryTag);
             layer.setStyle({
                 fillColor: '#d4651a', // Your primary color
                 fillOpacity: 0.7
