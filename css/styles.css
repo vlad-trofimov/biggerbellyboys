@@ -1594,7 +1594,7 @@ header h1 {
 .global-map-header {
     background: var(--primary-color);
     color: white;
-    padding: 1rem;
+    padding: 0.75rem;
     text-align: center;
     flex-shrink: 0;
 }

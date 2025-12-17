@@ -2215,10 +2215,11 @@ function updateGlobalMapHeader(countryCount) {
     if (!header) return;
     
     const totalRestaurants = getFilteredRestaurants().length;
+    const countriesRemaining = 195 - countryCount;
     
     header.innerHTML = `
         <h3>🌍 Global Belly Food Tour</h3>
-        <p><strong>${countryCount} countries visited</strong> • ${totalRestaurants} restaurants reviewed</p>
+        <p><strong>${countryCount} countries visited. ${countriesRemaining} to go.</strong></p>
     `;
 }
 
