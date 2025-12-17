@@ -2185,17 +2185,15 @@ function addCountryMarkersFromRestaurants(restaurants) {
             iconAnchor: [22, 22]
         });
         
-        // Create popup container with just the restaurant cards
-        const popupContainer = document.createElement('div');
+        // Use the exact same popup content as local map markers
+        let popupContent = '';
         
-        // Generate restaurant cards using the same function as main list
         restaurantList.forEach((restaurant, index) => {
-            const card = createRestaurantCardElement(restaurant, false); // No click event for popup
-            card.style.marginBottom = '12px';
-            popupContainer.appendChild(card);
+            popupContent += createPopupContent(restaurant);
+            if (index < restaurantList.length - 1) {
+                popupContent += '<div style="margin: 15px 0; border-bottom: 1px solid #ddd;"></div>';
+            }
         });
-        
-        const popupContent = popupContainer.innerHTML;
         
         const marker = L.marker(coords, { 
             icon: countryIcon,
