@@ -1,7 +1,7 @@
 {
-  "version": "2025-12-17T23:23:15.613Z",
-  "lastUpdated": "2025-12-17T23:23:15.613Z",
-  "totalRestaurants": 180,
+  "version": "2025-12-18T00:58:44.129Z",
+  "lastUpdated": "2025-12-18T00:58:44.129Z",
+  "totalRestaurants": 181,
   "restaurants": [
     {
       "reviewer": "vlad",
@@ -5375,6 +5375,36 @@
       "tikTokThumbnail": "thumbnails/7582272134353833271.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7582272134353833271.jpeg",
       "datePosted": "12/10/2025"
+    },
+    {
+      "reviewer": "jason",
+      "restaurant": "Old Mates Pub",
+      "tags": [
+        "australia",
+        "nyc",
+        "global belly food tour"
+      ],
+      "location": "Manhattan, NY",
+      "locationData": {
+        "city": "Manhattan",
+        "region": "NY",
+        "fullRegion": "New York",
+        "fullLocation": "Manhattan, New York",
+        "originalLocation": "Manhattan, NY",
+        "cityStandardized": "manhattan",
+        "fullRegionStandardized": "new york",
+        "fullLocationStandardized": "manhattan, new york"
+      },
+      "address": "170 John St, New York, NY 10038",
+      "city": "manhattan",
+      "googleMapsLink": "",
+      "latitude": 40.7059488,
+      "longitude": -74.00425589999999,
+      "rating": 8.2,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7584970893500190007",
+      "tikTokThumbnail": "thumbnails/7584970893500190007.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7584970893500190007.jpeg",
+      "datePosted": "12/17/2025"
     },
     {
       "reviewer": "andrew",
