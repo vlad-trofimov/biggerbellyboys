@@ -22,6 +22,36 @@ async function fetchTikTokThumbnail(url) {
     }
 }
 
+// Download and save thumbnail to local file
+async function downloadAndSaveThumbnail(thumbnailUrl, localPath) {
+    try {
+        const fetch = (await import('node-fetch')).default;
+        const response = await fetch(thumbnailUrl);
+        
+        if (!response.ok) {
+            console.log(`⚠️ Thumbnail download failed: ${response.status}`);
+            return false;
+        }
+        
+        // Ensure thumbnails directory exists
+        const thumbnailsDir = path.join(process.cwd(), 'thumbnails');
+        if (!fs.existsSync(thumbnailsDir)) {
+            fs.mkdirSync(thumbnailsDir, { recursive: true });
+        }
+        
+        // Save the image
+        const buffer = await response.buffer();
+        const fullPath = path.join(process.cwd(), localPath);
+        fs.writeFileSync(fullPath, buffer);
+        
+        console.log(`✅ Downloaded thumbnail to ${localPath}`);
+        return true;
+    } catch (error) {
+        console.log(`⚠️ Error downloading thumbnail:`, error.message);
+        return false;
+    }
+}
+
 // Geocoding function
 async function geocodeAddress(address, apiKey) {
     if (!address || address === '') return null;
@@ -311,13 +341,23 @@ async function main() {
             // Generate thumbnail for TikTok video
             const tikTokVideoUrl = row['TikTok Video']?.trim() || '';
             const cachedThumbnailPath = getCachedThumbnailPath(tikTokVideoUrl);
-            let thumbnailUrl = cachedThumbnailPath;
+            let thumbnailUrl = null;
             
-            // If no cached thumbnail and we have a TikTok URL, fetch thumbnail
-            if (!cachedThumbnailPath && tikTokVideoUrl) {
-                const fetchedThumbnail = await fetchTikTokThumbnail(tikTokVideoUrl);
-                if (fetchedThumbnail) {
-                    thumbnailUrl = fetchedThumbnail;
+            // Check if cached thumbnail actually exists on disk
+            const thumbnailExists = cachedThumbnailPath && fs.existsSync(path.join(process.cwd(), cachedThumbnailPath));
+            
+            if (thumbnailExists) {
+                thumbnailUrl = cachedThumbnailPath;
+            } else if (tikTokVideoUrl && cachedThumbnailPath) {
+                // Fetch and download thumbnail if no cached version exists
+                const fetchedThumbnailUrl = await fetchTikTokThumbnail(tikTokVideoUrl);
+                if (fetchedThumbnailUrl) {
+                    const downloadSuccess = await downloadAndSaveThumbnail(fetchedThumbnailUrl, cachedThumbnailPath);
+                    if (downloadSuccess) {
+                        thumbnailUrl = cachedThumbnailPath; // Use local path after successful download
+                    } else {
+                        thumbnailUrl = fetchedThumbnailUrl; // Fall back to remote URL if download failed
+                    }
                 }
             }
             
