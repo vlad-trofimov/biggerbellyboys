@@ -2210,7 +2210,10 @@ function addCountryMarkersFromRestaurants(restaurants) {
         }).addTo(globalMapInstance)
         .bindPopup(popupContent, { 
             maxWidth: 400,
-            className: 'country-restaurant-popup'
+            className: 'country-restaurant-popup',
+            autoPan: true,
+            autoPanPadding: [20, 20],
+            keepInView: true
         });
     });
     
@@ -2227,7 +2230,7 @@ function updateGlobalMapHeader(countryCount) {
     
     header.innerHTML = `
         <h3>🌍 Global Belly Food Tour (based in NYC 🍎🗽)</h3>
-        <p><strong>${countryCount} international cuisines reviewed. ${countriesRemaining} to go.</strong></p>
+        <p><strong>${countryCount} cuisines reviewed. ${countriesRemaining} to go.</strong></p>
     `;
 }
 
