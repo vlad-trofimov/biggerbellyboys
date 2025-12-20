@@ -2544,11 +2544,6 @@ function closeGlobalMapPopup() {
     }
 }
 
-// Helper function to generate Google Maps link
-function generateGoogleMapsLink(restaurant) {
-    if (restaurant.googleMapsLink) return restaurant.googleMapsLink;
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.address)}`;
-}
 
 // Helper function to get rating icon
 function getRatingIcon(rating, reviewer) {
