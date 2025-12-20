@@ -1726,3 +1726,11 @@ header h1 {
         padding: 1px 3px;
     }
 }
+
+/* Global Map amCharts Popup Styles - simple override */
+#global-map-popup {
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    pointer-events: auto;
+}
