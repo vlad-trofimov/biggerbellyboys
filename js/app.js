@@ -747,27 +747,22 @@ function createRestaurantCardElement(restaurant, includeClickEvent = true) {
     // Add click event to zoom to marker (only for main list, not popup)
     if (includeClickEvent) {
         card.addEventListener('click', () => {
-            console.log('🎯 Restaurant card clicked:', restaurant.restaurant);
-            console.log('📋 Restaurant tags:', restaurant.tags);
             
             // Check if this is a global belly food tour restaurant
             const hasGlobalTourTag = restaurant.tags.some(tag => 
                 standardizeTag(tag) === 'global belly food tour'
             );
             
-            console.log('🌍 Has global tour tag:', hasGlobalTourTag);
             
             if (hasGlobalTourTag) {
                 // Check if global belly food tour tag is currently selected
                 const isGlobalTourSelected = selectedTags.has('global belly food tour');
-                console.log('🔄 Is global tour selected:', isGlobalTourSelected);
                 
                 if (isGlobalTourSelected) {
                     // We're already on the global map, handle popup for country
                     const countryInfo = getCountryFromTags(restaurant.tags);
                     if (countryInfo) {
-                            console.log('💫 Opening popup for:', countryInfo.country);
-                        
+                            
                         // Pan map to country using simple coordinate mapping
                         if (globalMapInstance) {
                             const countryCoordinates = {
@@ -785,7 +780,6 @@ function createRestaurantCardElement(restaurant, includeClickEvent = true) {
                             
                             const coords = countryCoordinates[countryInfo.countryCode];
                             if (coords) {
-                                console.log('🎯 Panning map to coordinates:', coords);
                                 // Close any existing popup immediately before panning
                                 closeGlobalMapPopup();
                                 
@@ -832,17 +826,14 @@ function createRestaurantCardElement(restaurant, includeClickEvent = true) {
                         const clickY = chartRect.height * 0.3; // Upper third
                         
                         // Show popup immediately
-                        console.log('🚀 Showing popup for country:', countryInfo.countryCode, 'at position:', clickX, clickY);
                         showGlobalMapPopup(countryInfo.countryCode, countryInfo.country, clickX, clickY, countryRestaurantsByCountry);
                         }
                     } else {
                         // Store for when map loads
-                        console.log('⏳ Storing pending popup for:', countryInfo.country);
                         window.pendingCountryPopup = countryInfo;
                     }
                 } else {
                     // Global tour is not selected, treat as regular restaurant
-                    console.log('🗺️ Global tour not selected, using default map behavior');
                     const marker = markers[originalIndex];
                     if (marker) {
                         map.setView([restaurant.latitude, restaurant.longitude], 15);
@@ -2213,7 +2204,6 @@ let amChartsRoot = null;
 function initializeGlobalMap() {
     const worldMapContainer = document.getElementById('world-map');
     if (!worldMapContainer) {
-        console.log('🚫 Cannot initialize global map: container not found');
         return;
     }
     
@@ -2223,7 +2213,6 @@ function initializeGlobalMap() {
         amChartsRoot = null;
     }
     
-    console.log('🗺️ Initializing global map with amCharts...');
     
     try {
         // Initialize amCharts
@@ -2282,13 +2271,11 @@ function initializeGlobalMap() {
         const worldMapContainer = document.getElementById('world-map');
         if (worldMapContainer) {
             worldMapContainer.addEventListener('click', function(event) {
-                console.log('🌍 DOM world-map clicked', event.target);
                 // Only close if NOT clicking on the popup
                 if (!event.target.closest('#global-map-popup')) {
                     console.log('🔒 Closing popup - clicked outside popup area');
                     closeGlobalMapPopup();
                 } else {
-                    console.log('🎯 Clicked inside popup - not closing');
                 }
             });
         }
@@ -2308,7 +2295,6 @@ function initializeGlobalMap() {
 
 // Load Global Belly Food Tour countries and add restaurant popups
 function loadGlobalBellyFoodTourCountries(polygonSeries) {
-    console.log('🌍 Loading Global Belly Food Tour countries...');
     
     // Filter restaurants that are tagged with "global belly food tour" AND have identifiable international cuisine
     const globalTourRestaurants = restaurants.filter(restaurant => {
@@ -2411,7 +2397,6 @@ function loadGlobalBellyFoodTourCountries(polygonSeries) {
     // Check for pending country popup request
     if (window.pendingCountryPopup) {
         const countryInfo = window.pendingCountryPopup;
-        console.log('🎯 Opening pending popup for:', countryInfo.country, 'in loadGlobalBellyFoodTourCountries');
         
         // Find restaurants for this country
         const globalTourRestaurants = restaurants.filter(r => {
@@ -2619,14 +2604,12 @@ let countryLayers = {};
 let visitedCountryLayers = [];
 
 function loadCountryBoundaries() {
-    console.log('🗺️ Using simplified marker approach for reliability...');
     
     // Skip the complex GeoJSON and just use markers - this WILL work
     console.log('✅ Ready for country markers');
     
     // Highlight any pending visited countries
     if (window.pendingVisitedCountries && window.pendingVisitedCountries.length > 0) {
-        console.log('🎯 Adding markers for pending visited countries:', window.pendingVisitedCountries);
         addVisitedCountryMarkers(window.pendingVisitedCountries);
         window.pendingVisitedCountries = null;
     }
@@ -2654,7 +2637,6 @@ function initializeSimpleMap() {
     const worldMapContainer = document.getElementById('world-map');
     if (!worldMapContainer) return;
     
-    console.log('🗺️ Initializing simple fallback map');
     
     // Get visited countries for the fallback
     const filteredRestaurants = getFilteredRestaurants();
@@ -2717,7 +2699,6 @@ function updateGlobalMap() {
         standardizeTag(tag) === 'global belly food tour'
     );
     
-    console.log('🔍 Global tour tag selected:', hasGlobalTourTag);
     console.log('📋 Selected tags:', Array.from(selectedTags));
     
     if (hasGlobalTourTag) {
@@ -2728,7 +2709,6 @@ function updateGlobalMap() {
         if (localMap) {
             localMap.classList.add('hidden');
             localMap.style.display = 'none';
-            console.log('🚫 Hidden local map - classes:', localMap.className, 'style:', localMap.style.display);
         }
         
         // Initialize map if not already done
@@ -2737,11 +2717,9 @@ function updateGlobalMap() {
         }
         
         // The amCharts map handles restaurant loading automatically when initialized
-        console.log('🌍 Global map is already loaded with restaurant data');
         
     } else {
         // Hide world map, show local map
-        console.log('🚫 Hiding world map, showing local map');
         globalMapContainer.classList.add('hidden');
         const localMap = document.getElementById('map');
         if (localMap) {
