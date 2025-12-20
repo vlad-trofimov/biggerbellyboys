@@ -26,6 +26,7 @@ async function fetchTikTokThumbnail(url) {
 async function downloadAndSaveThumbnail(thumbnailUrl, localPath) {
     try {
         const fetch = (await import('node-fetch')).default;
+        const sharp = require('sharp');
         const response = await fetch(thumbnailUrl);
         
         if (!response.ok) {
@@ -39,12 +40,20 @@ async function downloadAndSaveThumbnail(thumbnailUrl, localPath) {
             fs.mkdirSync(thumbnailsDir, { recursive: true });
         }
         
-        // Save the image
+        // Download and compress the image
         const buffer = await response.buffer();
-        const fullPath = path.join(process.cwd(), localPath);
-        fs.writeFileSync(fullPath, buffer);
+        const compressedBuffer = await sharp(buffer)
+            .jpeg({ 
+                quality: 80, 
+                progressive: true 
+            })
+            .resize({ width: 300, withoutEnlargement: true })
+            .toBuffer();
         
-        console.log(`✅ Downloaded thumbnail to ${localPath}`);
+        const fullPath = path.join(process.cwd(), localPath);
+        fs.writeFileSync(fullPath, compressedBuffer);
+        
+        console.log(`✅ Downloaded and compressed thumbnail to ${localPath}`);
         return true;
     } catch (error) {
         console.log(`⚠️ Error downloading thumbnail:`, error.message);

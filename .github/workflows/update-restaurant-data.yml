@@ -25,7 +25,7 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm install node-fetch
+        run: npm install node-fetch sharp
         
       - name: Update restaurant data
         run: node .github/scripts/update-restaurant-data.js

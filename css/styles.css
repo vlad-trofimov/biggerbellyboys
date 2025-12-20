@@ -1664,8 +1664,6 @@ header h1 {
 .country-restaurant-popup .leaflet-popup-content {
     margin: 0;
     font-family: inherit;
-    max-height: 400px;
-    overflow-y: auto;
 }
 
 .country-restaurant-popup .leaflet-popup-tip {
