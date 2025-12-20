@@ -1,7 +1,7 @@
 {
-  "version": "2025-12-19T20:13:39.475Z",
-  "lastUpdated": "2025-12-19T20:13:39.475Z",
-  "totalRestaurants": 181,
+  "version": "2025-12-20T00:53:28.413Z",
+  "lastUpdated": "2025-12-20T00:53:28.413Z",
+  "totalRestaurants": 182,
   "restaurants": [
     {
       "reviewer": "vlad",
@@ -657,8 +657,8 @@
       "address": "715 E Pine St, Seattle, WA 98122",
       "city": "seattle",
       "googleMapsLink": "",
-      "latitude": 47.6150702,
-      "longitude": -122.3226252,
+      "latitude": 47.6146351,
+      "longitude": -122.3232656,
       "rating": 8.4,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7469651418434096430",
       "tikTokThumbnail": "thumbnails/7469651418434096430.jpeg",
@@ -4567,7 +4567,8 @@
         "arepas",
         "colombian",
         "latin",
-        "series"
+        "series",
+        "questforthebestarepa"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -4658,7 +4659,8 @@
         "arepas",
         "latin",
         "venezuelan",
-        "series"
+        "series",
+        "questforthebestarepa"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -4748,7 +4750,8 @@
         "arepas",
         "colombian",
         "latin",
-        "series"
+        "series",
+        "questforthebestarepa"
       ],
       "location": "New York, NY",
       "locationData": {
@@ -4837,7 +4840,8 @@
       "restaurant": "Cluck N'Sip",
       "tags": [
         "wings",
-        "series"
+        "series",
+        "chickenrun"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -4929,7 +4933,8 @@
         "kfc",
         "korean",
         "wings",
-        "series"
+        "series",
+        "chickenrun"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5020,7 +5025,8 @@
         "wings",
         "casual",
         "dive bar",
-        "series"
+        "series",
+        "chickenrun"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5110,7 +5116,8 @@
         "kfc",
         "korean",
         "wings",
-        "series"
+        "series",
+        "chickenrun"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5200,7 +5207,8 @@
         "arepas",
         "latin",
         "venezuelan",
-        "series"
+        "series",
+        "questforthebestarepa"
       ],
       "location": "New York, NY",
       "locationData": {
@@ -5292,7 +5300,8 @@
         "nashville",
         "hot chicken",
         "tendies",
-        "series"
+        "series",
+        "chickenrun"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5467,6 +5476,36 @@
       "tikTokThumbnail": "thumbnails/7583895976377699639.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7583895976377699639.jpeg",
       "datePosted": "12/15/2025"
+    },
+    {
+      "reviewer": "andrew",
+      "restaurant": "Avian Water and Banh Mi",
+      "tags": [
+        "banhmi",
+        "questforthebestbanhmi",
+        "series"
+      ],
+      "location": "San Diego, CA",
+      "locationData": {
+        "city": "San Diego",
+        "region": "CA",
+        "fullRegion": "California",
+        "fullLocation": "San Diego, California",
+        "originalLocation": "San Diego, CA",
+        "cityStandardized": "san diego",
+        "fullRegionStandardized": "california",
+        "fullLocationStandardized": "san diego, california"
+      },
+      "address": "6937 Linda Vista Rd C, San Diego, CA 92111",
+      "city": "san diego",
+      "googleMapsLink": "",
+      "latitude": 32.7849053,
+      "longitude": -117.1697431,
+      "rating": 7.9,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7585700616354204983",
+      "tikTokThumbnail": "thumbnails/7585700616354204983.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7585700616354204983.jpeg",
+      "datePosted": "12/19/2025"
     }
   ]
 }
