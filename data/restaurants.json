@@ -1,6 +1,6 @@
 {
-  "version": "2025-12-20T20:12:02.818Z",
-  "lastUpdated": "2025-12-20T20:12:02.818Z",
+  "version": "2025-12-21T01:00:43.344Z",
+  "lastUpdated": "2025-12-21T01:00:43.344Z",
   "totalRestaurants": 182,
   "restaurants": [
     {
@@ -4568,7 +4568,7 @@
         "colombian",
         "latin",
         "series",
-        "questforthebestarepa"
+        "quest for the best arepa"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -4660,7 +4660,7 @@
         "latin",
         "venezuelan",
         "series",
-        "questforthebestarepa"
+        "quest for the best arepa"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -4751,7 +4751,7 @@
         "colombian",
         "latin",
         "series",
-        "questforthebestarepa"
+        "quest for the best arepa"
       ],
       "location": "New York, NY",
       "locationData": {
@@ -4841,7 +4841,7 @@
       "tags": [
         "wings",
         "series",
-        "chickenrun"
+        "chicken run"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -4934,7 +4934,7 @@
         "korean",
         "wings",
         "series",
-        "chickenrun"
+        "chicken run"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5026,7 +5026,7 @@
         "casual",
         "dive bar",
         "series",
-        "chickenrun"
+        "chicken run"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5117,7 +5117,7 @@
         "korean",
         "wings",
         "series",
-        "chickenrun"
+        "chicken run"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5208,7 +5208,7 @@
         "latin",
         "venezuelan",
         "series",
-        "questforthebestarepa"
+        "quest for the best arepa"
       ],
       "location": "New York, NY",
       "locationData": {
@@ -5301,7 +5301,7 @@
         "hot chicken",
         "tendies",
         "series",
-        "chickenrun"
+        "chicken run"
       ],
       "location": "San Diego, CA",
       "locationData": {
@@ -5481,8 +5481,8 @@
       "reviewer": "andrew",
       "restaurant": "Avian Water and Banh Mi",
       "tags": [
-        "banhmi",
-        "questforthebestbanhmi",
+        "banh mi",
+        "quest for the best banh mi",
         "series"
       ],
       "location": "San Diego, CA",
