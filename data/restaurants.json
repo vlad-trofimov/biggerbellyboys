@@ -1,7 +1,7 @@
 {
-  "version": "2025-12-22T20:13:44.498Z",
-  "lastUpdated": "2025-12-22T20:13:44.498Z",
-  "totalRestaurants": 182,
+  "version": "2025-12-23T00:56:37.644Z",
+  "lastUpdated": "2025-12-23T00:56:37.644Z",
+  "totalRestaurants": 183,
   "restaurants": [
     {
       "reviewer": "vlad",
@@ -5506,6 +5506,37 @@
       "tikTokThumbnail": "thumbnails/7585700616354204983.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7585700616354204983.jpeg",
       "datePosted": "12/19/2025"
+    },
+    {
+      "reviewer": "vlad",
+      "restaurant": "Slurp",
+      "tags": [
+        "thai",
+        "crab rangoon",
+        "liberty public market",
+        "series"
+      ],
+      "location": "San Diego, CA",
+      "locationData": {
+        "city": "San Diego",
+        "region": "CA",
+        "fullRegion": "California",
+        "fullLocation": "San Diego, California",
+        "originalLocation": "San Diego, CA",
+        "cityStandardized": "san diego",
+        "fullRegionStandardized": "california",
+        "fullLocationStandardized": "san diego, california"
+      },
+      "address": "2820 Historic Decatur Rd, San Diego, CA 92106",
+      "city": "san diego",
+      "googleMapsLink": "",
+      "latitude": 32.7402027,
+      "longitude": -117.2111137,
+      "rating": 8.5,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7586457812738297102",
+      "tikTokThumbnail": "thumbnails/7586457812738297102.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7586457812738297102.jpeg",
+      "datePosted": "12/22/2025"
     }
   ]
 }
