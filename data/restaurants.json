@@ -1,6 +1,6 @@
 {
-  "version": "2025-12-26T16:13:42.925Z",
-  "lastUpdated": "2025-12-26T16:13:42.925Z",
+  "version": "2025-12-26T20:13:11.633Z",
+  "lastUpdated": "2025-12-26T20:13:11.634Z",
   "totalRestaurants": 183,
   "restaurants": [
     {
@@ -3252,8 +3252,8 @@
       "address": "2720 3rd Ave, Seattle, WA 98121",
       "city": "seattle",
       "googleMapsLink": "",
-      "latitude": 47.61762909999999,
-      "longitude": -122.3494761,
+      "latitude": 47.6176461,
+      "longitude": -122.3494532,
       "rating": 8.2,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7529246263766699277",
       "tikTokThumbnail": "thumbnails/7529246263766699277.jpeg",
