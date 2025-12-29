@@ -2121,6 +2121,7 @@ const countryMapping = {
     'cuba': { country: 'Cuba', countryCode: 'CU' },
     'czech republic': { country: 'Czech Republic', countryCode: 'CZ' },
     'denmark': { country: 'Denmark', countryCode: 'DK' },
+    'dominica': { country: 'Dominica', countryCode: 'DM' },
     'ecuador': { country: 'Ecuador', countryCode: 'EC' },
     'egypt': { country: 'Egypt', countryCode: 'EG' },
     'eritrea': { country: 'Eritrea', countryCode: 'ER' },
