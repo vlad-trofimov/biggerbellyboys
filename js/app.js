@@ -765,22 +765,9 @@ function createRestaurantCardElement(restaurant, includeClickEvent = true) {
                     const countryInfo = getCountryFromTags(restaurant.tags);
                     if (countryInfo) {
                             
-                        // Pan map to country using simple coordinate mapping
+                        // Pan map to country using dynamic coordinate lookup
                         if (globalMapInstance) {
-                            const countryCoordinates = {
-                                'AU': [-25, 135], // Australia
-                                'ER': [15, 38],   // Eritrea  
-                                'CO': [4, -74],   // Colombia
-                                'PH': [12, 122],  // Philippines
-                                'ET': [8, 38],    // Ethiopia
-                                'PL': [52, 20],   // Poland
-                                'CU': [22, -79],  // Cuba
-                                'YE': [15, 48],   // Yemen
-                                'BD': [24, 90],   // Bangladesh
-                                'AF': [33, 65]    // Afghanistan
-                            };
-                            
-                            const coords = countryCoordinates[countryInfo.countryCode];
+                            const coords = getCountryCoordinates(countryInfo.countryCode);
                             if (coords) {
                                 // Close any existing popup immediately before panning
                                 closeGlobalMapPopup();
@@ -2394,6 +2381,38 @@ function loadGlobalBellyFoodTourCountries(polygonSeries) {
     // Update header with cuisine count
     const reviewedCount = Object.keys(restaurantsByCountry).length;
     updateGlobalMapHeader(reviewedCount);
+}
+
+// Get country coordinates dynamically from amCharts map data
+function getCountryCoordinates(countryCode) {
+    if (!globalMapInstance || !globalMapInstance.series || globalMapInstance.series.length === 0) {
+        return null;
+    }
+    
+    const polygonSeries = globalMapInstance.series.getIndex(0);
+    const country = polygonSeries.getDataItemById(countryCode);
+    
+    if (country) {
+        const polygon = country.get("mapPolygon");
+        if (polygon) {
+            // Get the centroid (center point) of the country polygon
+            const centroid = polygon.get("centroid");
+            if (centroid) {
+                return [centroid.latitude, centroid.longitude];
+            }
+            
+            // Fallback: calculate center from bounds
+            const bounds = polygon.get("bounds");
+            if (bounds) {
+                const centerLat = (bounds.north + bounds.south) / 2;
+                const centerLon = (bounds.east + bounds.west) / 2;
+                return [centerLat, centerLon];
+            }
+        }
+    }
+    
+    return null;
+}
     
     // Completely disable auto-popups during initial map loading
     // Only process pending popups if explicitly triggered by user interaction
