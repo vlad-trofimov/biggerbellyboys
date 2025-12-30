@@ -2413,7 +2413,9 @@ function getCountryCoordinates(countryCode) {
     
     return null;
 }
-    
+
+// This code should be removed as it's part of disabled auto-popup functionality
+function handlePendingCountryPopup() {
     // Completely disable auto-popups during initial map loading
     // Only process pending popups if explicitly triggered by user interaction
     if (false && window.pendingCountryPopup && globalMapInstance && globalMapContainer && !globalMapContainer.classList.contains('hidden')) {
