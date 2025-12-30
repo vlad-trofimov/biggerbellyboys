@@ -767,7 +767,9 @@ function createRestaurantCardElement(restaurant, includeClickEvent = true) {
                             
                         // Pan map to country using dynamic coordinate lookup
                         if (globalMapInstance) {
+                            console.log('Trying to get coordinates for country:', countryInfo.countryCode, countryInfo.country);
                             const coords = getCountryCoordinates(countryInfo.countryCode);
+                            console.log('Got coordinates:', coords);
                             if (coords) {
                                 // Close any existing popup immediately before panning
                                 closeGlobalMapPopup();
@@ -2385,33 +2387,83 @@ function loadGlobalBellyFoodTourCountries(polygonSeries) {
 
 // Get country coordinates dynamically from amCharts map data
 function getCountryCoordinates(countryCode) {
+    console.log('getCountryCoordinates called with:', countryCode);
+    
     if (!globalMapInstance || !globalMapInstance.series || globalMapInstance.series.length === 0) {
+        console.log('No global map instance or series available');
         return null;
     }
     
     const polygonSeries = globalMapInstance.series.getIndex(0);
     const country = polygonSeries.getDataItemById(countryCode);
+    console.log('Found country data item:', country);
     
     if (country) {
         const polygon = country.get("mapPolygon");
+        console.log('Found polygon:', polygon);
         if (polygon) {
-            // Get the centroid (center point) of the country polygon
-            const centroid = polygon.get("centroid");
-            if (centroid) {
-                return [centroid.latitude, centroid.longitude];
+            // Try to get the geographic center using amCharts' built-in method
+            try {
+                const geoPoint = polygon.get("geoCentroid");
+                console.log('Geo centroid:', geoPoint);
+                if (geoPoint && geoPoint.latitude !== undefined && geoPoint.longitude !== undefined) {
+                    return [geoPoint.latitude, geoPoint.longitude];
+                }
+            } catch (e) {
+                console.log('Error getting geo centroid:', e);
             }
             
-            // Fallback: calculate center from bounds
-            const bounds = polygon.get("bounds");
-            if (bounds) {
-                const centerLat = (bounds.north + bounds.south) / 2;
-                const centerLon = (bounds.east + bounds.west) / 2;
-                return [centerLat, centerLon];
+            // Try alternative methods
+            try {
+                const polygonBounds = polygon.get("geoBounds");
+                console.log('Geo bounds:', polygonBounds);
+                if (polygonBounds) {
+                    const centerLat = (polygonBounds.north + polygonBounds.south) / 2;
+                    const centerLon = (polygonBounds.east + polygonBounds.west) / 2;
+                    console.log('Calculated center from geo bounds:', [centerLat, centerLon]);
+                    return [centerLat, centerLon];
+                }
+            } catch (e) {
+                console.log('Error getting geo bounds:', e);
+            }
+            
+            // Fallback to data item coordinates if available
+            try {
+                const dataItem = country;
+                const geometry = dataItem.get("geometry");
+                console.log('Geometry:', geometry);
+                if (geometry && geometry.coordinates) {
+                    // For simple geometries, try to calculate a rough center
+                    console.log('Using fallback coordinate calculation');
+                    // This is a very basic fallback - would need more complex logic for real polygons
+                }
+            } catch (e) {
+                console.log('Error accessing geometry:', e);
             }
         }
+    } else {
+        console.log('Country not found in map data:', countryCode);
     }
     
-    return null;
+    console.log('Could not determine coordinates, falling back to hardcoded values');
+    // Fallback to hardcoded coordinates for critical countries
+    const fallbackCoordinates = {
+        'DM': [15.4, -61.3], // Dominica
+        'AU': [-25, 135],    // Australia
+        'US': [39.8, -98.5], // United States
+        'CA': [56.1, -106.3], // Canada
+        'CO': [4.0, -74.0],  // Colombia
+        'ER': [15.0, 38.0],  // Eritrea
+        'PH': [12.0, 122.0], // Philippines
+        'ET': [8.0, 38.0],   // Ethiopia
+        'PL': [52.0, 20.0],  // Poland
+        'CU': [22.0, -79.0], // Cuba
+        'YE': [15.0, 48.0],  // Yemen
+        'BD': [24.0, 90.0],  // Bangladesh
+        'AF': [33.0, 65.0]   // Afghanistan
+    };
+    
+    return fallbackCoordinates[countryCode] || null;
 }
 
 // This code should be removed as it's part of disabled auto-popup functionality
