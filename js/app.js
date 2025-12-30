@@ -767,9 +767,7 @@ function createRestaurantCardElement(restaurant, includeClickEvent = true) {
                             
                         // Pan map to country using dynamic coordinate lookup
                         if (globalMapInstance) {
-                            console.log('Trying to get coordinates for country:', countryInfo.countryCode, countryInfo.country);
                             const coords = getCountryCoordinates(countryInfo.countryCode);
-                            console.log('Got coordinates:', coords);
                             if (coords) {
                                 // Close any existing popup immediately before panning
                                 closeGlobalMapPopup();
@@ -2387,81 +2385,38 @@ function loadGlobalBellyFoodTourCountries(polygonSeries) {
 
 // Get country coordinates dynamically from amCharts map data
 function getCountryCoordinates(countryCode) {
-    console.log('getCountryCoordinates called with:', countryCode);
-    
     if (!globalMapInstance || !globalMapInstance.series || globalMapInstance.series.length === 0) {
-        console.log('No global map instance or series available');
         return null;
     }
     
     const polygonSeries = globalMapInstance.series.getIndex(0);
     const country = polygonSeries.getDataItemById(countryCode);
-    console.log('Found country data item:', country);
     
     if (country) {
-        const polygon = country.get("mapPolygon");
-        console.log('Found polygon:', polygon);
-        if (polygon) {
-            // Debug: examine what properties are actually available
-            console.log('Polygon keys:', Object.keys(polygon));
-            console.log('Polygon _settings:', polygon._settings);
-            
-            // Try to get coordinates from the data item itself
-            const dataItem = country;
-            console.log('DataItem keys:', Object.keys(dataItem));
-            console.log('DataItem _settings:', dataItem._settings);
-            
-            // Try to access the geometry data
-            const geometry = dataItem.get("geometry");
-            console.log('Geometry:', geometry);
-            console.log('Geometry keys:', geometry ? Object.keys(geometry) : 'null');
-            
-            // Try to get coordinates from geometry
-            if (geometry && geometry.coordinates) {
-                console.log('Geometry coordinates:', geometry.coordinates);
-                // For polygons, coordinates are usually nested arrays
-                // Try to calculate centroid from the coordinate data
-                if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0]) {
-                    const coords = geometry.coordinates[0]; // First ring of polygon
-                    if (Array.isArray(coords) && coords.length > 0) {
-                        let sumLat = 0, sumLon = 0;
-                        coords.forEach(coord => {
-                            if (Array.isArray(coord) && coord.length >= 2) {
-                                sumLon += coord[0]; // longitude first in GeoJSON
-                                sumLat += coord[1]; // latitude second
-                            }
-                        });
-                        const centerLat = sumLat / coords.length;
-                        const centerLon = sumLon / coords.length;
-                        console.log('Calculated centroid from coordinates:', [centerLat, centerLon]);
-                        return [centerLat, centerLon];
-                    }
+        // Get the geometry data from the country data item
+        const geometry = country.get("geometry");
+        
+        if (geometry && geometry.coordinates && geometry.type === 'Polygon') {
+            // Calculate centroid from polygon coordinates
+            if (geometry.coordinates && geometry.coordinates[0]) {
+                const coords = geometry.coordinates[0]; // First ring of polygon
+                if (Array.isArray(coords) && coords.length > 0) {
+                    let sumLat = 0, sumLon = 0;
+                    coords.forEach(coord => {
+                        if (Array.isArray(coord) && coord.length >= 2) {
+                            sumLon += coord[0]; // longitude first in GeoJSON
+                            sumLat += coord[1]; // latitude second
+                        }
+                    });
+                    const centerLat = sumLat / coords.length;
+                    const centerLon = sumLon / coords.length;
+                    return [centerLat, centerLon];
                 }
             }
         }
-    } else {
-        console.log('Country not found in map data:', countryCode);
     }
     
-    console.log('Could not determine coordinates, falling back to hardcoded values');
-    // Fallback to hardcoded coordinates for critical countries
-    const fallbackCoordinates = {
-        'DM': [15.4, -61.3], // Dominica
-        'AU': [-25, 135],    // Australia
-        'US': [39.8, -98.5], // United States
-        'CA': [56.1, -106.3], // Canada
-        'CO': [4.0, -74.0],  // Colombia
-        'ER': [15.0, 38.0],  // Eritrea
-        'PH': [12.0, 122.0], // Philippines
-        'ET': [8.0, 38.0],   // Ethiopia
-        'PL': [52.0, 20.0],  // Poland
-        'CU': [22.0, -79.0], // Cuba
-        'YE': [15.0, 48.0],  // Yemen
-        'BD': [24.0, 90.0],  // Bangladesh
-        'AF': [33.0, 65.0]   // Afghanistan
-    };
-    
-    return fallbackCoordinates[countryCode] || null;
+    return null;
 }
 
 // This code should be removed as it's part of disabled auto-popup functionality
