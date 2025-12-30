@@ -2402,43 +2402,41 @@ function getCountryCoordinates(countryCode) {
         const polygon = country.get("mapPolygon");
         console.log('Found polygon:', polygon);
         if (polygon) {
-            // Try to get the geographic center using amCharts' built-in method
-            try {
-                const geoPoint = polygon.get("geoCentroid");
-                console.log('Geo centroid:', geoPoint);
-                if (geoPoint && geoPoint.latitude !== undefined && geoPoint.longitude !== undefined) {
-                    return [geoPoint.latitude, geoPoint.longitude];
-                }
-            } catch (e) {
-                console.log('Error getting geo centroid:', e);
-            }
+            // Debug: examine what properties are actually available
+            console.log('Polygon keys:', Object.keys(polygon));
+            console.log('Polygon _settings:', polygon._settings);
             
-            // Try alternative methods
-            try {
-                const polygonBounds = polygon.get("geoBounds");
-                console.log('Geo bounds:', polygonBounds);
-                if (polygonBounds) {
-                    const centerLat = (polygonBounds.north + polygonBounds.south) / 2;
-                    const centerLon = (polygonBounds.east + polygonBounds.west) / 2;
-                    console.log('Calculated center from geo bounds:', [centerLat, centerLon]);
-                    return [centerLat, centerLon];
-                }
-            } catch (e) {
-                console.log('Error getting geo bounds:', e);
-            }
+            // Try to get coordinates from the data item itself
+            const dataItem = country;
+            console.log('DataItem keys:', Object.keys(dataItem));
+            console.log('DataItem _settings:', dataItem._settings);
             
-            // Fallback to data item coordinates if available
-            try {
-                const dataItem = country;
-                const geometry = dataItem.get("geometry");
-                console.log('Geometry:', geometry);
-                if (geometry && geometry.coordinates) {
-                    // For simple geometries, try to calculate a rough center
-                    console.log('Using fallback coordinate calculation');
-                    // This is a very basic fallback - would need more complex logic for real polygons
+            // Try to access the geometry data
+            const geometry = dataItem.get("geometry");
+            console.log('Geometry:', geometry);
+            console.log('Geometry keys:', geometry ? Object.keys(geometry) : 'null');
+            
+            // Try to get coordinates from geometry
+            if (geometry && geometry.coordinates) {
+                console.log('Geometry coordinates:', geometry.coordinates);
+                // For polygons, coordinates are usually nested arrays
+                // Try to calculate centroid from the coordinate data
+                if (geometry.type === 'Polygon' && geometry.coordinates && geometry.coordinates[0]) {
+                    const coords = geometry.coordinates[0]; // First ring of polygon
+                    if (Array.isArray(coords) && coords.length > 0) {
+                        let sumLat = 0, sumLon = 0;
+                        coords.forEach(coord => {
+                            if (Array.isArray(coord) && coord.length >= 2) {
+                                sumLon += coord[0]; // longitude first in GeoJSON
+                                sumLat += coord[1]; // latitude second
+                            }
+                        });
+                        const centerLat = sumLat / coords.length;
+                        const centerLon = sumLon / coords.length;
+                        console.log('Calculated centroid from coordinates:', [centerLat, centerLon]);
+                        return [centerLat, centerLon];
+                    }
                 }
-            } catch (e) {
-                console.log('Error accessing geometry:', e);
             }
         }
     } else {
