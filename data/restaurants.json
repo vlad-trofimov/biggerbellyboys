@@ -1,8 +1,38 @@
 {
-  "version": "2025-12-29T20:14:29.407Z",
-  "lastUpdated": "2025-12-29T20:14:29.407Z",
-  "totalRestaurants": 185,
+  "version": "2025-12-30T00:57:01.557Z",
+  "lastUpdated": "2025-12-30T00:57:01.557Z",
+  "totalRestaurants": 186,
   "restaurants": [
+    {
+      "reviewer": "vlad",
+      "restaurant": "Ortiz's Taco Shop",
+      "tags": [
+        "cali burrito",
+        "mexican",
+        "series"
+      ],
+      "location": "San Diego, CA",
+      "locationData": {
+        "city": "San Diego",
+        "region": "CA",
+        "fullRegion": "California",
+        "fullLocation": "San Diego, California",
+        "originalLocation": "San Diego, CA",
+        "cityStandardized": "san diego",
+        "fullRegionStandardized": "california",
+        "fullLocationStandardized": "san diego, california"
+      },
+      "address": "3704 Voltaire St, San Diego, CA 92107",
+      "city": "san diego",
+      "googleMapsLink": "",
+      "latitude": 32.74052,
+      "longitude": -117.2290885,
+      "rating": 7.7,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7589347716027665678",
+      "tikTokThumbnail": "thumbnails/7589347716027665678.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7589347716027665678.jpeg",
+      "datePosted": "12/29/2025"
+    },
     {
       "reviewer": "andrew",
       "restaurant": "Cali Banh Mi",
