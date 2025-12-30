@@ -1,6 +1,6 @@
 {
-  "version": "2025-12-30T00:57:01.557Z",
-  "lastUpdated": "2025-12-30T00:57:01.557Z",
+  "version": "2025-12-30T04:31:37.703Z",
+  "lastUpdated": "2025-12-30T04:31:37.703Z",
   "totalRestaurants": 186,
   "restaurants": [
     {
@@ -62,6 +62,36 @@
       "tikTokThumbnail": "thumbnails/7588305725923937591.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7588305725923937591.jpeg",
       "datePosted": "12/26/2025"
+    },
+    {
+      "reviewer": "jason",
+      "restaurant": "Jasmine's Caribbean Cuisine",
+      "tags": [
+        "dominica",
+        "nyc",
+        "global belly food tour"
+      ],
+      "location": "Manhattan, NY",
+      "locationData": {
+        "city": "Manhattan",
+        "region": "NY",
+        "fullRegion": "New York",
+        "fullLocation": "Manhattan, New York",
+        "originalLocation": "Manhattan, NY",
+        "cityStandardized": "manhattan",
+        "fullRegionStandardized": "new york",
+        "fullLocationStandardized": "manhattan, new york"
+      },
+      "address": "371 W 46th St, New York, NY 10036",
+      "city": "manhattan",
+      "googleMapsLink": "",
+      "latitude": 40.7609624,
+      "longitude": -73.9902686,
+      "rating": 8,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7587450623138761997",
+      "tikTokThumbnail": "thumbnails/7587450623138761997.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7587450623138761997.jpeg",
+      "datePosted": "12/24/2025"
     },
     {
       "reviewer": "vlad",
@@ -5597,36 +5627,6 @@
       "tikTokThumbnail": "thumbnails/7455158368693407018.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7455158368693407018.jpeg",
       "datePosted": "1/2/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Jasmine's Caribbean Cuisine",
-      "tags": [
-        "dominica",
-        "nyc",
-        "global belly food tour"
-      ],
-      "location": "Manhattan, NY",
-      "locationData": {
-        "city": "Manhattan",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Manhattan, New York",
-        "originalLocation": "Manhattan, NY",
-        "cityStandardized": "manhattan",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "manhattan, new york"
-      },
-      "address": "371 W 46th St, New York, NY 10036",
-      "city": "manhattan",
-      "googleMapsLink": "",
-      "latitude": 40.7609624,
-      "longitude": -73.9902686,
-      "rating": 8,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7587450623138761997",
-      "tikTokThumbnail": "thumbnails/7587450623138761997.jpeg",
-      "tikTokThumbnailFallback": "thumbnails/7587450623138761997.jpeg",
-      "datePosted": "12/24/2025"
     }
   ]
 }
