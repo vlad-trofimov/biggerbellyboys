@@ -1,7 +1,7 @@
 {
-  "version": "2026-01-02T20:13:26.673Z",
-  "lastUpdated": "2026-01-02T20:13:26.673Z",
-  "totalRestaurants": 186,
+  "version": "2026-01-03T00:54:49.048Z",
+  "lastUpdated": "2026-01-03T00:54:49.048Z",
+  "totalRestaurants": 187,
   "restaurants": [
     {
       "reviewer": "vlad",
@@ -5597,6 +5597,36 @@
       "tikTokThumbnail": "thumbnails/7455363872267029806.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7455363872267029806.jpeg",
       "datePosted": "1/3/2025"
+    },
+    {
+      "reviewer": "jason",
+      "restaurant": "Chela",
+      "tags": [
+        "global belly food tour",
+        "nyc",
+        "mexico"
+      ],
+      "location": "Brooklyn, NY",
+      "locationData": {
+        "city": "Brooklyn",
+        "region": "NY",
+        "fullRegion": "New York",
+        "fullLocation": "Brooklyn, New York",
+        "originalLocation": "Brooklyn, NY",
+        "cityStandardized": "brooklyn",
+        "fullRegionStandardized": "new york",
+        "fullLocationStandardized": "brooklyn, new york"
+      },
+      "address": "408 5th Ave, Brooklyn, NY 11215",
+      "city": "brooklyn",
+      "googleMapsLink": "",
+      "latitude": 40.67032280000001,
+      "longitude": -73.985704,
+      "rating": 7,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7590080013983075639",
+      "tikTokThumbnail": "thumbnails/7590080013983075639.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7590080013983075639.jpeg",
+      "datePosted": "12/31/2025"
     },
     {
       "reviewer": "vlad",
