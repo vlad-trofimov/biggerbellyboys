@@ -1,8 +1,38 @@
 {
-  "version": "2026-01-04T20:13:25.348Z",
-  "lastUpdated": "2026-01-04T20:13:25.348Z",
-  "totalRestaurants": 187,
+  "version": "2026-01-05T01:03:07.857Z",
+  "lastUpdated": "2026-01-05T01:03:07.857Z",
+  "totalRestaurants": 188,
   "restaurants": [
+    {
+      "reviewer": "andrew",
+      "restaurant": "La Sandwicherie",
+      "tags": [
+        "sandiwches",
+        "brickell",
+        "french"
+      ],
+      "location": "Maimi, FL",
+      "locationData": {
+        "city": "Maimi",
+        "region": "FL",
+        "fullRegion": "Florida",
+        "fullLocation": "Maimi, Florida",
+        "originalLocation": "Maimi, FL",
+        "cityStandardized": "maimi",
+        "fullRegionStandardized": "florida",
+        "fullLocationStandardized": "maimi, florida"
+      },
+      "address": "34 SW 8th St, Miami, FL 33130",
+      "city": "maimi",
+      "googleMapsLink": "",
+      "latitude": 25.7660215,
+      "longitude": -80.1939794,
+      "rating": 9.7,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7591644752169159949",
+      "tikTokThumbnail": "thumbnails/7591644752169159949.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7591644752169159949.jpeg",
+      "datePosted": "1/4/2026"
+    },
     {
       "reviewer": "vlad",
       "restaurant": "Ortiz's Taco Shop",
