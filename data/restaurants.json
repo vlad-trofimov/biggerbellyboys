@@ -1,37 +1,68 @@
 {
-  "version": "2026-01-05T20:15:00.084Z",
-  "lastUpdated": "2026-01-05T20:15:00.085Z",
+  "version": "2026-01-06T00:58:29.403Z",
+  "lastUpdated": "2026-01-06T00:58:29.403Z",
   "totalRestaurants": 188,
   "restaurants": [
     {
-      "reviewer": "andrew",
-      "restaurant": "La Sandwicherie",
+      "reviewer": "vlad",
+      "restaurant": "Bopjo",
       "tags": [
-        "sandiwches",
-        "brickell",
-        "french"
+        "korean",
+        "fusion",
+        "liberty public market",
+        "series"
       ],
-      "location": "Maimi, FL",
+      "location": "San Diego, CA",
       "locationData": {
-        "city": "Maimi",
-        "region": "FL",
-        "fullRegion": "Florida",
-        "fullLocation": "Maimi, Florida",
-        "originalLocation": "Maimi, FL",
-        "cityStandardized": "maimi",
-        "fullRegionStandardized": "florida",
-        "fullLocationStandardized": "maimi, florida"
+        "city": "San Diego",
+        "region": "CA",
+        "fullRegion": "California",
+        "fullLocation": "San Diego, California",
+        "originalLocation": "San Diego, CA",
+        "cityStandardized": "san diego",
+        "fullRegionStandardized": "california",
+        "fullLocationStandardized": "san diego, california"
       },
-      "address": "34 SW 8th St, Miami, FL 33130",
-      "city": "maimi",
+      "address": "2820 Historic Decatur Rd, San Diego, CA 92106",
+      "city": "san diego",
       "googleMapsLink": "",
-      "latitude": 25.7660215,
-      "longitude": -80.1939794,
-      "rating": 9.7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7591644752169159949",
-      "tikTokThumbnail": "thumbnails/7591644752169159949.jpeg",
-      "tikTokThumbnailFallback": "thumbnails/7591644752169159949.jpeg",
-      "datePosted": "1/4/2026"
+      "latitude": 32.7402027,
+      "longitude": -117.2111137,
+      "rating": 7.6,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7591936276228574519",
+      "tikTokThumbnail": "thumbnails/7591936276228574519.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7591936276228574519.jpeg",
+      "datePosted": "1/5/2026"
+    },
+    {
+      "reviewer": "jason",
+      "restaurant": "Chela",
+      "tags": [
+        "global belly food tour",
+        "nyc",
+        "mexico"
+      ],
+      "location": "Brooklyn, NY",
+      "locationData": {
+        "city": "Brooklyn",
+        "region": "NY",
+        "fullRegion": "New York",
+        "fullLocation": "Brooklyn, New York",
+        "originalLocation": "Brooklyn, NY",
+        "cityStandardized": "brooklyn",
+        "fullRegionStandardized": "new york",
+        "fullLocationStandardized": "brooklyn, new york"
+      },
+      "address": "408 5th Ave, Brooklyn, NY 11215",
+      "city": "brooklyn",
+      "googleMapsLink": "",
+      "latitude": 40.67032280000001,
+      "longitude": -73.985704,
+      "rating": 7,
+      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7590080013983075639",
+      "tikTokThumbnail": "thumbnails/7590080013983075639.jpeg",
+      "tikTokThumbnailFallback": "thumbnails/7590080013983075639.jpeg",
+      "datePosted": "12/31/2025"
     },
     {
       "reviewer": "vlad",
@@ -5627,36 +5658,6 @@
       "tikTokThumbnail": "thumbnails/7455363872267029806.jpeg",
       "tikTokThumbnailFallback": "thumbnails/7455363872267029806.jpeg",
       "datePosted": "1/3/2025"
-    },
-    {
-      "reviewer": "jason",
-      "restaurant": "Chela",
-      "tags": [
-        "global belly food tour",
-        "nyc",
-        "mexico"
-      ],
-      "location": "Brooklyn, NY",
-      "locationData": {
-        "city": "Brooklyn",
-        "region": "NY",
-        "fullRegion": "New York",
-        "fullLocation": "Brooklyn, New York",
-        "originalLocation": "Brooklyn, NY",
-        "cityStandardized": "brooklyn",
-        "fullRegionStandardized": "new york",
-        "fullLocationStandardized": "brooklyn, new york"
-      },
-      "address": "408 5th Ave, Brooklyn, NY 11215",
-      "city": "brooklyn",
-      "googleMapsLink": "",
-      "latitude": 40.67032280000001,
-      "longitude": -73.985704,
-      "rating": 7,
-      "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7590080013983075639",
-      "tikTokThumbnail": "thumbnails/7590080013983075639.jpeg",
-      "tikTokThumbnailFallback": "thumbnails/7590080013983075639.jpeg",
-      "datePosted": "12/31/2025"
     },
     {
       "reviewer": "vlad",
