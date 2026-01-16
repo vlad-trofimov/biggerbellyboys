@@ -1,6 +1,6 @@
 {
-  "version": "2026-01-16T12:24:18.776Z",
-  "lastUpdated": "2026-01-16T12:24:18.776Z",
+  "version": "2026-01-16T16:16:49.448Z",
+  "lastUpdated": "2026-01-16T16:16:49.448Z",
   "totalRestaurants": 188,
   "restaurants": [
     {
@@ -5352,8 +5352,8 @@
       "address": "5375 Kearny Villa Rd #111, San Diego, CA 92123",
       "city": "san diego",
       "googleMapsLink": "",
-      "latitude": 32.8306521,
-      "longitude": -117.1388964,
+      "latitude": 32.8305267,
+      "longitude": -117.1389067,
       "rating": 8.3,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7463226894255803690?is_from_webapp=1&sender_device=pc",
       "tikTokThumbnail": "thumbnails/7463226894255803690.jpeg",
