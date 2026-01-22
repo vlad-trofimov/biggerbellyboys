@@ -1,6 +1,6 @@
 {
-  "version": "2026-01-22T04:40:30.545Z",
-  "lastUpdated": "2026-01-22T04:40:30.545Z",
+  "version": "2026-01-22T08:19:01.158Z",
+  "lastUpdated": "2026-01-22T08:19:01.158Z",
   "totalRestaurants": 188,
   "restaurants": [
     {
@@ -1000,8 +1000,8 @@
       "address": "1417 Suit A, University Ave, San Diego, CA 92103",
       "city": "san diego",
       "googleMapsLink": "",
-      "latitude": 32.7485172,
-      "longitude": -117.1546264,
+      "latitude": 32.74842,
+      "longitude": -117.1536209,
       "rating": 8,
       "tikTokVideo": "https://www.tiktok.com/@biggerbellyboys/video/7563326805726285070",
       "tikTokThumbnail": "thumbnails/7563326805726285070.jpeg",
